@@ -1658,6 +1658,39 @@ altahla_2024_whoqol,cov_paralysis_type,standard_family,built,,data/altahla_2024_
 altahla_2024_whoqol,id,standard,built,,data/altahla_2024_whoqol.py,66,exact,true
 altahla_2024_whoqol,item,standard,built,,data/altahla_2024_whoqol.py,85,exact,true
 altahla_2024_whoqol,resp,standard,built,,data/altahla_2024_whoqol.py,85,exact,true
+altarawneh_2021_effort_expectancy,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_effort_expectancy,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_effort_expectancy,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_facilitating_conditions,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_facilitating_conditions,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_facilitating_conditions,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_habit,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_habit,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_habit,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_hedonic_motivation,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_hedonic_motivation,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_hedonic_motivation,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_intention_to_use,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_intention_to_use,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_intention_to_use,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_interface_design,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_interface_design,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_interface_design,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_perceived_risk,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_perceived_risk,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_perceived_risk,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_performance_expectancy,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_performance_expectancy,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_performance_expectancy,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_price_value,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_price_value,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_price_value,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_social_influence,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_social_influence,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_social_influence,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_use,id,standard,built,,data/altarawneh_2021_mobile_banking.py,65,index,true
+altarawneh_2021_use,item,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
+altarawneh_2021_use,resp,standard,built,,data/altarawneh_2021_mobile_banking.py,76,index,true
 altarawneh_2023_pcps,cov_age,standard_family,built,Age,data/altarawneh_2023_pcps.py,67,exact,true
 altarawneh_2023_pcps,cov_gender,standard_family,built,Gender,data/altarawneh_2023_pcps.py,68,exact,true
 altarawneh_2023_pcps,cov_pc_training,standard_family,built,Paltraining,data/altarawneh_2023_pcps.py,71,exact,true
@@ -2678,6 +2711,21 @@ APFCompact_Ptacek_2024_SWLS,resp,standard,renamed,swl,data/APFCompact_Ptacek_202
 aps_vangsness_2019,id,standard,,,,,none,true
 aps_vangsness_2019,item,standard,,,,,none,true
 aps_vangsness_2019,resp,standard,,,,,none,true
+apsari_2025_risk_preference,id,standard,built,,data/apsari_2025_tax_compliance.py,59,index,true
+apsari_2025_risk_preference,item,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_risk_preference,resp,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_tax_compliance,id,standard,built,,data/apsari_2025_tax_compliance.py,59,exact,true
+apsari_2025_tax_compliance,item,standard,built,,data/apsari_2025_tax_compliance.py,70,exact,true
+apsari_2025_tax_compliance,resp,standard,built,,data/apsari_2025_tax_compliance.py,70,exact,true
+apsari_2025_tax_knowledge,id,standard,built,,data/apsari_2025_tax_compliance.py,59,index,true
+apsari_2025_tax_knowledge,item,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_tax_knowledge,resp,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_tax_sanctions,id,standard,built,,data/apsari_2025_tax_compliance.py,59,index,true
+apsari_2025_tax_sanctions,item,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_tax_sanctions,resp,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_technology_adoption,id,standard,built,,data/apsari_2025_tax_compliance.py,59,index,true
+apsari_2025_technology_adoption,item,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
+apsari_2025_technology_adoption,resp,standard,built,,data/apsari_2025_tax_compliance.py,70,index,true
 arabaci_2025_burnout,cov_age_band,standard_family,renamed,Age,data/arabaci_2025_task_diversity.py,56,index,true
 arabaci_2025_burnout,cov_education,standard_family,renamed,Educational level,data/arabaci_2025_task_diversity.py,58,index,true
 arabaci_2025_burnout,cov_experience,standard_family,renamed,Working experience (years),data/arabaci_2025_task_diversity.py,59,index,true
@@ -2855,6 +2903,18 @@ argentina_2018_risk_problems,id,standard,built,,data/argentina_2018_risk.do,23,i
 argentina_2018_risk_problems,item,standard,built,,data/argentina_2018_risk.do,166,index,true
 argentina_2018_risk_problems,resp,standard,renamed,`var',data/argentina_2018_risk.do,167,index,true
 argentina_2018_risk_problems,wave,standard,built,,data/argentina_2018_risk.do,39,index,true
+arifah_2026_brand_awareness,id,standard,built,,data/arifah_2026_social_media_marketing.py,60,index,true
+arifah_2026_brand_awareness,item,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_brand_awareness,resp,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_brand_trust,id,standard,built,,data/arifah_2026_social_media_marketing.py,60,index,true
+arifah_2026_brand_trust,item,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_brand_trust,resp,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_purchase_intention,id,standard,built,,data/arifah_2026_social_media_marketing.py,60,index,true
+arifah_2026_purchase_intention,item,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_purchase_intention,resp,standard,built,,data/arifah_2026_social_media_marketing.py,71,index,true
+arifah_2026_social_media_marketing,id,standard,built,,data/arifah_2026_social_media_marketing.py,60,exact,true
+arifah_2026_social_media_marketing,item,standard,built,,data/arifah_2026_social_media_marketing.py,71,exact,true
+arifah_2026_social_media_marketing,resp,standard,built,,data/arifah_2026_social_media_marketing.py,71,exact,true
 arista_2010_achievement_motivation,cov_age,standard_family,built,Edad,data/arista_2010_achievement_motivation.py,131,exact,true
 arista_2010_achievement_motivation,id,standard,built,,data/arista_2010_achievement_motivation.py,59,exact,true
 arista_2010_achievement_motivation,item,standard,built,,data/arista_2010_achievement_motivation.py,59,exact,true
@@ -3988,6 +4048,127 @@ bakumenko_2023_adyghe_values,item,standard,built,,data/bakumenko_2023_adyghe_val
 bakumenko_2023_adyghe_values,item_text,,built,item,data/bakumenko_2023_adyghe_values.py,69,exact,true
 bakumenko_2023_adyghe_values,item_text_translated,,built,item,data/bakumenko_2023_adyghe_values.py,70,exact,true
 bakumenko_2023_adyghe_values,resp,standard,built,,data/bakumenko_2023_adyghe_values.py,65,exact,true
+balakova_2026_cosmetics_barriers,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_cosmetics_barriers,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_cosmetics_barriers,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_cosmetics_barriers,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_furniture_barriers,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_barriers,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_furniture_barriers,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_furniture_barriers,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_furniture_motives,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_furniture_motives,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_furniture_motives,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_furniture_motives,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_refill_attitudes,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_refill_attitudes,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_refill_attitudes,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_refill_attitudes,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_reuse_behavior,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_behavior,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_reuse_behavior,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_reuse_behavior,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_reuse_centre,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_reuse_centre,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_reuse_centre,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_reuse_centre,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_secondhand_barriers,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_barriers,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_secondhand_barriers,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_secondhand_barriers,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_secondhand_motives,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_secondhand_motives,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_secondhand_motives,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_secondhand_motives,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_sustainable_cosmetics,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_cosmetics,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_sustainable_cosmetics,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_sustainable_cosmetics,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_sustainable_purchasing,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_sustainable_purchasing,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_sustainable_purchasing,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_sustainable_purchasing,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_upcycling_attitudes,cov_age,standard_family,renamed,A,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_age_group,standard_family,renamed,AK,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_economic_activity,standard_family,renamed,W,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_education,standard_family,renamed,E,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_gender,standard_family,renamed,G,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_household_income,standard_family,renamed,I,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_region,standard_family,renamed,R,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,cov_settlement_size,standard_family,renamed,S,data/balakova_2026_household_sustainability.py,39,index,true
+balakova_2026_upcycling_attitudes,id,standard,built,,data/balakova_2026_household_sustainability.py,79,index,true
+balakova_2026_upcycling_attitudes,item,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
+balakova_2026_upcycling_attitudes,resp,standard,built,,data/balakova_2026_household_sustainability.py,90,index,true
 balami_2019_imb_information,cov_residence,standard_family,built,Residence type,data/balami_2019_imb_llin.py,105,index,true
 balami_2019_imb_information,id,standard,built,SNO,data/balami_2019_imb_llin.py,104,index,true
 balami_2019_imb_information,item,standard,built,,data/balami_2019_imb_llin.py,127,index,true
@@ -4996,6 +5177,18 @@ bergs_2021_hpepss,cov_programme_year,standard_family,renamed,educationYear,data/
 bergs_2021_hpepss,id,standard,built,,data/bergs_2021_hpepss.py,54,exact,true
 bergs_2021_hpepss,item,standard,built,,data/bergs_2021_hpepss.py,83,exact,true
 bergs_2021_hpepss,resp,standard,built,,data/bergs_2021_hpepss.py,83,exact,true
+berlian_2026_brand_trust,id,standard,built,,data/berlian_2026_esg_unilever.py,57,index,true
+berlian_2026_brand_trust,item,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_brand_trust,resp,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_esg,id,standard,built,,data/berlian_2026_esg_unilever.py,57,index,true
+berlian_2026_esg,item,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_esg,resp,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_psychological_distance,id,standard,built,,data/berlian_2026_esg_unilever.py,57,index,true
+berlian_2026_psychological_distance,item,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_psychological_distance,resp,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_purchase_intention,id,standard,built,,data/berlian_2026_esg_unilever.py,57,index,true
+berlian_2026_purchase_intention,item,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
+berlian_2026_purchase_intention,resp,standard,built,,data/berlian_2026_esg_unilever.py,68,index,true
 bernik_2026_ase,cov_age,standard_family,built,Q2_Age,data/bernik_2026_student_engagement.py,147,index,true
 bernik_2026_ase,cov_gender,standard_family,built,Q1_Sex,data/bernik_2026_student_engagement.py,146,index,true
 bernik_2026_ase,cov_study_level,standard_family,built,Q3_Study,data/bernik_2026_student_engagement.py,148,index,true
@@ -8230,6 +8423,21 @@ chanal_2020_maths,cov_gender,standard_family,built,Sexe,data/chanal_2020_selfcon
 chanal_2020_maths,id,standard,built,,data/chanal_2020_selfconcept.py,41,index,true
 chanal_2020_maths,item,standard,built,,data/chanal_2020_selfconcept.py,88,index,true
 chanal_2020_maths,resp,standard,built,,data/chanal_2020_selfconcept.py,89,index,true
+chandra_2026_adoption_resilience,id,standard,built,,data/chandra_2026_ai_ecrm.py,58,index,true
+chandra_2026_adoption_resilience,item,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_adoption_resilience,resp,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_affective_trust,id,standard,built,,data/chandra_2026_ai_ecrm.py,58,index,true
+chandra_2026_affective_trust,item,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_affective_trust,resp,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_ai_interactivity,id,standard,built,,data/chandra_2026_ai_ecrm.py,58,index,true
+chandra_2026_ai_interactivity,item,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_ai_interactivity,resp,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_cognitive_trust,id,standard,built,,data/chandra_2026_ai_ecrm.py,58,index,true
+chandra_2026_cognitive_trust,item,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_cognitive_trust,resp,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_switch_point_efficacy,id,standard,built,,data/chandra_2026_ai_ecrm.py,58,index,true
+chandra_2026_switch_point_efficacy,item,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
+chandra_2026_switch_point_efficacy,resp,standard,built,,data/chandra_2026_ai_ecrm.py,69,index,true
 chaple_gil_2021_gad7,cov_age_group,standard_family,renamed,Edad,data/chaple_gil_2021_gad7.py,85,exact,true
 chaple_gil_2021_gad7,cov_covid_mental_health_impact,standard_family,renamed,COVID19_Impacto_SM,data/chaple_gil_2021_gad7.py,88,exact,true
 chaple_gil_2021_gad7,cov_feels_isolated,standard_family,renamed,Solo_Aislado,data/chaple_gil_2021_gad7.py,87,exact,true
@@ -16489,6 +16697,13 @@ enders_2022_victimhood,cov_year_born,standard_family,renamed,YEARBORN,data/ender
 enders_2022_victimhood,id,standard,built,,data/enders_2022_conspiracy_vaccine.py,115,index,true
 enders_2022_victimhood,item,standard,built,,data/enders_2022_conspiracy_vaccine.py,130,index,true
 enders_2022_victimhood,resp,standard,built,,data/enders_2022_conspiracy_vaccine.py,130,index,true
+endeshaw_2026_healthperf,cov_age,standard_family,renamed,Age,data/endeshaw_2026_healthperf.py,37,exact,true
+endeshaw_2026_healthperf,cov_gender,standard_family,renamed,Gender,data/endeshaw_2026_healthperf.py,37,exact,true
+endeshaw_2026_healthperf,cov_hospital,standard_family,renamed,NameHospital,data/endeshaw_2026_healthperf.py,37,exact,true
+endeshaw_2026_healthperf,cov_respondent_group,standard_family,renamed,RespoGroup,data/endeshaw_2026_healthperf.py,37,exact,true
+endeshaw_2026_healthperf,id,standard,built,,data/endeshaw_2026_healthperf.py,73,exact,true
+endeshaw_2026_healthperf,item,standard,built,,data/endeshaw_2026_healthperf.py,84,exact,true
+endeshaw_2026_healthperf,resp,standard,built,,data/endeshaw_2026_healthperf.py,84,exact,true
 enem_2013_1mil_ch,booklet,,renamed,CO_PROVA,data/enem_2013.R,89,prefix,true
 enem_2013_1mil_ch,id,standard,renamed,NU_INSCRICAO,data/enem_2013.R,47,prefix,true
 enem_2013_1mil_ch,item,standard,renamed,CO_ITEM,data/enem_2013.R,88,prefix,true
@@ -17387,19 +17602,19 @@ evpromisi_stone_2021_global,cov_benefits,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_education,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_employed,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_gender,standard_family,,,,,none,false
+evpromisi_stone_2021_global,cov_group,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_herntype,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_if_lat,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_income,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_marital,standard_family,,,,,none,false
 evpromisi_stone_2021_global,cov_race,standard_family,,,,,none,false
-evpromisi_stone_2021_global,group,,,,,,none,false
 evpromisi_stone_2021_global,id,standard,,,,,none,true
 evpromisi_stone_2021_global,item,standard,,,,,none,true
 evpromisi_stone_2021_global,resp,standard,,,,,none,true
+EWAS_Sanford_2024,cov_study,standard_family,,,,,exact,false
 EWAS_Sanford_2024,id,standard,built,,data/EWAS_Sanford_2024.R,18,exact,true
 EWAS_Sanford_2024,item,standard,built,,data/EWAS_Sanford_2024.R,25,exact,true
 EWAS_Sanford_2024,resp,standard,built,,data/EWAS_Sanford_2024.R,26,exact,true
-EWAS_Sanford_2024,study,,,,,,exact,false
 EWAS_Sanford_2024_Flourish,id,standard,built,,data/EWAS_Sanford_2024.R,18,index,true
 EWAS_Sanford_2024_Flourish,item,standard,built,,data/EWAS_Sanford_2024.R,25,index,true
 EWAS_Sanford_2024_Flourish,resp,standard,built,,data/EWAS_Sanford_2024.R,26,index,true
@@ -17519,11 +17734,15 @@ fadhliah_2022_disaster_media_trust,resp,standard,built,,data/fadhliah_2022_disas
 falih_2026_dass21,cov_age,standard_family,renamed,AGE,data/falih_2026_dass21.py,54,exact,true
 falih_2026_dass21,cov_agegroup,standard_family,renamed,AGEGROUP,data/falih_2026_dass21.py,54,exact,true
 falih_2026_dass21,cov_alcohol,standard_family,renamed,ALCOHOL,data/falih_2026_dass21.py,57,exact,true
+falih_2026_dass21,cov_caffeine,standard_family,renamed,Caffeine,data/falih_2026_dass21.py,45,exact,true
+falih_2026_dass21,cov_education,standard_family,renamed,Education,data/falih_2026_dass21.py,44,exact,true
 falih_2026_dass21,cov_experien,standard_family,renamed,EXPERIEN,data/falih_2026_dass21.py,56,exact,true
 falih_2026_dass21,cov_marital_status,standard_family,renamed,MARITALS,data/falih_2026_dass21.py,55,exact,true
+falih_2026_dass21,cov_monthly_income,standard_family,renamed,Monthly income,data/falih_2026_dass21.py,44,exact,true
 falih_2026_dass21,cov_sex,standard_family,renamed,SEX,data/falih_2026_dass21.py,55,exact,true
 falih_2026_dass21,cov_smoking,standard_family,renamed,SMOKING,data/falih_2026_dass21.py,57,exact,true
 falih_2026_dass21,cov_v7_a,standard_family,renamed,V7_A,data/falih_2026_dass21.py,56,exact,true
+falih_2026_dass21,cov_weekly_working_hours,standard_family,renamed,Weekly working hours,data/falih_2026_dass21.py,45,exact,true
 falih_2026_dass21,id,standard,renamed,NO,data/falih_2026_dass21.py,54,exact,true
 falih_2026_dass21,item,standard,built,,data/falih_2026_dass21.py,84,exact,true
 falih_2026_dass21,resp,standard,built,,data/falih_2026_dass21.py,84,exact,true
@@ -17947,6 +18166,27 @@ fcv19s_hossain_2022_fear,resp,standard,built,,data/fcv19s_hossain_2022.R,10,inde
 feardriving_fisher2021,id,standard,built,,data/feardriving_fischer2021.R,3,index,true
 feardriving_fisher2021,item,standard,built,,data/feardriving_fischer2021.R,8,index,true
 feardriving_fisher2021,resp,standard,built,,data/feardriving_fischer2021.R,8,index,true
+febriyanti_2026_actual_use,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_actual_use,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_actual_use,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_attitude,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_attitude,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_attitude,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_behavioral_intention,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_behavioral_intention,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_behavioral_intention,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_perceived_ease_of_use,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_perceived_ease_of_use,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_perceived_ease_of_use,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_perceived_usefulness,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_perceived_usefulness,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_perceived_usefulness,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_service_quality,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_service_quality,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_service_quality,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_trust,id,standard,built,,data/febriyanti_2026_ride_hailing.py,63,index,true
+febriyanti_2026_trust,item,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
+febriyanti_2026_trust,resp,standard,built,,data/febriyanti_2026_ride_hailing.py,74,index,true
 fecker_2026_mansplaining,cov_activity_frequency,standard_family,renamed,v_18,data/fecker_2026_mansplaining.py,99,exact,true
 fecker_2026_mansplaining,cov_activity_is_job,standard_family,renamed,v_23,data/fecker_2026_mansplaining.py,100,exact,true
 fecker_2026_mansplaining,cov_gender,standard_family,renamed,GENDER,data/fecker_2026_mansplaining.py,98,exact,true
@@ -17970,6 +18210,30 @@ FEDSP_Trzcinska_2023_PSPCSA,wave,standard,,,,,index,true
 FEDSP_Trzcinska_2023_SMSD,id,standard,renamed,number,data/FEDSP_Trzcińska_2024.R,9,index,true
 FEDSP_Trzcinska_2023_SMSD,item,standard,built,,data/FEDSP_Trzcińska_2024.R,39,index,true
 FEDSP_Trzcinska_2023_SMSD,resp,standard,built,,data/FEDSP_Trzcińska_2024.R,39,index,true
+felicia_2026_digital_authority,cov_age_group,standard_family,renamed,Age,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_digital_authority,cov_gender,standard_family,renamed,Gender,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_digital_authority,cov_occupation,standard_family,renamed,Occupation,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_digital_authority,id,standard,built,,data/felicia_2026_digital_tax.py,58,index,true
+felicia_2026_digital_authority,item,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_digital_authority,resp,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_enforced_compliance,cov_age_group,standard_family,renamed,Age,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_enforced_compliance,cov_gender,standard_family,renamed,Gender,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_enforced_compliance,cov_occupation,standard_family,renamed,Occupation,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_enforced_compliance,id,standard,built,,data/felicia_2026_digital_tax.py,58,index,true
+felicia_2026_enforced_compliance,item,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_enforced_compliance,resp,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_system_quality,cov_age_group,standard_family,renamed,Age,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_system_quality,cov_gender,standard_family,renamed,Gender,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_system_quality,cov_occupation,standard_family,renamed,Occupation,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_system_quality,id,standard,built,,data/felicia_2026_digital_tax.py,58,index,true
+felicia_2026_system_quality,item,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_system_quality,resp,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_voluntary_compliance,cov_age_group,standard_family,renamed,Age,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_voluntary_compliance,cov_gender,standard_family,renamed,Gender,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_voluntary_compliance,cov_occupation,standard_family,renamed,Occupation,data/felicia_2026_digital_tax.py,31,index,true
+felicia_2026_voluntary_compliance,id,standard,built,,data/felicia_2026_digital_tax.py,58,index,true
+felicia_2026_voluntary_compliance,item,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
+felicia_2026_voluntary_compliance,resp,standard,built,,data/felicia_2026_digital_tax.py,69,index,true
 felthun_2021_teleosce,cov_mode,standard_family,built,YEAR,data/felthun_2021_teleosce.py,62,exact,true
 felthun_2021_teleosce,cov_year,standard_family,built,YEAR,data/felthun_2021_teleosce.py,61,exact,true
 felthun_2021_teleosce,id,standard,built,ID,data/felthun_2021_teleosce.py,60,exact,true
@@ -18963,6 +19227,31 @@ franco_2024_unfolding,cov_sex,standard_family,renamed,sex,data/franco_2024_unfol
 franco_2024_unfolding,id,standard,built,,data/franco_2024_unfolding.do,10,exact,true
 franco_2024_unfolding,item,standard,built,,data/franco_2024_unfolding.do,39,exact,true
 franco_2024_unfolding,resp,standard,renamed,`var',data/franco_2024_unfolding.do,40,exact,true
+fransisca_2026_alliance_attitude,cov_age_group,standard_family,renamed,Usia,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_alliance_attitude,cov_gender,standard_family,renamed,Jenis Kelamin,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_alliance_attitude,id,standard,built,,data/fransisca_2026_co_branding.py,68,index,true
+fransisca_2026_alliance_attitude,item,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_alliance_attitude,resp,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_credibility,cov_age_group,standard_family,renamed,Usia,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_credibility,cov_gender,standard_family,renamed,Jenis Kelamin,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_credibility,id,standard,built,,data/fransisca_2026_co_branding.py,68,index,true
+fransisca_2026_brand_credibility,item,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_credibility,resp,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_equity,cov_age_group,standard_family,renamed,Usia,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_equity,cov_gender,standard_family,renamed,Jenis Kelamin,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_equity,id,standard,built,,data/fransisca_2026_co_branding.py,68,index,true
+fransisca_2026_brand_equity,item,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_equity,resp,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_familiarity,cov_age_group,standard_family,renamed,Usia,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_familiarity,cov_gender,standard_family,renamed,Jenis Kelamin,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_familiarity,id,standard,built,,data/fransisca_2026_co_branding.py,68,index,true
+fransisca_2026_brand_familiarity,item,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_familiarity,resp,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_fit,cov_age_group,standard_family,renamed,Usia,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_fit,cov_gender,standard_family,renamed,Jenis Kelamin,data/fransisca_2026_co_branding.py,35,index,true
+fransisca_2026_brand_fit,id,standard,built,,data/fransisca_2026_co_branding.py,68,index,true
+fransisca_2026_brand_fit,item,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
+fransisca_2026_brand_fit,resp,standard,built,,data/fransisca_2026_co_branding.py,79,index,true
 frantz_2021_cns,cov_age,standard_family,built,Age,data/frantz_2021_community_voices.py,184,index,true
 frantz_2021_cns,cov_condition,standard_family,built,condition,data/frantz_2021_community_voices.py,173,index,true
 frantz_2021_cns,cov_education,standard_family,built,Education,data/frantz_2021_community_voices.py,185,index,true
@@ -19138,8 +19427,8 @@ fukuda_2021_withholding_behavior,item,standard,built,,data/fukuda_2021_healthlit
 fukuda_2021_withholding_behavior,resp,standard,built,,data/fukuda_2021_healthliteracy.py,64,index,true
 fullscaleiq_memory,id,standard,built,,data/fullscaleiq.R,9,index,true
 fullscaleiq_memory,item,standard,built,,data/fullscaleiq.R,11,index,true
-fullscaleiq_memory,raw_resp,,built,,data/fullscaleiq.R,19,index,false
 fullscaleiq_memory,resp,standard,built,,data/fullscaleiq.R,12,index,true
+fullscaleiq_memory,resp_raw,standard,,,,,index,true
 fullscaleiq_memory,rt,standard,built,,data/fullscaleiq.R,26,index,true
 fullscaleiq_memory_options,id,standard,built,,data/openpsychometrics_options.py,105,index,true
 fullscaleiq_memory_options,item,standard,built,,data/openpsychometrics_options.py,105,index,true
@@ -19147,8 +19436,8 @@ fullscaleiq_memory_options,item_family,standard,built,,data/openpsychometrics_op
 fullscaleiq_memory_options,resp,standard,built,,data/openpsychometrics_options.py,105,index,true
 fullscaleiq_mentalrotation,id,standard,built,,data/fullscaleiq.R,9,index,true
 fullscaleiq_mentalrotation,item,standard,built,,data/fullscaleiq.R,11,index,true
-fullscaleiq_mentalrotation,raw_resp,,built,,data/fullscaleiq.R,19,index,false
 fullscaleiq_mentalrotation,resp,standard,built,,data/fullscaleiq.R,12,index,true
+fullscaleiq_mentalrotation,resp_raw,standard,,,,,index,true
 fullscaleiq_mentalrotation,rt,standard,built,,data/fullscaleiq.R,26,index,true
 fullscaleiq_mentalrotation_options,id,standard,built,,data/openpsychometrics_options.py,105,index,true
 fullscaleiq_mentalrotation_options,item,standard,built,,data/openpsychometrics_options.py,105,index,true
@@ -19156,8 +19445,8 @@ fullscaleiq_mentalrotation_options,item_family,standard,built,,data/openpsychome
 fullscaleiq_mentalrotation_options,resp,standard,built,,data/openpsychometrics_options.py,105,index,true
 fullscaleiq_vocab,id,standard,built,,data/fullscaleiq.R,9,index,true
 fullscaleiq_vocab,item,standard,built,,data/fullscaleiq.R,11,index,true
-fullscaleiq_vocab,raw_resp,,built,,data/fullscaleiq.R,19,index,false
 fullscaleiq_vocab,resp,standard,built,,data/fullscaleiq.R,12,index,true
+fullscaleiq_vocab,resp_raw,standard,,,,,index,true
 fullscaleiq_vocab,rt,standard,built,,data/fullscaleiq.R,26,index,true
 fullscaleiq_vocab_options,id,standard,built,,data/openpsychometrics_options.py,105,index,true
 fullscaleiq_vocab_options,item,standard,built,,data/openpsychometrics_options.py,105,index,true
@@ -20037,6 +20326,7 @@ gerbig_2023_who5,id,standard,built,,data/gerbig_2023_loneliness_ace.py,150,index
 gerbig_2023_who5,item,standard,built,,data/gerbig_2023_loneliness_ace.py,157,index,true
 gerbig_2023_who5,resp,standard,built,,data/gerbig_2023_loneliness_ace.py,157,index,true
 germann_2026_environment,cov_age,standard_family,renamed,age,data/germann_2026_terrorism.py,27,index,true
+germann_2026_environment,cov_attack_timing,standard_family,built,,data/germann_2026_terrorism.py,33,index,false
 germann_2026_environment,cov_edu,standard_family,renamed,edu,data/germann_2026_terrorism.py,28,index,true
 germann_2026_environment,cov_gender,standard_family,renamed,gender,data/germann_2026_terrorism.py,26,index,true
 germann_2026_environment,cov_lr,standard_family,renamed,lr,data/germann_2026_terrorism.py,30,index,true
@@ -20045,8 +20335,8 @@ germann_2026_environment,cov_region,standard_family,renamed,region,data/germann_
 germann_2026_environment,id,standard,built,newid,data/germann_2026_terrorism.py,93,index,true
 germann_2026_environment,item,standard,built,,data/germann_2026_terrorism.py,65,index,true
 germann_2026_environment,resp,standard,built,,data/germann_2026_terrorism.py,66,index,true
-germann_2026_environment,wave,standard,,,,,index,true
 germann_2026_immigration,cov_age,standard_family,renamed,age,data/germann_2026_terrorism.py,27,index,true
+germann_2026_immigration,cov_attack_timing,standard_family,built,,data/germann_2026_terrorism.py,33,index,false
 germann_2026_immigration,cov_edu,standard_family,renamed,edu,data/germann_2026_terrorism.py,28,index,true
 germann_2026_immigration,cov_gender,standard_family,renamed,gender,data/germann_2026_terrorism.py,26,index,true
 germann_2026_immigration,cov_lr,standard_family,renamed,lr,data/germann_2026_terrorism.py,30,index,true
@@ -20055,8 +20345,8 @@ germann_2026_immigration,cov_region,standard_family,renamed,region,data/germann_
 germann_2026_immigration,id,standard,built,newid,data/germann_2026_terrorism.py,93,index,true
 germann_2026_immigration,item,standard,built,,data/germann_2026_terrorism.py,65,index,true
 germann_2026_immigration,resp,standard,built,,data/germann_2026_terrorism.py,66,index,true
-germann_2026_immigration,wave,standard,,,,,index,true
 germann_2026_national_identity,cov_age,standard_family,renamed,age,data/germann_2026_terrorism.py,27,index,true
+germann_2026_national_identity,cov_attack_timing,standard_family,built,,data/germann_2026_terrorism.py,33,index,false
 germann_2026_national_identity,cov_edu,standard_family,renamed,edu,data/germann_2026_terrorism.py,28,index,true
 germann_2026_national_identity,cov_gender,standard_family,renamed,gender,data/germann_2026_terrorism.py,26,index,true
 germann_2026_national_identity,cov_lr,standard_family,renamed,lr,data/germann_2026_terrorism.py,30,index,true
@@ -20065,8 +20355,8 @@ germann_2026_national_identity,cov_region,standard_family,renamed,region,data/ge
 germann_2026_national_identity,id,standard,built,newid,data/germann_2026_terrorism.py,93,index,true
 germann_2026_national_identity,item,standard,built,,data/germann_2026_terrorism.py,65,index,true
 germann_2026_national_identity,resp,standard,built,,data/germann_2026_terrorism.py,66,index,true
-germann_2026_national_identity,wave,standard,,,,,index,true
 germann_2026_redistribution,cov_age,standard_family,renamed,age,data/germann_2026_terrorism.py,27,index,true
+germann_2026_redistribution,cov_attack_timing,standard_family,built,,data/germann_2026_terrorism.py,33,index,false
 germann_2026_redistribution,cov_edu,standard_family,renamed,edu,data/germann_2026_terrorism.py,28,index,true
 germann_2026_redistribution,cov_gender,standard_family,renamed,gender,data/germann_2026_terrorism.py,26,index,true
 germann_2026_redistribution,cov_lr,standard_family,renamed,lr,data/germann_2026_terrorism.py,30,index,true
@@ -20075,8 +20365,8 @@ germann_2026_redistribution,cov_region,standard_family,renamed,region,data/germa
 germann_2026_redistribution,id,standard,built,newid,data/germann_2026_terrorism.py,93,index,true
 germann_2026_redistribution,item,standard,built,,data/germann_2026_terrorism.py,65,index,true
 germann_2026_redistribution,resp,standard,built,,data/germann_2026_terrorism.py,66,index,true
-germann_2026_redistribution,wave,standard,,,,,index,true
 germann_2026_state_intervention,cov_age,standard_family,renamed,age,data/germann_2026_terrorism.py,27,index,true
+germann_2026_state_intervention,cov_attack_timing,standard_family,built,,data/germann_2026_terrorism.py,33,index,false
 germann_2026_state_intervention,cov_edu,standard_family,renamed,edu,data/germann_2026_terrorism.py,28,index,true
 germann_2026_state_intervention,cov_gender,standard_family,renamed,gender,data/germann_2026_terrorism.py,26,index,true
 germann_2026_state_intervention,cov_lr,standard_family,renamed,lr,data/germann_2026_terrorism.py,30,index,true
@@ -20085,7 +20375,6 @@ germann_2026_state_intervention,cov_region,standard_family,renamed,region,data/g
 germann_2026_state_intervention,id,standard,built,newid,data/germann_2026_terrorism.py,93,index,true
 germann_2026_state_intervention,item,standard,built,,data/germann_2026_terrorism.py,65,index,true
 germann_2026_state_intervention,resp,standard,built,,data/germann_2026_terrorism.py,66,index,true
-germann_2026_state_intervention,wave,standard,,,,,index,true
 gerou_2023_dass21,cov_age,standard_family,renamed,Age,data/gerou_2023_humility_quiet_ego.py,67,index,true
 gerou_2023_dass21,cov_education,standard_family,renamed,Education,data/gerou_2023_humility_quiet_ego.py,68,index,true
 gerou_2023_dass21,cov_gender,standard_family,renamed,Gender,data/gerou_2023_humility_quiet_ego.py,67,index,true
@@ -20378,6 +20667,12 @@ ghosh_2020_uwes,cov_marital_status,standard_family,renamed,Marital status,data/g
 ghosh_2020_uwes,id,standard,built,,data/ghosh_2020_covid_hcw.py,151,index,true
 ghosh_2020_uwes,item,standard,built,,data/ghosh_2020_covid_hcw.py,147,index,true
 ghosh_2020_uwes,resp,standard,built,,data/ghosh_2020_covid_hcw.py,159,index,true
+ghulman_2025_saudi_knowledge,cov_gender,standard_family,renamed,Gender,data/ghulman_2025_saudi_knowledge.py,40,exact,true
+ghulman_2025_saudi_knowledge,cov_generation,standard_family,renamed,Generation,data/ghulman_2025_saudi_knowledge.py,40,exact,true
+ghulman_2025_saudi_knowledge,cov_nationality_group,standard_family,renamed,Nationality,data/ghulman_2025_saudi_knowledge.py,40,exact,true
+ghulman_2025_saudi_knowledge,id,standard,renamed,ResponseID,data/ghulman_2025_saudi_knowledge.py,63,exact,true
+ghulman_2025_saudi_knowledge,item,standard,built,,data/ghulman_2025_saudi_knowledge.py,68,exact,true
+ghulman_2025_saudi_knowledge,resp,standard,built,,data/ghulman_2025_saudi_knowledge.py,68,exact,true
 gigantesco_2021_epds,cov_perinatal_stage,standard_family,built,,data/gigantesco_2021_perinatal.py,91,index,false
 gigantesco_2021_epds,id,standard,built,,data/gigantesco_2021_perinatal.py,90,index,true
 gigantesco_2021_epds,item,standard,built,,data/gigantesco_2021_perinatal.py,97,index,true
@@ -23437,6 +23732,18 @@ gunandran_2023_whoqol_bref,cov_smoking,standard_family,renamed,Smoking Status,da
 gunandran_2023_whoqol_bref,id,standard,built,,data/gunandran_2023_whoqol_bref.py,59,exact,true
 gunandran_2023_whoqol_bref,item,standard,built,,data/gunandran_2023_whoqol_bref.py,59,exact,true
 gunandran_2023_whoqol_bref,resp,standard,built,,data/gunandran_2023_whoqol_bref.py,75,exact,true
+gunawan_2026_brand_image,id,standard,built,,data/gunawan_2026_ecommerce_purchase.py,56,index,true
+gunawan_2026_brand_image,item,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_brand_image,resp,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_brand_trust,id,standard,built,,data/gunawan_2026_ecommerce_purchase.py,56,index,true
+gunawan_2026_brand_trust,item,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_brand_trust,resp,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_perceived_value,id,standard,built,,data/gunawan_2026_ecommerce_purchase.py,56,index,true
+gunawan_2026_perceived_value,item,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_perceived_value,resp,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_purchase_intention,id,standard,built,,data/gunawan_2026_ecommerce_purchase.py,56,index,true
+gunawan_2026_purchase_intention,item,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
+gunawan_2026_purchase_intention,resp,standard,built,,data/gunawan_2026_ecommerce_purchase.py,67,index,true
 guo_2015_neuroticism,cov_age,standard_family,built,Age,data/guo_2015_explosion_ptsd.py,74,index,true
 guo_2015_neuroticism,id,standard,built,,data/guo_2015_explosion_ptsd.py,49,index,true
 guo_2015_neuroticism,item,standard,built,,data/guo_2015_explosion_ptsd.py,49,index,true
@@ -24474,6 +24781,39 @@ hendrikx_2022_telepressure,cov_telework,standard_family,renamed,Thuiswerk,data/h
 hendrikx_2022_telepressure,id,standard,built,,data/hendrikx_2022_availability_norms.py,78,index,true
 hendrikx_2022_telepressure,item,standard,built,,data/hendrikx_2022_availability_norms.py,90,index,true
 hendrikx_2022_telepressure,resp,standard,built,,data/hendrikx_2022_availability_norms.py,107,index,true
+herisi_2025_impression_management,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_impression_management,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_impression_management,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_prevention_focus,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_prevention_focus,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_prevention_focus,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_promotion_focus,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_promotion_focus,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_promotion_focus,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_psychological_distance,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_psychological_distance,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_psychological_distance,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_recycling_intention,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_recycling_intention,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_recycling_intention,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_response_cost,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_response_cost,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_response_cost,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_response_efficacy,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_response_efficacy,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_response_efficacy,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_self_deceptive_enhancement,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_self_deceptive_enhancement,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_self_deceptive_enhancement,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_self_efficacy,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_self_efficacy,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_self_efficacy,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_severity,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_severity,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_severity,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_vulnerability,id,standard,built,,data/herisi_2025_recycling.py,62,index,true
+herisi_2025_vulnerability,item,standard,built,,data/herisi_2025_recycling.py,73,index,true
+herisi_2025_vulnerability,resp,standard,built,,data/herisi_2025_recycling.py,73,index,true
 heriyati_2026_digital_info_literacy,cov_digital_in_college,standard_family,built,,data/heriyati_2026_digital_entrepreneurship.py,61,index,false
 heriyati_2026_digital_info_literacy,cov_digital_tools,standard_family,built,,data/heriyati_2026_digital_entrepreneurship.py,61,index,false
 heriyati_2026_digital_info_literacy,cov_employees,standard_family,built,,data/heriyati_2026_digital_entrepreneurship.py,60,index,false
@@ -25455,6 +25795,26 @@ hu_2025_internship_attitude,cov_gender,standard_family,built,Gender,data/hu_2025
 hu_2025_internship_attitude,id,standard,built,,data/hu_2025_vocational_employability.py,68,index,true
 hu_2025_internship_attitude,item,standard,built,,data/hu_2025_vocational_employability.py,76,index,true
 hu_2025_internship_attitude,resp,standard,built,,data/hu_2025_vocational_employability.py,76,index,true
+hu_2026_ai_advertising,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_ai_advertising,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_ai_advertising,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_advertising,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_customer_service,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_ai_customer_service,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_ai_customer_service,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_customer_service,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_marketing_attitude,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_ai_marketing_attitude,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_ai_marketing_attitude,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_marketing_attitude,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_marketing_trust,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_ai_marketing_trust,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_ai_marketing_trust,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_marketing_trust,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_recommendation,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_ai_recommendation,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_ai_recommendation,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_ai_recommendation,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
 hu_2026_digital_nomad_wellbeing,cov_age_band,standard_family,renamed,age,data/hu_2026_digital_nomad.py,161,index,true
 hu_2026_digital_nomad_wellbeing,cov_completion_time_s,standard_family,renamed,restime,data/hu_2026_digital_nomad.py,162,index,true
 hu_2026_digital_nomad_wellbeing,cov_education,standard_family,renamed,edu,data/hu_2026_digital_nomad.py,161,index,true
@@ -25471,6 +25831,14 @@ hu_2026_psqi,cov_work_hours_band,standard_family,renamed,workhour,data/hu_2026_d
 hu_2026_psqi,id,standard,built,,data/hu_2026_digital_nomad.py,87,index,true
 hu_2026_psqi,item,standard,built,,data/hu_2026_digital_nomad.py,99,index,true
 hu_2026_psqi,resp,standard,built,,data/hu_2026_digital_nomad.py,116,index,true
+hu_2026_purchase_intention,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_purchase_intention,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_purchase_intention,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_purchase_intention,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_purchase_journey,cov_platform,standard_family,renamed,SHOPPIG,data/hu_2026_ai_marketing.py,33,index,true
+hu_2026_purchase_journey,id,standard,built,,data/hu_2026_ai_marketing.py,60,index,true
+hu_2026_purchase_journey,item,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
+hu_2026_purchase_journey,resp,standard,built,,data/hu_2026_ai_marketing.py,71,index,true
 hua_2023_efl_academic_procrastination,id,standard,built,,data/hua_2023_efl_learning_scales.py,92,index,true
 hua_2023_efl_academic_procrastination,item,standard,built,,data/hua_2023_efl_learning_scales.py,99,index,true
 hua_2023_efl_academic_procrastination,resp,standard,built,,data/hua_2023_efl_learning_scales.py,99,index,true
@@ -26339,6 +26707,46 @@ ilearnathome_regalado_2025,cov_years_of_service,standard_family,built,,data/ilea
 ilearnathome_regalado_2025,id,standard,built,,data/ilearnathome_regalado_2025.R,13,exact,true
 ilearnathome_regalado_2025,item,standard,built,,data/ilearnathome_regalado_2025.R,15,exact,true
 ilearnathome_regalado_2025,resp,standard,built,,data/ilearnathome_regalado_2025.R,16,exact,true
+ilham_2025_compliance_intention,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_compliance_intention,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_compliance_intention,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_compliance_intention,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_compliance_intention,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_peer_influence,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_peer_influence,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_peer_influence,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_peer_influence,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_peer_influence,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_social_media,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_social_media,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_social_media,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_social_media,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_social_media,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_knowledge,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_knowledge,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_knowledge,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_tax_knowledge,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_knowledge,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_morale,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_morale,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_morale,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_tax_morale,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_morale,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_simplicity,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_simplicity,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_tax_simplicity,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_tax_simplicity,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_tax_simplicity,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_trust,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_trust,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_trust,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_trust,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_trust,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_voluntary_compliance,cov_gender,standard_family,renamed,Gender,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_voluntary_compliance,cov_occupation,standard_family,renamed,Occupation,data/ilham_2025_millennial_tax.py,33,index,true
+ilham_2025_voluntary_compliance,id,standard,built,,data/ilham_2025_millennial_tax.py,60,index,true
+ilham_2025_voluntary_compliance,item,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
+ilham_2025_voluntary_compliance,resp,standard,built,,data/ilham_2025_millennial_tax.py,71,index,true
 ilic2019_cddq,id,standard,renamed,Var1,data/ilic2019_cddq.py,36,exact,true
 ilic2019_cddq,item,standard,built,,data/ilic2019_cddq.py,42,exact,true
 ilic2019_cddq,resp,standard,built,,data/ilic2019_cddq.py,42,exact,true
@@ -27889,6 +28297,14 @@ kacovsky_2022_imi,cov_stem_intention,standard_family,renamed,intention_to_study_
 kacovsky_2022_imi,id,standard,built,,data/kacovsky_2022_imi.py,73,exact,true
 kacovsky_2022_imi,item,standard,built,,data/kacovsky_2022_imi.py,85,exact,true
 kacovsky_2022_imi,resp,standard,built,,data/kacovsky_2022_imi.py,102,exact,true
+kadi_2025_purchase_intention,cov_gender,standard_family,renamed,Gender,data/kadi_2025_tiktok_cosmetics.py,34,index,true
+kadi_2025_purchase_intention,id,standard,built,,data/kadi_2025_tiktok_cosmetics.py,61,index,true
+kadi_2025_purchase_intention,item,standard,built,,data/kadi_2025_tiktok_cosmetics.py,72,index,true
+kadi_2025_purchase_intention,resp,standard,built,,data/kadi_2025_tiktok_cosmetics.py,72,index,true
+kadi_2025_tiktok_ad_response,cov_gender,standard_family,renamed,Gender,data/kadi_2025_tiktok_cosmetics.py,34,index,true
+kadi_2025_tiktok_ad_response,id,standard,built,,data/kadi_2025_tiktok_cosmetics.py,61,index,true
+kadi_2025_tiktok_ad_response,item,standard,built,,data/kadi_2025_tiktok_cosmetics.py,72,index,true
+kadi_2025_tiktok_ad_response,resp,standard,built,,data/kadi_2025_tiktok_cosmetics.py,72,index,true
 kahraman_2026_bai,cov_cancer_type,standard_family,renamed,Cancer Type,data/kahraman_2026_caregiver.py,135,index,true
 kahraman_2026_bai,cov_caregiver_age,standard_family,renamed,Caregiver Age,data/kahraman_2026_caregiver.py,130,index,true
 kahraman_2026_bai,cov_caregiver_gender,standard_family,renamed,Caregiver Gender,data/kahraman_2026_caregiver.py,130,index,true
@@ -30438,6 +30854,11 @@ kramer_2023_efct,wave,standard,built,Test,data/kramer_2023_face_matching.py,141,
 kramer_2023_gfmt2sa,id,standard,built,PID,data/kramer_2023_face_matching.py,124,index,true
 kramer_2023_gfmt2sa,item,standard,built,,data/kramer_2023_face_matching.py,74,index,true
 kramer_2023_gfmt2sa,resp,standard,built,Trial accuracy,data/kramer_2023_face_matching.py,126,index,true
+krejcova_2025_heas,cov_age,standard_family,renamed,age_clean,data/krejcova_2025_heas_czech.py,33,index,true
+krejcova_2025_heas,cov_gender,standard_family,renamed,gender,data/krejcova_2025_heas_czech.py,33,index,true
+krejcova_2025_heas,id,standard,built,,data/krejcova_2025_heas_czech.py,67,index,true
+krejcova_2025_heas,item,standard,built,,data/krejcova_2025_heas_czech.py,78,index,true
+krejcova_2025_heas,resp,standard,built,,data/krejcova_2025_heas_czech.py,78,index,true
 kreps_2023_ai_attitudes,cov_age,standard_family,built,age,data/kreps_2023_ai_attitudes.py,119,exact,true
 kreps_2023_ai_attitudes,cov_domain,standard_family,built,,data/kreps_2023_ai_attitudes.py,117,exact,false
 kreps_2023_ai_attitudes,cov_purpose,standard_family,built,,data/kreps_2023_ai_attitudes.py,118,exact,false
@@ -31632,6 +32053,31 @@ lena_2025_rmdq_albanian,id,standard,built,,data/lena_2025_rmdq_albanian.py,106,e
 lena_2025_rmdq_albanian,item,standard,built,,data/lena_2025_rmdq_albanian.py,157,exact,true
 lena_2025_rmdq_albanian,resp,standard,built,,data/lena_2025_rmdq_albanian.py,157,exact,true
 lena_2025_rmdq_albanian,wave,standard,built,,data/lena_2025_rmdq_albanian.py,152,exact,true
+leo_2026_continuance_intention,cov_age_group,standard_family,renamed,age,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_continuance_intention,cov_gender,standard_family,renamed,gender,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_continuance_intention,id,standard,built,,data/leo_2026_ewallet_continuance.py,60,index,true
+leo_2026_continuance_intention,item,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_continuance_intention,resp,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_ecosystem_integration,cov_age_group,standard_family,renamed,age,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_ecosystem_integration,cov_gender,standard_family,renamed,gender,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_ecosystem_integration,id,standard,built,,data/leo_2026_ewallet_continuance.py,60,index,true
+leo_2026_ecosystem_integration,item,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_ecosystem_integration,resp,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_habit,cov_age_group,standard_family,renamed,age,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_habit,cov_gender,standard_family,renamed,gender,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_habit,id,standard,built,,data/leo_2026_ewallet_continuance.py,60,index,true
+leo_2026_habit,item,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_habit,resp,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_satisfaction,cov_age_group,standard_family,renamed,age,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_satisfaction,cov_gender,standard_family,renamed,gender,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_satisfaction,id,standard,built,,data/leo_2026_ewallet_continuance.py,60,index,true
+leo_2026_satisfaction,item,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_satisfaction,resp,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_usefulness,cov_age_group,standard_family,renamed,age,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_usefulness,cov_gender,standard_family,renamed,gender,data/leo_2026_ewallet_continuance.py,33,index,true
+leo_2026_usefulness,id,standard,built,,data/leo_2026_ewallet_continuance.py,60,index,true
+leo_2026_usefulness,item,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
+leo_2026_usefulness,resp,standard,built,,data/leo_2026_ewallet_continuance.py,71,index,true
 leon_guereno_2020_breq,cov_age,standard_family,renamed,Age,data/leon_guereno_2020_breq_rs.py,34,index,true
 leon_guereno_2020_breq,cov_bmi,standard_family,renamed,BMI,data/leon_guereno_2020_breq_rs.py,35,index,true
 leon_guereno_2020_breq,cov_gender,standard_family,renamed,Gender,data/leon_guereno_2020_breq_rs.py,34,index,true
@@ -32892,6 +33338,26 @@ liang_2026_intrinsic_motivation,cov_professional_background,standard_family,rena
 liang_2026_intrinsic_motivation,id,standard,renamed,participant_id,data/liang_2026_exercise_motivation.py,34,index,true
 liang_2026_intrinsic_motivation,item,standard,built,,data/liang_2026_exercise_motivation.py,71,index,true
 liang_2026_intrinsic_motivation,resp,standard,built,,data/liang_2026_exercise_motivation.py,72,index,true
+lie_2026_emotional_value,cov_generation,standard_family,renamed,YearOfBirth,data/lie_2026_green_purchase.py,32,index,true
+lie_2026_emotional_value,id,standard,built,,data/lie_2026_green_purchase.py,59,index,true
+lie_2026_emotional_value,item,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_emotional_value,resp,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_environmental_care,cov_generation,standard_family,renamed,YearOfBirth,data/lie_2026_green_purchase.py,32,index,true
+lie_2026_environmental_care,id,standard,built,,data/lie_2026_green_purchase.py,59,index,true
+lie_2026_environmental_care,item,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_environmental_care,resp,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_environmental_knowledge,cov_generation,standard_family,renamed,YearOfBirth,data/lie_2026_green_purchase.py,32,index,true
+lie_2026_environmental_knowledge,id,standard,built,,data/lie_2026_green_purchase.py,59,index,true
+lie_2026_environmental_knowledge,item,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_environmental_knowledge,resp,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_green_marketing,cov_generation,standard_family,renamed,YearOfBirth,data/lie_2026_green_purchase.py,32,index,true
+lie_2026_green_marketing,id,standard,built,,data/lie_2026_green_purchase.py,59,index,true
+lie_2026_green_marketing,item,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_green_marketing,resp,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_green_purchase_intention,cov_generation,standard_family,renamed,YearOfBirth,data/lie_2026_green_purchase.py,32,index,true
+lie_2026_green_purchase_intention,id,standard,built,,data/lie_2026_green_purchase.py,59,index,true
+lie_2026_green_purchase_intention,item,standard,built,,data/lie_2026_green_purchase.py,70,index,true
+lie_2026_green_purchase_intention,resp,standard,built,,data/lie_2026_green_purchase.py,70,index,true
 liem_2024_attitude_env,id,standard,renamed,STT,data/liem_2024_env_stewardship.py,48,index,true
 liem_2024_attitude_env,item,standard,built,,data/liem_2024_env_stewardship.py,55,index,true
 liem_2024_attitude_env,resp,standard,built,,data/liem_2024_env_stewardship.py,55,index,true
@@ -35277,6 +35743,34 @@ marcussonclavertz_2019_velten,cov_sex,standard_family,renamed,Gender,data/marcus
 marcussonclavertz_2019_velten,id,standard,built,,data/marcussonclavertz_2019_velten_mood_induction.py,38,index,true
 marcussonclavertz_2019_velten,item,standard,built,,data/marcussonclavertz_2019_velten_mood_induction.py,64,index,true
 marcussonclavertz_2019_velten,resp,standard,built,,data/marcussonclavertz_2019_velten_mood_induction.py,64,index,true
+mardiyah_2025_enforced_compliance,cov_age_group,standard_family,renamed,Age,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_enforced_compliance,cov_education,standard_family,renamed,Highest Level of Education,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_enforced_compliance,cov_gender,standard_family,renamed,Gender,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_enforced_compliance,cov_income,standard_family,renamed,Annual Income,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_enforced_compliance,id,standard,built,,data/mardiyah_2025_freelancer_tax.py,57,index,true
+mardiyah_2025_enforced_compliance,item,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_enforced_compliance,resp,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_government_power,cov_age_group,standard_family,renamed,Age,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_government_power,cov_education,standard_family,renamed,Highest Level of Education,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_government_power,cov_gender,standard_family,renamed,Gender,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_government_power,cov_income,standard_family,renamed,Annual Income,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_government_power,id,standard,built,,data/mardiyah_2025_freelancer_tax.py,57,index,true
+mardiyah_2025_government_power,item,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_government_power,resp,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_trust_government,cov_age_group,standard_family,renamed,Age,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_trust_government,cov_education,standard_family,renamed,Highest Level of Education,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_trust_government,cov_gender,standard_family,renamed,Gender,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_trust_government,cov_income,standard_family,renamed,Annual Income,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_trust_government,id,standard,built,,data/mardiyah_2025_freelancer_tax.py,57,index,true
+mardiyah_2025_trust_government,item,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_trust_government,resp,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_voluntary_compliance,cov_age_group,standard_family,renamed,Age,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_voluntary_compliance,cov_education,standard_family,renamed,Highest Level of Education,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_voluntary_compliance,cov_gender,standard_family,renamed,Gender,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_voluntary_compliance,cov_income,standard_family,renamed,Annual Income,data/mardiyah_2025_freelancer_tax.py,30,index,true
+mardiyah_2025_voluntary_compliance,id,standard,built,,data/mardiyah_2025_freelancer_tax.py,57,index,true
+mardiyah_2025_voluntary_compliance,item,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
+mardiyah_2025_voluntary_compliance,resp,standard,built,,data/mardiyah_2025_freelancer_tax.py,68,index,true
 margaretto_2025_translation_study_1_generalknowledge,cov_age,standard_family,renamed,Age,data/margaretto_2025_translation.do,24,index,true
 margaretto_2025_translation_study_1_generalknowledge,cov_country,standard_family,renamed,Country,data/margaretto_2025_translation.do,23,index,true
 margaretto_2025_translation_study_1_generalknowledge,cov_educationlevel,standard_family,renamed,Highesteducationlevel,data/margaretto_2025_translation.do,27,index,true
@@ -35697,6 +36191,36 @@ maruyama_2023_madagascar_math,item,standard,built,,data/maruyama_2023_madagascar
 maruyama_2023_madagascar_math,resp,standard,built,,data/maruyama_2023_madagascar_math.py,73,exact,true
 maruyama_2023_madagascar_math,treat,standard,built,treatment,data/maruyama_2023_madagascar_math.py,101,exact,true
 maruyama_2023_madagascar_math,wave,standard,built,,data/maruyama_2023_madagascar_math.py,59,exact,true
+marveli_2026_brand_perception,cov_age_group,standard_family,renamed,Age\nUsia,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_perception,cov_domicile,standard_family,renamed,Domicile\nDomisili,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_perception,cov_gender,standard_family,renamed,Gender,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_perception,id,standard,built,,data/marveli_2026_frozen_food.py,59,index,true
+marveli_2026_brand_perception,item,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_brand_perception,resp,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_brand_trust,cov_age_group,standard_family,renamed,Age\nUsia,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_trust,cov_domicile,standard_family,renamed,Domicile\nDomisili,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_trust,cov_gender,standard_family,renamed,Gender,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_brand_trust,id,standard,built,,data/marveli_2026_frozen_food.py,59,index,true
+marveli_2026_brand_trust,item,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_brand_trust,resp,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_marketing_communication,cov_age_group,standard_family,renamed,Age\nUsia,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_marketing_communication,cov_domicile,standard_family,renamed,Domicile\nDomisili,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_marketing_communication,cov_gender,standard_family,renamed,Gender,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_marketing_communication,id,standard,built,,data/marveli_2026_frozen_food.py,59,index,true
+marveli_2026_marketing_communication,item,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_marketing_communication,resp,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_purchase_intention,cov_age_group,standard_family,renamed,Age\nUsia,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_purchase_intention,cov_domicile,standard_family,renamed,Domicile\nDomisili,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_purchase_intention,cov_gender,standard_family,renamed,Gender,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_purchase_intention,id,standard,built,,data/marveli_2026_frozen_food.py,59,index,true
+marveli_2026_purchase_intention,item,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_purchase_intention,resp,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_sales_channel,cov_age_group,standard_family,renamed,Age\nUsia,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_sales_channel,cov_domicile,standard_family,renamed,Domicile\nDomisili,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_sales_channel,cov_gender,standard_family,renamed,Gender,data/marveli_2026_frozen_food.py,32,index,true
+marveli_2026_sales_channel,id,standard,built,,data/marveli_2026_frozen_food.py,59,index,true
+marveli_2026_sales_channel,item,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
+marveli_2026_sales_channel,resp,standard,built,,data/marveli_2026_frozen_food.py,70,index,true
 mascherini_2021_meddiet,cov_age,standard_family,renamed,Age - years,data/mascherini_2021_meddiet.py,38,exact,true
 mascherini_2021_meddiet,cov_education,standard_family,renamed,Education,data/mascherini_2021_meddiet.py,41,exact,true
 mascherini_2021_meddiet,cov_gender,standard_family,renamed,Gender,data/mascherini_2021_meddiet.py,39,exact,true
@@ -38676,11 +39200,11 @@ mostova_2022_ras,cov_gender,standard_family,built,,data/mostova_2022_love_langua
 mostova_2022_ras,id,standard,built,,data/mostova_2022_love_languages.py,42,index,true
 mostova_2022_ras,item,standard,built,,data/mostova_2022_love_languages.py,84,index,true
 mostova_2022_ras,resp,standard,built,,data/mostova_2022_love_languages.py,84,index,true
-motion,id,standard,built,,data/motion_discrimination.R,13,index,true
-motion,item,standard,built,,data/motion_discrimination.R,12,index,true
-motion,resp,standard,built,,data/motion_discrimination.R,13,index,true
-motion,rt,standard,built,,data/motion_discrimination.R,12,index,true
-motion,trialnum,,built,,data/motion_discrimination.R,13,index,false
+motion,id,standard,,,,,ambiguous,true
+motion,item,standard,,,,,ambiguous,true
+motion,resp,standard,,,,,ambiguous,true
+motion,rt,standard,,,,,ambiguous,true
+motion,trialnum,,,,,,ambiguous,false
 movac_pakpour2022,id,standard,built,,data/movac_pakpour2022.R,18,exact,true
 movac_pakpour2022,item,standard,built,,data/movac_pakpour2022.R,18,exact,true
 movac_pakpour2022,resp,standard,built,,data/movac_pakpour2022.R,18,exact,true
@@ -39178,6 +39702,48 @@ nadif_2026_time_pressure,cov_gender,standard_family,renamed,Gender,data/nadif_20
 nadif_2026_time_pressure,id,standard,renamed,N,data/nadif_2026_genai_learning.py,70,index,true
 nadif_2026_time_pressure,item,standard,built,,data/nadif_2026_genai_learning.py,86,index,true
 nadif_2026_time_pressure,resp,standard,built,,data/nadif_2026_genai_learning.py,86,index,true
+nadira_2026_ai_accuracy,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_accuracy,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_accuracy,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_accuracy,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_accuracy,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_ai_accuracy,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_ai_accuracy,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_ai_exposure,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_exposure,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_exposure,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_exposure,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_ai_exposure,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_ai_exposure,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_ai_exposure,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_attitude_ai,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_attitude_ai,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_attitude_ai,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_attitude_ai,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_attitude_ai,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_attitude_ai,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_attitude_ai,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_brand_trust,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_brand_trust,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_brand_trust,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_brand_trust,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_brand_trust,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_brand_trust,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_brand_trust,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_flow_experience,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_flow_experience,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_flow_experience,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_flow_experience,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_flow_experience,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_flow_experience,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_flow_experience,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_purchase_decision,cov_age_group,standard_family,renamed,Usia,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_purchase_decision,cov_education,standard_family,renamed,Pendidikan Terakhir,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_purchase_decision,cov_gender,standard_family,renamed,Jenis Kelamin,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_purchase_decision,cov_occupation,standard_family,renamed,Pekerjaan,data/nadira_2026_ai_fashion_marketing.py,37,index,true
+nadira_2026_purchase_decision,id,standard,built,,data/nadira_2026_ai_fashion_marketing.py,65,index,true
+nadira_2026_purchase_decision,item,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
+nadira_2026_purchase_decision,resp,standard,built,,data/nadira_2026_ai_fashion_marketing.py,76,index,true
 naep_multilcirt,id,standard,built,,data/multilcirt.R,3,index,true
 naep_multilcirt,item,standard,built,,data/multilcirt.R,5,index,true
 naep_multilcirt,resp,standard,built,,data/multilcirt.R,5,index,true
@@ -42954,6 +43520,36 @@ personalitychange_kramer_2025_swls,id,standard,built,,data/personalitychange_kra
 personalitychange_kramer_2025_swls,item,standard,built,,data/personalitychange_kramer.py,3,prefix,true
 personalitychange_kramer_2025_swls,resp,standard,built,,data/personalitychange_kramer.py,3,prefix,true
 personalitychange_kramer_2025_swls,wave,standard,built,,data/personalitychange_kramer.py,3,prefix,true
+perttula_2026_climate_anxiety,cov_age_group,standard_family,renamed,Age,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_employed,standard_family,renamed,Employ,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_living,standard_family,renamed,Living,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_parent_degree,standard_family,renamed,ParentDegree,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_race,standard_family,renamed,RACE,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_residency,standard_family,renamed,CSUResidency,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,cov_sex,standard_family,renamed,Sex,data/perttula_2026_climate_anxiety.py,34,exact,true
+perttula_2026_climate_anxiety,id,standard,built,,data/perttula_2026_climate_anxiety.py,71,exact,true
+perttula_2026_climate_anxiety,item,standard,built,,data/perttula_2026_climate_anxiety.py,82,exact,true
+perttula_2026_climate_anxiety,resp,standard,built,,data/perttula_2026_climate_anxiety.py,82,exact,true
+perttula_2026_climate_behavior,cov_age_group,standard_family,renamed,Age,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_employed,standard_family,renamed,Employ,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_living,standard_family,renamed,Living,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_parent_degree,standard_family,renamed,ParentDegree,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_race,standard_family,renamed,RACE,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_residency,standard_family,renamed,CSUResidency,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,cov_sex,standard_family,renamed,Sex,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_behavior,id,standard,built,,data/perttula_2026_climate_anxiety.py,71,index,true
+perttula_2026_climate_behavior,item,standard,built,,data/perttula_2026_climate_anxiety.py,82,index,true
+perttula_2026_climate_behavior,resp,standard,built,,data/perttula_2026_climate_anxiety.py,82,index,true
+perttula_2026_climate_experience,cov_age_group,standard_family,renamed,Age,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_employed,standard_family,renamed,Employ,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_living,standard_family,renamed,Living,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_parent_degree,standard_family,renamed,ParentDegree,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_race,standard_family,renamed,RACE,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_residency,standard_family,renamed,CSUResidency,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,cov_sex,standard_family,renamed,Sex,data/perttula_2026_climate_anxiety.py,34,index,true
+perttula_2026_climate_experience,id,standard,built,,data/perttula_2026_climate_anxiety.py,71,index,true
+perttula_2026_climate_experience,item,standard,built,,data/perttula_2026_climate_anxiety.py,82,index,true
+perttula_2026_climate_experience,resp,standard,built,,data/perttula_2026_climate_anxiety.py,82,index,true
 PeSCBCSCe_Novak_2020_SCBCS,id,standard,,,,,ambiguous,true
 PeSCBCSCe_Novak_2020_SCBCS,item,standard,,,,,ambiguous,true
 PeSCBCSCe_Novak_2020_SCBCS,resp,standard,,,,,ambiguous,true
@@ -44924,6 +45520,55 @@ prihastiwi_2026_adcap,id,standard,built,,data/prihastiwi_2026_adcap.py,74,exact,
 prihastiwi_2026_adcap,item,standard,built,,data/prihastiwi_2026_adcap.py,11,exact,true
 prihastiwi_2026_adcap,itemcov_aspect,standard_family,built,item,data/prihastiwi_2026_adcap.py,75,exact,true
 prihastiwi_2026_adcap,resp,standard,built,,data/prihastiwi_2026_adcap.py,74,exact,true
+prihatna_2025_ease_of_use,cov_age_group,standard_family,renamed,Usia saat ini,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_ease_of_use,cov_gender,standard_family,renamed,Jenis kelamin,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_ease_of_use,id,standard,built,,data/prihatna_2025_online_shopping.py,67,index,true
+prihatna_2025_ease_of_use,item,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_ease_of_use,resp,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_product_assortment,cov_age_group,standard_family,renamed,Usia saat ini,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_product_assortment,cov_gender,standard_family,renamed,Jenis kelamin,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_product_assortment,id,standard,built,,data/prihatna_2025_online_shopping.py,67,index,true
+prihatna_2025_product_assortment,item,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_product_assortment,resp,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_purchase_intention,cov_age_group,standard_family,renamed,Usia saat ini,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_purchase_intention,cov_gender,standard_family,renamed,Jenis kelamin,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_purchase_intention,id,standard,built,,data/prihatna_2025_online_shopping.py,67,index,true
+prihatna_2025_purchase_intention,item,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_purchase_intention,resp,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_social_influence,cov_age_group,standard_family,renamed,Usia saat ini,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_social_influence,cov_gender,standard_family,renamed,Jenis kelamin,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_social_influence,id,standard,built,,data/prihatna_2025_online_shopping.py,67,index,true
+prihatna_2025_social_influence,item,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_social_influence,resp,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_usefulness,cov_age_group,standard_family,renamed,Usia saat ini,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_usefulness,cov_gender,standard_family,renamed,Jenis kelamin,data/prihatna_2025_online_shopping.py,35,index,true
+prihatna_2025_usefulness,id,standard,built,,data/prihatna_2025_online_shopping.py,67,index,true
+prihatna_2025_usefulness,item,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2025_usefulness,resp,standard,built,,data/prihatna_2025_online_shopping.py,78,index,true
+prihatna_2026_intention_ewallet,cov_age,standard_family,renamed,Umur Anda saat ini,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_ewallet,cov_gender,standard_family,renamed,Jenis Kelamin Anda,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_ewallet,cov_main_payment,standard_family,renamed,main_method,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_ewallet,id,standard,built,,data/prihatna_2026_digital_payment.py,65,index,true
+prihatna_2026_intention_ewallet,item,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_intention_ewallet,resp,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_intention_mobile_banking,cov_age,standard_family,renamed,Umur Anda saat ini,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_mobile_banking,cov_gender,standard_family,renamed,Jenis Kelamin Anda,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_mobile_banking,cov_main_payment,standard_family,renamed,main_method,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_intention_mobile_banking,id,standard,built,,data/prihatna_2026_digital_payment.py,65,index,true
+prihatna_2026_intention_mobile_banking,item,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_intention_mobile_banking,resp,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_observability,cov_age,standard_family,renamed,Umur Anda saat ini,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_observability,cov_gender,standard_family,renamed,Jenis Kelamin Anda,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_observability,cov_main_payment,standard_family,renamed,main_method,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_observability,id,standard,built,,data/prihatna_2026_digital_payment.py,65,index,true
+prihatna_2026_observability,item,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_observability,resp,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_usefulness,cov_age,standard_family,renamed,Umur Anda saat ini,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_usefulness,cov_gender,standard_family,renamed,Jenis Kelamin Anda,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_usefulness,cov_main_payment,standard_family,renamed,main_method,data/prihatna_2026_digital_payment.py,33,index,true
+prihatna_2026_usefulness,id,standard,built,,data/prihatna_2026_digital_payment.py,65,index,true
+prihatna_2026_usefulness,item,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
+prihatna_2026_usefulness,resp,standard,built,,data/prihatna_2026_digital_payment.py,76,index,true
 prilyasinta_2026_connectedness,cov_age_band,standard_family,renamed,Berapa usia Anda saat ini?,data/prilyasinta_2026_balinese_motivation.py,76,index,true
 prilyasinta_2026_connectedness,cov_education,standard_family,renamed,Apa jenjang pendidikan Anda yang terakhir?,data/prilyasinta_2026_balinese_motivation.py,77,index,true
 prilyasinta_2026_connectedness,cov_ethnicity,standard_family,renamed,Apa etnis/suku Anda?,data/prilyasinta_2026_balinese_motivation.py,75,index,true
@@ -46416,6 +47061,21 @@ ren_2026_moral_decoupling,cov_tenure_band,standard_family,renamed,tenure,data/re
 ren_2026_moral_decoupling,id,standard,renamed,no,data/ren_2026_amoral_management.py,136,index,true
 ren_2026_moral_decoupling,item,standard,built,,data/ren_2026_amoral_management.py,149,index,true
 ren_2026_moral_decoupling,resp,standard,built,,data/ren_2026_amoral_management.py,149,index,true
+rendra_2026_ease_of_use,cov_gender,standard_family,renamed,Jenis kelamin,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_ease_of_use,cov_semester,standard_family,renamed,Semester,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_ease_of_use,id,standard,built,,data/rendra_2026_ewallet.py,58,index,true
+rendra_2026_ease_of_use,item,standard,built,,data/rendra_2026_ewallet.py,69,index,true
+rendra_2026_ease_of_use,resp,standard,built,,data/rendra_2026_ewallet.py,69,index,true
+rendra_2026_trust,cov_gender,standard_family,renamed,Jenis kelamin,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_trust,cov_semester,standard_family,renamed,Semester,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_trust,id,standard,built,,data/rendra_2026_ewallet.py,58,index,true
+rendra_2026_trust,item,standard,built,,data/rendra_2026_ewallet.py,69,index,true
+rendra_2026_trust,resp,standard,built,,data/rendra_2026_ewallet.py,69,index,true
+rendra_2026_usage_intention,cov_gender,standard_family,renamed,Jenis kelamin,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_usage_intention,cov_semester,standard_family,renamed,Semester,data/rendra_2026_ewallet.py,31,index,true
+rendra_2026_usage_intention,id,standard,built,,data/rendra_2026_ewallet.py,58,index,true
+rendra_2026_usage_intention,item,standard,built,,data/rendra_2026_ewallet.py,69,index,true
+rendra_2026_usage_intention,resp,standard,built,,data/rendra_2026_ewallet.py,69,index,true
 Resistance,group,,built,,data/Resistance.R,10,exact,false
 Resistance,id,standard,built,,data/Resistance.R,10,exact,true
 Resistance,item,standard,built,,data/Resistance.R,9,exact,true
@@ -47657,6 +48317,24 @@ ruizjimenez_2026_health_eval,cov_sex,standard_family,built,SEXO,data/ruizjimenez
 ruizjimenez_2026_health_eval,id,standard,built,ID_CASO,data/ruizjimenez_2026_health_eval.py,54,exact,true
 ruizjimenez_2026_health_eval,item,standard,built,,data/ruizjimenez_2026_health_eval.py,62,exact,true
 ruizjimenez_2026_health_eval,resp,standard,built,,data/ruizjimenez_2026_health_eval.py,62,exact,true
+rumangkit_2024_green_awareness,cov_age_group,standard_family,renamed,Usia,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_awareness,cov_education,standard_family,renamed,Tingkat pendidikan,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_awareness,cov_gender,standard_family,renamed,Jenis Kelamin,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_awareness,id,standard,built,,data/rumangkit_2024_ev_green_purchase.py,60,index,true
+rumangkit_2024_green_awareness,item,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
+rumangkit_2024_green_awareness,resp,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
+rumangkit_2024_green_marketing_mix,cov_age_group,standard_family,renamed,Usia,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_marketing_mix,cov_education,standard_family,renamed,Tingkat pendidikan,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_marketing_mix,cov_gender,standard_family,renamed,Jenis Kelamin,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_marketing_mix,id,standard,built,,data/rumangkit_2024_ev_green_purchase.py,60,index,true
+rumangkit_2024_green_marketing_mix,item,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
+rumangkit_2024_green_marketing_mix,resp,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
+rumangkit_2024_green_purchase_intention,cov_age_group,standard_family,renamed,Usia,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_purchase_intention,cov_education,standard_family,renamed,Tingkat pendidikan,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_purchase_intention,cov_gender,standard_family,renamed,Jenis Kelamin,data/rumangkit_2024_ev_green_purchase.py,33,index,true
+rumangkit_2024_green_purchase_intention,id,standard,built,,data/rumangkit_2024_ev_green_purchase.py,60,index,true
+rumangkit_2024_green_purchase_intention,item,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
+rumangkit_2024_green_purchase_intention,resp,standard,built,,data/rumangkit_2024_ev_green_purchase.py,71,index,true
 rumangkit_2025_attitude,id,standard,renamed,ID,data/rumangkit_2025_entrepreneurial_intention.py,81,index,true
 rumangkit_2025_attitude,item,standard,built,,data/rumangkit_2025_entrepreneurial_intention.py,88,index,true
 rumangkit_2025_attitude,resp,standard,built,,data/rumangkit_2025_entrepreneurial_intention.py,104,index,true
@@ -48537,6 +49215,18 @@ saputra_2025_fomo_consumer,cov_purchase_frequency,standard_family,renamed,PR02,d
 saputra_2025_fomo_consumer,id,standard,built,,data/saputra_2025_fomo_consumer.py,69,exact,true
 saputra_2025_fomo_consumer,item,standard,built,,data/saputra_2025_fomo_consumer.py,80,exact,true
 saputra_2025_fomo_consumer,resp,standard,built,,data/saputra_2025_fomo_consumer.py,92,exact,true
+saputra_2026_brand_experience,id,standard,built,,data/saputra_2026_luxury_brand.py,62,index,true
+saputra_2026_brand_experience,item,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_experience,resp,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_love,id,standard,built,,data/saputra_2026_luxury_brand.py,62,index,true
+saputra_2026_brand_love,item,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_love,resp,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_loyalty,id,standard,built,,data/saputra_2026_luxury_brand.py,62,index,true
+saputra_2026_brand_loyalty,item,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_loyalty,resp,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_trust,id,standard,built,,data/saputra_2026_luxury_brand.py,62,index,true
+saputra_2026_brand_trust,item,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
+saputra_2026_brand_trust,resp,standard,built,,data/saputra_2026_luxury_brand.py,73,index,true
 saputra_2026_rpa,cov_age,standard_family,renamed,Age,data/saputra_2026_rpa_supply_chain.py,50,index,true
 saputra_2026_rpa,id,standard,built,,data/saputra_2026_rpa_supply_chain.py,49,index,true
 saputra_2026_rpa,item,standard,built,,data/saputra_2026_rpa_supply_chain.py,57,index,true
@@ -48985,6 +49675,21 @@ sd4_silvia_2025,resp,standard,built,,data/shorttripm_hexaco_sd4_silvia_2025.R,12
 sds,id,standard,,,,,ambiguous,true
 sds,item,standard,,,,,ambiguous,true
 sds,resp,standard,,,,,ambiguous,true
+sebayang_2025_adoption,id,standard,built,,data/sebayang_2025_mobile_banking.py,55,index,true
+sebayang_2025_adoption,item,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_adoption,resp,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_perceived_ease_of_use,id,standard,built,,data/sebayang_2025_mobile_banking.py,55,index,true
+sebayang_2025_perceived_ease_of_use,item,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_perceived_ease_of_use,resp,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_perceived_usefulness,id,standard,built,,data/sebayang_2025_mobile_banking.py,55,index,true
+sebayang_2025_perceived_usefulness,item,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_perceived_usefulness,resp,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_privacy_risk,id,standard,built,,data/sebayang_2025_mobile_banking.py,55,index,true
+sebayang_2025_privacy_risk,item,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_privacy_risk,resp,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_social_influence,id,standard,built,,data/sebayang_2025_mobile_banking.py,55,index,true
+sebayang_2025_social_influence,item,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
+sebayang_2025_social_influence,resp,standard,built,,data/sebayang_2025_mobile_banking.py,66,index,true
 sejna_2025_academic_self_concept,cov_grade,standard_family,renamed,Grade,data/sejna_2025_school_anxiety.py,54,index,true
 sejna_2025_academic_self_concept,cov_sex,standard_family,renamed,Sex,data/sejna_2025_school_anxiety.py,54,index,true
 sejna_2025_academic_self_concept,id,standard,built,,data/sejna_2025_school_anxiety.py,94,index,true
@@ -49308,6 +50013,12 @@ septiani_2026_trust,resp,standard,built,,data/septiani_2026_live_streaming.py,87
 septiani_2026_visibility,id,standard,built,,data/septiani_2026_live_streaming.py,73,index,true
 septiani_2026_visibility,item,standard,built,,data/septiani_2026_live_streaming.py,78,index,true
 septiani_2026_visibility,resp,standard,built,,data/septiani_2026_live_streaming.py,87,index,true
+setiawan_2026_brand_trust,cov_age_group,standard_family,renamed,Age Group,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_brand_trust,cov_gender,standard_family,renamed,Gender,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_brand_trust,cov_zero_variance,standard_family,renamed,zero_var,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_brand_trust,id,standard,built,,data/setiawan_2026_influencer_credibility.py,67,index,true
+setiawan_2026_brand_trust,item,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
+setiawan_2026_brand_trust,resp,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
 setiawan_2026_cybersecurity_behaviour,cov_cyber_training,standard_family,renamed,cyber_training,data/setiawan_2026_cybersecurity_literacy.py,94,index,true
 setiawan_2026_cybersecurity_behaviour,cov_cyber_training_provider,standard_family,renamed,cyber_training_provider,data/setiawan_2026_cybersecurity_literacy.py,95,index,true
 setiawan_2026_cybersecurity_behaviour,cov_highest_qualification,standard_family,renamed,highest_qualification,data/setiawan_2026_cybersecurity_literacy.py,85,index,true
@@ -49362,6 +50073,36 @@ setiawan_2026_cybersecurity_knowledge,id,standard,built,participant_id,data/seti
 setiawan_2026_cybersecurity_knowledge,item,standard,built,,data/setiawan_2026_cybersecurity_literacy.py,9,index,true
 setiawan_2026_cybersecurity_knowledge,itemcov_focus_area,standard_family,built,item,data/setiawan_2026_cybersecurity_literacy.py,199,index,true
 setiawan_2026_cybersecurity_knowledge,resp,standard,built,,data/setiawan_2026_cybersecurity_literacy.py,46,index,true
+setiawan_2026_impulsive_buying,cov_age_group,standard_family,renamed,Age Group,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_impulsive_buying,cov_gender,standard_family,renamed,Gender,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_impulsive_buying,cov_zero_variance,standard_family,renamed,zero_var,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_impulsive_buying,id,standard,built,,data/setiawan_2026_influencer_credibility.py,67,index,true
+setiawan_2026_impulsive_buying,item,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
+setiawan_2026_impulsive_buying,resp,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
+setiawan_2026_influencer_credibility,cov_age_group,standard_family,renamed,Age Group,data/setiawan_2026_influencer_credibility.py,33,exact,true
+setiawan_2026_influencer_credibility,cov_gender,standard_family,renamed,Gender,data/setiawan_2026_influencer_credibility.py,33,exact,true
+setiawan_2026_influencer_credibility,cov_zero_variance,standard_family,renamed,zero_var,data/setiawan_2026_influencer_credibility.py,33,exact,true
+setiawan_2026_influencer_credibility,id,standard,built,,data/setiawan_2026_influencer_credibility.py,67,exact,true
+setiawan_2026_influencer_credibility,item,standard,built,,data/setiawan_2026_influencer_credibility.py,78,exact,true
+setiawan_2026_influencer_credibility,resp,standard,built,,data/setiawan_2026_influencer_credibility.py,78,exact,true
+setiawan_2026_repurchase_intention,cov_age_group,standard_family,renamed,Age Group,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_repurchase_intention,cov_gender,standard_family,renamed,Gender,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_repurchase_intention,cov_zero_variance,standard_family,renamed,zero_var,data/setiawan_2026_influencer_credibility.py,33,index,true
+setiawan_2026_repurchase_intention,id,standard,built,,data/setiawan_2026_influencer_credibility.py,67,index,true
+setiawan_2026_repurchase_intention,item,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
+setiawan_2026_repurchase_intention,resp,standard,built,,data/setiawan_2026_influencer_credibility.py,78,index,true
+setiawati_2025_customer_decision,id,standard,built,,data/setiawati_2025_ewallet_gamification.py,57,index,true
+setiawati_2025_customer_decision,item,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_customer_decision,resp,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_gamification,id,standard,built,,data/setiawati_2025_ewallet_gamification.py,57,index,true
+setiawati_2025_gamification,item,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_gamification,resp,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_peer_influence,id,standard,built,,data/setiawati_2025_ewallet_gamification.py,57,index,true
+setiawati_2025_peer_influence,item,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_peer_influence,resp,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_user_experience,id,standard,built,,data/setiawati_2025_ewallet_gamification.py,57,index,true
+setiawati_2025_user_experience,item,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
+setiawati_2025_user_experience,resp,standard,built,,data/setiawati_2025_ewallet_gamification.py,68,index,true
 setsoafia_2026_ctd,cov_academic_level,standard_family,built,Academic Level,data/setsoafia_2026_genai_literacy.py,145,index,true
 setsoafia_2026_ctd,cov_age,standard_family,built,Age,data/setsoafia_2026_genai_literacy.py,143,index,true
 setsoafia_2026_ctd,cov_cgpa,standard_family,built,CGPA,data/setsoafia_2026_genai_literacy.py,146,index,true
@@ -53443,6 +54184,61 @@ sung_2026_marital_quality,cov_working,standard_family,renamed,work,data/sung_202
 sung_2026_marital_quality,id,standard,built,,data/sung_2026_marital_quality.py,94,exact,true
 sung_2026_marital_quality,item,standard,built,,data/sung_2026_marital_quality.py,97,exact,true
 sung_2026_marital_quality,resp,standard,built,,data/sung_2026_marital_quality.py,133,exact,true
+suryanegara_2026_brand_advocacy,cov_age_group,standard_family,renamed,AgeGroup,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_advocacy,cov_education,standard_family,renamed,Education,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_advocacy,cov_monthly_expenditure,standard_family,renamed,MonthlyExpenditure,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_advocacy,cov_sex,standard_family,renamed,Sex,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_advocacy,cov_site,standard_family,renamed,Site,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_advocacy,id,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,61,index,true
+suryanegara_2026_brand_advocacy,item,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_brand_advocacy,resp,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_brand_engagement,cov_age_group,standard_family,renamed,AgeGroup,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_engagement,cov_education,standard_family,renamed,Education,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_engagement,cov_monthly_expenditure,standard_family,renamed,MonthlyExpenditure,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_engagement,cov_sex,standard_family,renamed,Sex,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_engagement,cov_site,standard_family,renamed,Site,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_engagement,id,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,61,index,true
+suryanegara_2026_brand_engagement,item,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_brand_engagement,resp,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_brand_trust,cov_age_group,standard_family,renamed,AgeGroup,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_trust,cov_education,standard_family,renamed,Education,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_trust,cov_monthly_expenditure,standard_family,renamed,MonthlyExpenditure,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_trust,cov_sex,standard_family,renamed,Sex,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_trust,cov_site,standard_family,renamed,Site,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_brand_trust,id,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,61,index,true
+suryanegara_2026_brand_trust,item,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_brand_trust,resp,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_omnichannel,cov_age_group,standard_family,renamed,AgeGroup,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_omnichannel,cov_education,standard_family,renamed,Education,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_omnichannel,cov_monthly_expenditure,standard_family,renamed,MonthlyExpenditure,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_omnichannel,cov_sex,standard_family,renamed,Sex,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_omnichannel,cov_site,standard_family,renamed,Site,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_omnichannel,id,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,61,index,true
+suryanegara_2026_omnichannel,item,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_omnichannel,resp,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_servqual,cov_age_group,standard_family,renamed,AgeGroup,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_servqual,cov_education,standard_family,renamed,Education,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_servqual,cov_monthly_expenditure,standard_family,renamed,MonthlyExpenditure,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_servqual,cov_sex,standard_family,renamed,Sex,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_servqual,cov_site,standard_family,renamed,Site,data/suryanegara_2026_omnichannel_healthcare.py,34,index,true
+suryanegara_2026_servqual,id,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,61,index,true
+suryanegara_2026_servqual,item,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suryanegara_2026_servqual,resp,standard,built,,data/suryanegara_2026_omnichannel_healthcare.py,72,index,true
+suwadi_2025_brand_trust,id,standard,built,,data/suwadi_2025_greenwashing.py,56,index,true
+suwadi_2025_brand_trust,item,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_brand_trust,resp,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_green_brand_image,id,standard,built,,data/suwadi_2025_greenwashing.py,56,index,true
+suwadi_2025_green_brand_image,item,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_green_brand_image,resp,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_greenwashing,id,standard,built,,data/suwadi_2025_greenwashing.py,56,exact,true
+suwadi_2025_greenwashing,item,standard,built,,data/suwadi_2025_greenwashing.py,67,exact,true
+suwadi_2025_greenwashing,resp,standard,built,,data/suwadi_2025_greenwashing.py,67,exact,true
+suwadi_2025_nwom,id,standard,built,,data/suwadi_2025_greenwashing.py,56,index,true
+suwadi_2025_nwom,item,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_nwom,resp,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_website_interactivity,id,standard,built,,data/suwadi_2025_greenwashing.py,56,index,true
+suwadi_2025_website_interactivity,item,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
+suwadi_2025_website_interactivity,resp,standard,built,,data/suwadi_2025_greenwashing.py,67,index,true
 suyato_2023_cbq,cov_faculty,standard_family,renamed,FACULTY,data/suyato_2023_cbq.py,75,exact,true
 suyato_2023_cbq,cov_gender,standard_family,renamed,GENDER,data/suyato_2023_cbq.py,75,exact,true
 suyato_2023_cbq,id,standard,built,,data/suyato_2023_cbq.py,114,exact,true
@@ -57782,6 +58578,18 @@ villarrealzegarra2026_trif,cov_specialty,standard_family,renamed,especialidad,da
 villarrealzegarra2026_trif,id,standard,built,,data/villarrealzegarra2026_trif.py,40,exact,true
 villarrealzegarra2026_trif,item,standard,built,,data/villarrealzegarra2026_trif.py,55,exact,true
 villarrealzegarra2026_trif,resp,standard,built,,data/villarrealzegarra2026_trif.py,56,exact,true
+villarrealzegarra_2025_eguiq,cov_age,standard_family,renamed,age_clean,data/villarrealzegarra_2025_ecoanxiety_peru.py,34,index,true
+villarrealzegarra_2025_eguiq,id,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,77,index,true
+villarrealzegarra_2025_eguiq,item,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
+villarrealzegarra_2025_eguiq,resp,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
+villarrealzegarra_2025_heas,cov_age,standard_family,renamed,age_clean,data/villarrealzegarra_2025_ecoanxiety_peru.py,34,index,true
+villarrealzegarra_2025_heas,id,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,77,index,true
+villarrealzegarra_2025_heas,item,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
+villarrealzegarra_2025_heas,resp,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
+villarrealzegarra_2025_phq4,cov_age,standard_family,renamed,age_clean,data/villarrealzegarra_2025_ecoanxiety_peru.py,34,index,true
+villarrealzegarra_2025_phq4,id,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,77,index,true
+villarrealzegarra_2025_phq4,item,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
+villarrealzegarra_2025_phq4,resp,standard,built,,data/villarrealzegarra_2025_ecoanxiety_peru.py,88,index,true
 vinasvelazquez_2022_vsabhc,cov_age,standard_family,built,edad,data/vinasvelazquez_2022_vsabhc.py,91,exact,true
 vinasvelazquez_2022_vsabhc,cov_country,standard_family,built,país,data/vinasvelazquez_2022_vsabhc.py,93,exact,true
 vinasvelazquez_2022_vsabhc,cov_sex,standard_family,built,sexo,data/vinasvelazquez_2022_vsabhc.py,92,exact,true
@@ -59323,6 +60131,36 @@ wijesinghe_2025_sustained_agile_usage,cov_team_size,standard_family,renamed,Team
 wijesinghe_2025_sustained_agile_usage,id,standard,renamed,Response Number,data/wijesinghe_2025_sustained_agile_usage.py,36,exact,true
 wijesinghe_2025_sustained_agile_usage,item,standard,built,,data/wijesinghe_2025_sustained_agile_usage.py,45,exact,true
 wijesinghe_2025_sustained_agile_usage,resp,standard,built,,data/wijesinghe_2025_sustained_agile_usage.py,45,exact,true
+wilasandy_2026_experience_quality,cov_age_group,standard_family,renamed,Usia,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_experience_quality,cov_gender,standard_family,renamed,Jenis Kelamin,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_experience_quality,cov_visit_purpose,standard_family,renamed,Tujuan utama kunjungan Anda:,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_experience_quality,id,standard,built,,data/wilasandy_2026_oceanarium.py,62,index,true
+wilasandy_2026_experience_quality,item,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_experience_quality,resp,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_perceived_value,cov_age_group,standard_family,renamed,Usia,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_perceived_value,cov_gender,standard_family,renamed,Jenis Kelamin,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_perceived_value,cov_visit_purpose,standard_family,renamed,Tujuan utama kunjungan Anda:,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_perceived_value,id,standard,built,,data/wilasandy_2026_oceanarium.py,62,index,true
+wilasandy_2026_perceived_value,item,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_perceived_value,resp,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_revisit_intention,cov_age_group,standard_family,renamed,Usia,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_revisit_intention,cov_gender,standard_family,renamed,Jenis Kelamin,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_revisit_intention,cov_visit_purpose,standard_family,renamed,Tujuan utama kunjungan Anda:,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_revisit_intention,id,standard,built,,data/wilasandy_2026_oceanarium.py,62,index,true
+wilasandy_2026_revisit_intention,item,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_revisit_intention,resp,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_satisfaction,cov_age_group,standard_family,renamed,Usia,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_satisfaction,cov_gender,standard_family,renamed,Jenis Kelamin,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_satisfaction,cov_visit_purpose,standard_family,renamed,Tujuan utama kunjungan Anda:,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_satisfaction,id,standard,built,,data/wilasandy_2026_oceanarium.py,62,index,true
+wilasandy_2026_satisfaction,item,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_satisfaction,resp,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_service_quality,cov_age_group,standard_family,renamed,Usia,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_service_quality,cov_gender,standard_family,renamed,Jenis Kelamin,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_service_quality,cov_visit_purpose,standard_family,renamed,Tujuan utama kunjungan Anda:,data/wilasandy_2026_oceanarium.py,35,index,true
+wilasandy_2026_service_quality,id,standard,built,,data/wilasandy_2026_oceanarium.py,62,index,true
+wilasandy_2026_service_quality,item,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
+wilasandy_2026_service_quality,resp,standard,built,,data/wilasandy_2026_oceanarium.py,73,index,true
 wilkins_2018_phq9,cov_age,standard_family,renamed,Age,data/wilkins_2018_phq9.py,60,exact,true
 wilkins_2018_phq9,cov_gender,standard_family,renamed,Gender,data/wilkins_2018_phq9.py,60,exact,true
 wilkins_2018_phq9,id,standard,renamed,SN,data/wilkins_2018_phq9.py,60,exact,true

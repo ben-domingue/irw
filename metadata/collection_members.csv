@@ -1270,11 +1270,6 @@ gerber_2022_selfesteem,longitudinal,rule:meta:longitudinal
 gerber_2022_selfesteem,rct,rule:var:treat
 gerber_2022_selfesteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 gerbig_2023_who5,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
-germann_2026_environment,longitudinal,rule:meta:longitudinal
-germann_2026_immigration,longitudinal,rule:meta:longitudinal
-germann_2026_national_identity,longitudinal,rule:meta:longitudinal
-germann_2026_redistribution,longitudinal,rule:meta:longitudinal
-germann_2026_state_intervention,longitudinal,rule:meta:longitudinal
 gerou_2023_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 gerou_2023_dass21,dass21,supplied
 gerou_2023_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -2090,6 +2085,7 @@ kovacevic_lepojevic_2024_pssm,clustered,rule:var:cluster_id
 kraft_todd_2017_panas,panas,wording
 kramer_2023_efct,longitudinal,rule:meta:longitudinal
 kramer_2023_efct,rct,rule:var:treat
+krejcova_2025_heas,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 kreps_2023_ai_attitudes,rct,rule:var:treat
 KTEEM_Schoen_2019-2022,longitudinal,rule:meta:longitudinal
 KTEEM_Schoen_2019-2022,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
@@ -2722,6 +2718,7 @@ personalitychange_kramer_2025_sccs,longitudinal,rule:meta:longitudinal
 personalitychange_kramer_2025_si,longitudinal,rule:meta:longitudinal
 personalitychange_kramer_2025_swls,longitudinal,rule:meta:longitudinal
 personalitychange_kramer_2025_swls,swls,name
+perttula_2026_climate_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 peters_2025_att_exp_eval,longitudinal,rule:meta:longitudinal
 peters_2025_att_exp_strength,longitudinal,rule:meta:longitudinal
 peters_2025_att_instr_eval,longitudinal,rule:meta:longitudinal
@@ -3539,6 +3536,8 @@ vicens_2021_hads,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 vigl_2022_bfi2xs,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 vilela_estrada_2025_hads,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 vilela_estrada_2025_hads,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+villarrealzegarra_2025_heas,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+villarrealzegarra_2025_phq4,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 vinasvelazquez_2022_vsabhc,longitudinal,rule:meta:longitudinal
 vocab_assessment_3_to_8_year_old_children,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 vocab_assessment_3_to_8_year_old_children,response_time,rule:var:rt
