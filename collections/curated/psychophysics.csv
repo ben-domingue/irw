@@ -1,0 +1,32 @@
+table,basis,note
+rouault_2018_dots_e1,curated:confidence_db #3686,dot-number discrimination; item = side x dot difference
+rouault_2018_dots_e2,curated:confidence_db #3686,"dot-number discrimination, staircased; item = side x log dot difference"
+haddara_2022_majority,curated:confidence_db #3686,letter/colour majority judgement; item = task x majority class
+jaquiery_2018_dots,curated:confidence_db #3686,dot-number discrimination; item = side x dots moved
+prieto_unpub_contrast,curated:confidence_db #3686,"two-interval contrast discrimination, staircased; item = interval x contrast"
+bang_2019_gabor,curated:confidence_db #3686,"Gabor orientation, coarse and fine; item = task x side x catch"
+wierzchon_2014_faces,curated:confidence_db #3686,masked face-sex identification; item = class x exposure
+lebreton_2018_gabor,curated:confidence_db #3686,two-Gabor contrast comparison under incentives; item = experiment x incentive x side
+massoni_2017_dots,curated:confidence_db #3686,dot-number discrimination; item = side x exposure
+zheng_2023_dots,curated:confidence_db #3686,dot discrimination with expectation and reward cues; item = condition x cue x side
+xiang_2021_numerosity,curated:confidence_db #3686,numerosity estimation; item = dot count x exposure; resp = estimate
+mazor_2021_qo,curated:confidence_db #3686,"masked discrimination (Q vs O), staircased; item = class x SOA"
+mazor_2021_co,curated:confidence_db #3686,"masked discrimination (C vs O), staircased; item = class x SOA"
+mazor_2021_tilt,curated:confidence_db #3686,"masked discrimination (tilted vs vertical), staircased; item = class x SOA"
+mazor_2021_curve,curated:confidence_db #3686,"masked discrimination (curved vs straight), staircased; item = class x SOA"
+mazor_2021_cube,curated:confidence_db #3686,"masked discrimination (cube orientation), staircased; item = class x SOA"
+mazor_2021_mirror_n,curated:confidence_db #3686,"masked discrimination (mirrored vs normal N), staircased; item = class x SOA"
+mazor_2021_grating,curated:confidence_db #3686,"masked discrimination (grating vs noise), staircased; item = class x SOA"
+mturkddm_by,curated:inventory #3686,numerosity discrimination (DDM); item = stimulus
+mturkddm_y25,curated:inventory #3686,numerosity discrimination (DDM); item = stimulus
+yu2025,curated:inventory #3686,size estimation and reproduction; item = phase x stimulus
+bocheva_2025_gabor,curated:confidence_db #3686,"Gabor orientation, cued hand; item = hand x contrast x tilt"
+desender_2018_colour,curated:confidence_db #3686,colour averaging; item = variance x mean distance x class
+desender_2022_dots_e2b,curated:confidence_db #3686,"dot-number discrimination, staircased; item = side x dot difference"
+konishi_2019_dualtask,curated:confidence_db #3686,"RDK motion and colour, single/dual task; item = experiment x block x task x answer"
+massoni_2018_dots,curated:confidence_db #3686,dot-number discrimination; item = side x difficulty
+matthews_2018_dualtask,curated:confidence_db #3686,peripheral Gabor and central letter detection; item = task x attention x expectation x presence
+rouault_2019_dots,curated:confidence_db #3686,dot-number discrimination; item = side x dot difference
+sadeghi_2017_contrast,curated:confidence_db #3686,"two-interval contrast detection, staircased; item = interval x contrast"
+siedlecka_2021_dots,curated:confidence_db #3686,go/no-go dot comparison; item = designated side x answer x difficulty
+wierzchon_2019_gabor,curated:confidence_db #3686,masked Gabor orientation; item = class x exposure

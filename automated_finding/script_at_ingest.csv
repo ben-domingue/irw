@@ -104,6 +104,7 @@ balakova_2026_secondhand_motives,core,data/balakova_2026_household_sustainabilit
 balakova_2026_sustainable_cosmetics,core,data/balakova_2026_household_sustainability.py,2026-11-21
 balakova_2026_sustainable_purchasing,core,data/balakova_2026_household_sustainability.py,2026-11-21
 balakova_2026_upcycling_attitudes,core,data/balakova_2026_household_sustainability.py,2026-11-21
+bang_2019_gabor,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 banoschaparro_2026_fsii5,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 banoschaparro_2026_lwms5,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 banoschaparro_2026_quptw9,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
@@ -162,6 +163,7 @@ binus_2025_vstream_va,core,data/binus_2025_virtual_streamers.py,2026-11-23
 binus_2025_vstream_vs,core,data/binus_2025_virtual_streamers.py,2026-11-23
 blau_1967_occupation5,cov,data/covariance/batch_sem.R,2026-11-17
 boateng_2019_bsesebf11,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
+bocheva_2025_gabor,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 boer_2016_lmx,cov,data/covariance/batch_metasem.R,2026-11-17
 bordea_2026_sierc6,cov,data/covariance/pmc_article_tables_ar.py,2026-11-19
 boruch_1970_mtmm14,cov,data/covariance/batch_rpackages2.R,2026-11-17
@@ -244,6 +246,8 @@ dejonge_2020_runninginjury14,cov,data/covariance/pmc_article_tables_am.py,2026-1
 delgado_2021_empathyburnout7,cov,data/covariance/pmc_article_tables_aw.py,2026-11-19
 denovan_2019_ctpi8,cov,data/covariance/pmc_article_tables_ao.py,2026-11-19
 deoliveira_2024_mbi,core,data/deoliveira_2024_anaesthesiologist_mbi.py,2026-11-23
+desender_2018_colour,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
+desender_2022_dots_e2b,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 dharma_2025_brand_loyalty,core,data/dharma_2025_influencer_loyalty.py,2026-11-23
 dharma_2025_brand_value,core,data/dharma_2025_influencer_loyalty.py,2026-11-23
 dharma_2025_promotion,core,data/dharma_2025_influencer_loyalty.py,2026-11-23
@@ -352,6 +356,7 @@ gunawan_2026_purchase_intention,core,data/gunawan_2026_ecommerce_purchase.py,202
 guthrie_1973_kipt8,cov,data/covariance/batch_smacof.R,2026-11-17
 gutierrezvelilla_2022_quality_work_life,core,data/gutierrezvelilla_2022_work_life_quality.py,2026-11-23
 guttman_1991_wiscr12,cov,data/covariance/batch_smacof.R,2026-11-17
+haddara_2022_majority,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
 halim_2026_aiu,core,data/halim_2026_ai_forex_trading.py,2026-11-23
 halim_2026_at,core,data/halim_2026_ai_forex_trading.py,2026-11-23
@@ -478,6 +483,7 @@ jabutay_2025_upward_social_comparison,core,data/jabutay_2025_escapism_impulse.py
 jacobs_2017_uewd8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 jahrami_2023_ghost10,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 jahrami_2025_nmpq20,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
+jaquiery_2018_dots,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 jaspal_2020_coras9,cov,data/covariance/pmc_article_tables_ao.py,2026-11-19
 jaya_2025_robot_info_adoption,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
 jaya_2025_robot_info_credibility,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
@@ -515,6 +521,7 @@ kilic_2026_teacherclimate12,cov,data/covariance/pmc_article_tables_p.py,2026-11-
 kim_2026_medicationerror9,cov,data/covariance/pmc_article_tables_aq.py,2026-11-19
 knefel_2018_cptsd11,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 koka_2019_pecontrol16,cov,data/covariance/pmc_article_tables_al.py,2026-11-19
+konishi_2019_dualtask,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 koo_2022_hostileattrib7,cov,data/covariance/pmc_article_tables_aw.py,2026-11-19
 kornelia_2026_brand_trust,core,data/kornelia_2026_florist_ewom.py,2026-11-23
 kornelia_2026_ewom,core,data/kornelia_2026_florist_ewom.py,2026-11-23
@@ -544,6 +551,7 @@ kurniawan_2024_pr,core,data/kurniawan_2024_risk_benefit_shopping.py,2026-11-23
 kurniawan_2024_trust,core,data/kurniawan_2024_risk_benefit_shopping.py,2026-11-23
 larsson_2021_fsds13,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
 lawler_1967_jobperf9,cov,data/covariance/batch_rpackages5.R,2026-11-18
+lebreton_2018_gabor,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 leebaggley_2026_bws7,cov,data/covariance/pmc_article_tables_ai.py,2026-11-18
 leo_2026_continuance_intention,core,data/leo_2026_ewallet_continuance.py,2026-11-21
 leo_2026_ecosystem_integration,core,data/leo_2026_ewallet_continuance.py,2026-11-21
@@ -629,17 +637,27 @@ marveli_2026_brand_trust,core,data/marveli_2026_frozen_food.py,2026-11-21
 marveli_2026_marketing_communication,core,data/marveli_2026_frozen_food.py,2026-11-21
 marveli_2026_purchase_intention,core,data/marveli_2026_frozen_food.py,2026-11-21
 marveli_2026_sales_channel,core,data/marveli_2026_frozen_food.py,2026-11-21
+massoni_2017_dots,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+massoni_2018_dots,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 mateorodriguez_2021_wai7,cov,data/covariance/pmc_article_tables_aj.py,2026-11-18
 mathieu_2015_cohesion4,cov,data/covariance/batch_metasem.R,2026-11-17
 matius_2026_fomo,core,data/matius_2026_tiktok_fomo.py,2026-11-23
 matius_2026_online_impulse_buying,core,data/matius_2026_tiktok_fomo.py,2026-11-23
 matius_2026_scarcity,core,data/matius_2026_tiktok_fomo.py,2026-11-23
+matthews_2018_dualtask,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 mattingsdal_2026_decisionclaims9,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 mauricio_2021_apais6,cov,data/covariance/pmc_article_tables_aj.py,2026-11-18
 maydeline_2026_advertisement,core,data/maydeline_2026_korean_skincare.py,2026-11-23
 maydeline_2026_brand_benefits,core,data/maydeline_2026_korean_skincare.py,2026-11-23
 maydeline_2026_brand_experience,core,data/maydeline_2026_korean_skincare.py,2026-11-23
 maydeline_2026_brand_loyalty,core,data/maydeline_2026_korean_skincare.py,2026-11-23
+mazor_2021_co,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_cube,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_curve,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_grating,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_mirror_n,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_qo,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+mazor_2021_tilt,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 mcdonald_1984_union5,cov,data/covariance/batch_sem.R,2026-11-17
 mcerlean_2023_ptg19,cov,data/covariance/pmc_article_tables_al.py,2026-11-19
 mcgrew_2014_wjiv47,cov,data/covariance/batch_rpackages3.R,2026-11-17
@@ -755,6 +773,7 @@ pretorius_2022_coherence7,cov,data/covariance/pmc_article_tables_av.py,2026-11-1
 pretorius_2022_pis10,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 pretorius_2023_tss5,cov,data/covariance/pmc_article_tables_ak.py,2026-11-18
 pretorius_2025_isi7,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
+prieto_unpub_contrast,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 prihatna_2025_ease_of_use,core,data/prihatna_2025_online_shopping.py,2026-11-21
 prihatna_2025_product_assortment,core,data/prihatna_2025_online_shopping.py,2026-11-21
 prihatna_2025_purchase_intention,core,data/prihatna_2025_online_shopping.py,2026-11-21
@@ -809,6 +828,9 @@ roostika_2025_ve,core,data/roostika_2025_livestream_impulse.py,2026-11-23
 rosalin_2026_osce15,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 rostiotajarvi_2017_fss9,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 rottweiler_2024_misogyny8,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
+rouault_2018_dots_e1,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+rouault_2018_dots_e2,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+rouault_2019_dots,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 ruchensky_2018_ppi8,cov,data/covariance/osf_ruchensky2018_ppi.py,2026-11-18
 ruchensky_2018_ppir8,cov,data/covariance/osf_ruchensky2018_ppi.py,2026-11-18
 rumangkit_2024_green_awareness,core,data/rumangkit_2024_ev_green_purchase.py,2026-11-21
@@ -822,6 +844,7 @@ rumangkit_2024_india_opi,core,data/rumangkit_2024_india_ecommerce.py,2026-11-23
 rumangkit_2024_india_usefulness,core,data/rumangkit_2024_india_ecommerce.py,2026-11-23
 ruzzano_2015_asdocd17,cov,data/covariance/batch_rpackages_b.R,2026-11-17
 ryder_2026_resilience8,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
+sadeghi_2017_contrast,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 sakai_2026_brand_attachment,core,data/sakai_2026_brand_attachment_value.py,2026-11-23
 sakai_2026_brand_loyalty,core,data/sakai_2026_brand_attachment_value.py,2026-11-23
 sakai_2026_perceived_brand_value,core,data/sakai_2026_brand_attachment_value.py,2026-11-23
@@ -891,6 +914,7 @@ shorbaji_2026_self_blame,core,data/shorbaji_2026_ai_delegation_blame.py,2026-11-
 shorbaji_2026_seller_blame,core,data/shorbaji_2026_ai_delegation_blame.py,2026-11-23
 shorbaji_2026_switch_to_manual,core,data/shorbaji_2026_ai_delegation_blame.py,2026-11-23
 shorbaji_2026_trust,core,data/shorbaji_2026_ai_delegation_blame.py,2026-11-23
+siedlecka_2021_dots,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 siegel_2019_pen13,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 silva_2025_biajs4,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 simao_2026_vasq9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
@@ -1031,6 +1055,8 @@ wibowo_2026_ai_recommendation,core,data/wibowo_2026_ai_recommend_impulse.py,2026
 wibowo_2026_hedonic_motivation,core,data/wibowo_2026_ai_recommend_impulse.py,2026-11-23
 wibowo_2026_impulse_buying,core,data/wibowo_2026_ai_recommend_impulse.py,2026-11-23
 wibowo_2026_utilitarian_motivation,core,data/wibowo_2026_ai_recommend_impulse.py,2026-11-23
+wierzchon_2014_faces,core,data/confidence_db/confidence_db_perception.R,2026-11-23
+wierzchon_2019_gabor,core,data/confidence_db/confidence_db_perception_n50.R,2026-11-23
 wieteskamilek_2026_emphasis10,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 wijaya_2025_ex,core,data/wijaya_2025_technostress_qwl.py,2026-11-23
 wijaya_2025_js,core,data/wijaya_2025_technostress_qwl.py,2026-11-23
@@ -1053,6 +1079,7 @@ wolfson_2025_smmconditions27,cov,data/covariance/pmc_article_tables_p.py,2026-11
 wood_2024_psychedelicchallenge11,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 wu_2024_awe9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
 wvs_1994_jobsat3,cov,data/covariance/batch_metasem.R,2026-11-17
+xiang_2021_numerosity,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 xing_2026_pe_teacher_innovative_work,core,data/xing_2026_pe_teacher_iwb.py,2026-11-23
 xing_2026_pe_teacher_psych_empowerment,core,data/xing_2026_pe_teacher_iwb.py,2026-11-23
 xing_2026_pe_teacher_teaching_efficacy,core,data/xing_2026_pe_teacher_iwb.py,2026-11-23
@@ -1080,6 +1107,7 @@ zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
 zhang_2026_aidelegation7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 zhao_2017_osas6,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 zhao_2021_doctoralidentity12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
+zheng_2023_dots,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 zieff_2023_snapiv18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
