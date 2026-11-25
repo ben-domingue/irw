@@ -1,0 +1,8 @@
+table,basis,note
+twod_rotation_mather2023,curated:mental_rotation,"2D object rotation ability items (Mather & Condon 2023), large sparse online sample"
+fullscaleiq_mentalrotation,curated:mental_rotation,"openpsychometrics Full Scale IQ test, mental rotation block (6 items)"
+fullscaleiq_mentalrotation_options,curated:mental_rotation,option-level companion of fullscaleiq_mentalrotation
+geiser_tam,curated:mental_rotation,"mental rotation test items (Geiser, Lehmann & Eid 2006)"
+janssen2_tam,curated:mental_rotation,mental rotation test items (Janssen & Geiser 2010)
+dd_rotation,curated:mental_rotation,"chronometric mental rotation with rt (Borst, Kievit, Thompson & Kosslyn 2011)"
+mentalrotation_wolf_2024,curated:mental_rotation,"3-D printed Shepard-Metzler-style shapes, angle in itemcov_angle"
