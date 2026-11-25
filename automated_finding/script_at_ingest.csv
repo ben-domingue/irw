@@ -127,6 +127,11 @@ bechtoldt_1961_ability17,cov,data/covariance/pilot_rpackages.R,2026-11-17
 becker_1992_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 becker_1994_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 beenen_2021_mips11,cov,data/covariance/pmc_article_tables_am.py,2026-11-19
+bellettini_2022_bebras_giga,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
+bellettini_2022_bebras_kilo,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
+bellettini_2022_bebras_mega,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
+bellettini_2022_bebras_peta,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
+bellettini_2022_bebras_tera,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 berki_2026_sportcommit7,cov,data/covariance/osf_berki2026_sportcommit.py,2026-11-17
 berlian_2026_brand_trust,core,data/berlian_2026_esg_unilever.py,2026-11-21
 berlian_2026_esg,core,data/berlian_2026_esg_unilever.py,2026-11-21
