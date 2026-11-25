@@ -33,3 +33,4 @@ wierzchon_2019_gabor,curated:confidence_db #3686,masked Gabor orientation; item 
 sasaki_2019_contrast_online,curated:psychophysics #3686,"Gabor orientation 2AFC, constant stimuli; item = tilt x spatial frequency x contrast"
 sasaki_2019_contrast_online_rep,curated:psychophysics #3686,"Gabor orientation 2AFC, constant stimuli, 10 repeats; item = tilt x spatial frequency x contrast"
 makowski_2024_illusion,curated:psychophysics #3686,"Illusion Game (Ebbinghaus, Mueller-Lyer, Vertical-Horizontal); item = illusion x strength x difference"
+chladkova_2021_mcgurk,curated:psychophysics #3686,McGurk and congruent audiovisual syllables; item = stimulus type x video
