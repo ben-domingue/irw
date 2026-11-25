@@ -48,3 +48,4 @@ liu_lourenco_2026_mr,curated:psychophysics #3686,chronometric mental rotation un
 dd_rotation,curated:psychophysics #3686,chronometric mental rotation (Borst et al. 2011); angle in itemcov_angle (#3718)
 mentalrotation_wolf_2024,curated:psychophysics #3686,3D-printed Shepard-Metzler shapes; angle in itemcov_angle
 ebert_2024_letter_mr,curated:psychophysics #3686,"chronometric letter rotation, alone or under visual WM load; item = letter x angle"
+harrison_2014_correlation_jnd,curated:licence ask #3686,correlation JND staircases in 9 chart types; item = chart x direction x rbase x rv
