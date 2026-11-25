@@ -42,6 +42,7 @@ zenodo 24531118 (disintegration / daily rumination, N=916, 90 cols), figshare 34
 supply chains, N=550), zenodo 24463648 (environmental risk perception, Igdir, N=532), dataverse
 O4E9YN (AI reliance, CC0, N=502). `good` does not test the N floor, composites, PII beyond the
 screen, or licence beyond the triage string; one good row (zenodo 23992649) has licence `unknown`.
+
 ## 2026-11-25 — Repos monthly discovery+triage (mode 3, scheduled, full sweep)
 
 Scheduled monthly run, from a fresh checkout at `e1da180` (`Metadata pipeline: run for

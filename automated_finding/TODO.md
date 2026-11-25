@@ -7,6 +7,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-25b).
 - [ ] Work `leads/repos_backlog_leads_2026-11-25.csv` (15 good, 32 worth_retrying, 86 recoverable_format,
   10 aggregate_continuous). Shard 10 holds the room.
 - [ ] Backlog is 54 retry rows; figshare is most of the download failures again.
+
 ## Repos monthly discovery+triage 2026-11-25 (mode 3, scheduled, full sweep)
 
 Full write-up in `BATCH_LOG.md` (2026-11-25). Discovery + triage only; no `data/`
