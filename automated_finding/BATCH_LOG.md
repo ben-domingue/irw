@@ -7,6 +7,61 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-25c — the day's 157 repos leads worked: 85 deposits, 399 tables, 2,124,328 responses
+
+Ben (via the parent session): work the leads from the 2026-11-25 monthly routine (`leads/repos_leads_2026-11-25.csv`, 14) and the
+backlog drain (`leads/repos_backlog_leads_2026-11-25.csv`, 143). Branch `data/repos-leads-2026-11-25`, worktree
+`~/irw-wt/repos-leads-2026-11-25` (based on the two lead branches, PRs #3721/#3726; not on main yet). Every lead now carries a
+`[repos leads 2026-11-25c]` note: **85 shipped, 60 rejected_content, 5 blocked_licence, 2 skipped_pii, 5 unworked.**
+
+Every table passed `run_qc` (no fails), `irw-validate --profile upload` and `irw_lint_covariates.py` before staging (8 lint
+`covariate_as_item` hits are accepted false positives on item stems -- Comp_3_Confidence, center_attention, control, Race (a CRT-II
+item), alcohol_or_other_drugs, learning_to_live, i_get_help_when_i_am_sick, poor_appetite_weight_loss -- each recorded as
+`LINT_FP` in the build spec). Every script asserts its row count and balances its source columns. No item text shipped.
+
+**Largest:** charzynska_2026 (IWAS-5 / UWES-3 / MWMS-6, 32,097 employees in 85 countries), anon_2026_empathy (IRI x 1,995 + 567 x 3
+waves, SACQ), bansal_2026 (28 tables, 702 adults on trust in AI, IPIP Big Five, privacy concern), zancu_2026 (CEBRACS/DERS/BICSI
+with T1/T2 waves), ding_2026 (1,464 adolescents), kings_2026 (41-item giftedness knowledge, 1,667 French teachers),
+simanjuntak_2026 (2,447 pupils pre/post), torun_2026 (BIS-11 etc., text labels mapped), minozzo_2026 (13 tables, Table S1 codes),
+wren_2026 (ACE, CTQ-SF, GHSQ x 3, CAGE-AID). Panels with a `wave` column: zancu, anon_2026_empathy, simanjuntak, bekova (MBI/PSS T0-T2).
+
+**Stacked samples (cov_study / cov_sample):** zhang_2026 (two experiments), nosratabadi_2026 S1+S2 (Risk/PI by identical names;
+S3 separate script), anon_2026_pni (EFA+CFA), minozzo_2026 (calibration+validation), aksoy_2026_pets (English+Turkish versions),
+lv_2026 (trust/check stacked; sense-of-gain split -- 1-5 in study 1, 1-7 in study 2), gomezmari_2026 (ASD vs Asperger label).
+rumangkit_2026c_* is a third Rumangkit collection: none of its 272 OCB patterns occurs in zenodo 21522509, so not a duplicate.
+
+**Rejected (60):** firm/city/country panels, aggregate scores and simulations (b27, b36, b40, b51, b74, b80, b84, b87, b101, b135), records/reviews/tables (b90,
+b112, b113, b115, b117, b122, b123, b126, b128, b130, b133, b140), composites only (m5, b20, b34, b38, b39, b49, b58, b61, b65, b70,
+b102, b106, b107, b132), single items / EMA / counts (b22, b53, b55, b86, b103), N<100 (b15, b104, b111, b120, b129), duplicated
+response rows (b4: 227/500 repeat another's 44-item pattern), example/synthetic data (m7 RKI Beispieldaten; b100 two-decimal ages --
+coin flip), third-party redistribution (b71 ANES), LLM outputs (m12), duplicates of a shipped file (b29, b31), no items (b21, b82,
+b114, b118, b121, b137), and b124 (Statistics Canada data not in the deposit).
+**Licence (5, logged in license_blocked_candidates.csv):** m11 and b12 (Zenodo, no licence), b14 (CC0 on the record but the README
+forbids redistribution), b45 (CC BY but the dictionary says 'controlled sharing'), b109 (Dataverse 'limited information' terms).
+**PII (2):** b69 (pupils' full names), b108 (a 'Research Assistant' column of staff first names -- skipped by the letter of the
+2026-10-20 ruling; otherwise a strong 768-person BIS/BAS, self-control, NFC deposit).
+**Unworked (5, reasons in the lead notes):** b37 (VR1-46 block boundaries only in the paper), b44 (items' wording varies by issue
+condition), b60 (vignette repeats), b125 (Curiosity Consortium trial design), b127 (36 stems, no block structure).
+
+**Judgement calls worth a look:** ~40 tables keep an unexpanded code as the construct name ("code not expanded" in the
+description); positional item codes where headers are full stems (aini_2026, jayadi_2026, trejovazquez_2026_bai) say so in the
+header; akhrani_2026_ohq_sf keeps 419/1,346 repeated 8-item patterns (consistent skewed answers, not copied rows);
+Google-Forms text labels mapped in order (torun_2026, trejovazquez BAI); carballo_2026 25/50/75/100 divided by 25; dropped
+columns per the geographic rule (Domisili/province/district/municipality/departement) and the clinical free-text rule
+(ngunda chronic_illness). Hashed or platform IDs (Prolific PID, ResponseId, session hashes, self-generated codes) replaced by row order.
+
+**Item text:** none shipped; every provenance row says where the text is. Cheap later builds (wording in the deposit): herrera_2026
+(diccionario), sengarie_2026, lee_2026, croitoru_2026, minozzo_2026 (Table S1 PT+EN), umoru_2026, ahmad_2026, charzynska_2026,
+ye_2026, hung_2026 (.sav labels), wren_2026, anon_2026_pni, gomezmari_2026, torun_2026, galindodominguez_2026, efawati_2026,
+sucipto_2026, aini_2026, prichard_2026.
+
+**Covariate labels:** harvested for the 24 .sav/.dta scripts (`harvest.py --commit HEAD`); `build.py` labels them once the tables
+are in published metadata.csv.
+
+Staged: 399 dictionary_auto + codebook_at_ingest (+ script_at_ingest where the script name differs) rows, 399 tags/tags_auto.csv
+rows, 399 itemtext_provenance rows, 5 license_blocked_candidates rows. Build tooling (spec files, generator) lives outside the repo at
+`~/irw-wt/repos-leads-2026-11-25-tools`; the data/ scripts are self-contained.
+
 ## 2026-11-25b — Repos backlog drain (local, uncapped): 618 rows triaged, 143 leads
 
 The 2026-11-25 monthly repos routine (PR #3721) spent its whole `--limit 150` on backlog and left
