@@ -187,6 +187,8 @@ bellettini_2022_bebras_kilo,core,data/national_exams_3498/bellettini_2022_bebras
 bellettini_2022_bebras_mega,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_peta,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_tera,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
+bekova_2026_mbi,core,data/bekova_2026_parental_burnout.py,2026-11-25
+bekova_2026_pss10,core,data/bekova_2026_parental_burnout.py,2026-11-25
 berki_2026_sportcommit7,cov,data/covariance/osf_berki2026_sportcommit.py,2026-11-17
 berlian_2026_brand_trust,core,data/berlian_2026_esg_unilever.py,2026-11-21
 berlian_2026_esg,core,data/berlian_2026_esg_unilever.py,2026-11-21
@@ -391,6 +393,9 @@ duan_2026_csr_trust,core,data/duan_2026_csr_douyin.py,2026-11-23
 ducasse_2025_oas7,cov,data/covariance/pmc_article_tables_au.py,2026-11-19
 duman_2019_ipat10,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
+dursun_2026_career_decisiveness,core,data/dursun_2026_career_happiness.py,2026-11-25
+dursun_2026_ohq_short,core,data/dursun_2026_career_happiness.py,2026-11-25
+dursun_2026_swemwbs,core,data/dursun_2026_career_happiness.py,2026-11-25
 ebert_2024_animal_mr,core,data/jansen_jost_chronometric_mr/jansen_jost_chronometric_mr.R,2026-11-25
 ebert_2024_letter_mr,core,data/ebert_2024_letter_mr/ebert_2024_letter_mr.R,2026-11-25
 efawati_2026_entrepreneurial_leadership,core,data/efawati_2026_entrepreneurial_leadership.py,2026-11-25
@@ -456,6 +461,11 @@ gan_2021_psycap8,cov,data/covariance/pmc_article_tables_ao.py,2026-11-19
 ganis_kievit_2015_mr,core,data/more_rotation/more_rotation.R,2026-11-25
 gao_2026_thriving9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
 garney_2025_totalteen22,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
+garnham_2026_bes,core,data/garnham_2026_reading_empathy.py,2026-11-25
+garnham_2026_emque,core,data/garnham_2026_reading_empathy.py,2026-11-25
+garnham_2026_reading_attitudes,core,data/garnham_2026_reading_empathy.py,2026-11-25
+garnham_2026_sdq_items,core,data/garnham_2026_reading_empathy.py,2026-11-25
+garnham_2026_social_skills,core,data/garnham_2026_reading_empathy.py,2026-11-25
 ge_2026_aiengagement11,cov,data/covariance/pmc_article_tables_am.py,2026-11-19
 gerber_2025_anhedonia11,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 ghulman_2025_saudi_knowledge,core,data/ghulman_2025_saudi_knowledge.py,2026-11-21
@@ -648,6 +658,10 @@ jaya_2025_robot_info_quality,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
 jaya_2025_robot_info_quantity,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
 jaya_2025_robot_info_usefulness,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
 jaya_2025_robot_purchase_intention,core,data/jaya_2025_tiktok_ewom_robot.py,2026-11-23
+jayadi_2026_ar,core,data/jayadi_2026_ar_humor_tiktok.py,2026-11-25
+jayadi_2026_emotion,core,data/jayadi_2026_ar_humor_tiktok.py,2026-11-25
+jayadi_2026_humor,core,data/jayadi_2026_ar_humor_tiktok.py,2026-11-25
+jayadi_2026_pi,core,data/jayadi_2026_ar_humor_tiktok.py,2026-11-25
 jehn_1997_ocp54,cov,data/covariance/batch_rpackages5.R,2026-11-18
 ji_2021_esuper6,cov,data/covariance/pmc_article_tables_au.py,2026-11-19
 jiang_2026_pezps9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
@@ -1238,6 +1252,10 @@ suwadi_2025_greenwashing,core,data/suwadi_2025_greenwashing.py,2026-11-21
 suwadi_2025_nwom,core,data/suwadi_2025_greenwashing.py,2026-11-21
 suwadi_2025_website_interactivity,core,data/suwadi_2025_greenwashing.py,2026-11-21
 swain_2022_perfusion10,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
+szendeff_2026_hads,core,data/szendeff_2026_pain_coping.py,2026-11-25
+szendeff_2026_pci,core,data/szendeff_2026_pain_coping.py,2026-11-25
+szendeff_2026_pcs,core,data/szendeff_2026_pain_coping.py,2026-11-25
+szendeff_2026_woc16,core,data/szendeff_2026_pain_coping.py,2026-11-25
 tam_2022_boredom5,cov,data/covariance/pmc_article_tables_aw.py,2026-11-19
 tareke_2022_hbmpractice11,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
 tekin_2025_commitment,core,data/tekin_2025_favoritism.py,2026-11-25
