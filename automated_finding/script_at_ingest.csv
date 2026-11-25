@@ -1146,3 +1146,4 @@ zheng_2023_dots,core,data/confidence_db/confidence_db_perception.R,2026-11-23
 zieff_2023_snapiv18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
+harrison_2014_correlation_jnd,core,data/harrison_2014_correlation_jnd/harrison_2014_correlation_jnd.R,2026-11-25
