@@ -627,6 +627,7 @@ baqy_2024_me,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questio
 baqy_2024_personalization,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,Personalization
 baqy_2024_security,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,Security
 baqy_2024_st,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,St
+barretto_garcia_2023_numerosity,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,NA,Perceptual decision: numerosity comparison
 bartoli_2022_badge_notifications,NA,NA,Internet-based,NA,NA,NA,ita,NA
 baruah_2026_qfi,Adult (18+),NA,Workplace,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,NA,qfi
 baruah_2026_qfta,Adult (18+),NA,General/non-specific,"Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,NA,qfta
@@ -653,6 +654,7 @@ batistafoguet_2021_mlq,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale
 batool_2024_ai_attitudes,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Attitudes towards artificial intelligence (GAAIS)
 batool_2024_big_five,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Five-factor personality (BFI-44)
 baudin_2024_static99r,NA,NA,Clinical,NA,Observational rating,Likert Scale/selected response,swe,NA
+bauer_2021_mr_pupil,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
 baujard_2007_approval,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 baujard_2007_ev_0to2,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 baujard_2012_louvigny_approval,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
@@ -1368,6 +1370,7 @@ chinvararak_2021_ylseq,Adult (18+),NA,Clinical,NA,Survey/questionnaire,NA,tha,NA
 chinvararak_2022_gad7,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,tha,Anxiety
 chinvararak_2022_mbi_gs,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,tha,Burnout
 chinvararak_2022_phq9,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,tha,Depression
+chladkova_2021_mcgurk,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,cze,Audiovisual speech perception: McGurk effect
 cho_2022_pscse,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,kor,Patient safety competency (PSCSE)
 cho_2023_ipss,Adult (18+),NA,Clinical,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,kor,International Prostate Symptom Score (IPSS)
 cho_2023_oabss,Adult (18+),NA,Clinical,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,kor,Overactive Bladder Symptom Score (OABSS)
@@ -2000,6 +2003,8 @@ earja_2026_fomo,Adult (18+),NA,Internet-based,Affective/mental health,Survey/que
 earja_2026_perceived_risk,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,Perceived risk
 earja_2026_purchase_intention,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,Purchase intention
 earja_2026_trust,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ind,Trust
+ebert_2024_animal_mr,Child (<18y),"Early (<6y), Child (6-12y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
+ebert_2024_letter_mr,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
 ecps_sahm_2024_distrust,Adult (18+),NA,"Clinical, Targeted/specific","Affective/mental health, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,ger,German Version of the Emotion Regulation Questionnaire-Short Form - Distrust Subscale
 ecps_sahm_2024_dtl,Adult (18+),NA,"Clinical, Targeted/specific","Affective/mental health, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,ger,German Version of the Emotion Regulation Questionnaire-Short Form - Deal with Things in Life Subscale
 ecps_sahm_2024_emotion,Adult (18+),NA,Clinical,Behavioral,Survey/questionnaire,Constructed Response,ger,Psychometric Properties of a German Version of the Emotion Regulation Questionnaire-Short Form (ERQ-S): Evidence from Community and Patient Samples
@@ -2548,6 +2553,7 @@ gan_2024_depression,NA,NA,Clinical,NA,Observational rating,Likert Scale/selected
 ganbat_2022_pollution_disease_risk,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,mon,NA
 ganbat_2022_pollution_leave_type,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,mon,NA
 ganbat_2022_pollution_symptoms,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,mon,NA
+ganis_kievit_2015_mr,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Mental rotation
 gao2025_attachment_anxiety,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,chi,"Attachment toward one's adult child, anxious dimension (3 items, ECR-RS-style wording, not named in the deposit)"
 gao2025_attachment_avoidance,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 gao2025_family_support,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
@@ -2985,6 +2991,7 @@ grugan_2026_mps15,Adult (18+),NA,General/non-specific,Personality,Survey/questio
 grugan_2026_psp_hes,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Perfectionistic self-presentation (hiding effort)
 grugan_2026_psps,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Perfectionistic self-presentation
 grugan_2026_social_anxiety,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Social anxiety
+gu_2025_det,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,NA,Perceptual decision: orientation discrimination from working memory
 guatemala_2024_homes_avenues,Adult (18+),NA,"Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Avenues
 guatemala_2024_homes_country,Adult (18+),NA,"Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,ENCASBA -  Country
 guatemala_2024_homes_drainage,Adult (18+),NA,"Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Drainage
@@ -3774,6 +3781,9 @@ jordan_2020_burnout,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selec
 jordan_2020_mindfulness,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,NA,eng,Mindfulness (12 items worded as the FFMQ short form; the paper does not name the instrument)
 jordan_2020_pss10,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 jordan_2020_resilience,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
+jost_2022_mcmr_e1,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
+jost_2022_mcmr_e2,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
+jost_2023_mr_visualization,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ger,Mental rotation
 jovanovic_2026_conscientiousness_bfi,Mixed,Adolescent (12-18y),General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,srp,Conscientiousness Subscale of Big Five Inventory
 jovanovic_2026_conscientiousness_dass_d,Mixed,Adolescent (12-18y),General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,srp,Depression Anxiety Stress Scales
 jovanovic_2026_conscientiousness_panas_na,Mixed,Adolescent (12-18y),General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,srp,Negative Affect subscale of the Positive and Negative Affect Schedule
@@ -4546,6 +4556,7 @@ liu_2026_empathy,Child (<18y),Adolescent (12-18y),"Educational, General/non-spec
 liu_2026_moral_disengagement,Child (<18y),Adolescent (12-18y),"Educational, General/non-specific",Personality,Survey/questionnaire,Likert Scale/selected response,chi,Moral disengagement
 liu_2026_self_control,Child (<18y),Adolescent (12-18y),"Educational, General/non-specific",Personality,Survey/questionnaire,Likert Scale/selected response,chi,Self-control
 liu_2026_social_alienation,Child (<18y),Adolescent (12-18y),"Educational, General/non-specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Social alienation
+liu_lourenco_2026_mr,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Mental rotation
 liuzza_2018_bods,Adult (18+),NA,Internet-based,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Body odour disgust sensitivity (BODS)
 liuzza_2018_dsr,Adult (18+),NA,Internet-based,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Disgust sensitivity (DS-R)
 liuzza_2018_pvd,Adult (18+),NA,Internet-based,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Perceived vulnerability to disease (PVD)
@@ -4766,6 +4777,8 @@ makovi_2021_environmental_risk,NA,NA,Internet-based,NA,Survey/questionnaire,Like
 makovi_2021_symbolic_racism,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 makowska_2023_pdts,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,pol,NA
 makowska_2023_pss4,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,pol,NA
+makowski_2024_illusion,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,NA,Perceptual decision: visual illusion sensitivity
+makowski_2026_illusion_pcs,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,eng,Perceptual decision: visual illusion sensitivity
 makransky_2016_mcq_correct,Adult (18+),NA,Educational,NA,Test,Likert Scale/selected response,eng,NA
 makransky_2016_motivation,Adult (18+),NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,dan,NA
 makransky_2016_self_efficacy,Adult (18+),NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,dan,NA
@@ -5998,6 +6011,7 @@ pilch_2021_personality_ipip20,Adult (18+),NA,Internet-based,NA,Survey/questionna
 pilch_2021_preventive_behavior,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,pol,NA
 pilch_2021_preventive_vas,NA,NA,Internet-based,NA,Survey/questionnaire,Slider/continuous,pol,NA
 pilch_2021_protection_motivation,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,pol,NA
+pillai_2026_auditory,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Perceptual decision: auditory discrimination
 pimchangthong_2026_attitude,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,Attitude toward smart hotel technology
 pimchangthong_2026_perceived_control,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,Perceived behavioral control
 pimchangthong_2026_subjective_norms,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,Subjective norms
@@ -6762,6 +6776,8 @@ sari_2026_remote_work_solutions,Adult (18+),NA,Workplace,Opinion/attitude,Survey
 sariyska_2019_dark_triad,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,NA,Dark Triad (SD3)
 sariyska_2019_food_frequency,Adult (18+),NA,General/non-specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,NA,Dietary habits (food frequency)
 sas_deters_2022,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Schizotypal Ambivalence Scale (SAS)
+sasaki_2019_contrast_online,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,jpn,Perceptual decision: contrast detection
+sasaki_2019_contrast_online_rep,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,jpn,Perceptual decision: contrast detection
 sat12_wilson_2003,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,grade 12 science assessment test (SAT)
 sauerbronn_2025_affective_presence,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Leader affective presence
 sauerbronn_2025_authentic_leadership,Adult (18+),NA,Workplace,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,por,Authentic leadership (ALQ)
@@ -7792,6 +7808,7 @@ threat_isler_2024_exp2_picture_panas,Adult (18+),NA,Internet-based,Affective/men
 threat_isler_2024_exp3_cog_panas,Adult (18+),NA,Internet-based,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
 threat_isler_2024_exp4_cog_crt,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
 threat_isler_2024_exp4_cog_panas,Adult (18+),NA,Internet-based,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+thurston_2021_mrt,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,tha,Mental rotation
 tian2026_digital_competence,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 tian_2021_app_affective_engagement,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Affective engagement
 tian_2021_app_behavioral_engagement,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Behavioural engagement
@@ -8436,6 +8453,14 @@ wolters2026_symptom_concerns,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Sc
 wolters2026_wi,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,ger,NA
 wondie_2020_hads,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,amh,Anxiety and depression (HADS)
 wong_2016_npi_stroke,Adult (18+),NA,Clinical,Affective/mental health,Observational rating,Likert Scale/selected response,NA,Neuropsychiatric Inventory (NPI)
+wong_2025_embedded_figures,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Spatial ability: embedded figures
+wong_2025_mental_rotation,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Mental rotation
+wong_2025_perspective_taking,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Spatial ability: perspective taking
+wong_2025_raven12,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Fluid reasoning (Raven)
+wong_2025_sbsod,Adult (18+),NA,General/non-specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"chi, eng",Sense of direction
+wong_2025_spatial_scaling,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Spatial ability: spatial scaling
+wong_2025_vswm,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Visuospatial working memory
+wong_2025_vwm,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"chi, eng",Verbal working memory
 wong_2026_eca_disclosure,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,Disclosure governance with a conversational agent
 woodall_2020_bfi44,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 wooly_hartman2022,Adult (18+),NA,Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Do you know the Wooly Bully? Testing era-based knowledge to verify participant age online

@@ -724,6 +724,7 @@ barnett_2025_quota_politicians,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,
 barnett_2026_morocco_candidates,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 barnfield_2023_policy_discounting,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,exact,,,TRUE,FALSE,unassessed,0
 barnum_2026_bystander_video,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
+barretto_garcia_2023_numerosity,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.4,TRUE,FALSE,FALSE,unassessed,1
 bartoli_2022_badge_notifications,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,FALSE,FALSE,TRUE,shipped,1
 baruah_2026_qfi,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 baruah_2026_qfta,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
@@ -750,6 +751,7 @@ batistafoguet_2021_mlq,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,
 batool_2024_ai_attitudes,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 batool_2024_big_five,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
 baudin_2024_static99r,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,FALSE,FALSE,FALSE,unassessed,1
+bauer_2021_mr_pupil,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.417,TRUE,FALSE,FALSE,unassessed,1
 baujard_2007_approval,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.6,TRUE,FALSE,FALSE,unassessed,1
 baujard_2007_ev_0to2,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.6,TRUE,FALSE,FALSE,unassessed,1
 baujard_2012_louvigny_approval,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.273,TRUE,FALSE,FALSE,unassessed,1
@@ -817,6 +819,11 @@ bekteshi_2024_eri_overcommitment,core,item_response_warehouse_6,FALSE,TRUE,TRUE,
 bekteshi_2024_eri_reward,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 belita_2022_eidm_competence,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 belita_2022_eidm_org_factors,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
+bellettini_2022_bebras_giga,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.714,TRUE,FALSE,FALSE,unassessed,7
+bellettini_2022_bebras_kilo,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.714,TRUE,FALSE,FALSE,unassessed,7
+bellettini_2022_bebras_mega,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.714,TRUE,FALSE,FALSE,unassessed,7
+bellettini_2022_bebras_peta,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.714,TRUE,FALSE,FALSE,unassessed,7
+bellettini_2022_bebras_tera,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.714,TRUE,FALSE,FALSE,unassessed,7
 belyakova_2026_bfi2s,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,unassessed,0
 belyakova_2026_maas,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,unassessed,0
 belyakova_2026_pil,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,unassessed,0
@@ -851,6 +858,8 @@ bernik_2026_idl,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TR
 bernik_2026_study_engagement,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,,TRUE,FALSE,unassessed,0
 berntzen_2025_political_violence,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 berrani_2020_pheem,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
+berry_2020_cce_hindi,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.889,TRUE,FALSE,FALSE,unassessed,7
+berry_2020_cce_math,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.889,TRUE,FALSE,FALSE,unassessed,7
 bertani_2024_afccq,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
 berz_2022_candidate_selection,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 berz_2026_crisis_accountability,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
@@ -1252,6 +1261,7 @@ c19prc_uk_mcbride_2021_wordsum,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TR
 cabanas_2026_emotional_competence,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,prefix,1,,FALSE,FALSE,unassessed,0
 cabanas_2026_entrep_self_efficacy,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,prefix,1,,FALSE,FALSE,unassessed,0
 cabanas_2026_entrepreneurial_intention,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,prefix,1,,FALSE,FALSE,unassessed,0
+cabrerapommiez_2023_lecdis,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,exact,0.833,,FALSE,FALSE,unassessed,7
 cacciatore_2021_crisis_care_satisfaction,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 cacciatore_2021_isel,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 cacciatore_2021_ongoing_satisfaction,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
@@ -1626,6 +1636,7 @@ chinvararak_2021_ylseq,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,
 chinvararak_2022_gad7,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 chinvararak_2022_mbi_gs,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 chinvararak_2022_phq9,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
+chladkova_2021_mcgurk,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.333,TRUE,FALSE,FALSE,unassessed,1
 cho_2022_pscse,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
 cho_2023_ipss,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,unassessed,0
 cho_2023_oabss,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,unassessed,0
@@ -2025,7 +2036,7 @@ datta_2021_spatial_visualization,core,item_response_warehouse_8,FALSE,TRUE,TRUE,
 davenport_2026_black_classification,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 davis_2026_ethnic_federalism,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 dbdifdm_puga_2021,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,FALSE,FALSE,FALSE,unassessed,1
-dd_rotation,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
+dd_rotation,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.8,TRUE,FALSE,TRUE,shipped,1
 de_vries_2022_bat_burnout_core,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 de_vries_2022_bat_secondary,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 de_vries_2022_eudaimonic_wellb,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
@@ -2428,6 +2439,8 @@ earja_2026_fomo,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TR
 earja_2026_perceived_risk,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 earja_2026_purchase_intention,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 earja_2026_trust,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
+ebert_2024_animal_mr,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.333,TRUE,FALSE,FALSE,unassessed,1
+ebert_2024_letter_mr,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.364,TRUE,FALSE,FALSE,unassessed,1
 eckerehrhardt_2025_energy_governance,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,prefix,,,TRUE,FALSE,unassessed,0
 eckerehrhardt_2025_internet_governance,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,prefix,,,TRUE,FALSE,unassessed,0
 eckhard_2022_administrative_language,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
@@ -3262,6 +3275,7 @@ gan_2026_alternative_meat,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,
 ganbat_2022_pollution_disease_risk,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 ganbat_2022_pollution_leave_type,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 ganbat_2022_pollution_symptoms,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
+ganis_kievit_2015_mr,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.444,TRUE,FALSE,FALSE,unassessed,1
 gao2025_attachment_anxiety,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,withdrawn,0
 gao2025_attachment_avoidance,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 gao2025_family_support,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,excluded,0
@@ -3752,6 +3766,7 @@ grugan_2026_mps15,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,
 grugan_2026_psp_hes,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.857,,FALSE,FALSE,unassessed,1
 grugan_2026_psps,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.857,,FALSE,FALSE,unassessed,1
 grugan_2026_social_anxiety,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.857,,FALSE,FALSE,unassessed,1
+gu_2025_det,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.25,TRUE,FALSE,FALSE,unassessed,1
 guatemala_2024_homes_avenues,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 guatemala_2024_homes_country,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 guatemala_2024_homes_drainage,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
@@ -4693,6 +4708,9 @@ jordan_2020_burnout,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRU
 jordan_2020_mindfulness,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,FALSE,TRUE,shipped,1
 jordan_2020_pss10,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,TRUE,FALSE,blocked,1
 jordan_2020_resilience,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,TRUE,TRUE,shipped,1
+jost_2022_mcmr_e1,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.364,TRUE,FALSE,FALSE,unassessed,1
+jost_2022_mcmr_e2,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.364,TRUE,FALSE,FALSE,unassessed,1
+jost_2023_mr_visualization,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.4,TRUE,FALSE,FALSE,unassessed,1
 jost_2024_zambia_participation,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 jovanovic_2026_conscientiousness_bfi,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.833,TRUE,FALSE,FALSE,unassessed,1
 jovanovic_2026_conscientiousness_dass_d,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.833,TRUE,FALSE,FALSE,unassessed,1
@@ -5602,6 +5620,7 @@ liu_2026_moral_disengagement,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE
 liu_2026_self_control,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,prefix,0.429,TRUE,TRUE,FALSE,unassessed,1
 liu_2026_social_alienation,core,item_response_warehouse_5,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,prefix,0.429,TRUE,TRUE,FALSE,unassessed,1
 liu_2026_taiwan_ballots,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
+liu_lourenco_2026_mr,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.444,TRUE,FALSE,FALSE,unassessed,1
 liuzza_2018_bods,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.857,TRUE,TRUE,FALSE,unassessed,1
 liuzza_2018_dsr,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.857,TRUE,TRUE,FALSE,unassessed,1
 liuzza_2018_pvd,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.857,TRUE,TRUE,FALSE,unassessed,1
@@ -5871,6 +5890,8 @@ makovi_2021_environmental_risk,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TR
 makovi_2021_symbolic_racism,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,TRUE,FALSE,withdrawn,0
 makowska_2023_pdts,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 makowska_2023_pss4,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,blocked,0
+makowski_2024_illusion,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.4,TRUE,FALSE,FALSE,unassessed,1
+makowski_2026_illusion_pcs,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.25,TRUE,FALSE,FALSE,unassessed,1
 makransky_2016_mcq_correct,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 makransky_2016_motivation,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,blocked,0
 makransky_2016_self_efficacy,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
@@ -7338,6 +7359,7 @@ pilch_2021_personality_ipip20,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRU
 pilch_2021_preventive_behavior,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,FALSE,TRUE,shipped,1
 pilch_2021_preventive_vas,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,FALSE,TRUE,shipped,1
 pilch_2021_protection_motivation,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
+pillai_2026_auditory,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.211,TRUE,FALSE,FALSE,unassessed,1
 pimchangthong_2026_attitude,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 pimchangthong_2026_perceived_control,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 pimchangthong_2026_subjective_norms,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
@@ -9130,6 +9152,8 @@ sari_2026_remote_work_solutions,core,item_response_warehouse_10,FALSE,TRUE,TRUE,
 sariyska_2019_dark_triad,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
 sariyska_2019_food_frequency,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 sas_deters_2022,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,FALSE,FALSE,TRUE,shipped,1
+sasaki_2019_contrast_online,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.333,TRUE,FALSE,FALSE,unassessed,1
+sasaki_2019_contrast_online_rep,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.308,TRUE,FALSE,FALSE,unassessed,1
 sasmaz_2026_candidate_selection,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 sat12_wilson_2003,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,FALSE,FALSE,FALSE,excluded,1
 sauerbronn_2025_affective_presence,core,item_response_warehouse_6,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
@@ -9162,6 +9186,8 @@ schadelbauer_2023_va_system_trust,core,item_response_warehouse_7,FALSE,TRUE,TRUE
 schadelbauer_2023_va_trust,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0
 schafer_2016_music_effects,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,FALSE,TRUE,shipped,1
 schafer_2016_music_goals,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,FALSE,FALSE,TRUE,shipped,1
+schaffner_2024_ssdp_math,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.7,TRUE,FALSE,FALSE,unassessed,7
+schaffner_2024_ssdp_science,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,index,0.7,TRUE,FALSE,FALSE,unassessed,7
 schalet_2016_bai,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,unassessed,0
 schalet_2016_hrsa,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 schalet_2016_hrsd,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,FALSE,failed,0
@@ -10269,6 +10295,7 @@ threat_isler_2024_exp2_picture_panas,core,item_response_warehouse,FALSE,TRUE,TRU
 threat_isler_2024_exp3_cog_panas,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,none,1,TRUE,FALSE,TRUE,shipped,1
 threat_isler_2024_exp4_cog_crt,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,none,1,TRUE,FALSE,TRUE,shipped,1
 threat_isler_2024_exp4_cog_panas,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,none,1,TRUE,FALSE,TRUE,shipped,1
+thurston_2021_mrt,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.429,TRUE,FALSE,FALSE,unassessed,1
 tian2026_digital_competence,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,none,0.25,FALSE,FALSE,TRUE,shipped,3
 tian_2021_app_affective_engagement,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,TRUE,FALSE,TRUE,shipped,0
 tian_2021_app_behavioral_engagement,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,1,,FALSE,TRUE,shipped,0
@@ -11146,6 +11173,14 @@ wolters2026_symptom_concerns,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE
 wolters2026_wi,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,none,0.571,FALSE,FALSE,FALSE,withdrawn,3
 wondie_2020_hads,core,item_response_warehouse_8,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.667,TRUE,FALSE,FALSE,unassessed,1
 wong_2016_npi_stroke,core,item_response_warehouse_9,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,,FALSE,FALSE,unassessed,0
+wong_2025_embedded_figures,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_mental_rotation,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_perspective_taking,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_raven12,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_sbsod,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_spatial_scaling,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_vswm,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
+wong_2025_vwm,core,item_response_warehouse_10,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,index,0.375,TRUE,FALSE,FALSE,unassessed,1
 wong_2026_eca_disclosure,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,0.364,,TRUE,FALSE,unassessed,1
 wood_2022_campaign_finance,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,index,,,TRUE,FALSE,unassessed,0
 woodall_2020_bfi44,core,item_response_warehouse_4,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,exact,1,TRUE,FALSE,FALSE,unassessed,0

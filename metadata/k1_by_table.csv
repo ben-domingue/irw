@@ -627,6 +627,7 @@ baqy_2024_me,0,,397,1,397,0,0,0,no_qi
 baqy_2024_personalization,0,,397,1,397,0,0,0,no_qi
 baqy_2024_security,0,,397,1,397,0,0,0,no_qi
 baqy_2024_st,0,,397,1,397,0,0,0,no_qi
+barretto_garcia_2023_numerosity,0,,64,1,64,0,0,0,no_qi
 bartoli_2022_badge_notifications,2,cov_age|cov_gender,1009,8,1009,0,0,0,ok
 baruah_2026_qfi,1,cov_gender,226,2,226,0,0,0,ok
 baruah_2026_qfta,1,cov_gender,226,2,226,0,0,0,ok
@@ -653,6 +654,7 @@ batistafoguet_2021_mlq,0,,300,1,300,0,0,0,no_qi
 batool_2024_ai_attitudes,3,cov_age|cov_gender|cov_major,272,80,272,28,0.1029,0.4706,ok
 batool_2024_big_five,3,cov_age|cov_gender|cov_major,272,80,272,28,0.1029,0.4706,ok
 baudin_2024_static99r,1,cov_age_at_release,146,5,146,0,0,0.0274,ok
+bauer_2021_mr_pupil,0,,107,1,107,0,0,0,no_qi
 baujard_2007_approval,1,cov_city,2836,3,2836,0,0,0,ok
 baujard_2007_ev_0to2,1,cov_city,2834,3,2834,0,0,0,ok
 baujard_2012_louvigny_approval,3,cov_age|cov_gender|cov_weight,930,450,930,255,0.2742,0.7559,ok
@@ -694,6 +696,11 @@ bekteshi_2024_eri_overcommitment,4,cov_age|cov_education|cov_gender|cov_working_
 bekteshi_2024_eri_reward,4,cov_age|cov_education|cov_gender|cov_working_years,216,172,216,142,0.6574,0.9769,ok
 belita_2022_eidm_competence,1,cov_degree,201,2,201,0,0,0,ok
 belita_2022_eidm_org_factors,1,cov_degree,201,2,201,0,0,0,ok
+bellettini_2022_bebras_giga,0,,5384,1,5384,0,0,0,no_qi
+bellettini_2022_bebras_kilo,0,,3483,1,3483,0,0,0,no_qi
+bellettini_2022_bebras_mega,0,,11640,1,11640,0,0,0,no_qi
+bellettini_2022_bebras_peta,0,,3035,1,3035,0,0,0,no_qi
+bellettini_2022_bebras_tera,0,,4654,1,4654,0,0,0,no_qi
 belyakova_2026_bfi2s,4,cov_age_group|cov_education|cov_occupation|cov_sex,143,54,143,30,0.2098,0.5524,ok
 belyakova_2026_maas,4,cov_age_group|cov_education|cov_occupation|cov_sex,143,54,143,30,0.2098,0.5524,ok
 belyakova_2026_pil,4,cov_age_group|cov_education|cov_occupation|cov_sex,143,54,143,30,0.2098,0.5524,ok
@@ -715,6 +722,8 @@ bernik_2026_classroom_engagement,2,cov_age|cov_gender,269,20,269,4,0.0149,0.0409
 bernik_2026_idl,2,cov_age|cov_gender,269,20,269,4,0.0149,0.0409,ok
 bernik_2026_study_engagement,2,cov_age|cov_gender,269,20,269,4,0.0149,0.0409,ok
 berrani_2020_pheem,5,cov_age|cov_age_start_residency|cov_children|cov_marital_status|cov_sex,255,184,255,138,0.5412,0.9451,ok
+berry_2020_cce_hindi,1,cov_female,3129,2,3129,0,0,0,ok
+berry_2020_cce_math,1,cov_female,3127,2,3127,0,0,0,ok
 bertani_2024_afccq,5,cov_age|cov_born_italy|cov_city|cov_education|cov_gender,1213,480,1213,186,0.1533,0.6974,ok
 besaa_s_2026_22766055,2,cov_age|cov_sexual_orientation,299,35,299,11,0.0368,0.1338,ok
 beshai_2017_fiqr,4,cov_age|cov_education|cov_gender|cov_income,519,456,519,399,0.7688,0.9904,ok
@@ -1038,6 +1047,7 @@ c19prc_uk_mcbride_2021_wordsum,2,cov_age|cov_gender,2058,134,2058,11,0.0053,0.02
 cabanas_2026_emotional_competence,4,cov_age_band|cov_country|cov_gender|cov_university,637,21,637,4,0.0063,0.0204,ok
 cabanas_2026_entrep_self_efficacy,4,cov_age_band|cov_country|cov_gender|cov_university,637,21,637,4,0.0063,0.0204,ok
 cabanas_2026_entrepreneurial_intention,4,cov_age_band|cov_country|cov_gender|cov_university,637,21,637,4,0.0063,0.0204,ok
+cabrerapommiez_2023_lecdis,1,cov_female,1233,2,1233,0,0,0,ok
 cacciatore_2021_crisis_care_satisfaction,1,cov_gender,345,3,345,1,0.0029,0.0029,ok
 cacciatore_2021_isel,1,cov_gender,362,3,362,1,0.0028,0.0028,ok
 cacciatore_2021_ongoing_satisfaction,1,cov_gender,351,3,351,1,0.0028,0.0028,ok
@@ -1367,6 +1377,7 @@ chinvararak_2021_ylseq,5,cov_age|cov_education|cov_marital_status|cov_occupation
 chinvararak_2022_gad7,2,cov_age|cov_sex,986,82,986,13,0.0132,0.0791,ok
 chinvararak_2022_mbi_gs,2,cov_age|cov_sex,986,82,986,13,0.0132,0.0791,ok
 chinvararak_2022_phq9,2,cov_age|cov_sex,403,63,403,11,0.0273,0.1613,ok
+chladkova_2021_mcgurk,3,cov_age|cov_female|cov_incl_age,470,90,470,28,0.0596,0.2468,ok
 cho_2022_pscse,3,cov_age|cov_gender|cov_grade,110,42,110,29,0.2636,0.4818,ok
 cho_2023_ipss,1,cov_age,1875,46,1875,3,0.0016,0.0085,ok
 cho_2023_oabss,1,cov_age,898,42,898,4,0.0045,0.0156,ok
@@ -1999,6 +2010,8 @@ earja_2026_fomo,5,cov_birth_cohort|cov_education|cov_gender|cov_income|cov_occup
 earja_2026_perceived_risk,5,cov_birth_cohort|cov_education|cov_gender|cov_income|cov_occupation,123,95,123,78,0.6341,0.9512,ok
 earja_2026_purchase_intention,5,cov_birth_cohort|cov_education|cov_gender|cov_income|cov_occupation,123,95,123,78,0.6341,0.9512,ok
 earja_2026_trust,5,cov_birth_cohort|cov_education|cov_gender|cov_income|cov_occupation,123,95,123,78,0.6341,0.9512,ok
+ebert_2024_animal_mr,3,cov_age_months|cov_female|cov_ses,98,94,98,90,0.9184,1,ok
+ebert_2024_letter_mr,2,cov_age|cov_female,213,28,213,7,0.0329,0.0704,ok
 ecps_sahm_2024_distrust,4,cov_age|cov_education|cov_gender|cov_occupation,13137,2699,13137,1273,0.0969,0.257,ok
 ecps_sahm_2024_dtl,4,cov_age|cov_education|cov_gender|cov_occupation,13299,2725,13299,1290,0.097,0.2566,ok
 ecps_sahm_2024_emotion,4,cov_age|cov_education|cov_gender|cov_occupation,12988,2679,12988,1264,0.0973,0.2578,ok
@@ -2603,6 +2616,7 @@ gan_2024_depression,0,,318,1,318,0,0,0,no_qi
 ganbat_2022_pollution_disease_risk,0,,1329,1,1329,0,0,0,no_qi
 ganbat_2022_pollution_leave_type,0,,1329,1,1329,0,0,0,no_qi
 ganbat_2022_pollution_symptoms,0,,1329,1,1329,0,0,0,no_qi
+ganis_kievit_2015_mr,2,cov_age|cov_female,54,21,54,7,0.1296,0.7778,ok
 gao2025_attachment_anxiety,3,cov_age|cov_gender|cov_marital_status,459,12,459,0,0,0,ok
 gao2025_attachment_avoidance,3,cov_age|cov_gender|cov_marital_status,459,12,459,0,0,0,ok
 gao2025_family_support,3,cov_age|cov_gender|cov_marital_status,459,12,459,0,0,0,ok
@@ -3040,6 +3054,7 @@ grugan_2026_mps15,2,cov_age|cov_gender,890,105,890,31,0.0348,0.1135,ok
 grugan_2026_psp_hes,2,cov_age|cov_gender,890,105,890,31,0.0348,0.1135,ok
 grugan_2026_psps,2,cov_age|cov_gender,890,105,890,31,0.0348,0.1135,ok
 grugan_2026_social_anxiety,2,cov_age|cov_gender,890,105,890,31,0.0348,0.1135,ok
+gu_2025_det,2,cov_age|cov_female,50,22,50,6,0.12,0.68,ok
 guatemala_2024_homes_avenues,3,cov_age|cov_educ|cov_sex,6868,737,6868,149,0.0217,0.091,ok
 guatemala_2024_homes_country,3,cov_age|cov_educ|cov_sex,6864,737,6864,149,0.0217,0.0911,ok
 guatemala_2024_homes_drainage,3,cov_age|cov_educ|cov_sex,6886,738,6886,150,0.0218,0.0909,ok
@@ -3829,6 +3844,9 @@ jordan_2020_burnout,0,,539,1,539,0,0,0,no_qi
 jordan_2020_mindfulness,0,,539,1,539,0,0,0,no_qi
 jordan_2020_pss10,0,,539,1,539,0,0,0,no_qi
 jordan_2020_resilience,0,,539,1,539,0,0,0,no_qi
+jost_2022_mcmr_e1,1,cov_female,253,3,253,0,0,0.0079,ok
+jost_2022_mcmr_e2,2,cov_education|cov_female,1250,16,1250,0,0,0.0032,ok
+jost_2023_mr_visualization,0,,150,1,150,0,0,0,no_qi
 jovanovic_2026_conscientiousness_bfi,2,cov_age|cov_gender,1376,57,1376,46,0.0334,0.0349,ok
 jovanovic_2026_conscientiousness_dass_d,2,cov_age|cov_gender,924,56,924,46,0.0498,0.0552,ok
 jovanovic_2026_conscientiousness_panas_na,2,cov_age|cov_gender,403,11,403,2,0.005,0.0099,ok
@@ -4597,6 +4615,7 @@ liu_2026_empathy,2,cov_gender|cov_grade,1883,6,1883,0,0,0,ok
 liu_2026_moral_disengagement,2,cov_gender|cov_grade,1883,6,1883,0,0,0,ok
 liu_2026_self_control,2,cov_gender|cov_grade,1883,6,1883,0,0,0,ok
 liu_2026_social_alienation,2,cov_gender|cov_grade,1883,6,1883,0,0,0,ok
+liu_lourenco_2026_mr,1,cov_female,164,2,164,0,0,0,ok
 liuzza_2018_bods,3,cov_age|cov_education|cov_gender,750,330,750,172,0.2293,0.636,ok
 liuzza_2018_dsr,3,cov_age|cov_education|cov_gender,159,124,159,99,0.6226,1,ok
 liuzza_2018_pvd,3,cov_age|cov_education|cov_gender,159,124,159,99,0.6226,1,ok
@@ -4817,6 +4836,8 @@ makovi_2021_environmental_risk,8,cov_age|cov_education|cov_gender|cov_hispanic|c
 makovi_2021_symbolic_racism,8,cov_age|cov_education|cov_gender|cov_hispanic|cov_ideology_self|cov_ideology_turkprime|cov_income|cov_race,1582,1295,1582,1069,0.6757,0.9968,ok
 makowska_2023_pdts,3,cov_birth_year|cov_education|cov_gender,558,200,558,70,0.1254,0.5824,ok
 makowska_2023_pss4,3,cov_birth_year|cov_education|cov_gender,558,200,558,70,0.1254,0.5824,ok
+makowski_2024_illusion,2,cov_age|cov_female,100,31,100,10,0.1,0.58,ok
+makowski_2026_illusion_pcs,4,cov_age|cov_education|cov_ethnicity|cov_female,500,352,500,246,0.492,0.98,ok
 makransky_2016_mcq_correct,2,cov_age|cov_sex,189,27,189,15,0.0794,0.1481,ok
 makransky_2016_motivation,2,cov_age|cov_sex,189,27,189,15,0.0794,0.1481,ok
 makransky_2016_self_efficacy,2,cov_age|cov_sex,189,27,189,15,0.0794,0.1481,ok
@@ -6049,6 +6070,7 @@ pilch_2021_personality_ipip20,5,cov_age|cov_education|cov_employment|cov_gender|
 pilch_2021_preventive_behavior,6,cov_age|cov_education|cov_employment|cov_health_situation|cov_marital_status|cov_sex,383,269,383,202,0.5274,0.9243,ok
 pilch_2021_preventive_vas,6,cov_age|cov_education|cov_employment|cov_health_situation|cov_marital_status|cov_sex,325,230,325,171,0.5262,0.9015,ok
 pilch_2021_protection_motivation,5,cov_age|cov_education|cov_employment|cov_gender|cov_marital,397,280,397,210,0.529,0.9043,ok
+pillai_2026_auditory,0,,392,1,392,0,0,0,no_qi
 pimchangthong_2026_attitude,4,cov_age_band|cov_education|cov_gender|cov_income,487,109,487,34,0.0698,0.2895,ok
 pimchangthong_2026_perceived_control,4,cov_age_band|cov_education|cov_gender|cov_income,487,109,487,34,0.0698,0.2895,ok
 pimchangthong_2026_subjective_norms,4,cov_age_band|cov_education|cov_gender|cov_income,487,109,487,34,0.0698,0.2895,ok
@@ -6813,6 +6835,8 @@ sari_2026_remote_work_solutions,0,,231,1,231,0,0,0,no_qi
 sariyska_2019_dark_triad,3,cov_age|cov_education|cov_sex,444,165,444,105,0.2365,0.4685,ok
 sariyska_2019_food_frequency,3,cov_age|cov_education|cov_sex,444,165,444,105,0.2365,0.4685,ok
 SAS_Deters_2022,0,,7096,1,7096,0,0,0,no_qi
+sasaki_2019_contrast_online,2,cov_age|cov_female,285,80,285,21,0.0737,0.4526,ok
+sasaki_2019_contrast_online_rep,2,cov_age|cov_female,166,69,166,30,0.1807,0.6506,ok
 sat12_wilson_2003,0,,600,1,600,0,0,0,no_qi
 sauerbronn_2025_affective_presence,5,cov_age|cov_children|cov_education|cov_marital_status|cov_sex,193,150,193,124,0.6425,0.9482,ok
 sauerbronn_2025_authentic_leadership,5,cov_age|cov_children|cov_education|cov_marital_status|cov_sex,193,150,193,124,0.6425,0.9482,ok
@@ -6839,6 +6863,8 @@ schadelbauer_2023_va_system_trust,6,cov_age|cov_education|cov_language|cov_natio
 schadelbauer_2023_va_trust,6,cov_age|cov_education|cov_language|cov_nationality|cov_occupation|cov_sex,138,125,138,113,0.8188,1,ok
 schafer_2016_music_effects,0,,121,1,121,0,0,0,no_qi
 schafer_2016_music_goals,0,,121,1,121,0,0,0,no_qi
+schaffner_2024_ssdp_math,1,cov_female,19148,3,19148,0,0,0,ok
+schaffner_2024_ssdp_science,1,cov_female,19148,3,19148,0,0,0,ok
 schalet_2016_bai,0,,179,1,179,0,0,0,no_qi
 schalet_2016_hrsa,0,,180,1,180,0,0,0,no_qi
 schalet_2016_hrsd,0,,180,1,180,0,0,0,no_qi
@@ -7843,6 +7869,7 @@ threat_isler_2024_exp2_picture_panas,0,,433,1,433,0,0,0,no_qi
 threat_isler_2024_exp3_cog_panas,0,,1777,1,1777,0,0,0,no_qi
 threat_isler_2024_exp4_cog_crt,0,,2689,1,2689,0,0,0,no_qi
 threat_isler_2024_exp4_cog_panas,0,,2689,1,2689,0,0,0,no_qi
+thurston_2021_mrt,3,cov_age|cov_education|cov_female,1387,286,1387,140,0.1009,0.2545,ok
 tian2026_digital_competence,4,cov_age|cov_education|cov_gender|cov_region,764,51,764,16,0.0209,0.0654,ok
 tian_2021_app_affective_engagement,3,cov_age_band|cov_education|cov_gender,303,24,303,7,0.0231,0.0759,ok
 tian_2021_app_behavioral_engagement,3,cov_age_band|cov_education|cov_gender,303,24,303,7,0.0231,0.0759,ok
@@ -8487,6 +8514,14 @@ wolters2026_symptom_concerns,3,cov_age|cov_education|cov_gender,83,45,83,22,0.26
 wolters2026_wi,3,cov_age|cov_education|cov_gender,83,45,83,22,0.2651,0.9398,ok
 wondie_2020_hads,2,cov_age|cov_sex,256,92,256,43,0.168,0.5391,ok
 wong_2016_npi_stroke,3,cov_age|cov_education_years|cov_sex,518,359,518,273,0.527,0.8745,ok
+wong_2025_embedded_figures,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_mental_rotation,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_perspective_taking,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_raven12,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_sbsod,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_spatial_scaling,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_vswm,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
+wong_2025_vwm,4,cov_age|cov_education|cov_language|cov_male,201,93,201,60,0.2985,0.5821,ok
 wong_2026_eca_disclosure,3,cov_age|cov_education|cov_gender,252,100,252,62,0.246,0.5198,ok
 woodall_2020_bfi44,1,cov_gender,271,3,271,0,0,0,ok
 wooly_hartman2022,1,cov_age,1561,72,1561,7,0.0045,0.0141,ok
