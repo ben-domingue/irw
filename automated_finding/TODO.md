@@ -1,5 +1,35 @@
 # IRW Automated Finding — TODO
 
+## Repos monthly discovery+triage 2026-11-25 (mode 3, scheduled, full sweep)
+
+Full write-up in `BATCH_LOG.md` (2026-11-25). Discovery + triage only; no `data/`
+scripts written this run.
+
+- [ ] **`scholars_portal` is fully blocked in this sandbox** (0/125 terms, every
+  query hit a proxy 403 against `borealisdata.ca`) — a network-policy fix, not a
+  pipeline bug. Worth asking whoever owns the sandbox's agent-proxy allowlist to add
+  it before the next scheduled run, or the source stays permanently dark here.
+- [ ] **`dryad` failed on 69/125 terms** this run (403 directly from `datadryad.org`,
+  not the proxy) — intermittent/rate-limit shaped. If it recurs next month, worth
+  checking whether a slower per-query pace or a different pagination avoids it.
+- [ ] **This run's 150-triage cap was entirely consumed by the pre-existing
+  backlog** — none of this month's 1,269 newly discovered candidates were triaged
+  yet; they're now folded into the rewritten `repo_triage_backlog.csv` (618 rows
+  still owed: 574 past the cap, 44 download_failed/error to retry). The next
+  scheduled or manual triage run should expect another backlog-only pass before any
+  of this month's new finds surface as `good`/`human_assistance`.
+- [ ] **14 leads in `leads/repos_leads_2026-11-25.csv`, all `unworked`**: 3 `good`
+  (financial-literacy/tax, generative-AI-acceptance, e-commerce/fashion deposits, all
+  Zenodo, cc-by), 9 `recoverable_format` (mostly "re-read keeping only the N columns
+  that share one small integer domain" — a parse/column-selection fix, not a content
+  problem; one is semicolon-delimited and was read with the comma reader; one needs
+  a per-scale split on `resp_scale_mixed`), 2 `worth_retrying` (one has text-coded
+  Likert responses needing a recode, one needs the id-column mapping confirmed).
+- [ ] One `aggregate_continuous` row (zenodo.23621693, "From Clicks to Constructs")
+  was left out of the leads file as a probable genuine composite rather than a
+  legitimate per-item continuous measure — worth a second look if that reading is
+  wrong, since it was a judgement call, not a hard rule.
+
 ## Repos sweep 2026-11-23 (mode 3, 15 new topics x 9 languages) — 128 tables uploaded to shards 9 and 2
 
 Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).

@@ -7,6 +7,106 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-25 — Repos monthly discovery+triage (mode 3, scheduled, full sweep)
+
+Scheduled monthly run, from a fresh checkout at `e1da180` (`Metadata pipeline: run for
+2026-11-25 (#3704)`). Sandbox started bare — `requests`/`pandas`/`openpyxl`/`pyreadstat`/
+`pyreadr`/`xlrd` all had to be installed before anything could run (note: `pip3`
+resolved to a stray Python 3.13 on this box, distinct from the `python`/`python3` 3.11
+the pipeline actually runs under — installed with `python -m pip install --user
+--break-system-packages ...` into the right interpreter after the mismatch surfaced).
+`reserved.py selftest`: ok. All 14 lead URLs/DOIs cleared `check-stdin`.
+
+**Discovery:** `irw_discover_monthly.py --mode full`, all 8 sources, 125 `TERM_LIST`
+terms (since last covered, mostly 2026-09-02). The first attempt was killed by the
+sandbox's 2-hour background cap at 120/125 terms (`differential item functioning` cut
+off mid-query); the remaining 5 terms (`differential item functioning`, `test
+equating`, `computerized adaptive testing`, `youth development`, `employability
+skills`) were finished in a second, short run with `--terms`. Both runs' output CSVs
+were merged and deduped on DOI: **1,888 raw hits → 1,269 unique candidates** (588
+cross-term duplicate DOIs dropped). All 125 terms logged to `search_terms_log.csv`.
+
+**Coverage warnings (read before trusting "0 new" from these sources next time):**
+- `scholars_portal`: **0/125 terms searched, all run** — every single query hit
+  `ProxyError('Unable to connect to proxy', ... 403 Forbidden (agent proxy: no rule or
+  network setting allows this host)')` against `borealisdata.ca`. This is a sandbox
+  network-policy block, not a transient source outage — the proxy itself refuses the
+  host. Watermarks did not advance for any term at this source; worth fixing the
+  proxy allowlist rather than re-running.
+- `dryad`: missed on 69/125 terms — `datadryad.org` itself returned `403 Client Error:
+  Forbidden` (not a proxy block), looked rate-limit/pagination shaped (later pages of
+  a query failed more than page 1). Intermittent, not total.
+- `datacite`: missed on 3/125 terms; `zenodo`: missed on 1/125 term — isolated,
+  not a pattern.
+
+**Triage:** `irw_batch_updated.py --limit 150 --retriage --resume --backlog
+repo_triage_backlog.csv`. `preflight_deps()` passed silently (deps already present
+after the install above). **The entire 150-row cap was consumed by the pre-existing
+backlog** (282 of 283 carried-over backlog rows were in scope; the 150 cap cut in
+before any of this run's 1,269 new candidates were reached) — so every `good` row
+below is from backlog triaged in an earlier run, not from this month's new
+discovery. `Backlog repo_triage_backlog.csv: 618 row(s) still owed (574 past the cap,
+44 to retry)` — the new candidates and the backlog overflow are now all sitting in
+the rewritten `repo_triage_backlog.csv` for the next run. 44 `download_failed`/`error`
+rows were left out of `repo_triage_seen_keys.csv` for retry; none hit the
+3-failed-attempts drop this run.
+
+Flag breakdown (150 triaged):
+
+| flag | n |
+|---|---|
+| good | 3 |
+| human_assistance | 16 |
+| no_usable_file | 78 |
+| download_failed | 43 |
+| not_item_response | 1 |
+| below_min_n | 2 |
+| license_restricted | 2 |
+| error | 1 |
+
+`download_failed` by source: figshare 32, datacite 4, dataverse 3, dryad 2, surf 1, osf 1.
+
+Step 2b retriage of the 16 `human_assistance` rows (`[step 2b] 16 refined flag(s)
+recorded in repo_triage_seen_keys.csv`):
+
+| refined_flag | n |
+|---|---|
+| recoverable_format | 9 |
+| worth_retrying | 2 |
+| human_review | 2 |
+| not_item_response | 2 |
+| aggregate_continuous | 1 |
+| conj | 0 |
+| wrong_file_selected | 0 |
+
+`[human_review] archived 2 row(s)` → `human_review/human_review_zenodo_2026-11-25.csv`.
+
+**`good` rows** (all from backlog, cc-by, Zenodo):
+- "Financial literacy and tax management among market traders in northern Peru:
+  underlying data" — https://zenodo.org/records/23455377 — cc-by — 218 participants,
+  36 items.
+- "Dataset for Factors Affecting The Acceptance of Generative AI in Improving the
+  Financial Literacy of Retail Investors" — https://zenodo.org/records/23313645 —
+  cc-by — 151 participants, 23 items.
+- "The Role of E-Commerce Information Systems in Supporting Sustainable Fashion
+  Consumption..." — https://zenodo.org/records/23879195 — cc-by — 250 participants,
+  42 items.
+
+No fit/licence judgement beyond what the scripts computed was made on these three.
+
+**Leads:** `leads/repos_leads_2026-11-25.csv` — 14 rows (3 `good`, 9
+`recoverable_format`, 2 `worth_retrying`; 0 `wrong_file_selected`), all `unworked`. The
+one `aggregate_continuous` row ("From Clicks to Constructs: Event-Stream Process
+Mining...", zenodo.23621693) was judged a genuine composite, not a legitimate
+per-item continuous measure — its own retriage reason reads "likely continuous
+measurement (VAS, RT, scale scores), not ordinal item responses," which leans toward
+drop rather than confirmed-legitimate — so it was left out of the leads file rather
+than included on a coin flip; revisit if that reading turns out wrong.
+
+Scope: discovery + triage only, per this run's instructions — no `data/` script
+written, no upload, no Google Sheet edit, no PR merge, no follow-up check-in
+scheduled.
+
 ## 2026-11-10 hour-1110 lane C (repos leads 2026-11-10b + Step 2c archive) — 64 tables staged, 5 held
 
 One-hour acquisition run, lane `hour-1110-c`, worktree `~/irw-wt/hour-1110-c`. Hand-off:
