@@ -36,3 +36,4 @@ makowski_2024_illusion,curated:psychophysics #3686,"Illusion Game (Ebbinghaus, M
 chladkova_2021_mcgurk,curated:psychophysics #3686,McGurk and congruent audiovisual syllables; item = stimulus type x video
 makowski_2026_illusion_pcs,curated:psychophysics #3686,"Illusion Game (Ebbinghaus, Mueller-Lyer, Vertical-Horizontal), online; item = illusion x strength x difference"
 gu_2025_det,curated:psychophysics #3686,orientation discrimination vs reference after a delay; item = timing x reference offset
+barretto_garcia_2023_numerosity,curated:psychophysics #3686,numerosity comparison of sequential coin clouds; item = first x second numerosity
