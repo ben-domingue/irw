@@ -1113,3 +1113,4 @@ zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 sasaki_2019_contrast_online,core,data/sasaki_2019_contrast/sasaki_2019_contrast.R,2026-11-25
 sasaki_2019_contrast_online_rep,core,data/sasaki_2019_contrast/sasaki_2019_contrast.R,2026-11-25
+makowski_2024_illusion,core,data/makowski_2024_illusion/makowski_2024_illusion.R,2026-11-25
