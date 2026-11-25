@@ -1,0 +1,6 @@
+table,verdict,note
+WMI_Rot_Han,REJECT,"rotation span: a working-memory task in which the rotation judgement is the processing component, not the measured ability"
+tolomeo_2026_icar16,REJECT,ICAR16 mixes four item types; only its 3D-rotation items are mental rotation
+robison_2026_retesting_paper_folding,REJECT,paper folding: spatial visualisation without rotation
+fernandez_mendez_2026_section_test,REJECT,cross-sections: spatial visualisation without rotation
+datta_2021_spatial_visualization,REJECT,general spatial visualisation test; items not identified as rotation
