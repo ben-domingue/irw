@@ -30,3 +30,5 @@ rouault_2019_dots,curated:confidence_db #3686,dot-number discrimination; item = 
 sadeghi_2017_contrast,curated:confidence_db #3686,"two-interval contrast detection, staircased; item = interval x contrast"
 siedlecka_2021_dots,curated:confidence_db #3686,go/no-go dot comparison; item = designated side x answer x difficulty
 wierzchon_2019_gabor,curated:confidence_db #3686,masked Gabor orientation; item = class x exposure
+sasaki_2019_contrast_online,curated:psychophysics #3686,"Gabor orientation 2AFC, constant stimuli; item = tilt x spatial frequency x contrast"
+sasaki_2019_contrast_online_rep,curated:psychophysics #3686,"Gabor orientation 2AFC, constant stimuli, 10 repeats; item = tilt x spatial frequency x contrast"
