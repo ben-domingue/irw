@@ -47,3 +47,4 @@ ganis_kievit_2015_mr,curated:psychophysics #3686,"chronometric mental rotation, 
 liu_lourenco_2026_mr,curated:psychophysics #3686,chronometric mental rotation under speed or accuracy instructions; item = same/mirror x angle
 dd_rotation,curated:psychophysics #3686,chronometric mental rotation (Borst et al. 2011); angle in itemcov_angle (#3718)
 mentalrotation_wolf_2024,curated:psychophysics #3686,3D-printed Shepard-Metzler shapes; angle in itemcov_angle
+ebert_2024_letter_mr,curated:psychophysics #3686,"chronometric letter rotation, alone or under visual WM load; item = letter x angle"
