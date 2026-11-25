@@ -7,6 +7,42 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-25b — Repos backlog drain (local, uncapped): 618 rows triaged, 143 leads
+
+The 2026-11-25 monthly repos routine (PR #3721) spent its whole `--limit 150` on backlog and left
+618 rows owed in `repo_triage_backlog.csv`. Drained locally, no cap, in worktree
+`~/irw-wt/repos-backlog-2026-11-25`: `irw_batch_updated.py <empty candidates> --backlog
+repo_triage_backlog.csv --retriage`. Same reader set as the routine (preflight passed).
+
+| flag | n |
+|---|---|
+| no_usable_file | 294 |
+| human_assistance | 180 |
+| download_failed | 58 |
+| below_min_n | 34 |
+| not_item_response | 20 |
+| good | 15 |
+| error | 7 |
+| pii_suspected | 7 |
+| license_restricted | 3 |
+
+Step 2b over the 180: 86 recoverable_format, 32 worth_retrying, 29 human_review (archived to
+`human_review/human_review_figshare_2026-11-25.csv`), 23 not_item_response, 10 aggregate_continuous,
+0 conj. 180 refined flags written to `repo_triage_seen_keys.csv`.
+
+download_failed by source: figshare 30, datacite 9, dataverse 8, surf 5, dryad 4, zenodo 2.
+Backlog now 54 rows (all retries, 0 past a cap); 11 dropped after 3 failed attempts
+(dryad r4xgxd2wf, 3r2280h01, hx3ffbgvs; figshare 34681230, 34020886, 34020871, 34020868,
+33972121, journal.pmen.0000697.s001; surf rircu4).
+
+**Leads:** 143 rows to `leads/repos_backlog_leads_2026-11-25.csv`, all `unworked`: 15 good,
+32 worth_retrying, 86 recoverable_format, 10 aggregate_continuous (marked unverified -- may be
+composites). Largest good rows: zenodo 24239172 (OHQ-SF, 9 Indonesian communities, N=1,346),
+zenodo 24531118 (disintegration / daily rumination, N=916, 90 cols), figshare 34913799 (AI and
+supply chains, N=550), zenodo 24463648 (environmental risk perception, Igdir, N=532), dataverse
+O4E9YN (AI reliance, CC0, N=502). `good` does not test the N floor, composites, PII beyond the
+screen, or licence beyond the triage string; one good row (zenodo 23992649) has licence `unknown`.
+
 ## 2026-11-25 — Repos monthly discovery+triage (mode 3, scheduled, full sweep)
 
 Scheduled monthly run, from a fresh checkout at `e1da180` (`Metadata pipeline: run for
