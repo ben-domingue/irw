@@ -6660,3 +6660,6 @@ makowski_2026_illusion_pcs,core,https://github.com/RealityBending/IllusionGamePh
 gu_2025_det,core,https://s3.amazonaws.com/openneuro.org/ds005381/task-DET_events.json,2026-11-25
 barretto_garcia_2023_numerosity,core,https://openneuro.org/datasets/ds004259/versions/1.0.0,2026-11-25
 thurston_2021_mrt,core,https://borealisdata.ca/api/access/datafile/138408,2026-11-25
+bauer_2021_mr_pupil,core,https://doi.org/10.5281/zenodo.4081753,2026-11-25
+ebert_2024_animal_mr,core,https://doi.org/10.5281/zenodo.14275869,2026-11-25
+jost_2023_mr_visualization,core,https://github.com/LeonardoJost/InternalExternalVisualizationOfRotation,2026-11-25
