@@ -29,9 +29,24 @@
 
 import hashlib
 import os
+import sys
 import zipfile
 
 import pandas as pd
+
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, REPO_ROOT)
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def qc(df, name):
+    """Refuse to write a table that fails any validator check; print the warnings."""
+    checks = run_qc(df)
+    fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+    assert not fails, (name, fails)
+    for c in checks:
+        if c.status == "warn":
+            print(f"  [qc warn] {name} {c.name}: {c.detail[:160]}")
 
 PKG = os.environ.get(
     "IRW_NATEXAMS_DIR",
@@ -78,6 +93,7 @@ def convert():
     }).sort_values(["id", "item"])
     os.makedirs(OUT_DIR, exist_ok=True)
     name = "cabrerapommiez_2023_lecdis"
+    qc(out, name)
     out.to_csv(os.path.join(OUT_DIR, name + ".csv"), index=False)
     print(name, len(out), "rows", out.id.nunique(), "persons", out.item.nunique(), "items")
 
