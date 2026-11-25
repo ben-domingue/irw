@@ -1123,3 +1123,11 @@ bauer_2021_mr_pupil,core,data/jansen_jost_chronometric_mr/jansen_jost_chronometr
 ebert_2024_animal_mr,core,data/jansen_jost_chronometric_mr/jansen_jost_chronometric_mr.R,2026-11-25
 jost_2023_mr_visualization,core,data/jansen_jost_chronometric_mr/jansen_jost_chronometric_mr.R,2026-11-25
 pillai_2026_auditory,core,data/pillai_2026_auditory/pillai_2026_auditory.R,2026-11-25
+wong_2025_mental_rotation,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_embedded_figures,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_spatial_scaling,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_perspective_taking,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_vswm,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_vwm,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_raven12,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
+wong_2025_sbsod,core,data/wong_2025_spatial/wong_2025_spatial.R,2026-11-25
