@@ -1152,3 +1152,5 @@ munns_2026_flags,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
 munns_2026_vk_mrt,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
 munns_2026_psvtr,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
 munns_2026_mrt_battery,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
+makowski_2025_illusion_retest,core,data/makowski_2025_illusion_retest/makowski_2025_illusion_retest.R,2026-11-25
+makowski_2025_illusion_perceptual,core,data/makowski_2025_illusion_retest/makowski_2025_illusion_retest.R,2026-11-25
