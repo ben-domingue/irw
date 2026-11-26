@@ -1917,6 +1917,10 @@ grace_2026_enjoyment,core,none,2026-11-23
 grace_2026_entertainment,core,none,2026-11-23
 grace_2026_impulse_buying,core,none,2026-11-23
 grace_2026_interactivity,core,none,2026-11-23
+gracia_2026_aatq,core,none,2026-11-25
+gracia_2026_bis_bas,core,none,2026-11-25
+gracia_2026_brief_self_control,core,none,2026-11-25
+gracia_2026_need_for_cognition,core,none,2026-11-25
 gracio_michelon_2026_ambiguity_reaction,core,none,2026-11-10
 gracio_michelon_2026_decontextualization,core,none,2026-11-10
 gracio_michelon_2026_emotional_reaction,core,none,2026-11-10
@@ -2105,6 +2109,7 @@ harlianto_2025_cyberloafing,core,none,2026-10-07
 harlianto_2025_job_stress,core,none,2026-10-07
 harris_2023_neighbor_cooperation_mw,conj,none,2026-10-08
 harris_2023_neighbor_cooperation_zm,conj,none,2026-10-08
+harrison_2014_correlation_jnd,core,https://github.com/TuftsVALT/ranking-correlation/blob/master/data/README.md,2026-11-25
 harsgor_2023_covid_aid_palestinians,conj,https://dataverse.harvard.edu/api/access/datafile/7276978,2026-10-08
 hart_2021_covid_concern,core,none,2026-11-10
 hart_2021_trump_support,core,none,2026-11-10

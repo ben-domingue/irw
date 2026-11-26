@@ -1,14 +1,13 @@
 # IRW Automated Finding — TODO
 
-## Repos leads 2026-11-25c — 399 tables (85 deposits) staged, awaiting upload
+## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) staged, awaiting upload
 
 Full write-up in `BATCH_LOG.md` (2026-11-25c). Branch `data/repos-leads-2026-11-25` (stacked on PRs #3721/#3726 -- rebase onto
 main after they land; squash merges mean a stacked PR never reaches main).
 
-- [ ] 399 response tables in `automated_finding/irw_output/` need uploading (shard 10 has room: 402 used of 1000); no item text tables.
-- [ ] Ben: b108 (ego-depletion, 768 students) skipped only for a column of research-assistant first names -- drop the column and ship?
-- [ ] Ben: b45 (ADHD/entrepreneurship, CC BY on figshare vs 'controlled sharing' in its dictionary) and b14 (CC0 vs README 'must not
-  redistribute') -- ship or ask the authors?
+- [ ] 403 response tables in `automated_finding/irw_output/` need uploading (shard 10 has room: 402 used of 1000); no item text tables.
+- [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
+  code-named construct tables ship as they are.
 - [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).
 - [ ] Covariate labels: after these tables are published and the weekly pipeline runs, `build.py`, `audit_gaps.py --write`, PR.
 

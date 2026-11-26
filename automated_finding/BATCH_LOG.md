@@ -58,6 +58,12 @@ sucipto_2026, aini_2026, prichard_2026.
 **Covariate labels:** harvested for the 24 .sav/.dta scripts (`harvest.py --commit HEAD`); `build.py` labels them once the tables
 are in published metadata.csv.
 
+**Rulings (ben-domingue 2026-11-25):** (1) b108 ships -- a staff/RA name column is not respondent PII; the 'Research Assistant'
+column is dropped in any form. Built as gracia_2026_* (Brief Self-Control 13, BIS/BAS 20, AATQ 12, Need for Cognition 18; 768
+students, 46,618 responses), so the batch is now **86 deposits, 403 tables, 2,170,946 responses** (shipped 86, rejected 60,
+blocked_licence 5, skipped_pii 1, unworked 5). (2) b14 and b45 HELD: stay blocked_licence, noted 'HELD per ben-domingue 2026-11-25' in
+the leads CSV and license_blocked_candidates.csv. (3) Code-named construct tables ship as they are.
+
 Staged: 399 dictionary_auto + codebook_at_ingest (+ script_at_ingest where the script name differs) rows, 399 tags/tags_auto.csv
 rows, 399 itemtext_provenance rows, 5 license_blocked_candidates rows. Build tooling (spec files, generator) lives outside the repo at
 `~/irw-wt/repos-leads-2026-11-25-tools`; the data/ scripts are self-contained.

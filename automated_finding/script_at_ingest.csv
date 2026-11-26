@@ -187,13 +187,13 @@ beege_2026_learning_test,core,data/beege_2026_subtitles.py,2026-11-25
 beege_2026_listening_comprehension,core,data/beege_2026_subtitles.py,2026-11-25
 beege_2026_prior_knowledge,core,data/beege_2026_subtitles.py,2026-11-25
 beenen_2021_mips11,cov,data/covariance/pmc_article_tables_am.py,2026-11-19
+bekova_2026_mbi,core,data/bekova_2026_parental_burnout.py,2026-11-25
+bekova_2026_pss10,core,data/bekova_2026_parental_burnout.py,2026-11-25
 bellettini_2022_bebras_giga,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_kilo,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_mega,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_peta,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
 bellettini_2022_bebras_tera,core,data/national_exams_3498/bellettini_2022_bebras.py,2026-11-25
-bekova_2026_mbi,core,data/bekova_2026_parental_burnout.py,2026-11-25
-bekova_2026_pss10,core,data/bekova_2026_parental_burnout.py,2026-11-25
 berki_2026_sportcommit7,cov,data/covariance/osf_berki2026_sportcommit.py,2026-11-17
 berlian_2026_brand_trust,core,data/berlian_2026_esg_unilever.py,2026-11-21
 berlian_2026_esg,core,data/berlian_2026_esg_unilever.py,2026-11-21
@@ -492,6 +492,10 @@ grace_2026_enjoyment,core,data/grace_2026_live_commerce.py,2026-11-23
 grace_2026_entertainment,core,data/grace_2026_live_commerce.py,2026-11-23
 grace_2026_impulse_buying,core,data/grace_2026_live_commerce.py,2026-11-23
 grace_2026_interactivity,core,data/grace_2026_live_commerce.py,2026-11-23
+gracia_2026_aatq,core,data/gracia_2026_ego_depletion.py,2026-11-25
+gracia_2026_bis_bas,core,data/gracia_2026_ego_depletion.py,2026-11-25
+gracia_2026_brief_self_control,core,data/gracia_2026_ego_depletion.py,2026-11-25
+gracia_2026_need_for_cognition,core,data/gracia_2026_ego_depletion.py,2026-11-25
 green_2026_caregiverwellness9,cov,data/covariance/pmc_article_tables.py,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
@@ -538,6 +542,7 @@ hangui_2026_skepticism,core,data/hangui_2026_organic_message.py,2026-11-23
 hardee_2026_drinkmotives12,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 harman_1967_holzinger9,cov,data/covariance/batch_rpackages3.R,2026-11-17
 harman_1967_political8,cov,data/covariance/batch_rpackages3.R,2026-11-17
+harrison_2014_correlation_jnd,core,data/harrison_2014_correlation_jnd/harrison_2014_correlation_jnd.R,2026-11-25
 he_2026_polarization13,cov,data/covariance/pmc_article_tables_am.py,2026-11-19
 he_2026_tam22,cov,data/covariance/mendeley_he2026_tam.py,2026-11-17
 he_2026_utaut17,cov,data/covariance/zenodo_he2026_utaut.py,2026-11-17
