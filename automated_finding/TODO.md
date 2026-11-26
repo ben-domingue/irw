@@ -5,7 +5,16 @@
 Full write-up in `BATCH_LOG.md` (2026-11-25c). Branch `data/repos-leads-2026-11-25` (stacked on PRs #3721/#3726 -- rebase onto
 main after they land; squash merges mean a stacked PR never reaches main).
 
-- [ ] 403 response tables in `automated_finding/irw_output/` need uploading (shard 10 has room: 402 used of 1000); no item text tables.
+- [ ] 403 response tables in `automated_finding/irw_output/` (shard 10 has room: 402 used of 1000) + 81 item text tables in
+  `automated_finding/itemtext_output/` (`irw_text`) need uploading -- response tables first. Leave `held_2026-11-25/` behind
+  (27 held, provenance.csv marker in place). 15 of the 81 (tothe_2021 x13, upoma_2026 x2) join tables that are already live.
+- [ ] Issues-page entries owed (`itemtext_issues.qmd`, datapages/irw), one per table, the public_note text is in each
+  provenance row: IRW-translated English -- herrera_2026 x5, sucipto_2026 x7, aini_2026 x5, minozzo_2026 x13 (prompts, and the
+  barrier items); language/version notes -- croitoru_2026 x5 (Romanian administered, English shipped), ahmad_2026 x5 (72 read
+  French), charzynska_2026_iwas5 (85 cultures, English master). check_provenance.R does not read
+  automated_finding/itemtext_provenance.csv, so nothing will flag these.
+- [ ] Ben: tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' -- one common sentence that matches the SWLS row;
+  its stem is blank. Restore it, or leave blank?
 - [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
   code-named construct tables ship as they are.
 - [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).

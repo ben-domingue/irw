@@ -68,6 +68,36 @@ Staged: 399 dictionary_auto + codebook_at_ingest (+ script_at_ingest where the s
 rows, 399 itemtext_provenance rows, 5 license_blocked_candidates rows. Build tooling (spec files, generator) lives outside the repo at
 `~/irw-wt/repos-leads-2026-11-25-tools`; the data/ scripts are self-contained.
 
+**Item text, built 2026-11-25c (Step 3.5, after the response tables were final):** 81 `__items.csv` in `itemtext_output/`
+(2,518 rows), 27 built and parked in `itemtext_output/held_2026-11-25/` (list: `itemtext_hold_2026-11-25.csv`), 17 held without
+building, prichard_2026 skipped. Builder `itemtext_verification/make_itemtext_repos_2026-11-25c.py`, records
+`records_repos_2026-11-25c.py` + `records_spec_2026_11_25c.py`. Every shipped table ties text to code by name (the codebook /
+labels / header carries the IRW code), except aini_2026 (positional codes, re-derived from the script's own slicing) -- so all 81
+are `data_labels` NOT_NEEDED rows in `itemtext/mapping_verification.csv`. Gates: `validate_items.R` PASS on all 81 (`--resp-csv`
+for the staged ones, `--table-sets` for the live tothe_2021 x13 and upoma_2026 x2); `audit_batch.R` PASS except anon_2026_pni
+(row-count WARN: the CFA sample answered 24 of 34 PNI items, by design) and tothe_2021_other_satisfaction (blank b4_8, below);
+`irw-validate` clean after the two rights hits were acted on; `lint_verification.R` and `check_provenance.R` add nothing new.
+- **Shipped (81):** herrera_2026 x5 (Spanish + IRW English), croitoru_2026 x5 (authors' English, Romanian administration,
+  fallback), ahmad_2026 x5 (author-written; language 'English; French'), sengarie_2026 x4, efawati_2026 x3, lee_2026 x7,
+  umoru_2026 social_capital + health_stressors, charzynska_2026_iwas5 (the depositors' own IWAS), wren_2026_ace (register ACE =
+  ship), anon_2026_pni + _impressions, ye_2026 x6 (Chinese + authors' English), sucipto_2026 x7 and aini_2026 x5 (Indonesian + IRW
+  English), tothe_2021 x13, minozzo_2026 x13 (Portuguese + authors' English; IRW English for 7 barrier items and the prompts),
+  upoma_2026 ai_literacy_ethics + ai_stressors (the README's study-specific blocks). Stems searched verbatim for every
+  study-authored deposit; none matched a published scale.
+- **Held, built (27):** lee mastery (Pearlin) + self_esteem (irw-validate matched C01 to the CSES hold row), umoru
+  life_satisfaction (SWLS, block), charzynska uwes3 (block) + mwms6, hung_2026 x6 (MC-SDS, RCBS-, BSMAS-style, comparison and
+  avoidance items), wren ctq_sf + ghsq x3 + cage_aid, galindodominguez_2026 x6 (SRL-SRS in Basque), gomezmari_2026 (ASSET in
+  Spanish), torun_2026 x4 (Turkish adaptations, incl. BIS-11).
+- **Held, not built (17):** upoma_2026's ten TAM/AAIUS/GADS/GAIES/SDLRS/PSS-derived tables; vilkaitevaitone_2026 x7 (adapted from
+  the cited third-party scales). Wording locations are in their provenance rows.
+- **Skipped:** prichard_2026 -- stems survive only as the column headers with spaces removed; the full wording needs the
+  instrument, not in the deposit.
+- **One stem blanked:** tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' matches the SWLS row word for word; its
+  item_text is blank pending a ruling (7 of 8 items worded).
+- **Register rows (13):** hold -- Pearlin Mastery, MWMS, MC-SDS, up/down social comparison, GHSQ, CAGE-AID (terms conflict),
+  ASSET, SRL-SRS, the Torun battery, the Upoma adapted battery, the Vilkaite-Vaitone eWOM battery; ship -- CRoSS (CC BY 4.0 first
+  publication), IWAS (depositor-originated).
+
 ## 2026-11-25b — Repos backlog drain (local, uncapped): 618 rows triaged, 143 leads
 
 The 2026-11-25 monthly repos routine (PR #3721) spent its whole `--limit 150` on backlog and left
