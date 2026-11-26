@@ -99,6 +99,15 @@ for the staged ones, `--table-sets` for the live tothe_2021 x13 and upoma_2026 x
   ASSET, SRL-SRS, the Torun battery, the Upoma adapted battery, the Vilkaite-Vaitone eWOM battery; ship -- CRoSS (CC BY 4.0 first
   publication), IWAS (depositor-originated).
 
+**Uploaded 2026-11-25** by Claude (Ben's go-ahead in-session). The 403 response tables went to the item_response_warehouse_10
+draft (shard at 852 after). The first `red_up` run was killed for low memory at 221/403. The restart was refused for the
+1000-table cap, because red_up's planning listed the release only, so the 220 tables already in the draft counted as new
+(fixed in #3746). Recovered by uploading only the 183 missing tables from `runs/shard10_remainder_2026-11-25/` (183/183
+verified). 219 of the first 220 matched their files by count(*); ding_2026_who5 had been created empty, was deleted and was
+re-uploaded by Ben; mao_2026_ext (half-written) was deleted by Ben and re-sent with the 183. The 81 item text tables went to the
+irw_text_4 draft from `runs/itemtext_upload_2026-11-25/`, because red_up refuses a tree holding the held/ marker (81/81
+verified, `uploaded` stamped in itemtext_provenance.csv). Issues-page entries: datapages/irw#462 (41). Ben publishes.
+
 ## 2026-11-25b — Repos backlog drain (local, uncapped): 618 rows triaged, 143 leads
 
 The 2026-11-25 monthly repos routine (PR #3721) spent its whole `--limit 150` on backlog and left

@@ -1,14 +1,14 @@
 # IRW Automated Finding — TODO
 
-## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) staged, awaiting upload
+## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) uploaded to shard 10 + 81 item text tables
 
-Full write-up in `BATCH_LOG.md` (2026-11-25c). Branch `data/repos-leads-2026-11-25` (stacked on PRs #3721/#3726 -- rebase onto
-main after they land; squash merges mean a stacked PR never reaches main).
+Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-leads-2026-11-25`, rebased onto main).
 
-- [ ] 403 response tables in `automated_finding/irw_output/` (shard 10 has room: 402 used of 1000) + 81 item text tables in
-  `automated_finding/itemtext_output/` (`irw_text`) need uploading -- response tables first. Leave `held_2026-11-25/` behind
-  (27 held, provenance.csv marker in place). 15 of the 81 (tothe_2021 x13, upoma_2026 x2) join tables that are already live.
-- [ ] Issues-page entries owed (`itemtext_issues.qmd`, datapages/irw), one per table, the public_note text is in each
+- [x] **UPLOADED 2026-11-25 by Claude (Ben's go-ahead in-session):** 403 response tables to the item_response_warehouse_10
+  draft (all row-count verified; ding_2026_who5 re-uploaded by Ben after an interrupted run left it empty) and 81 item text
+  tables to the irw_text_4 draft (81/81 verified; the 27 in `held_2026-11-25/` left behind). Ben publishes shard 10, then irw_text_4.
+- [ ] Merge #3729 once both drafts are published.
+- [x] Issues-page entries: datapages/irw#462 merged 2026-11-25 (41 entries). Were owed (`itemtext_issues.qmd`), one per table, the public_note text is in each
   provenance row: IRW-translated English -- herrera_2026 x5, sucipto_2026 x7, aini_2026 x5, minozzo_2026 x13 (prompts, and the
   barrier items); language/version notes -- croitoru_2026 x5 (Romanian administered, English shipped), ahmad_2026 x5 (72 read
   French), charzynska_2026_iwas5 (85 cultures, English master). check_provenance.R does not read
