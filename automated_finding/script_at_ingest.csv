@@ -1147,3 +1147,7 @@ zieff_2023_snapiv18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 harrison_2014_correlation_jnd,core,data/harrison_2014_correlation_jnd/harrison_2014_correlation_jnd.R,2026-11-25
+munns_2026_flags,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
+munns_2026_vk_mrt,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
+munns_2026_psvtr,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
+munns_2026_mrt_battery,core,data/munns_2026_mrt/munns_2026_mrt.R,2026-11-25
