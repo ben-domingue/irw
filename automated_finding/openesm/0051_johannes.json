@@ -208,7 +208,8 @@
      "construct": "happiness, positive affect, affect",
      "source": ""
     }
-   ]
+   ],
+   "dict_note": "One participant (id 66 in openESM's copy) is excluded: a technical fault sent them 69 prompts, 11 to 16 a day and often under the study's 45-minute minimum spacing, and the authors judged those data untrustworthy. The participant the paper excluded for answering too few surveys is kept."
   }
  ],
  "candidates": [],
@@ -250,7 +251,7 @@
  },
  "notes": [
   "date is when the prompt was sent (scheduled_time), not when it was answered: the data hold no answer time stamp. time_prompt equals scheduled_time, and time_survey is only the date (local midnight). Prompt time plus reactibility_survey would give an opening time, but 17 of those delays are negative, so it is not used.",
-  "Exclusions in the paper, kept here: IRW ships the deposited data, not the analysis sample. The paper recruited 111 and kept the 77 with complete logging and survey data, which are openESM's 77; it then analysed 75. Person 51 answered 6 surveys, under the preregistered minimum of 8 (20% of 40). Person 66 received 69 surveys (11 to 16 a day) because of technical problems, and the authors excluded the data as untrustworthy; all 27 prompts in the data that come less than 45 minutes after the previous one (the study's minimum spacing) are person 66's.",
+  "Person 66 is dropped (EXCLUDE_IDS); person 51 is kept. The paper recruited 111 and kept the 77 with complete logging and survey data, which are openESM's 77; it then analysed 75. Person 66 received 69 surveys (11 to 16 a day) because of technical problems, and the authors excluded the data as untrustworthy; all 27 prompts in the data that come less than 45 minutes after the previous one (the study's minimum spacing) are person 66's. That is a broken protocol, not an analysis choice, so IRW drops them too (ruled on #3674). Person 51 answered 6 surveys, under the preregistered minimum of 8 (20% of 40); that is an analysis choice, and IRW ships the deposited data, so person 51 stays.",
   "Responses are as given: discontent, without_energy and tense run towards the negative pole and are not reversed. The paper averages all seven into one affective well-being index.",
   "Item text: none for this PR (#3421). For whoever does item text later: the study ran in English (participants had to be proficient in English), so openESM's wording is the original, matching the paper and the deposit's codebook.",
   "For the openESM report (#1698): 0051_johannes's counter (and beep within a day) count backwards in time, exactly reversing the scheduled_time order, and its day column is the weekday (1 = Monday), not the study day."
@@ -296,5 +297,8 @@
    "what": "`reference` is drafted from openESM's BibTeX. Check it against the paper's DOI: the year (online vs print), page range and author list are where it goes wrong.",
    "resolution": "Title added from Crossref (10.1080/15213269.2020.1768122): Media Psychology 24(5), 581-605, 2021 issue (online 2020), nine authors."
   }
+ ],
+ "exclude_ids": [
+  "66"
  ]
 }

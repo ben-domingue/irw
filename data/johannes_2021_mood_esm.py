@@ -31,14 +31,16 @@ Coding notes
   scheduled_time, and time_survey is only the date (local midnight). Prompt
   time plus reactibility_survey would give an opening time, but 17 of those
   delays are negative, so it is not used.
-* Exclusions in the paper, kept here: IRW ships the deposited data, not the
-  analysis sample. The paper recruited 111 and kept the 77 with complete
-  logging and survey data, which are openESM's 77; it then analysed 75.
-  Person 51 answered 6 surveys, under the preregistered minimum of 8 (20% of
-  40). Person 66 received 69 surveys (11 to 16 a day) because of technical
-  problems, and the authors excluded the data as untrustworthy; all 27
-  prompts in the data that come less than 45 minutes after the previous one
-  (the study's minimum spacing) are person 66's.
+* Person 66 is dropped (EXCLUDE_IDS); person 51 is kept. The paper recruited
+  111 and kept the 77 with complete logging and survey data, which are
+  openESM's 77; it then analysed 75. Person 66 received 69 surveys (11 to 16
+  a day) because of technical problems, and the authors excluded the data as
+  untrustworthy; all 27 prompts in the data that come less than 45 minutes
+  after the previous one (the study's minimum spacing) are person 66's. That
+  is a broken protocol, not an analysis choice, so IRW drops them too (ruled
+  on #3674). Person 51 answered 6 surveys, under the preregistered minimum
+  of 8 (20% of 40); that is an analysis choice, and IRW ships the deposited
+  data, so person 51 stays.
 * Responses are as given: discontent, without_energy and tense run towards
   the negative pole and are not reversed. The paper averages all seven into
   one affective well-being index.
@@ -134,9 +136,15 @@ ITEMDIR = os.path.join(AF, "itemtext_output")
 CACHE = Path.home() / ".cache" / "irw" / "openesm"
 HEADERS = {"User-Agent": "IRW-openESM-ingest/1.0"}
 
+# Sample floor (datastandard.md, #3421): 100 people, or for ESM tables 30
+# people and a median of 20 responses per person per item, pooled over the
+# table's person x item grid (zero where a person skipped an item).
+MIN_IDS, ESM_MIN_IDS, ESM_MIN_MEDIAN = 100, 30, 20
+
 REC = 22953104
 FILENAME = '0051_johannes_ts.tsv'
 N_ROWS, N_IDS = 2828, 77
+EXCLUDE_IDS = ['66']        # dropped; why is in the coding notes
 ORDER = {'by': 'timestamp', 'column': 'scheduled_time'}
 DATE = {'column': 'scheduled_time',
  'tz': 'UTC',
@@ -298,6 +306,10 @@ def main():
     os.makedirs(ITEMDIR, exist_ok=True)
     df = load()
     assert len(df) == N_ROWS and df["id"].nunique() == N_IDS, df.shape
+    if EXCLUDE_IDS:
+        gone = df["id"].astype(str).isin(EXCLUDE_IDS)
+        assert df.loc[gone, "id"].nunique() == len(EXCLUDE_IDS), "an EXCLUDE_IDS id is absent"
+        df = df.loc[~gone].copy()
     df = add_wave_date(df)
     keep = ["id", "wave"] + (["date"] if DATE else [])
     for table in TABLES:
@@ -320,6 +332,11 @@ def main():
         assert not long.duplicated(["id", "item", "wave"]).any()
         if DATE:
             assert (long.groupby("id")["date"].diff().dropna() >= 0).all()
+        counts = long.groupby(["id", "item"]).size().unstack(fill_value=0)
+        n, med = len(counts), counts.stack().median()
+        assert n >= MIN_IDS or (n >= ESM_MIN_IDS and med >= ESM_MIN_MEDIAN), (
+            table["name"], f"{n} people, median {med:g} responses per person "
+            "per item: under the sample floor")
         bad = [c for c in run_qc(long) if c.status == "fail"]
         assert not bad, (table["name"], [(c.name, c.detail) for c in bad])
         path = os.path.join(OUTDIR, f"{table['name']}.csv")
