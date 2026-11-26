@@ -72,8 +72,9 @@ Rules (ruled on #1775, 2026-10-01):
   no more than the number of source rows carrying it. A 1/2 swap or a 0/1
   recode fails this check and the pair is left out.
   `metadata/covariate_labels/coverage.csv` records every pair considered:
-  whether it was included, withheld or excluded, why, and which shipped codes
-  have no label.
+  whether it was included, withheld or excluded (or `text`: the script already
+  ships label strings, nothing to label), why, and which shipped codes have no
+  label.
 
 **Regenerating** (manual; the scripts download from OSF, Zenodo and similar
 sources, and a few read local files, so this cannot run in CI):
