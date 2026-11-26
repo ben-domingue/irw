@@ -1,0 +1,248 @@
+{
+ "dataset_id": "0013_hoebeke",
+ "openesm": {
+  "first_author": "Hoebeke",
+  "year": 2022,
+  "licence": "CC-BY 4.0",
+  "zenodo_concept_doi": "10.5281/zenodo.17347619",
+  "zenodo_record": 22952951,
+  "zenodo_version_doi": "10.5281/zenodo.22952951",
+  "filename": "0013_hoebeke_ts.tsv",
+  "codebook_url": "https://zenodo.org/records/22952951/files/0013_hoebeke_codebook.pdf",
+  "link_to_data": "https://osf.io/dngyk/",
+  "paper_doi": "https://doi.org/10.36131/cnfioritieditore20220504",
+  "sampling_scheme": "4x/day time-contingent equidistant intervals",
+  "participants": "community sample",
+  "n_participants": 40,
+  "n_days": "14",
+  "n_beeps_per_day": "4"
+ },
+ "original_licence": {
+  "value": "CC BY 4.0",
+  "how": "OSF API, node dngyk"
+ },
+ "licence": "CC BY 4.0",
+ "reference": "Hoebeke, Y., Blanchard, M. A., Contreras, A., & Heeren, A. (2022). An experience sampling measure of the key features of rumination. Clinical Neuropsychiatry, 19(5), 288-297.",
+ "script": "hoebeke_2022_rumination_esm",
+ "input": {
+  "n_rows": 2102,
+  "n_ids": 40
+ },
+ "order": {
+  "by": "timestamp",
+  "column": "created"
+ },
+ "date": {
+  "column": "created",
+  "tz": "Europe/Brussels",
+  "tz_evidence": "The deposit's formr survey (FE_RUM_survey v2_EN.csv, osf.io/dngyk) sets timezone \"CET\" and prompts at 09:00, 13:00, 17:00 and 21:00; the stamps as written cluster at exactly 9, 13, 17 and 21h, and do not shift at the 2021-03-28 DST change, as true UTC stamps would. So the Z stamps are Belgian local time.",
+  "window": [
+   "2021-02-26",
+   "2021-06-09"
+  ]
+ },
+ "tables": [
+  {
+   "name": "hoebeke_2022_rumination",
+   "instrument": "ESM rumination items (Hoebeke et al., 2022)",
+   "description": "Experience sampling, 4 prompts a day (9am, 1pm, 5pm, 9pm) for 14 days, community sample of 40 French-speaking adults: five items on key features of rumination since the previous prompt (perseverance, negativity, self-criticism, brooding, replaying). 0-100 sliders.",
+   "items": [
+    {
+     "column": "perseverance",
+     "item": "perseverance",
+     "stem": "How much time did you spend thinking of one or more emotional experiences?",
+     "anchors": {
+      "0": "None",
+      "100": "All the time"
+     },
+     "scale": [
+      0,
+      100
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      0.0,
+      100.0,
+      2062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "rumination, emotion regulation",
+     "source": ""
+    },
+    {
+     "column": "negativity",
+     "item": "negativity",
+     "stem": "To what extent were your thoughts negative?",
+     "anchors": {
+      "0": "Not at all",
+      "100": "Extremely"
+     },
+     "scale": [
+      0,
+      100
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      0.0,
+      100.0,
+      2062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "negative thinking, negativity",
+     "source": ""
+    },
+    {
+     "column": "self_criticism",
+     "item": "self_criticism",
+     "stem": "\"To what extent were your thoughts self -critical?\"",
+     "anchors": {
+      "0": "Not at all",
+      "100": "Extremely"
+     },
+     "scale": [
+      0,
+      100
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      0.0,
+      100.0,
+      2062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "self-critical thinking, criticism",
+     "source": ""
+    },
+    {
+     "column": "brooding",
+     "item": "brooding",
+     "stem": "How much did you think about the causes and consequences of emotional experiences?",
+     "anchors": {
+      "0": "Not at all",
+      "100": "Absolutely"
+     },
+     "scale": [
+      0,
+      100
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      0.0,
+      100.0,
+      2062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "rumination, emotion-focused reflection",
+     "source": ""
+    },
+    {
+     "column": "replaying",
+     "item": "replaying",
+     "stem": "To what extent have you mentally replayed emotional experiences that you’ve had?",
+     "anchors": {
+      "0": "Not at all",
+      "100": "Absolutely"
+     },
+     "scale": [
+      0,
+      100
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      0.0,
+      100.0,
+      2062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "rumination, emotion regulation",
+     "source": ""
+    }
+   ]
+  }
+ ],
+ "candidates": [],
+ "not_shipped": {
+  "modified": "PosixCt: Time of modification",
+  "ended": "PosixCt: Time of ending",
+  "expired": "PosixCt: Time of expiring",
+  "activity": "single item (absorption in activity) for a larger project; not part of the measure (paper, footnote 2)",
+  "att_control": "single item (executive control) for a larger project; not part of the measure (paper, footnote 2)"
+ },
+ "itemtext": {
+  "ship": false,
+  "language": "TODO",
+  "translation_source": "TODO",
+  "why": "No item text for this PR, per #3421."
+ },
+ "notes": [
+  "formr would not submit a prompt until every slider had been moved off its default of 50 (the submit item's showif in FE_RUM_survey v2_EN.csv), so no response is exactly 50.",
+  "The OSF raw file (ESM-RUM_02_ESM.csv) has three more answered rows than openESM's copy; each is a second submission started the moment the previous answer to the same prompt ended. openESM keeps the first. Every shipped value matches the raw file.",
+  "The paper (footnote 4) removed one observation submitted 289 minutes after its prompt. openESM's copy already excludes it, as does the OSF raw file: the longest gap between prompt and submission in either is 153 minutes.",
+  "For whoever does item text: participants answered in French. The authors developed the items in French and back-translated them into English (paper; Table S1 of the supplement, osf.io/wj6xn), and openESM's English wording is that back-translation.",
+  "For the openESM report (#1698): 0013_hoebeke's created/modified/ended/expired stamps carry a Z but hold Belgian local time."
+ ],
+ "flags": [
+  {
+   "what": "`wave` = each person's prompts numbered in created order (openESM time columns, best first: ['created', 'ended', 'modified', 'expired']). `date` = created as Unix seconds. Data run 2021-02-26 09:01 .. 2021-06-08 21:23 as written. Set date.window from the paper's collection period.",
+   "resolution": "wave = each person's prompts numbered in time order of created; date = created in Unix seconds. openESM's counter agrees with that order. date.window is the paper's collection period, 'between February 26th, 2021 and June 8th, 2021', with the end set to 2021-06-09 so that June 8 is included."
+  },
+  {
+   "what": "Time zone of created. Written with a `Z`, but in 0072_neubauer and 0056/0057_ryvkina the `Z` stamps are local time. Hour-of-day counts as written: 9h:342, 10h:157, 11h:1, 13h:456, 14h:77, 15h:1, 17h:433, 18h:87, 19h:9, 21h:447, 22h:92. No Unix time column to check against: compare with the paper. Set date.tz to 'UTC' if the stamps are true UTC, or to the study's IANA zone (e.g. 'Europe/Berlin') if they are local time, and say how you know in date.tz_evidence.",
+   "resolution": "Europe/Brussels, not UTC: see date.tz_evidence (formr timezone CET, prompts at 9/13/17/21h, no shift at the DST change)."
+  },
+  {
+   "what": "Tables are a first guess from file order, response scale, source, prompts asked at, and column-name prefixes. Read the codebook and split or merge so each table is one instrument or subscale (datastandard.md, 'One file per scale'); rename each `<author>_<year>_<construct>`, and set `script` to the record's name.",
+   "resolution": "One table, hoebeke_2022_rumination: the five 0-100 slider items the paper develops and validates as its measure."
+  },
+  {
+   "what": "`candidates` holds columns that may or may not be items (binary checkboxes, counts, rating scales whose coding gives no anchors -- activity, att_control). Move any that are responses into a table; the rest go to `not_shipped` with a reason. activity, att_control",
+   "resolution": "activity and att_control go to not_shipped: the paper (footnote 2) describes them as 'two additional items assessing self-report executive control and self-report absorption in an activity' for a larger project; single items, not part of the measure, and not in the deposit's ESM survey file."
+  },
+  {
+   "what": "openESM says cross-sectional (baseline) data exist. Covariates such as age and gender are not handled by this tool: add them by hand to the generated script if wanted (neubauer_2023_stecco does), or note why not.",
+   "resolution": "No covariates. Age and gender are in the deposit's demographics file if wanted later."
+  },
+  {
+   "what": "Read openESM's additional_comments: 'some variable codings unclear'",
+   "resolution": "'some variable codings unclear' concerns activity and att_control, settled by the paper's footnote 2."
+  },
+  {
+   "what": "Licence: openESM 'CC-BY 4.0'; original deposit 'CC BY 4.0' (OSF API, node dngyk). IRW carries openESM's label when it is stricter (ruled 2026-10-04); if the two differ, the difference goes in the notes and in the report to openESM.",
+   "resolution": "CC BY 4.0 at the source (OSF dngyk) and on openESM; nothing differs."
+  },
+  {
+   "what": "`reference` is drafted from openESM's BibTeX. Check it against the paper's DOI: the year (online vs print), page range and author list are where it goes wrong.",
+   "resolution": "Matches the DOI's own metadata (Crossref does not hold this DOI) and Europe PMC (PMC9597648): Clinical Neuropsychiatry 19(5), 288-297, 2022, four authors."
+  }
+ ]
+}
