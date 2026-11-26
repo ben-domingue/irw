@@ -97,6 +97,19 @@ LICENCES = {
     "CC BY-SA 4.0": "CC BY-SA 4.0", "CC0 1.0": "CC0 1.0", "GPL-3.0": "GPL-3.0",
 }
 
+# Labels LICENCES does not know, read and ruled on for one record each:
+# record -> (licence carried, sentence for the dictionary notes).
+LICENCE_RULINGS = {
+    "0075": ("CC0 1.0",
+             "Licence: CC0 1.0 with an added no-reidentification clause (LICENSE "
+             "in github.com/digital-wellbeing/open-play, section 5): \"Users must "
+             "not attempt to reidentify, deanonymize, or otherwise link the data "
+             "to specific individuals. This includes combining the dataset with "
+             "other information sources for the purpose of reidentification.\" "
+             "The clause also bars sharing derived data in a way that could "
+             "enable reidentification. Cleared on #3421 (2026-11-15)."),
+}
+
 
 
 def norm_licence(name):
@@ -342,7 +355,7 @@ def plan(args):
     if state and not state.startswith("planned") and not args.force:
         sys.exit(f"{did} is already in IRW ({state}). --force to re-plan anyway.")
     label = rec.get("license", "")
-    if label not in LICENCES:
+    if label not in LICENCES and num not in LICENCE_RULINGS:
         sys.exit(f"{did}: openESM licence {label!r} is not one this tool knows. "
                  "Read it and rule on it first (datastandard.md, 'Before you start').")
 
@@ -648,7 +661,7 @@ def plan(args):
 
     olic, how = original_licence(rec.get("link_to_data"))
     olic = norm_licence(olic) if olic != TODO else olic
-    carried = LICENCES[label]
+    carried, ruled_note = LICENCE_RULINGS.get(num, (LICENCES.get(label), ""))
     flag(f"Licence: openESM {label!r}; original deposit {olic!r} ({how}). IRW "
          "carries openESM's label when it is stricter (ruled 2026-10-04); if the "
          "two differ, the difference goes in the notes and in the report to openESM.")
@@ -672,9 +685,11 @@ def plan(args):
             n_days=rec.get("n_days"), n_beeps_per_day=rec.get("n_beeps_per_day")),
         original_licence=OrderedDict(value=olic, how=how),
         licence=carried,
+        licence_note=ruled_note,
         reference=bibtex_to_reference(rec.get("reference_a")),
         script=script,
         input=OrderedDict(n_rows=len(df), n_ids=int(df["id"].nunique())),
+        exclude_ids=[],
         order=order, date=date,
         tables=tables, candidates=candidates, not_shipped=not_shipped,
         itemtext=OrderedDict(
@@ -769,6 +784,11 @@ def check_spec(spec):
     errs += [f"flag {i}: no resolution -- {f['what'][:70]}"
              for i, f in enumerate(spec["flags"], 1)
              if not (f.get("resolution") or "").strip()]
+    ex = spec.get("exclude_ids", [])
+    if not isinstance(ex, list) or len(set(map(str, ex))) != len(ex):
+        errs.append("exclude_ids: a list of distinct ids")
+    errs += [f"{t['name']}: dict_note must be a string" for t in spec["tables"]
+             if not isinstance(t.get("dict_note", ""), str)]
     if spec["candidates"]:
         errs.append("candidates is not empty: move each into a table or not_shipped")
     names = [t["name"] for t in spec["tables"]]
@@ -851,6 +871,7 @@ MIN_IDS, ESM_MIN_IDS, ESM_MIN_MEDIAN = {min_ids}, {esm_min_ids}, {esm_min_median
 REC = {zrec!r}
 FILENAME = {filename!r}
 N_ROWS, N_IDS = {n_rows!r}, {n_ids!r}
+EXCLUDE_IDS = {exclude_ids}        # dropped; why is in the coding notes
 ORDER = {order}
 DATE = {date}
 ITEMTEXT = {itemtext_spec}
@@ -951,6 +972,10 @@ def main():
     os.makedirs(ITEMDIR, exist_ok=True)
     df = load()
     assert len(df) == N_ROWS and df["id"].nunique() == N_IDS, df.shape
+    if EXCLUDE_IDS:
+        gone = df["id"].astype(str).isin(EXCLUDE_IDS)
+        assert df.loc[gone, "id"].nunique() == len(EXCLUDE_IDS), "an EXCLUDE_IDS id is absent"
+        df = df.loc[~gone].copy()
     df = add_wave_date(df)
     keep = ["id", "wave"] + (["date"] if DATE else [])
     for table in TABLES:
@@ -1017,6 +1042,8 @@ def emit(args):
     if out.exists() and not args.force:
         sys.exit(f"{out.relative_to(SRC)} exists; --force to overwrite")
     olic = spec["original_licence"]["value"]
+    # the reference's DOI: openESM's unless the reviewed spec cites another version
+    paper_doi = spec.get("paper_doi") or o["paper_doi"]
     licence_note = ("" if norm_licence(olic) == spec["licence"] else
                     f" (the openESM copy's label, carried; the original "
                     f"deposit is {olic})")
@@ -1028,9 +1055,10 @@ def emit(args):
     header = "\n".join(textwrap.fill(line, 79, subsequent_indent="    ") for line in [
         f"Original deposit: {o['link_to_data']} ({olic})",
         f"Paper: {spec['reference']} "
-        f"doi:{re.sub(r'^https?://(dx[.])?doi[.]org/', '', o['paper_doi'] or '')}",
+        f"doi:{re.sub(r'^https?://(dx[.])?doi[.]org/', '', paper_doi or '')}",
         f"Data: {o['filename']}",
-        f"License: {spec['licence']}{licence_note}",
+        f"License: {spec['licence']}{licence_note}"
+        + (f". {spec['licence_note']}" if spec.get("licence_note") else ""),
         "Item text: " + (f"shipped, {it['language']}, translation_source="
                          f"{it['translation_source']}" if it["ship"] else
                          "not shipped (see coding notes)"),
@@ -1049,6 +1077,7 @@ def emit(args):
         not_shipped="\n".join(f"{c:<22} {why}" for c, why in spec["not_shipped"].items())
         or "(none)",
         n_rows=spec["input"]["n_rows"], n_ids=spec["input"]["n_ids"],
+        exclude_ids=pprint.pformat(sorted(map(str, spec.get("exclude_ids", []))), width=70),
         min_ids=MIN_IDS, esm_min_ids=ESM_MIN_IDS, esm_min_median=ESM_MIN_MEDIAN,
         order=pprint.pformat(spec["order"], width=70),
         date=pprint.pformat(spec["date"], width=70),
@@ -1065,12 +1094,14 @@ def emit(args):
                     "copy used are carried."
                     if licence_note else
                     f"; original deposit {o['link_to_data']}, also {olic}.")
+                 + (f" {spec['licence_note']}" if spec.get("licence_note") else "")
+                 + (f" {t['dict_note']}" if t.get("dict_note") else "")
                  + f" See data/{spec['script']}.py.")
         dict_rows.append(OrderedDict(
             table=t["name"], description=t["description"],
             url=f"https://zenodo.org/records/{o['zenodo_record']}",
             reference=spec["reference"],
-            doi=re.sub(r"^https?://(dx\.)?doi\.org/", "", o["paper_doi"] or ""),
+            doi=re.sub(r"^https?://(dx\.)?doi\.org/", "", paper_doi or ""),
             doi_data=o["zenodo_version_doi"], original_license=spec["licence"],
             public_reshare="Public", derived_license=spec["licence"],
             notes=notes, codebook_url=o["codebook_url"]))
