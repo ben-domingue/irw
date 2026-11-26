@@ -8,7 +8,7 @@
 ##Columns computed from the live table:
 ##  table, group ("" when the table has no group column), n_vars, n_obs (the
 ##  largest cell n: the matrix N, or the largest pairwise n), stat ("cor" or
-##  "cov"), has_sd, has_mean, min_eigenvalue, is_pd (min_eigenvalue > 0; a
+##  "cov"), has_sd, has_mean, has_rel (reliability rows), min_eigenvalue, is_pd (min_eigenvalue > 0; a
 ##  non-PD matrix is kept as published and flagged here, rule V8), and
 ##  n_missing_cells (lower-triangle cells the source did not report, held as
 ##  rows with an empty value; Ben, 2026-11-18). For a matrix with blank cells,
@@ -77,6 +77,7 @@ one_matrix <- function(name, d, g) {
   data.frame(table = name, group = g, n_vars = length(v), n_obs = max(as.numeric(cells$n)),
              stat = paste(unique(cells$stat), collapse = "+"),
              has_sd = any(d$stat == "sd"), has_mean = any(d$stat == "mean"),
+             has_rel = any(d$stat == "rel"),
              min_eigenvalue = signif(ev, 6), is_pd = if (is.na(ev)) NA else ev > 0,
              n_missing_cells = sum(is.na(m[lower.tri(m, diag = TRUE)])),
              stringsAsFactors = FALSE)
@@ -138,6 +139,29 @@ if ("variables" %in% names(out)) {
               if (nzchar(out$group[i])) paste0(" / ", out$group[i]) else "")
   }
 }
+##Subject tags (data/covariance/tags.csv; README "Subject tags", #3645): core's
+##`construct type` and `sample` (TAG_VOCAB, core's rules) plus cov additions,
+##and a cov-only `framework`. Normalised and checked by core's own function, so
+##a value outside the vocabulary stops the run here as it does in 03_tags.R.
+##A table with no row gets NA and is reported (new tables are tagged in batches;
+##metadata/tests/test_cov_tags.py lists them too).
+source("tag_normalize.R")
+COV_TAG_EXTRA <- list("construct type" = "Socioeconomic/attainment", "sample" = character(0))
+COV_FRAMEWORKS <- c("TPB", "RAA", "HAPA", "TAM", "UTAUT", "SCCT", "HBM", "status_attainment")
+cov_vocab <- TAG_VOCAB
+for (k in names(COV_TAG_EXTRA)) cov_vocab[[k]] <- c(cov_vocab[[k]], COV_TAG_EXTRA[[k]])
+ctags <- read.csv(file.path("..", "data", "covariance", "tags.csv"), colClasses = "character",
+                  na.strings = "", check.names = FALSE)
+ctags$construct_type <- normalize_multiselect(ctags$construct_type, "construct type", vocab = cov_vocab)
+ctags$sample <- normalize_multiselect(ctags$sample, "sample", vocab = cov_vocab)
+bad_fw <- setdiff(na.omit(ctags$framework), COV_FRAMEWORKS)
+if (length(bad_fw)) stop("framework outside the README list (data/covariance/tags.csv): ",
+                         paste(bad_fw, collapse = ", "))
+out <- merge(out, ctags[, c("table", "construct_type", "sample", "framework")], by = "table",
+             all.x = TRUE, sort = FALSE)
+no_tags <- unique(out$table[!out$table %in% ctags$table])
+if (length(no_tags)) message("  ! no subject tags (data/covariance/tags.csv): ", paste(no_tags, collapse = ", "))
+
 nonpd <- out$table[out$is_pd %in% FALSE]
 if (length(nonpd)) message("  non-positive-definite as published (V8, kept): ", paste(unique(nonpd), collapse = ", "))
 

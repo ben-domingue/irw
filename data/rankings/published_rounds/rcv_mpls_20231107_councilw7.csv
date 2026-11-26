@@ -1,0 +1,14 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2023-Ward-7-Summary-Sheet.pdf
+1,c01,3867
+1,c02,290
+1,c03,3808
+1,(exhausted),0
+1,(write-in),23
+2,c01,4055
+2,c02,0
+2,c03,3878
+2,(exhausted),55
+2,(write-in),0
+1,(threshold),3995
+1,(elected:c01),

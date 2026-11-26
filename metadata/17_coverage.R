@@ -60,6 +60,9 @@
 #                    automated_finding/codebook_at_ingest.csv, or doc_type
 #                    "none" in codebook_by_review.csv (2026-11-16; before
 #                    that 1,980 such tables counted as gaps).
+#                    A hit includes how_found labelled_data: the deposit
+#                    ships an SPSS or Stata file, whose embedded variable and
+#                    value labels count as documentation (Ben, 2026-11-20).
 #   data_note        in data_notes.csv -- INFO ONLY, never a gap: most tables
 #                    legitimately carry no caveat.
 #   itemtext_shipped in itemtext_metadata.csv and not withdrawn from irw_text*

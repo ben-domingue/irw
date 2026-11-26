@@ -184,6 +184,51 @@ local({
           "a row the machine could not add anything to gets no provenance row")
 })
 
+cat("write_dict_provenance -- dates (#3680)\n")
+
+local({
+    f <- tempfile(fileext = ".csv")
+    on.exit(unlink(f), add = TRUE)
+    day1 <- as.Date("2026-11-01")
+    day2 <- as.Date("2026-11-08")
+    frame <- function(filled, day) dict_provenance_frame(filled, today = day)
+    write <- function(filled, day) {
+        suppressMessages(write_dict_provenance(frame(filled, day), f))
+        readr::read_csv(f, col_types = readr::cols(.default = "c"), progress = FALSE)
+    }
+    both <- c("a_2020\tNotes", "b_2020\tDOI (for paper)")
+
+    write(both, day1)
+    first <- readBin(f, "raw", file.size(f))
+    out <- write(both, day2)
+    check(identical(readBin(f, "raw", file.size(f)), first),
+          "a second write on a later day, with nothing new filled, leaves the file byte for byte unchanged")
+    check(all(out$generated == "2026-11-01"), "the dates stay those of the first write")
+
+    out <- write(c(both, "c_2020\tNotes"), day2)
+    check(out$generated[out$table == "c_2020"] == "2026-11-08",
+          "a newly filled table gets the new date")
+    check(all(out$generated[out$table != "c_2020"] == "2026-11-01"),
+          "the pairs already there keep theirs")
+
+    out <- write(c("a_2020\tNotes; DOI (for paper)", "b_2020\tDOI (for paper)",
+                   "c_2020\tNotes"), as.Date("2026-11-15"))
+    check(out$generated[out$table == "a_2020"] == "2026-11-15",
+          "a table whose filled columns change is a new pair and gets the new date")
+    check(out$generated[out$table == "b_2020"] == "2026-11-01",
+          "an untouched pair beside it keeps its date")
+
+    out <- write(c("a_2020\tNotes; DOI (for paper)", "b_2020\tDOI (for paper)"),
+                 as.Date("2026-11-22"))
+    check(!"c_2020" %in% out$table, "a table removed from the dictionary drops out")
+    check(nrow(out) == 2L, "and nothing is carried forward from the old file")
+
+    write_dict_provenance(frame(character(0), day1), f)
+    check(nrow(readr::read_csv(f, col_types = readr::cols(.default = "c"),
+                               progress = FALSE)) == 0L,
+          "an empty frame writes an empty sidecar")
+})
+
 cat("read_dict_auto -- refusals\n")
 
 tmp <- tempfile(fileext = ".csv")

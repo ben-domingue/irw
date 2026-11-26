@@ -1,0 +1,14 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2017-Park-District-3-RCV-Tabulation-Summary.pdf
+1,c01,5415
+1,c02,7094
+1,c03,2069
+1,(exhausted),0
+1,(write-in),52
+2,c01,5841
+2,c02,7753
+2,c03,0
+2,(exhausted),1036
+2,(write-in),0
+1,(threshold),7316
+1,(elected:c02),

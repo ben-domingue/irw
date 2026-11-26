@@ -82,6 +82,18 @@ class CovTest(unittest.TestCase):
         df.loc[df.stat == "sd", "value"] = float("nan")
         self.assertIn("cov_required_columns", checks(df, "error"))
 
+    def test_reliability_rows(self):
+        ## Ben, 2026-11-18: reliability is a per-variable `rel` row beside sd and mean.
+        rel = pd.DataFrame([{"stat": "rel", "var1": v, "var2": None, "value": r, "n": 200}
+                            for v, r in zip("abc", (0.81, 0.77, 0.9))])
+        self.assertEqual(checks(pd.concat([table(), rel], ignore_index=True), "error"), set())
+        bad = rel.copy(); bad.loc[0, "value"] = 1.2
+        self.assertIn("cov_moments", checks(pd.concat([table(), bad], ignore_index=True), "error"))
+        dup = pd.concat([table(), rel, rel.iloc[:1]], ignore_index=True)
+        self.assertIn("cov_moments", checks(dup, "error"))
+        blank = rel.copy(); blank.loc[0, "value"] = float("nan")
+        self.assertIn("cov_required_columns", checks(pd.concat([table(), blank], ignore_index=True), "error"))
+
     def test_parse_variables(self):
         from irw_validate.cov import parse_variables
         self.assertEqual(parse_variables(""), [])

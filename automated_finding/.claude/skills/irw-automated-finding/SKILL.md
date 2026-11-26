@@ -653,6 +653,18 @@ missing row, verdict included, is normal work for this step, not something to
 hand back. 14 of the 15 instruments behind the 2026-10-18 holds had no row at
 all, which is why nothing warned.
 
+**One generic sentence matching a held instrument's item does not hold the
+table** (ben-domingue, 2026-11-25: "ship. that one question is going to be
+quite common"). When an author-developed list contains a single common
+sentence that is word-for-word an item of a `hold` instrument -- e.g.
+`tothe_2021_other_satisfaction` b4_8 "I am satisfied with my life", an SWLS
+stem, in an otherwise original satisfaction list -- ship the stem, and say so
+in the provenance `note`. The hold covers the instrument, not every common
+sentence it contains. `irw-validate` will still WARN `rights_register` on that
+item; that WARN is explained by this ruling. This is about ONE stray generic
+line. Several items from the same instrument, or its distinctive wording, is
+the instrument -- that is still a hold.
+
 **Hold it before upload, not after.** Pulling a table from an unpublished
 draft is one `draft.table(name).delete()`. Pulling a published one took a
 dedicated withdrawal script and a corpus-wide sweep. The record for a hold is

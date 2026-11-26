@@ -16,7 +16,10 @@ Three deposit files are read:
 - "MASEM R code and output/R code McEachan RAA.txt": the sample size vector `n`,
   in the same order. The file is R code; it is parsed as TEXT and never run.
 - "Main data file/RAA_reanalysis_data_file_FINAL.xlsx": the extraction sheet,
-  used only for each study's label and behaviour. It lists 89 studies; the 8
+  used for each study's label and behaviour, and for the reliabilities in its
+  "Alpha - <variable>" columns (Cronbach's alpha), written as `rel` rows for
+  the variables in that study's matrix (a cell that is not a number, such as
+  "Not measured", is skipped). It lists 89 studies; the 8
   without a matrix (no data obtained, as the sheet says) are not in the
   analysis file. Each matrix is matched to its row by n and by all 36
   correlations; the only differences are that the analysis file rounds 16
@@ -35,6 +38,8 @@ Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per study (the sheet's label).
 Modification (2026-11-18): unreported pairs among measured variables are empty
 values instead of holding the study (blank cells allowed, #3582).
+Modification (2026-11-18): per-variable Cronbach's alpha from the extraction
+sheet added as `rel` rows (value as stored), after each study's matrix rows.
 
 Usage: python3 data/covariance/osf_hagger2018_raa.py <out dir>
 """
@@ -54,6 +59,10 @@ FILES = {"mat": "mceachan.txt", "code": "R code McEachan RAA.txt",
 TABLE = "hagger_2018_raa9"
 V = ["Int", "AA", "IA", "SN", "DN", "Aut", "Cap", "Beh", "PB"]
 K = len(V)
+ALPHA = ["Alpha - intention", "Alpha - affective attitude", "Alpha - instrumental attitudes",
+         "Alpha - injunctive (subjective) norm", "Alpha - descriptive norm",
+         "Alpha - Autonomy (up to me)", "Alpha - Capacity (Self-efficacy)", "Alpha - behavior",
+         "Alpha - past behavior"]
 
 
 def get(url):
@@ -120,6 +129,7 @@ def main(out):
     hdr = list(rows[1])
     pair = hdr.index("Intention-Affective attitude")
     beh = hdr.index("Behavior")
+    alpha = [hdr.index(a) for a in ALPHA]
     studies = [r for r in rows[2:] if isinstance(r[0], int)]
 
     long, records, held, j = [], [], [], 0
@@ -157,6 +167,19 @@ def main(out):
                 value = "1" if i == x else ("" if M[i][x] == "NA" else M[i][x])
                 long.append({"stat": "cor", "var1": V[i], "var2": V[x],
                              "value": value, "n": ni, "group": label})
+        for i in keep:                    # Cronbach's alpha as stored; non-numbers skipped
+            a = r[alpha[i]]
+            if isinstance(a, bool) or a is None:
+                continue
+            if isinstance(a, (int, float)):
+                txt = str(a) if isinstance(a, int) else repr(float(a))
+            elif re.fullmatch(r"\s*\d*\.?\d+\s*", str(a)):
+                txt = str(a).strip()
+            else:
+                continue
+            if not 0 < float(txt) <= 1:
+                raise SystemExit(f"{label}: alpha {txt} for {V[i]} out of range")
+            long.append({"stat": "rel", "var1": V[i], "var2": "", "value": txt, "n": ni, "group": label})
         records.append({"group": label, "n_obs": ni, "dropped": dropped,
                         "blank": [f"{V[i]}-{V[x]}" for a, i in enumerate(keep) for x in keep[:a]
                                   if M[i][x] == "NA"],

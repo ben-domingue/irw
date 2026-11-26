@@ -1194,6 +1194,12 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
     for i, row in enumerate(rows, 1):
         k = _key(row)
         if k in done:
+            # A --resume skips rows the interrupted run already triaged, but
+            # that run never reached append_seen_keys() below, so their
+            # verdicts must be carried into the ledger here or they are lost
+            # (the 2026-11-20 sweep's pause/resume left 297 of 503 keys out).
+            if done[k].get("flag") not in TRANSIENT_FLAGS:
+                newly_seen.append((k, done[k].get("flag")))
             continue
         src = (row.get("source") or "").lower()
         if src in blocked_srcs:

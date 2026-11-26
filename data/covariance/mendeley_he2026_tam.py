@@ -13,8 +13,11 @@ Appendixes.xlsx:
   r, two reliabilities), plus a per-study key from each abbreviation to the
   construct's name in that study. The abbreviations are the meta-analysts'
   harmonised constructs (e.g. BI is "Behavioral Intention" in most studies and
-  "Adoption Intention" in one); they are kept as deposited. Reliabilities are
-  not part of the layout.
+  "Adoption Intention" in one); they are kept as deposited. The two
+  reliability columns (the coefficient is not named in the deposit) give each
+  construct's reliability in that study; they are written as `rel` rows, as
+  stored, when a construct has one numeric value across all its pairs ("NA",
+  "/" and blanks skipped; a construct with conflicting values is skipped).
 - Appendix 1: Study ID -> short citation (the group label).
 - Appendix 2: Study ID -> country, AI type and major (the population).
 Study ID 17 has two samples ("17-CN", "17-INT"); there is no study 19.
@@ -30,6 +33,9 @@ layout in data/covariance/README.md, one group per study, labelled
 "study <ID>: <citation>".
 Modification (2026-11-18): unreported pairs among measured constructs are
 written as empty values instead of holding the study.
+
+Modification (2026-11-18): per-construct reliabilities from Appendix 3 added
+as `rel` rows after each study's matrix rows.
 
 Usage: python3 data/covariance/mendeley_he2026_tam.py <out dir>
 """
@@ -80,7 +86,13 @@ def main(out):
         if len(ns) != 1:
             raise SystemExit(f"study {sid}: N differs across pairs {ns}")
         ni = ns.pop()
-        r_of = {}
+        r_of, rel = {}, defaultdict(set)
+        for r in rs:
+            for x, y in ((r[2], r[5]), (r[3], r[6])):
+                if isinstance(y, (int, float)) and not isinstance(y, bool):
+                    rel[clean(x)].add(repr(float(y)))
+                elif clean(y) not in ("", "NA"):
+                    rel[clean(x)].add("?" + str(y))
         for r in rs:
             a, b = clean(r[2]), clean(r[3])
             if a == b or a not in ORDER or b not in ORDER or frozenset((a, b)) in r_of:
@@ -99,6 +111,15 @@ def main(out):
                              "value": "1" if i == j else (repr(r_of[frozenset((i, j))])
                                                           if frozenset((i, j)) in r_of else ""),
                              "n": ni, "group": group})
+        for i in v:   # reliability as stored; one numeric value per construct, else skipped
+            vals = rel.get(i, set())
+            if len(vals) == 1 and not next(iter(vals)).startswith("?"):
+                val = next(iter(vals))
+                if not 0 < float(val) <= 1:
+                    raise SystemExit(f"study {sid}: reliability {val} for {i} out of range")
+                long.append({"stat": "rel", "var1": i, "var2": "", "value": val, "n": ni, "group": group})
+            elif len(vals) > 1:
+                print(f"study {sid}: {i} has conflicting reliabilities {sorted(vals)}, skipped")
         c = chars.get(sid) or chars[base]
         records.append({"group": group, "n_obs": ni, "vars": v, "missing": missing,
                         "population": "; ".join(x for x in (clean(c[4]), clean(c[5]), clean(c[9])) if x)})

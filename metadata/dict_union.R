@@ -538,7 +538,7 @@ union_dict <- function(dict, auto, label = "dictionary") {
     list(dict = dict, provenance = dict_provenance_frame(filled))
 }
 
-dict_provenance_frame <- function(filled = character(0)) {
+dict_provenance_frame <- function(filled = character(0), today = Sys.Date()) {
     if (!length(filled)) {
         return(data.frame(table = character(0), columns = character(0),
                           contributor = character(0), generated = character(0),
@@ -548,14 +548,30 @@ dict_provenance_frame <- function(filled = character(0)) {
     data.frame(table       = vapply(parts, `[`, character(1), 1L),
                columns     = vapply(parts, `[`, character(1), 2L),
                contributor = DICT_AUTO_CONTRIBUTOR,
-               generated   = format(Sys.Date(), "%Y-%m-%d"),
+               generated   = format(today, "%Y-%m-%d"),
                stringsAsFactors = FALSE)
 }
 
 ##Sidecar rather than a column in biblio.csv: the published schema is read by
 ##Rpkg, Python-pkg and the site, and none of them should have to change to gain
 ##an audit trail. Committed, unlike 03_tags.R's -- see .gitignore.
+##
+##`generated` is when a (table, columns) pair first appeared, not when the file
+##was last written (#3680): a pair already in the sidecar keeps its date, so a
+##run that fills nothing new rewrites the file byte for byte. Only the pairs in
+##`prov` are written. A table whose filled columns changed is a new pair and
+##takes the new date; a table no longer in the dictionary drops out.
 write_dict_provenance <- function(prov, out) {
+    if (file.exists(out) && nrow(prov)) {
+        old <- readr::read_csv(out, col_types = readr::cols(.default = "c"),
+                               progress = FALSE)
+        if (all(c("table", "columns", "generated") %in% names(old))) {
+            i <- match(paste(prov$table, prov$columns, sep = "\t"),
+                       paste(old$table, old$columns, sep = "\t"))
+            kept <- old$generated[i]
+            prov$generated <- ifelse(is.na(kept), prov$generated, kept)
+        }
+    }
     readr::write_csv(prov, out)
     message("  wrote ", nrow(prov), " provenance row(s) to ", out)
     invisible(NULL)
