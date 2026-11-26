@@ -211,10 +211,16 @@ describe_chat <- function(prompt) {
 
 ##------------------------------------------------------- text utilities -----
 
+##Letters and digits in ANY script, not just a-z (#2325). The earlier
+##`[^a-z0-9 ]` stripped every non-ASCII character, so Cyrillic or Chinese item
+##wording tokenized to nothing and could never be flagged -- a silent exemption
+##for exactly the tables whose items are not in English. \p{M} keeps combining
+##marks (decomposed accents, Indic vowel signs) inside their word. Output on
+##ASCII text is unchanged.
 tokenize <- function(x) {
     if (is.na(x) || !nzchar(x)) return(character(0))
-    x <- tolower(x)
-    x <- gsub("[^a-z0-9 ]+", " ", x)
+    x <- tolower(enc2utf8(x))
+    x <- gsub("[^\\p{L}\\p{M}\\p{N} ]+", " ", x, perl = TRUE)
     t <- strsplit(trimws(x), "\\s+")[[1]]
     t[nzchar(t)]
 }
@@ -240,6 +246,11 @@ overlap <- function(restricted, description) {
     for (src in restricted) {
         ts <- tokenize(src)
         n <- min(N_GRAM, length(ts))
+        ##One-word inputs are exempt, by Ben's ruling on #2325 (2026-11-23). A
+        ##single word in common is not reproduction of protected wording: a
+        ##one-word Context Text such as "Edadismo" is a label for the construct,
+        ##and a description is expected to use it. Reproduction needs a run of
+        ##at least two words, so the window never shrinks below 2.
         if (n < 2) next
         hit <- intersect(ngrams(ts, n), ngrams(dt, n))
         if (length(hit)) {
@@ -663,6 +674,23 @@ gate_self_test <- function() {
     ck(identical(apply_title_gate(none)$unit_key, "table:x_2020_y"),
        "an untagged table is untouched")
 
+    ##The overlap guard on non-English input (#2325): echoed Cyrillic item
+    ##wording must flag, and ASCII tokenization must not have moved.
+    ru <- "Оцените важность знания родного языка и народных песен"
+    ck(overlap(ru, ru)$flag, "echoed Cyrillic item wording is flagged")
+    ck(identical(tokenize("Fear of COVID-19, (early) stage."),
+                 c("fear", "of", "covid", "19", "early", "stage")),
+       "ASCII tokenization is unchanged")
+    ck(identical(tokenize("évaluation précoce"), c("évaluation", "précoce")),
+       "an accented word stays one token")
+    ##Documented exemption (#2325): one word in common is not reproduction of
+    ##protected wording, so a one-word restricted input never flags, while
+    ##two words already do.
+    ck(!overlap("Edadismo", "Edadismo is prejudice based on age.")$flag,
+       "a one-word restricted input is exempt (ruling on #2325)")
+    ck(overlap("ageism scale", "An ageism scale.")$flag,
+       "a two-word restricted input still flags")
+
     cat("\n", if (fail == 0L) "PASS" else "FAIL", " -- ", fail,
         " failure(s)\n", sep = "")
     quit(save = "no", status = if (fail == 0L) 0L else 1L)
@@ -930,7 +958,13 @@ if (length(todo_keys) > 0 && !OPT_STUB && !OPT_STUBCOPY) invisible(gateway_key()
 new <- list(); flushed <- 0
 ##Parallel to `new`, and only read by the --stub-copy verdict: a unit with no
 ##restricted input has nothing to leak, so it must NOT be counted as a miss.
+##Neither must a unit whose only restricted inputs are single words: overlap()
+##exempts those on purpose (#2325), so echoing them back is an expected pass.
 had_restricted <- logical(0)
+one_word_only  <- logical(0)
+flaggable <- function(restricted) {
+    any(vapply(restricted, function(s) length(tokenize(s)) >= 2, logical(1)))
+}
 for (i in seq_along(todo_keys)) {
     u <- todo_keys[i]
     rows <- units[units$unit_key == u, ]
@@ -949,6 +983,7 @@ for (i in seq_along(todo_keys)) {
             stringsAsFactors = FALSE)
         cat("[", i, "/", length(todo_keys), "] ", u, "  no evidence\n", sep = "")
         had_restricted <- c(had_restricted, FALSE)
+        one_word_only  <- c(one_word_only, FALSE)
         next
     }
 
@@ -965,10 +1000,17 @@ for (i in seq_along(todo_keys)) {
     txt <- clean_reply(txt)
     ov  <- overlap(b$restricted, txt)
 
-    if (is.na(txt) || identical(txt, "INSUFFICIENT") || is_chatter(txt)) {
+    ##The rights guard is consulted BEFORE the chatter filter (#2325). CHATTER
+    ##is unanchored, so a reply that copies an item such as "I cannot sleep..."
+    ##matched `i cannot` and was filed as "no description" without the guard
+    ##ever being asked. Nothing was published either way, but a copied reply
+    ##must be recorded as what it is: flagged for review.
+    if (is.na(txt) || identical(txt, "INSUFFICIENT")) {
         prov <- "no description"; flag <- FALSE; txt <- NA_character_
     } else if (ov$flag) {
         prov <- "pending review"; flag <- TRUE
+    } else if (is_chatter(txt)) {
+        prov <- "no description"; flag <- FALSE; txt <- NA_character_
     } else {
         prov <- "described"; flag <- FALSE
     }
@@ -979,7 +1021,9 @@ for (i in seq_along(todo_keys)) {
         sources_used = b$used, similarity_flag = flag, provenance = prov,
         reviewed = FALSE, stringsAsFactors = FALSE)
 
-    had_restricted <- c(had_restricted, length(b$restricted) > 0)
+    had_restricted <- c(had_restricted, flaggable(b$restricted))
+    one_word_only  <- c(one_word_only,
+                        length(b$restricted) > 0 && !flaggable(b$restricted))
 
     cat("[", i, "/", length(todo_keys), "] ", substr(u, 1, 52), "  ", prov,
         if (flag) "  <-- FLAGGED" else "", "\n", sep = "")
@@ -1000,8 +1044,10 @@ if (OPT_STUBCOPY) {
     cat("\n", strrep("=", 60), "\nADVERSARIAL TEST: ", sum(had_restricted),
         " of ", nrow(res), " unit(s) carried restricted input; ",
         sum(had_restricted) - sum(miss), " flagged.\n",
-        nrow(res) - sum(had_restricted),
-        " unit(s) had no restricted input and nothing to leak.\n", sep = "")
+        nrow(res) - sum(had_restricted) - sum(one_word_only),
+        " unit(s) had no restricted input and nothing to leak.\n",
+        sum(one_word_only), " unit(s) had only one-word restricted input,",
+        " exempt by ruling on #2325 (expected pass).\n", sep = "")
     if (any(miss)) {
         cat("FAIL -- restricted text was echoed back and NOT caught:\n")
         print(res$unit_key[miss])
