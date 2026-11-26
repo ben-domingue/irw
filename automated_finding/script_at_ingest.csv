@@ -1604,3 +1604,4 @@ iimura_2022_spsgi6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 boren_2023_nursestress6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 dealmeida_2021_moneyattitude6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 hagerman_2017_faceattract6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+poole_2020_toj,core,data/timing_db/timing_db.R,2026-11-26

@@ -32,18 +32,21 @@
 ##   hallez_2019_reproduction    TR_Hallez_2019
 ##   maass_2019_reproduction     TR_Maass_2019
 ##   maass_2019_mci_reproduction TR_Maass_2019_Exp2
+##   poole_2020_toj              TOJ_Poole_2020 (Choice coding inferred, below)
 ##
 ## Left out:
 ##   Non-human datasets (FI, PI, DRL: rats, mice, pigeons) and human datasets
 ##     with fewer than 50 people (deJong_2021 has 49).
 ##   RT_Balci_2023 -- one retrospective duration judgement per person
 ##     (24,494 people), so no repeated items to model.
-##   TOJ_Poole_2020 -- Choice (1/2) does not track which tone came first
-##     (about 88% "1" for both orders), so it is neither the raw choice nor
-##     clearly accuracy; held until the coding is confirmed.
-##   TOJ_Williams_2018_Exp1 -- filed as temporal order but holds adaptive
-##     duration-difference staircases on the same 52 people as
-##     williams_2019_estimation; held for a closer look.
+##   TOJ_Williams_2018_Exp1 -- filed as temporal order but holds duration-
+##     difference series (0.7 s standard) on the same 52 people as
+##     williams_2019_estimation. Its Accuracy column carries no signal: 0.50
+##     overall and per modality, every person 0.39-0.61, uncorrelated with the
+##     difference (r = 0.02), and the series steps down regardless of it at
+##     any lag from -2 to +2 trials. The paper reports clear thresholds, so
+##     the column is not the accuracy; not built.
+##   TOJ_Williams_2018_Exp2 -- 32 people, under the floor.
 ##
 ## Usage: Rscript timing_db.R <extracted datasets/ dir> <out_dir>
 
@@ -247,3 +250,26 @@ d <- x[, .(id = Subj_idx, item = paste0("d", lv(Target_Duration)),
            resp = as.numeric(Response), trial_block = Session, trial_number = Trial,
            cov_mci = as.integer(MCI), itemcov_duration = Target_Duration)]
 finish(d, "maass_2019_mci_reproduction")
+
+## ---- Poole, Lees & Jones (2020), Timing & Time Perception 8(3-4), 239-253 -
+## Auditory temporal order judgement: a high and a low tone, which came first,
+## with the gap filled by silence, white noise or a click train (Condition
+## 1/2/3, within person, 84 trials each); 60 adults. Each person was tested
+## at three SOAs set from their own threshold, 0.75, 1 and 1.25 times it
+## (the top level is capped at 0.2 s for six people; person 128 has two
+## levels). The levels are per person, so item = filler x first tone x level
+## (low/mid/high) and the absolute SOA is kept per trial in trial_soa, as for
+## bang_2019_gabor.
+## Choice: the codebook does not say. 1 = correct, 2 = error: P(Choice 1)
+## rises with SOA within 58 of 60 people (0.83, 0.90, 0.94 at the three
+## levels), errors are slower (median rt 0.62 vs 0.31 s), and Choice does not
+## track which tone came first. Session is one code per person, not a
+## session, and is not kept.
+x <- rd("TOJ_Poole_2020")
+x[, level := c("low", "mid", "high")[frank(SOA, ties.method = "dense")], by = Subj_idx]
+fill <- c("1" = "silence", "2" = "noise", "3" = "clicks")
+d <- x[, .(id = Subj_idx,
+           item = paste0(fill[as.character(Condition)], "_", sub("_tone", "", tolower(First_Stim)), "first_", level),
+           resp = as.integer(Choice == 1), rt = Reaction_Time,
+           trial_number = Trial, trial_soa = SOA)]
+finish(d, "poole_2020_toj")
