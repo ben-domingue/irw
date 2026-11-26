@@ -242,7 +242,7 @@ rcv_berkeley_20241105_mayor,53086,149306,1,7,5,5945,0,Berkeley_20241105_Mayor.ta
 rcv_bloomington_20231107_councilal,19353,35149,1,4,3,7241,0,Bloomington_20231107_CityCouncilAL.tab,10.7910/DVN/AMK8PJ,Bloomington,2023-11-07,CityCouncilAL,irv,1,3,3,20878,20878,19353,7241,13,0,yes,rotated
 rcv_bloomington_20231107_councild4,3092,5632,1,3,3,1275,0,Bloomington_20231107_CityCouncilD4.tab,10.7910/DVN/AMK8PJ,Bloomington,2023-11-07,CityCouncilD4,irv,1,3,3,3298,3298,3092,1275,0,0,yes,rotated
 rcv_boulder_20231107_mayor,32951,89195,1,4,4,631,0,Boulder_20231107_Mayor.tab,10.7910/DVN/AMK8PJ,Boulder,2023-11-07,Mayor,irv,1,4,4,118787,118787,32951,631,0,0,unknown,fixed
-rcv_burlington_20060307_mayor,9788,28060,1,7,5,2,0,Burlington_20060307_Mayor.tab,10.7910/DVN/AMK8PJ,Burlington,2006-03-07,Mayor,irv,unknown,5,6,9865,9865,9788,2,34,0,unknown,unknown
+rcv_burlington_20060307_mayor,9788,28060,1,7,5,2,0,Burlington_20060307_Mayor.tab,10.7910/DVN/AMK8PJ,Burlington,2006-03-07,Mayor,irv,1,5,6,9865,9865,9788,2,34,0,unknown,unknown
 rcv_burlington_20090303_mayor,8980,28703,1,7,5,0,0,Burlington_20090303_Mayor.tab,10.7910/DVN/AMK8PJ,Burlington,2009-03-03,Mayor,irv,1,5,5,8984,8984,8980,0,6,239,yes,fixed
 rcv_burlington_20230307_councilcentrald,2159,3467,1,4,3,97,0,Burlington_20230307_CityCouncilCentralDistrict.tab,10.7910/DVN/AMK8PJ,Burlington,2023-03-07,CityCouncilCentralDistrict,irv,1,3,2,2276,2276,2159,97,17,100,yes,fixed
 rcv_burlington_20230307_councileastd,1400,2236,1,4,3,43,0,Burlington_20230307_CityCouncilEastDistrict.tab,10.7910/DVN/AMK8PJ,Burlington,2023-03-07,CityCouncilEastDistrict,irv,1,3,2,1467,1467,1400,43,3,65,yes,fixed
@@ -717,7 +717,7 @@ rcv_nyc_20210622_demcouncild45,19379,36788,1,5,4,1048,0,NewYorkCity_20210622_DEM
 rcv_nyc_20210622_demcouncild46,18550,54538,1,10,5,1282,0,NewYorkCity_20210622_DEM_CityCouncilD46.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD46,irv,1,5,8,336070,21370,18550,1282,179,208,yes,fixed
 rcv_nyc_20210622_demcouncild47,8068,18499,1,6,5,433,0,NewYorkCity_20210622_DEM_CityCouncilD47.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD47,irv,1,5,4,336070,10788,8068,433,85,290,yes,fixed
 rcv_nyc_20210622_demcouncild48,9260,24719,1,7,5,440,0,NewYorkCity_20210622_DEM_CityCouncilD48.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD48,irv,1,5,5,336070,12494,9260,440,112,245,yes,fixed
-rcv_nyc_20210622_demcouncild49,13795,45428,1,11,5,911,0,NewYorkCity_20210622_DEM_CityCouncilD49.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD49,irv,unknown,5,9,43503,26305,13795,911,191,206,yes,unknown
+rcv_nyc_20210622_demcouncild49,13795,45428,1,11,5,911,0,NewYorkCity_20210622_DEM_CityCouncilD49.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD49,irv,1,5,9,43503,26305,13795,911,191,206,yes,unknown
 rcv_nyc_20210622_demcouncild5,25483,73739,1,9,5,414,0,NewYorkCity_20210622_DEM_CityCouncilD5.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD5,irv,1,5,7,267513,29435,25483,414,131,294,yes,fixed
 rcv_nyc_20210622_demcouncild6,39454,99924,1,8,5,671,0,NewYorkCity_20210622_DEM_CityCouncilD6.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD6,irv,1,5,6,267513,43230,39454,671,147,304,yes,fixed
 rcv_nyc_20210622_demcouncild7,23300,73695,1,14,5,630,0,NewYorkCity_20210622_DEM_CityCouncilD7.tab,10.7910/DVN/AMK8PJ,NewYorkCity,2021-06-22,DEM_CityCouncilD7,irv,1,5,12,267513,25848,23300,630,231,254,yes,fixed
@@ -1009,7 +1009,7 @@ rcv_stlouispark_20211102_councilward4,712,1242,1,3,3,515,0,StLouisPark_20211102_
 rcv_takoma_20221108_councilward1,1364,2997,1,4,4,12,0,TakomaPark_20221108_CityCouncilWard1.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard1,irv,1,4,3,1364,1364,1364,12,0,47,yes,unknown
 rcv_takoma_20221108_councilward2,1072,1131,1,2,2,14,0,TakomaPark_20221108_CityCouncilWard2.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard2,irv,1,2,1,1072,1072,1072,14,0,90,yes,unknown
 rcv_takoma_20221108_councilward3,1373,3219,1,5,4,18,0,TakomaPark_20221108_CityCouncilWard3.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard3,irv,1,4,3,1373,1373,1373,18,2,21,yes,unknown
-rcv_takoma_20221108_councilward4,576,623,1,2,2,18,0,TakomaPark_20221108_CityCouncilWard4.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard4,irv,unknown,2,1,576,576,576,18,0,36,yes,unknown
+rcv_takoma_20221108_councilward4,576,623,1,2,2,18,0,TakomaPark_20221108_CityCouncilWard4.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard4,irv,1,2,1,576,576,576,18,0,36,yes,unknown
 rcv_takoma_20221108_councilward5,487,1131,1,4,4,36,0,TakomaPark_20221108_CityCouncilWard5.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard5,irv,1,4,3,487,487,487,36,0,6,yes,unknown
 rcv_takoma_20221108_councilward6,652,1801,1,6,5,31,0,TakomaPark_20221108_CityCouncilWard6.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,CityCouncilWard6,irv,1,5,4,652,652,652,31,5,21,yes,unknown
 rcv_takoma_20221108_mayor,5712,13665,1,5,4,143,0,TakomaPark_20221108_Mayor.tab,10.7910/DVN/AMK8PJ,TakomaPark,2022-11-08,Mayor,irv,1,4,3,5712,5712,5712,143,14,195,yes,unknown
