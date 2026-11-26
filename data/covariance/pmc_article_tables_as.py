@@ -211,12 +211,8 @@ def tpb(group, cols, a_col, m_col, sd_col, part_kw):
 
 
 CONFIGS = [
-    # Elam et al. (2021), Table 1: African Americans above the diagonal (read), European
-    # Americans below it (not read: one cell is printed "− .0.02"); 1 diagonal; the
-    # Mean (SD) row and column are not read.
-    square("PMC8599703", "Table 1", "elam_2021_alcoholprs7", 192, PRS, seq(1, 7), seq(1, 7), 0, NUMS(1, 7),
-           label_rx=DOTNUM, group="african_american",
-           part_kw=dict(upper_only=True)),
+    # Elam et al. (2021) moved to pmc_article_tables_ax.py (2026-11-25), which builds both
+    # groups; its African American rows are byte-identical to the ones this script wrote.
     # Gross et al. (2025), Table 2: "j. label", M and SD in columns 2-3, lower triangle with
     # a "--" diagonal in columns 4-10 (no column for the last variable).
     square("PMC12244045", "Table 2", "gross_2025_temperamentema8", 112, TEMP, seq(1, 8), seq(4, 10) + [None], 0,

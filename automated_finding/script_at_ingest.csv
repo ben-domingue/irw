@@ -417,7 +417,7 @@ efendi_2025_interactivity,core,data/efendi_2025_beauty_live_commerce.py,2026-11-
 efendi_2025_online_reviews,core,data/efendi_2025_beauty_live_commerce.py,2026-11-23
 efendi_2025_online_shopping_behavior,core,data/efendi_2025_beauty_live_commerce.py,2026-11-23
 efendi_2025_trust,core,data/efendi_2025_beauty_live_commerce.py,2026-11-23
-elam_2021_alcoholprs7,cov,data/covariance/pmc_article_tables_as.py,2026-11-19
+elam_2021_alcoholprs7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-19
 elemo_2020_fcv19s7,cov,data/covariance/pmc_article_tables_ai.py,2026-11-18
 elizondogarcia_2024_involvement_barriers,core,data/elizondogarcia_2024_parental_involvement.py,2026-11-23
 elizondogarcia_2024_self_regulation,core,data/elizondogarcia_2024_parental_involvement.py,2026-11-23
@@ -1556,3 +1556,18 @@ bratzke_2019_reproduction_e2,core,data/timing_db/timing_db.R,2026-11-25
 hallez_2019_reproduction,core,data/timing_db/timing_db.R,2026-11-25
 maass_2019_reproduction,core,data/timing_db/timing_db.R,2026-11-25
 maass_2019_mci_reproduction,core,data/timing_db/timing_db.R,2026-11-25
+pedley_2019_ipqo12,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+wang_2026_proactivehl10,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+pirchio_2018_prejudice7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+hoch_2024_regfocus8,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+clarke_2022_metoo7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+scott_2016_actchange8,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+spinner_2018_toyflex6,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+newton_2024_napbeliefs7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+regnoli_2025_mvts7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+baceviciene_2020_bodyappr6,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+waddimba_2020_autonomysupp6,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+dou_2022_nsscurric7,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+gershgoren_2021_pptsq6,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+colnaghi_2017_dizziness5,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
+rachmawati_2016_nursresatt6,cov,data/covariance/pmc_article_tables_ax.py,2026-11-25
