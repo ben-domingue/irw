@@ -84,10 +84,42 @@ is the first table carrying `HBM`. New tables from then on are tagged in
 batches: an intake PR need not tag its tables, and CI lists untagged tables
 rather than failing on them, so intake is never blocked by tagging.
 
+## Second batch (2026-11-25)
+
+The 155 tables built after the first passes (batches AL to AX) were tagged the
+same way: two blind passes from the record fields, adjudicated by hand.
+
+| | identical |
+|---|---|
+| construct type | 90.3% |
+| sample | 83.2% |
+| framework | 100% |
+| all three columns | 74.2% |
+
+The 41 disagreeing cells (40 tables) were settled by the 11-18 rulings above,
+and each settled cell's `notes` says how. Most sample disagreements were one
+pass adding `General/non-specific` to a named population with no account of
+recruitment, which the "named population" ruling leaves blank. Two calls are
+new applications rather than new rules:
+
+- **A quota panel is not `Representative`** even when the source calls it
+  nationally representative (`rottweiler_2024_misogyny8`,
+  `schnell_2023_maps7`), following `shek_2023_covidmentalhealth22`. Both
+  passes had given `Representative`. Random selection of schools or invitees
+  (`baceviciene_2020_bodyappr6`, the padmanabhanunni tables) keeps it.
+- **A trial cohort reached through the trial is `Program-based`**, also for a
+  secondary analysis (`abduljawad_2022_hospice9`, `elam_2021_alcoholprs7`), as
+  `dibaj_2025_ber5`. A one-off message experiment is not
+  (`zulkiewicz_2024_antiindustry7`).
+
+**Open for Ben (#3564):** dyad and couple tables, where each row is a pair and
+the variables are each member's own scores (`nothel_2023_albs10`,
+`pirchio_2018_prejudice7`, `schnettler_2024_ftowcdyad6`,
+`wang_2021_attachexplore12`). The team ruling covers aggregated team scores,
+not this. For now they are tagged as people, which is the reversible choice.
+
 ## Still open
 
-- Package filters (`construct_type`, `sample`, `framework`) in R and Python, once
-  the columns are live in `cov_metadata`.
 - The `cov_standard.qmd` bar and framework list.
 - Multi-country survey programmes pooled by country (ISSP, WVS) follow the pooled
   rule (frame blank), although each group is a national sample.

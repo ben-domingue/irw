@@ -13,8 +13,11 @@ Three things this does that a naive search doesn't:
   - EXCLUDE   : automatically skips datasets already in the IRW, or already
                 logged as a genuinely-ambiguous human_review row in a past
                 batch. The exclusion set is fetched live from the IRW
-                dictionary Google Sheet plus every doi column found under
-                human_review/*.csv on every run (_load_auto_exclusions()) —
+                dictionary Google Sheet, metadata/biblio.csv, the data sources of
+                data/ build scripts (not every DOI they mention), plus every doi
+                column found under human_review/*.csv on every run
+                (_load_auto_exclusions()); paper DOI, data DOI and the
+                deposit behind a repository URL all count (#3573) —
                 no local file to maintain. (The processing-queue "to be
                 processed" sheet was dropped from this check 2026-07-14 --
                 it's a manually maintained tab other contributors use, not
@@ -1044,8 +1047,20 @@ DICT_SHEET_URL = (
 )
 
 
+_URL_DOI_RX = re.compile(r"10\.\d{4,9}/[^\s\"'<>,;|\]\[(){}&#?]+", re.I)
+
+
 def _extract_doi_from_url(url: str) -> str | None:
-    """Best-effort extraction of a normalised DOI from a data repository URL."""
+    """Best-effort extraction of a normalised deposit DOI from a data
+    repository URL.
+
+    The repository forms matter because the dictionary often records a
+    deposit ONLY by its landing page, next to the paper's DOI (#3573):
+    `mellat_2022_*` carries 10.1080/19349637.2022.2121239 as its DOI and
+    data.mendeley.com/datasets/nr9388gbzf as its URL, so unless the URL is
+    turned back into 10.17632/nr9388gbzf the deposit stays discoverable. The
+    same goes for the build scripts' API and download URLs
+    (zenodo.org/api/records/N/files/..., data.mendeley.com/public-files/...)."""
     if not url:
         return None
     # doi.org resolver
@@ -1056,14 +1071,20 @@ def _extract_doi_from_url(url: str) -> str | None:
     m = re.search(r'persistentId=doi:(.+?)(?:&|$)', url, re.I)
     if m:
         return norm_doi(m.group(1))
-    # OSF project page
-    m = re.search(r'osf\.io/([a-z0-9]+)/?$', url, re.I)
+    # OSF project page, any sub-page (/files/osfstorage, /overview,
+    # ?view_only=) or the v2 API node URL. Node ids are five characters.
+    m = re.search(r'osf\.io/(?:v2/nodes/)?([a-z0-9]{5})(?=[/?#]|$)', url, re.I)
     if m:
         return norm_doi(f'10.17605/osf.io/{m.group(1)}')
-    # Zenodo record page
-    m = re.search(r'zenodo\.org/record/(\d+)', url)
+    # Zenodo record page (old /record/N and current /records/N) or API URL
+    m = re.search(r'zenodo\.org/(?:api/)?records?/(\d+)', url)
     if m:
         return norm_doi(f'10.5281/zenodo.{m.group(1)}')
+    # Mendeley Data landing page, public-files download or public-api URL
+    m = re.search(r'data\.mendeley\.com/(?:[a-z-]+/)?datasets/([a-z0-9]{10})(?![a-z0-9])',
+                  url, re.I)
+    if m:
+        return norm_doi(f'10.17632/{m.group(1)}')
     # Figshare article page (any subdomain). Real URLs have a variable number
     # of path segments between "articles/" and the numeric ID -- at minimum
     # a type segment ("dataset"), often also a title slug
@@ -1072,6 +1093,11 @@ def _extract_doi_from_url(url: str) -> str | None:
     m = re.search(r'figshare\.com/articles/.+?(\d+)(?:\.v\d+)?/?(?:[?#]|$)', url)
     if m:
         return norm_doi(f'10.6084/m9.figshare.{m.group(1)}')
+    # Anything else that carries a DOI in its path or query (Dryad's
+    # /dataset/doi:10.5061/..., other Dataverses, journal SI file links).
+    m = _URL_DOI_RX.search(url)
+    if m:
+        return norm_doi(m.group(0).rstrip("./"))
     return None
 
 
@@ -1218,20 +1244,216 @@ def _load_staged_dict_exclusions(names=STAGED_DICT_FILES) -> set:
     return dois
 
 
+BIBLIO_CSV = os.path.join(_HERE, os.pardir, "metadata", "biblio.csv")
+
+
+def _load_biblio_exclusions(path: str = BIBLIO_CSV) -> set:
+    """Paper DOI, data DOI and data-URL deposit DOI of every row in
+    metadata/biblio.csv.
+
+    The dictionary sheet has no data-DOI column at all, so a shipped table
+    whose deposit is recorded only as `DOI__for_data_` (andreu_sanchez_2023_*,
+    10.5281/zenodo.8057093) was invisible to the sheet-only check (#3573).
+    biblio.csv is also the committed copy, so it still works when the sheet
+    fetch fails."""
+    dois = set()
+    try:
+        with open(path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                for col in ("DOI__for_paper_", "DOI__for_data_"):
+                    d = norm_doi(row.get(col, "") or "")
+                    if "/" in d and " " not in d:
+                        dois.add(d)
+                url_doi = _extract_doi_from_url(row.get("URL__for_data_", "") or "")
+                if url_doi:
+                    dois.add(url_doi)
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        print(f"[warn] Could not read {path}: {e}", file=sys.stderr)
+    return dois
+
+
+BUILD_SCRIPT_GLOBS = ("*.py", "*.R", "*.r")
+# DOI prefixes of data repositories: a deposit under one of these names data,
+# never an instrument paper, so a build script mentioning it anywhere counts.
+_DATA_REPO_PREFIXES = (
+    "10.5281/",   # Zenodo
+    "10.17605/",  # OSF
+    "10.17632/",  # Mendeley Data
+    "10.6084/",   # figshare (incl. journal SI portals)
+    "10.7910/",   # Harvard Dataverse
+    "10.5061/",   # Dryad
+    "10.34894/",  # DataverseNL
+    "10.17026/",  # DANS
+    "10.15139/",  # Odum / UNC Dataverse
+    "10.4121/",   # 4TU.ResearchData
+    "10.3886/",   # ICPSR / openICPSR
+    "10.11587/",  # AUSSDA
+    "10.5683/",   # Borealis (Scholars Portal)
+    "10.23668/",  # PsychArchives
+    "10.5255/",   # UK Data Service
+    "10.4232/",   # GESIS
+    "10.6071/",   # UC Merritt / Dryad (UC)
+    "10.17639/",  # Nottingham Research Data Management Repository
+    "10.33009/",  # LDbase
+)
+_SCRIPT_URL_RX = re.compile(r"https?://[^\s\"'<>,;|\]\[(){}]+", re.I)
+# A header line declaring where a script's data comes from, or the paper its
+# table belongs to: "# Source: https://zenodo.org/records/N", "# Data:
+# Mendeley Data ... doi", "Dataset (OSF): https://osf.io/abcde", "# Paper:
+# https://link.springer.com/article/10.1007/...", "# DOI: 10.29059/...".
+# Comment or docstring, any case. "doi:10.x" written inline as a DOI URI
+# ("##doi:10.1017/S0007...; a 48-column subset") is a citation, not a label.
+_SOURCE_LINE_RX = re.compile(
+    r"^\s*(?:#+'?|\"{3}|'{3})?\s*(?:source|data|dataset|deposit|download|"
+    r"repository|raw data|data source|paper|doi(?!:10\.))\b[^:\n]{0,40}:", re.I)
+
+
+def _python_code_strings(text: str) -> str | None:
+    """The string literals a Python script's code uses, without comments or
+    docstrings; None if it does not parse."""
+    import ast
+    try:
+        tree = ast.parse(text)
+    except (SyntaxError, ValueError):
+        return None
+    # A string standing alone as a statement is a docstring (or a bare
+    # comment-string), not something the code reads.
+    skip = {id(n.value) for n in ast.walk(tree)
+            if isinstance(n, ast.Expr) and isinstance(n.value, ast.Constant)}
+    out = [n.value for n in ast.walk(tree)
+           if isinstance(n, ast.Constant) and isinstance(n.value, str)
+           and id(n) not in skip]
+    return "\n".join(out)
+
+
+def _r_code_text(text: str) -> str:
+    """An R script with its comments removed (a '#' outside quotes)."""
+    lines = []
+    for line in text.splitlines():
+        q, cut = None, len(line)
+        for i, ch in enumerate(line):
+            if q:
+                if ch == "\\":
+                    continue
+                if ch == q:
+                    q = None
+            elif ch in "\"'":
+                q = ch
+            elif ch == "#":
+                cut = i
+                break
+        lines.append(line[:cut])
+    return "\n".join(lines)
+
+
+def _script_source_text(path: str, text: str) -> str:
+    """The parts of a build script that name its data SOURCE: the code (the
+    URLs and DOIs it downloads or reads) plus any declared source line.
+
+    Comments and docstrings are otherwise left out, because that is where a
+    script cites the instrument's validation paper, the scoring manual or a
+    related study -- citations, not data this script built (#3573 follow-up).
+    """
+    if path.endswith(".py"):
+        code = _python_code_strings(text)
+        if code is None:          # does not parse: fall back to line rule
+            code = "\n".join(l for l in text.splitlines()
+                             if not l.lstrip().startswith("#"))
+    else:
+        code = _r_code_text(text)
+    declared = [l for l in text.splitlines() if _SOURCE_LINE_RX.match(l)]
+    return code + "\n" + "\n".join(declared)
+
+
+def _load_build_script_exclusions(root: str | None = None) -> set:
+    """DOIs and repository deposits that data/ build scripts take their data
+    FROM.
+
+    A build script is the one place a worked deposit is always named by its
+    own identifier: the dictionary often records only the PAPER DOI plus a
+    landing page, but the script downloads from the deposit
+    (`zenodo.org/api/records/14870714/files/...` in
+    sanchezgarcia_2025_academic_dishonesty.py, whose dictionary rows carry
+    10.1371/journal.pone.0346573). Before #3573 these deposits re-surfaced in
+    discovery and only irw_claude_assist.already_worked() (#3424) caught them,
+    after they had already been triaged into human_review/.
+
+    Only the source counts (#3573 follow-up). Two signals:
+
+    * Any DOI or URL in the code (download and read calls, URL constants)
+      or on a declared "Source:"/"Data:" line -- see _script_source_text().
+    * A DATA-REPOSITORY deposit (_DATA_REPO_PREFIXES: Zenodo, OSF, Mendeley,
+      figshare, Dataverses, Dryad, ...) anywhere in the script, comments
+      included. Older scripts name their source only in a header comment
+      ("##https://osf.io/25m8a", "Original deposit: 10.5281/zenodo.3774526",
+      "# DOI: 10.6084/m9.figshare.24081459.v1"), and the rest are the same
+      data deposited twice (mairean_2024c_*: zenodo.13905610 built,
+      zenodo.13905612 the duplicate). A repository deposit is data, never an
+      instrument paper.
+
+    A "# Paper:" or "# DOI:" header line counts too: it names the table's
+    own paper, which biblio.csv sometimes records under a different DOI or
+    not at all (Aspirations_Sonmez_2022: script 10.1504/IJHD.2023.131527,
+    biblio 10.1504/IJHD.2023.10055261). A journal DOI the script merely
+    mentions elsewhere -- the instrument's validation paper in a comment, a
+    citation in the docstring -- is not excluded on this script's account;
+    if it is the table's own paper or data DOI, metadata/biblio.csv and the
+    dictionary exclude it anyway (_load_biblio_exclusions)."""
+    root = root or os.path.join(_HERE, os.pardir, "data")
+    dois = set()
+    paths = []
+    for pat in BUILD_SCRIPT_GLOBS:
+        paths += glob.glob(os.path.join(root, "**", pat), recursive=True)
+    for path in paths:
+        try:
+            with open(path, encoding="utf-8", errors="replace") as f:
+                full = f.read()
+        except OSError:
+            continue
+        dois |= _dois_in(_script_source_text(path, full))
+        dois |= {d for d in _dois_in(full)
+                 if d.startswith(_DATA_REPO_PREFIXES)}
+    return dois
+
+
+def _dois_in(text: str) -> set:
+    """Every DOI in `text`, bare or behind a repository URL."""
+    out = set()
+    for m in _URL_DOI_RX.finditer(text):
+        d = norm_doi(m.group(0).rstrip("./`"))
+        if "/" in d:
+            out.add(d)
+    for m in _SCRIPT_URL_RX.finditer(text):
+        url_doi = _extract_doi_from_url(m.group(0))
+        if url_doi:
+            out.add(url_doi.rstrip("./`"))
+    return out
+
+
 def _load_auto_exclusions() -> set:
-    """Load DOIs to exclude: already in the IRW dictionary, already staged in
-    this repo's own dictionary_auto*.csv, already logged as a human_review row
-    in a past batch, or already in the conjoint ledger."""
+    """Load DOIs to exclude: already in the IRW dictionary or biblio.csv,
+    the data source of a data/ build script, already staged in this repo's own
+    dictionary_auto*.csv, already logged as a human_review row in a past
+    batch, or already in the conjoint ledger. Each source contributes paper
+    DOIs, data DOIs and the deposit DOI behind any repository URL, so a
+    deposit recorded under its paper's DOI is still caught (#3573)."""
     existing = _load_existing_irw_dois()
+    biblio = _load_biblio_exclusions()
+    scripts = _load_build_script_exclusions()
     reviewed = _load_human_review_exclusions()
     conj = _load_conj_ledger_exclusions()
     staged = _load_staged_dict_exclusions()
     print(f"[exclude] {len(existing)} DOIs already in IRW, "
+          f"{len(biblio)} in metadata/biblio.csv, "
+          f"{len(scripts)} named as a source by data/ build scripts, "
           f"{len(reviewed)} already logged in human_review/, "
           f"{len(conj)} in the conjoint ledger, "
           f"{len(staged)} staged in dictionary_auto*.csv but not yet in the "
           f"sheet", flush=True)
-    return _with_supplement_bases(existing | reviewed | conj | staged)
+    return _with_supplement_bases(
+        existing | biblio | scripts | reviewed | conj | staged)
 
 
 def is_excluded(doi: str, exclude: set) -> str:
@@ -1263,6 +1485,10 @@ def is_excluded(doi: str, exclude: set) -> str:
     d = norm_doi(doi)
     if d in exclude:
         return "exact"
+    # One deposit, any version: 10.17632/nr9388gbzf.2 vs 10.17632/nr9388gbzf,
+    # figshare .v1 vs bare. The exclusion set carries the canonical form too.
+    if canonical_doi(d) in exclude:
+        return "exact"
     base = strip_supplement_suffix(d)
     if base != d and base in exclude:
         return "supplement"
@@ -1271,8 +1497,10 @@ def is_excluded(doi: str, exclude: set) -> str:
 
 def _with_supplement_bases(exclude: set) -> set:
     """The exclusion set plus the article DOI behind every supplementary-file
-    DOI in it, so the match works whichever form each side recorded."""
+    DOI in it, and the version-free form of every repository DOI in it, so
+    the match works whichever form each side recorded."""
     extra = {b for b in (strip_supplement_suffix(d) for d in exclude) if b}
+    extra |= {canonical_doi(d) for d in exclude}
     return exclude | extra
 
 

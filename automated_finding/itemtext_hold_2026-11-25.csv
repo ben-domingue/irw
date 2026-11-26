@@ -1,0 +1,28 @@
+table,items,instrument,rights_basis_recorded,recommendation,reason
+lee_2026_mastery,5,"Pearlin Mastery Scale (Pearlin & Schooler 1978), reworded",none,HOLD,"Named third-party instrument (near-verbatim B03/B05, reworded B02/B04); no grant located; silence holds (2026-10-15). Register row written."
+umoru_2026_life_satisfaction,5,"Satisfaction With Life Scale (SWLS), Diener et al. 1985, adapted",none,HOLD,"SWLS derivative (LS5 verbatim 'If I could live my life over, I would change almost nothing'; LS1/LS4 reworded); SWLS is BLOCK in the register (Ben 2026-09-09)."
+charzynska_2026_uwes3,3,"Utrecht Work Engagement Scale, 3-item form (UWES-3)",none,HOLD,"UWES is BLOCK in the register: 'free for use for non-commercial scientific research. Commercial and/or non-scientific use is prohibited, unless previous written permission is granted'."
+charzynska_2026_mwms6,6,"Multidimensional Work Motivation Scale (MWMS), Gagne et al. 2015",none,HOLD,Named third-party instrument; no grant located; silence holds. Register row written.
+hung_2026_social_avoidance,5,Social avoidance items as administered by Hung 2026,none,HOLD,Part of an all-named-instrument battery whose source scales the deposit does not cite; held with the battery under err-on-exclusion (stems not matched to a source).
+hung_2026_psmu,6,"Problematic social media use items (BSMAS/Bergen-style, 'Internet')",none,HOLD,Bergen Social Media Addiction Scale derivative; BSMAS is HOLD in the register.
+hung_2026_upward_comparison,6,Upward social comparison items,none,HOLD,"Named-scale shape, source not cited; HOLD register row written."
+hung_2026_downward_comparison,6,Downward social comparison items,none,HOLD,As upward_comparison.
+hung_2026_shyness,6,Shyness items (Cheek & Buss RCBS-style),none,HOLD,RCBS derivative ('I feel nervous when I'm with people I don't know well' ~ RCBS 'I feel tense ...'); RCBS is BLOCK in the register.
+hung_2026_social_desirability,5,Marlowe-Crowne Social Desirability Scale items,none,HOLD,Verbatim MC-SDS items; HOLD register row written.
+wren_2026_ctq_sf,28,Childhood Trauma Questionnaire - Short Form (CTQ-SF),none,HOLD,CTQ is HOLD in the register: 'sold under licence by Pearson Assessments'.
+wren_2026_ghsq_emotional,10,General Help-Seeking Questionnaire (GHSQ),none,HOLD,Named third-party instrument; no grant located; HOLD register row written.
+wren_2026_ghsq_suicidal,10,General Help-Seeking Questionnaire (GHSQ),none,HOLD,As ghsq_emotional.
+wren_2026_ghsq_substance,10,General Help-Seeking Questionnaire (GHSQ),none,HOLD,As ghsq_emotional.
+wren_2026_cage_aid,4,"CAGE-AID, Brown & Rounds 1995",none,HOLD,"Terms conflict (public-domain agency copies vs 'permission for use granted by Richard Brown, MD'); HOLD register row written."
+gomezmari_2026_asd_teacher_self_efficacy,30,"Autism Self-Efficacy Scale for Teachers (ASSET), Ruble et al. 2013, Spanish",none,HOLD,"Named third-party instrument, translated (a translation is a derivative); HOLD register row written."
+torun_2026_short_video_addiction,10,Turkish short-video addiction scale (KVB),none,HOLD,Published Turkish adaptation of a named scale; HOLD register row (Torun-2026-battery).
+torun_2026_academic_procrastination,19,"Academic Procrastination Scale, Turkish (AEO)",none,HOLD,As short_video_addiction.
+torun_2026_ok,16,"16-item self-control scale, Turkish (OK)",none,HOLD,As short_video_addiction.
+torun_2026_bis11,30,"Barratt Impulsiveness Scale BIS-11, Turkish",none,HOLD,BIS-11 is HOLD in the register.
+galindodominguez_2026_planning,8,"Self-Regulation of Learning Self-Report Scale (SRL-SRS), Toering et al. 2012, Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+galindodominguez_2026_self_monitoring,5,"Self-Regulation of Learning Self-Report Scale (SRL-SRS), Toering et al. 2012, Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+galindodominguez_2026_evaluation,8,"Self-Regulation of Learning Self-Report Scale (SRL-SRS), Toering et al. 2012, Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+galindodominguez_2026_reflection,5,"Self-Regulation of Learning Self-Report Scale (SRL-SRS), Toering et al. 2012, Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+galindodominguez_2026_effort,10,"Self-Regulation of Learning Self-Report Scale (SRL-SRS), Toering et al. 2012, Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+galindodominguez_2026_overreliance,11,"AI-dependence items OVR07-OVR18 (numbered from an unnamed larger instrument), Basque",none,HOLD,"Named third-party instrument, translated; HOLD register row written (SRL-SRS). Built in Basque only, no English."
+lee_2026_self_esteem,4,"Self-esteem items mixing Core Self-Evaluations (C01 ~ CSES ""Overall, I am satisfied with myself"") and RSES rewordings (C03, C05)",none,HOLD,"irw-validate matched C01 to the register's CSES row (verdict hold: originator's article paywalled, no rights statement). RSES (ship) does not reach the CSES item; the four-item block is held whole rather than split."

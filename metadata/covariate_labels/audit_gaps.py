@@ -149,6 +149,8 @@ def main() -> int:
         if table in considered:
             if table in kept:
                 continue                  # some pairs kept, just not all
+            if all(r["status"] == "text" for r in coverage if r["table"] == table):
+                continue                  # every covariate ships as label text
             why = sorted({r["reason"] for r in coverage
                           if r["table"] == table and r["reason"]})
             rows.append(dict(table=table, scripts=";".join(rel),

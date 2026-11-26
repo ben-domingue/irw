@@ -177,6 +177,48 @@ class ExtraChecks(unittest.TestCase):
         report = validate_frame(df, profile="upload")
         self.assertNotIn("cov_range", [f.check for f in report.findings])
 
+    @staticmethod
+    def _esm(people, beeps, items=("a", "b", "c"), wave=True):
+        rows = [(i, it, (i + w) % 7 + 1, w) for i in range(people)
+                for w in range(1, beeps + 1) for it in items]
+        df = F(id=[r[0] for r in rows], item=[r[1] for r in rows],
+               resp=[r[2] for r in rows])
+        if wave:
+            df["wave"] = [r[3] for r in rows]
+        return df
+
+    def _floor(self, df):
+        report = validate_frame(df, profile="upload")
+        return [(f.severity, f.message) for f in report.findings
+                if f.check == "sample_floor"]
+
+    def test_esm_table_over_the_esm_floor_is_info_not_warn(self):
+        """#3421: 30 people and a pooled median of 20 per person per item."""
+        (sev, msg), = self._floor(self._esm(40, 25))
+        self.assertEqual(sev, "info")
+        self.assertIn("ESM floor", msg)
+
+    def test_esm_floor_needs_the_median(self):
+        (sev, _), = self._floor(self._esm(40, 5))
+        self.assertEqual(sev, "warn")
+
+    def test_esm_floor_needs_30_people(self):
+        (sev, _), = self._floor(self._esm(25, 40))
+        self.assertEqual(sev, "warn")
+
+    def test_esm_floor_needs_an_occasion_column(self):
+        (sev, _), = self._floor(self._esm(40, 25, wave=False))
+        self.assertEqual(sev, "warn")
+
+    def test_esm_median_is_pooled_so_a_thin_item_can_stay(self):
+        df = self._esm(40, 25, items=("a", "b", "c", "d"))
+        df = df[~((df["item"] == "d") & (df["wave"] > 5))]   # d asked 5 times
+        (sev, _), = self._floor(df)
+        self.assertEqual(sev, "info")
+
+    def test_hundred_people_needs_no_floor_finding(self):
+        self.assertEqual(self._floor(self._esm(100, 2)), [])
+
     def test_long_table_name_blocks(self):
         df = FIXTURES["clean"]()
         long_name = "a" * 41

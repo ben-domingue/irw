@@ -33,7 +33,7 @@ rcv_berkeley_20241105_mayor,berkeley_2004plus,1,4,4,yes,yes,yes,match,0,,,,
 rcv_bloomington_20231107_councilal,bloomington_2023plus,1,2,2,yes,no,no,warning,3,"round 1 (write-in): ours 0, published 33",,writein_pooling,the deposit has no write-in mark; the city's table prints a line of 33 in round 1; round 2 matches in every figure. Winner the same.
 rcv_bloomington_20231107_councild4,bloomington_2023plus,1,1,1,yes,no,no,warning,2,"round 1 (write-in): ours 0, published 11",,writein_pooling,"the deposit has no write-in mark; the city's table prints a line of 11. Winner the same, one round."
 rcv_boulder_20231107_mayor,boulder_2020plus,1,2,2,yes,no,no,warning,5,"round 1 c01: ours 11540, published 11504",,same_outcome_source_differs,"the table holds 41 more votes in round 1 (32,934 against 32,893), 36 of them for c01; no saved source says why. Winner and the batch of round 1 the same."
-rcv_burlington_20060307_mayor,burlington_2005,unknown,2,,,,no,warning,,cannot count: seats is 'unknown' in the design row,CANNOT_COUNT,seats_unknown,"seats is unknown in the design row, so the table is not counted. The replay of #3461 counted it as one seat, the one elected candidate the published rounds show: the same winner, and the report's last round has c02 one vote above the table's (12 ballots reach an overvote, and the regulations keep a ballot where only one candidate at that ranking continues, which the table's token cannot show)."
+rcv_burlington_20060307_mayor,burlington_2005,1,2,2,yes,yes,no,warning,1,"round 2 c02: ours 3985, published 3986",,same_outcome_source_differs,"the report's last round has c02 one vote above the table's; 12 ballots reach an overvote, 10 at their first ranking and 2 after their first choice is out, and the regulations keep a ballot where only one candidate at that ranking continues, which the table's token cannot show."
 rcv_burlington_20090303_mayor,burlington_2005,1,3,3,yes,yes,no,warning,1,"round 3 c05: ours 4060, published 4061",,same_outcome_source_differs,"the report's last round has c05 one vote above the table's; 5 ballots reach an overvote, with the same exception. 4 invalid ballots the report sets apart are inactive here."
 rcv_burlington_20230307_councilcentrald,burlington_2021plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_burlington_20230307_councileastd,burlington_2021plus,1,1,1,yes,yes,yes,match,0,,,,
@@ -204,7 +204,7 @@ rcv_nyc_20210622_demcouncild45,nyc_2019plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild46,nyc_2019plus,1,7,7,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild47,nyc_2019plus,1,3,3,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild48,nyc_2019plus,1,5,5,yes,yes,yes,match,0,,,,
-rcv_nyc_20210622_demcouncild49,nyc_2019plus,unknown,9,,,,no,warning,,cannot count: seats is 'unknown' in the design row,CANNOT_COUNT,seats_unknown,"seats is unknown in the design row, so the table is not counted. The replay of #3461 counted it as one seat, the one elected candidate the published rounds show, and matched every figure."
+rcv_nyc_20210622_demcouncild49,nyc_2019plus,1,9,9,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild5,nyc_2019plus,1,6,6,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild6,nyc_2019plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_nyc_20210622_demcouncild7,nyc_2019plus,1,12,12,yes,yes,yes,match,0,,,,
@@ -464,7 +464,7 @@ rcv_stlouispark_20211102_councilward4,stlouispark_2018plus,1,1,1,yes,yes,yes,mat
 rcv_takoma_20221108_councilward1,takoma_2019plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_takoma_20221108_councilward2,takoma_2019plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_takoma_20221108_councilward3,takoma_2019plus,1,2,2,yes,yes,yes,match,0,,,,
-rcv_takoma_20221108_councilward4,takoma_2019plus,unknown,1,,,,no,warning,,cannot count: seats is 'unknown' in the design row,CANNOT_COUNT,seats_unknown,"seats is unknown in the design row, so the table is not counted. The replay of #3461 counted it as one seat, the one elected candidate the published rounds show, and matched every figure."
+rcv_takoma_20221108_councilward4,takoma_2019plus,1,1,1,yes,yes,yes,match,0,,,,
 rcv_takoma_20221108_councilward5,takoma_2019plus,1,2,2,yes,yes,no,warning,2,"round 2 (write-in): ours 0, published 1",,writein_pooling,the report's round 2 prints a write-in line of 1 where the table's write-in marks have gone on to c01; every other figure matches. Winner the same.
 rcv_takoma_20221108_councilward6,takoma_2019plus,1,2,2,yes,yes,no,warning,1,"round 2 c03: ours 292, published 294",,same_outcome_source_differs,"the report has c03 two votes above the table in its last round; exactly 2 ballots reach an overvote, and the Charter keeps a ballot where only one candidate at that ranking is advancing, which the table's token cannot show. Winner the same."
 rcv_takoma_20221108_mayor,takoma_2019plus,1,1,1,yes,yes,yes,match,0,,,,
