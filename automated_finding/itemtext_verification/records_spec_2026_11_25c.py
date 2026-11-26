@@ -212,10 +212,10 @@ add("aini_2026_high_protein_food",
 ship("tothe_2021_student_satisfaction", ref="10.17632/7cjz65mg6g ; educational-factors.xlsx sheet 'details' (variable name, details)",
      instrument_note=("instrument: author-developed questionnaire (To-The, Khuc-Van, Hoang-Duc et al. 2021) -- the deposit cites no source "
                       "scale; rights: study-authored under the deposit's CC BY 4.0. One exception: b4_8 'I am satisfied with my life' "
-                      "matches the register's SWLS row (block) word for word, so its item_text is left blank pending a ruling."),
+                      "matches the register's SWLS row (block) word for word, its stem is shipped: one common sentence inside an author-developed list is not the SWLS (ben-domingue 2026-11-25)."),
      how=("Gated against the LIVE tables (uploaded 2026-11-23) via irw_table_sets(); audit_batch.R run live. Anchors: only the "
           "endpoints are labelled in the source (1 = Bad, 5 = Good); 2-4 blank. Vietnamese students; " + LANG_UNSET),
-     per_table={"tothe_2021_other_satisfaction": "b4_8's item_text is blank by design (SWLS register match, see above); 7 of 8 items worded."},
+     per_table={"tothe_2021_other_satisfaction": "8 of 8 items worded; b4_8 matches an SWLS item but ships (ruling above)."},
      codes="a13_1..b4_8", srcdesc="the details sheet", n="one details row per item, 75/75 across the thirteen tables")
 
 ship("minozzo_2026_seafood_consumers", ref="10.5281/zenodo.22284893 ; amostra_calibracao.xlsx headers ('<prompt> [<Portuguese item>]') + Supplementary_Material_EN Table_S1 (English)",

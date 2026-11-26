@@ -13,8 +13,7 @@ main after they land; squash merges mean a stacked PR never reaches main).
   barrier items); language/version notes -- croitoru_2026 x5 (Romanian administered, English shipped), ahmad_2026 x5 (72 read
   French), charzynska_2026_iwas5 (85 cultures, English master). check_provenance.R does not read
   automated_finding/itemtext_provenance.csv, so nothing will flag these.
-- [ ] Ben: tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' -- one common sentence that matches the SWLS row;
-  its stem is blank. Restore it, or leave blank?
+- [x] tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' (matches an SWLS item): ruled SHIP 2026-11-25, stem restored.
 - [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
   code-named construct tables ship as they are.
 - [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).

@@ -559,10 +559,9 @@ def tothe(src):
                 txt[k] = r[b].strip()
     assert sum(str(v).startswith("5-point Likert scale questions (1=Bad, 5=Good)") for v in d.values.ravel()) == 2
     anchors = {1: "Bad", 5: "Good"}
-    # b4_8 'I am satisfied with my life' matches the register's SWLS row (verdict block) word for word;
-    # one common sentence in an author-developed list, but held until cleared: item_text left blank.
+    # b4_8 'I am satisfied with my life' matches the register's SWLS row (verdict block) word for word.
+    # Ships: one common sentence inside an author-developed list is not the SWLS (ben-domingue, 2026-11-25).
     assert txt["b4_8"] == "I am satisfied with my life"
-    txt["b4_8"] = ""
     for table, cs in blocks("tothe_2021_student_satisfaction").items():
         build(table, "Questionnaire on factors in Vietnamese students' motivation and satisfaction under COVID-19, "
               "To-The, Khuc-Van, Hoang-Duc et al. 2021", {c: txt[c] for c in cs}, anchors)

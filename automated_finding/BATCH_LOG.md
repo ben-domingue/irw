@@ -75,7 +75,7 @@ building, prichard_2026 skipped. Builder `itemtext_verification/make_itemtext_re
 labels / header carries the IRW code), except aini_2026 (positional codes, re-derived from the script's own slicing) -- so all 81
 are `data_labels` NOT_NEEDED rows in `itemtext/mapping_verification.csv`. Gates: `validate_items.R` PASS on all 81 (`--resp-csv`
 for the staged ones, `--table-sets` for the live tothe_2021 x13 and upoma_2026 x2); `audit_batch.R` PASS except anon_2026_pni
-(row-count WARN: the CFA sample answered 24 of 34 PNI items, by design) and tothe_2021_other_satisfaction (blank b4_8, below);
+(row-count WARN: the CFA sample answered 24 of 34 PNI items, by design) and tothe_2021_other_satisfaction (b4_8 SWLS match, shipped, below);
 `irw-validate` clean after the two rights hits were acted on; `lint_verification.R` and `check_provenance.R` add nothing new.
 - **Shipped (81):** herrera_2026 x5 (Spanish + IRW English), croitoru_2026 x5 (authors' English, Romanian administration,
   fallback), ahmad_2026 x5 (author-written; language 'English; French'), sengarie_2026 x4, efawati_2026 x3, lee_2026 x7,
@@ -92,8 +92,9 @@ for the staged ones, `--table-sets` for the live tothe_2021 x13 and upoma_2026 x
   the cited third-party scales). Wording locations are in their provenance rows.
 - **Skipped:** prichard_2026 -- stems survive only as the column headers with spaces removed; the full wording needs the
   instrument, not in the deposit.
-- **One stem blanked:** tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' matches the SWLS row word for word; its
-  item_text is blank pending a ruling (7 of 8 items worded).
+- **One stem matched a held instrument:** tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' matches the SWLS row
+  word for word. Ruled SHIP (ben-domingue 2026-11-25): one common sentence inside an author-developed list is not the
+  instrument. Stem restored, 8 of 8 items worded.
 - **Register rows (13):** hold -- Pearlin Mastery, MWMS, MC-SDS, up/down social comparison, GHSQ, CAGE-AID (terms conflict),
   ASSET, SRL-SRS, the Torun battery, the Upoma adapted battery, the Vilkaite-Vaitone eWOM battery; ship -- CRoSS (CC BY 4.0 first
   publication), IWAS (depositor-originated).
