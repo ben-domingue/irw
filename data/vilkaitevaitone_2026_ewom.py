@@ -12,9 +12,8 @@
 #   deposit has no PI1), _source_homophily (SH1-4), _source_trust (ST1-3, source trustworthiness).
 # Covariates: cov_age_group, cov_gender, cov_education from the .sav value labels.
 # PII: none (all columns numeric).
-# Item text: not shipped -- stems are in the .sav variable labels and the codebook, anchors in the value labels, but the
-#   items are adapted from published third-party scales (Cheung et al. 2009; Durmaz & Yuksel 2017; Jiang & Benbasat
-#   2007; Lu et al. 2014; Dhun & Dangi 2023 / Onofrei et al. 2022; Fisher et al. 1979) with no register rows yet.
+# Item text: held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv) (not built) -- items adapted from the
+#   third-party scales the codebook cites; stems in the .sav labels + codebook, anchors in the value labels
 import io
 import re
 import sys

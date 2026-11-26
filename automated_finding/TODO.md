@@ -1,5 +1,24 @@
 # IRW Automated Finding — TODO
 
+## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) uploaded to shard 10 + 81 item text tables
+
+Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-leads-2026-11-25`, rebased onto main).
+
+- [x] **UPLOADED 2026-11-25 by Claude (Ben's go-ahead in-session):** 403 response tables to the item_response_warehouse_10
+  draft (all row-count verified; ding_2026_who5 re-uploaded by Ben after an interrupted run left it empty) and 81 item text
+  tables to the irw_text_4 draft (81/81 verified; the 27 in `held_2026-11-25/` left behind). Ben publishes shard 10, then irw_text_4.
+- [ ] Merge #3729 once both drafts are published.
+- [x] Issues-page entries: datapages/irw#462 merged 2026-11-25 (41 entries). Were owed (`itemtext_issues.qmd`), one per table, the public_note text is in each
+  provenance row: IRW-translated English -- herrera_2026 x5, sucipto_2026 x7, aini_2026 x5, minozzo_2026 x13 (prompts, and the
+  barrier items); language/version notes -- croitoru_2026 x5 (Romanian administered, English shipped), ahmad_2026 x5 (72 read
+  French), charzynska_2026_iwas5 (85 cultures, English master). check_provenance.R does not read
+  automated_finding/itemtext_provenance.csv, so nothing will flag these.
+- [x] tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' (matches an SWLS item): ruled SHIP 2026-11-25, stem restored.
+- [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
+  code-named construct tables ship as they are.
+- [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).
+- [ ] Covariate labels: after these tables are published and the weekly pipeline runs, `build.py`, `audit_gaps.py --write`, PR.
+
 ## Repos backlog drain 2026-11-25b — 143 unworked leads
 
 Full write-up in `BATCH_LOG.md` (2026-11-25b).

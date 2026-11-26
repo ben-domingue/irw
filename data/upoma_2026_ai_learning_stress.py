@@ -24,8 +24,10 @@
 # Covariates: cov_age_group (Q1), cov_gender (Q2), cov_relationship (Q3), cov_semester (Q4), decoded from the codebook.
 #   The AI-tool indicators are not carried.
 # PII: none (the clean file has one text column, NewID; open-ended answers were withheld by the depositors).
-# Item text: not shipped -- the codebook and survey_instrument_english.docx give every stem and anchor, but the items
-#   are adapted from third-party instruments (TAM, AAIUS, GADS, GAIES, SDLRS, PSS-10) with no register rows yet.
+# Item text: shipped 2026-11-25c for the two study-specific blocks (ai_literacy_ethics, ai_stressors; codebook Source
+#   Question); the TAM/AAIUS/GADS/GAIES/SDLRS/PSS-derived tables held 2026-11-25
+#   (automated_finding/itemtext_hold_2026-11-25.csv);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys
