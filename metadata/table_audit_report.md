@@ -5,7 +5,7 @@ Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public r
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (200 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (201 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -27,6 +27,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | hachenberger_2025_gonogo | core |  |  | 1 |  |  |
 | hachenberger_2025_stroop_bin | core |  |  | 1 |  |  |
 | hachenberger_2025_webexec | core |  |  | 1 |  |  |
+| harrison_2014_correlation_jnd | core |  | 1 |  |  |  |
 | kazarovytska_2026_ingroup_event_attribution | core |  |  | 1 |  |  |
 | kwiatkowska_2022_bemas | core |  |  | 1 |  |  |
 | liang2026_extrinsic_motivation | core |  |  | 1 |  |  |
@@ -38,8 +39,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | liu_2025_self_esteem_study2 | core |  | 1 |  |  |  |
 | moral_absolutism_goyal_2025_moral | core |  |  | 1 |  |  |
 | moral_absolutism_goyal_2025_nfc | core |  |  | 1 |  |  |
-| putwain_2020_rcads | core |  | 1 |  |  |  |
-_...and 170 more, see the .txt or .csv._
+_...and 171 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
