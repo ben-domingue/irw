@@ -49,3 +49,16 @@ dd_rotation,curated:psychophysics #3686,chronometric mental rotation (Borst et a
 mentalrotation_wolf_2024,curated:psychophysics #3686,3D-printed Shepard-Metzler shapes; angle in itemcov_angle
 ebert_2024_letter_mr,curated:psychophysics #3686,"chronometric letter rotation, alone or under visual WM load; item = letter x angle"
 harrison_2014_correlation_jnd,curated:licence ask #3686,correlation JND staircases in 9 chart types; item = chart x direction x rbase x rv
+baccarani_2020_bisection,curated:timing_db #3686,auditory temporal bisection under odour conditions; item = test duration
+tipples_2019_bisection,curated:timing_db #3686,visual temporal bisection with threatening or neutral pictures; item = picture condition x test duration
+suarezpinilla_2019_videos,curated:timing_db #3686,duration estimation of natural-scene videos (1-64 s); item = setting x duration
+williams_2019_estimation,curated:timing_db #3686,"verbal estimation of auditory, visual and tactile intervals; item = modality x duration"
+matthews_2018_toj,curated:timing_db #3686,visual temporal order judgement on dynamic plaids; item = motion type x SOA
+damsma_2021_reproduction,curated:timing_db #3686,motor reproduction of visual intervals (1-4 s); item = target duration
+bratzke_2019_reproduction_e1,curated:timing_db #3686,visual/auditory interval reproduction in the same or other modality; item = modality x congruency x duration
+bratzke_2019_reproduction_e2,curated:timing_db #3686,filled/empty auditory interval reproduction; item = form x congruency x duration
+hallez_2019_reproduction,curated:timing_db #3686,"visual interval reproduction in short and long contexts, children and adults; item = context x duration"
+maass_2019_reproduction,curated:timing_db #3686,auditory interval reproduction across alternating duration sets; item = target duration
+maass_2019_mci_reproduction,curated:timing_db #3686,auditory interval reproduction by older adults with aMCI and controls; item = target duration
+makowski_2025_illusion_retest,curated:psychophysics #3686,"Illusion Game (Ebbinghaus, Mueller-Lyer, Vertical-Horizontal) test-retest; item = illusion x strength x difference"
+makowski_2025_illusion_perceptual,curated:psychophysics #3686,Illusion Game perceptual baseline without illusion; item = illusion x signed difference (strength 0)
