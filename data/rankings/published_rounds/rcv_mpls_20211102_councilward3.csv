@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2021-Council-Ward-3-Round-Results-Summary.pdf
+1,c01,888
+1,c02,1165
+1,c03,6027
+1,c04,5229
+1,(exhausted),0
+1,(write-in),44
+2,c01,0
+2,c02,0
+2,c03,6907
+2,c04,5658
+2,(exhausted),788
+2,(write-in),0
+1,(threshold),6677
+1,(elected:c03),

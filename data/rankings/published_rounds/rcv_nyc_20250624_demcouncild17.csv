@@ -1,0 +1,17 @@
+round,item,votes
+1,(source),https://www.vote.nyc/sites/default/files/pdf/election_results/2025/20250624Primary%20Election/rcv/026938_1.html
+1,c01,2339
+1,c02,1502
+1,c03,1635
+1,c04,3714
+1,(write-in),90
+2,c01,2345
+2,c02,1512
+2,c03,1639
+2,c04,3727
+3,c01,2487
+3,c03,1842
+3,c04,4049
+4,c01,2769
+4,c04,4536
+1,(elected:c04),

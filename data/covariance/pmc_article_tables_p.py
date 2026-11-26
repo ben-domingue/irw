@@ -24,9 +24,14 @@ as a full square, the script checks the upper triangle equals the lower and writ
 the lower; for lower-triangle tables it checks the upper triangle is empty. Values
 are written in shortest round-trip form of the published decimal (for example
 "0.40" -> "0.4"), i.e. unchanged. Mean and SD columns, where used, become mean/sd
-rows. Variable names are the source's labels; where the source numbers its items
+rows. A reliability the article prints for a variable (Cronbach's alpha in another
+table or in the text, same sample) becomes a rel row, value as printed; the
+coefficient is named in matrices.csv notes. Variable names are the source's labels; where the source numbers its items
 ("1", "2", ...) they are written "item1", "item2", ... and the item wording is in
 matrices.csv `variables`.
+
+Modification (2026-11-18): rel rows added (#3607 standard) for chen_2026,
+brouwer_2025 and kilic_2026; other rows unchanged.
 
 Modification (2026-11-18): reshaped to the long lower-triangle layout in
 data/covariance/README.md; stars stripped; values unchanged.
@@ -47,7 +52,11 @@ from pathlib import Path
 # order), rows (the <tr> index holding each variable's row, or None if the table
 # prints no row for it), optional mean/sd column indices, optional group
 # (several configs with one table name = one table with a group column);
-# optional rename maps a printed header to the name used (layout only).
+# optional rename maps a printed header to the name used (layout only);
+# optional rel = dict(label=<table label>, col=<cell index>) reads a printed
+# per-variable reliability from another table of the same article, from the row
+# whose first cell is the variable's label; optional rel_text = {variable: regex}
+# reads it from the article text (one capture group). Both give `rel` rows.
 CONFIGS = [
     dict(pmcid="PMC12469481", label="Table 3", table="wolfson_2025_smmconditions27", n=978,
          layout="full", col0=1, header_row=0,
@@ -63,16 +72,17 @@ CONFIGS = [
          names=[f"item{i}" for i in range(1, 23)], rows=list(range(1, 23))),
     dict(pmcid="PMC13730822", label="Table 2", table="chen_2026_attachmentprosocial12", n=536,
          layout="lower", col0=1, label_col=0,
-         rows=list(range(1, 13))),
+         rows=list(range(1, 13)), rel=dict(label="Table 1", col=6)),  # Cronbach's alpha column
     dict(pmcid="PMC12226599", label="Table 6", table="brouwer_2025_mslq15", n=509,
          layout="lower", col0=1, label_col=0,
-         rows=list(range(1, 16))),
+         rows=list(range(1, 16)), rel=dict(label="Table 4", col=6)),  # Cronbach's alpha column
     dict(pmcid="PMC12986267", label="Table 2", table="wieteskamilek_2026_emphasis10", n=120,
          layout="lower", col0=3, mean=1, sd=2,
          names=[f"Emph-{i}" for i in range(1, 11)], rows=list(range(1, 11))),
     dict(pmcid="PMC13627343", label="Table 11", table="kilic_2026_teacherclimate12", n=424,
          layout="lower", col0=1, label_col=0,
-         rows=list(range(1, 13))),
+         rows=list(range(1, 13)),
+         rel_text={v: v + r" \(α = (\d?\.\d+)\)" for v in ("Love", "Value", "Adaptation")}),
     dict(pmcid="PMC13534396", label="Table 4", table="brod_2026_acemimpact25", n=199,
          layout="lower", col0=1, label_col=0,
          rows=list(range(2, 27))),
@@ -177,6 +187,28 @@ def build(cfg, root):
             for i in range(k):
                 out.append({"stat": stat, "var1": names[i], "var2": "",
                             "value": num(rows[ridx[i]][cfg[stat]], where), "n": cfg["n"]})
+    if cfg.get("rel"):
+        rt = next(t for t in root.iter("table-wrap")
+                  if t.find("label") is not None and txt(t.find("label")) == cfg["rel"]["label"])
+        rrows = [[txt(c) for c in tr if c.tag in ("td", "th")] for tr in rt.iter("tr")]
+        for nm in names:
+            hit = [r for r in rrows if r and varname(r[0]) == nm]
+            if len(hit) != 1:
+                raise SystemExit(f"{where}: reliability row for {nm!r} found {len(hit)} times")
+            v = num(hit[0][cfg["rel"]["col"]], f"{where} rel {nm}")
+            if float(v) > 1:
+                raise SystemExit(f"{where}: reliability {v} > 1 for {nm}")
+            out.append({"stat": "rel", "var1": nm, "var2": "", "value": v, "n": cfg["n"]})
+    if cfg.get("rel_text"):
+        body = txt(root.find(".//body"))
+        for nm, pat in cfg["rel_text"].items():
+            if nm not in names:
+                raise SystemExit(f"{where}: rel_text variable {nm!r} not in the matrix")
+            hits = set(re.findall(pat, body))
+            if len(hits) != 1:
+                raise SystemExit(f"{where}: reliability for {nm!r} matched {hits}")
+            out.append({"stat": "rel", "var1": nm, "var2": "", "value": num(hits.pop(), where),
+                        "n": cfg["n"]})
     if cfg.get("group"):
         for r in out:
             r["group"] = cfg["group"]

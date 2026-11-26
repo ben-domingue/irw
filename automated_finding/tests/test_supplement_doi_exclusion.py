@@ -53,11 +53,15 @@ class IsExcludedTest(unittest.TestCase):
         self.assertEqual(is_excluded("10.3389/fpsyt.2022.999999.s001",
                                      {ARTICLE}), "")
 
-    def test_a_version_suffix_is_not_stripped_into_a_false_match(self):
-        # Stripping `.1` would make every version of one Mendeley deposit
-        # match a neighbouring deposit's DOI; it must not happen.
+    def test_a_version_suffix_is_not_treated_as_a_supplement(self):
+        # A Mendeley `.1` is not a supplementary-file suffix, so it never
+        # takes the coarser "supplement" path. Since #3573 it does match as
+        # the SAME deposit (canonical_doi, the rule discovery already dedups
+        # by): 10.17632/826gmw6ypw.1 is version 1 of 10.17632/826gmw6ypw.
         self.assertEqual(is_excluded("10.17632/826gmw6ypw.1",
-                                     {"10.17632/826gmw6ypw"}), "")
+                                     {"10.17632/826gmw6ypw"}), "exact")
+        self.assertEqual(is_excluded("10.17632/826gmw6ypw.1",
+                                     {"10.17632/826gmw6ypx"}), "")
 
     def test_blank_doi_is_never_excluded(self):
         self.assertEqual(is_excluded("", {ARTICLE}), "")

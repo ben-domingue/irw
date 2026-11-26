@@ -1,0 +1,17 @@
+round,item,votes
+1,(source),https://macombgovdocs.org/clerk/electionresults/2019/November19/6000.html
+1,c01,1610
+1,c02,465
+1,c03,1061
+1,c04,1855
+2,c01,1673.9009
+2,c02,493.6062
+2,c03,1129.1198
+2,c04,1664
+3,c01,1664
+3,c02,496.6301
+3,c03,1131.4917
+3,c04,1664
+1,(threshold),1664
+1,(elected:c01),
+1,(elected:c04),

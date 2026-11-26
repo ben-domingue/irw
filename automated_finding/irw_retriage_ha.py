@@ -280,6 +280,21 @@ def classify(row: pd.Series) -> tuple[str, str]:
                 "confirm the category set/order against the source "
                 "instrument and recode to numeric; not a content problem.")
 
+    # ── RULE 6c: trial-level file with a detected person id ──────────────────
+    # coerce_to_irw() leaves this marker when one low-cardinality column plus
+    # a trial index (and a session/date column where numbering restarts) is
+    # unique row by row: a trials-based file, not an ambiguous one. It used to
+    # fall through to the human_review default, whose archive discovery reads
+    # as exclusions, so every such file left the pipeline unseen (irw#2607).
+    if "Trial-level file:" in reasons:
+        return ("worth_retrying",
+                "Trials-based file: triage found the person id and the trial "
+                "key (see reasons). Map it under the IRW Trials standard "
+                "(item = the probe, trial columns carry the repeats) in a "
+                "processing script. Few ids is expected of this shape; check "
+                "the datastandard.md floor ruling (#2220) before rejecting "
+                "on n.")
+
     # ── RULE 7: Only 2 columns, both non-numeric labels ──────────────────────
     if len(cols) == 2 and not any(re.search(r"\d", c) for c in cols):
         return ("not_item_response",

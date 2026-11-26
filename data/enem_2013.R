@@ -2,8 +2,12 @@ library(tidyverse)
 library(vroom)
 
 year <- 2013
-standard_prova_codes <- c(167, 170, 171, 174, 176, 177, 178, 180, 181, 182)
-regular_prova_codes  <- c(167, 170, 171, 174, 176, 177, 178, 180, 181, 182, 189, 190)
+# All four colours of each area's main booklet (4 areas x 4 colours = 16 codes). Earlier versions listed only
+# the first and last colour of each block of four, which dropped two of the four CH/CN day-1 colours (and with
+# them those examinees from every area, since regular_ids filters on CO_PROVA_CH) and the LC/MT Amarelo booklets
+# from the standard item set.
+standard_prova_codes <- c(167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182)
+regular_prova_codes  <- c(167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 189, 190)
 
 # INEP response codes: A-E, "." blank, "*" double mark
 ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")
@@ -130,6 +134,19 @@ process_area <- function(area) {
     if (n_off / nrow(microdata) > 0.01)
       stop(sprintf("%s %s: %.4f of records are off-length -- layout is not uniform",
                    year, area, n_off / nrow(microdata)))
+  }
+
+  # One 2013 CH record (booklet 169) has eleven "9"s, a code INEP does not use for
+  # answers. Records with a code outside ALPHABET are dropped like off-length
+  # ones; LC is exempt, because there "9" pads the language block not sat.
+  bad_chr <- if (area == "LC") "[^A-E.*9]" else "[^A-E.*]"
+  n_bad   <- sum(grepl(bad_chr, md[[txcol]]))
+  if (n_bad > 0) {
+    cat(sprintf("  %s: dropped %d of %d examinees whose %s has a code outside A-E . *\n",
+                area, n_bad, nrow(md), txcol))
+    if (n_bad / nrow(md) > 0.01)
+      stop(sprintf("%s %s: %.4f of records have unexpected codes", year, area, n_bad / nrow(md)))
+    md <- md[!grepl(bad_chr, md[[txcol]]), ]
   }
 
   # where the LC string is 5 wider than the position span it holds both

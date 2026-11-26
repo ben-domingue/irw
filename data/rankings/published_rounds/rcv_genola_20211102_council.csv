@@ -1,0 +1,12 @@
+round,item,votes
+1,(source),https://rcvis.com/v/21g_ge_cc_1_u4
+1,(source),https://rcvis.com/v/21g_ge_cc_2_u4
+1,(seat:1),
+1,c01,76
+1,c02,81
+1,c03,180
+1,(seat:2),
+1,c01,133
+1,c02,163
+1,(elected:c02),
+1,(elected:c03),

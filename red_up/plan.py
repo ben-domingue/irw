@@ -56,8 +56,21 @@ def index_tables(owner: str, dataset_names: list[str]) -> dict[str, list[str]]:
     import redivis
 
     def fetch(name: str) -> tuple[str, list[str]]:
-        dataset = redivis.organization(owner).dataset(name)
-        return name, [t.properties["name"] for t in dataset.list_tables()]
+        # The release AND the open draft. Listing the release only made every
+        # table already uploaded to an unpublished draft plan as NEW, so
+        # `over_cap` counted it twice: on 2026-11-25 a restart of an
+        # interrupted 403-table upload, 220 of them already in the draft, was
+        # refused for passing the 1000-table cap when it would have left the
+        # shard at 853. (push_one already replaces a draft table in place;
+        # only the plan was wrong.)
+        names = {t.properties["name"]
+                 for t in redivis.organization(owner).dataset(name).list_tables()}
+        try:
+            names |= {t.properties["name"] for t in
+                      redivis.organization(owner).dataset(name, version="next").list_tables()}
+        except Exception:  # no draft open (NotFoundError), as in table_counts
+            pass
+        return name, sorted(names)
 
     index: dict[str, list[str]] = {}
     with ThreadPoolExecutor(max_workers=min(8, len(dataset_names) or 1)) as pool:
@@ -84,7 +97,7 @@ def table_counts(owner: str, dataset_names: list[str]) -> dict[str, int]:
 
     The open draft if there is one, since that is where new tables land and it
     can already hold more than the release; else the latest version.
-    index_tables cannot answer this: `dataset(name)` lists the release only.
+    index_tables cannot answer this: it unions the release and the draft.
     """
     import redivis
 

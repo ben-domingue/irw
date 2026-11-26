@@ -18,8 +18,9 @@ OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 # as Chinese text mis-decoded as Latin-1 (readable again via
 # .encode('latin1').decode('gb18030')): "一点也不符合" (not at all
 # matching) = 1, "非常符合" (very much matching) = 7 -- mapped explicitly
-# using the raw mis-decoded byte strings as keys. `totalseconds` kept as
-# `rt`. Derived composite columns (CET4/totalvalue/enjoyment/MRS/GS/SS/
+# using the raw mis-decoded byte strings as keys. `totalseconds` is a
+# whole-session total, not a per-item time, so it ships as
+# `cov_completion_time_s` (#2401, #3643). Derived composite columns (CET4/totalvalue/enjoyment/MRS/GS/SS/
 # TE/Tv/selfperceived/interaction/speaking/listening/reading/writing/SRL)
 # not shipped.
 URL = ("https://journals.plos.org/plosone/article/file"
@@ -36,18 +37,18 @@ def fetch() -> pd.DataFrame:
     r = requests.get(URL, headers=UA, timeout=120)
     r.raise_for_status()
     df = pd.read_spss(io.BytesIO(r.content))
-    return df.rename(columns={"index": "id", "totalseconds": "rt"})
+    return df.rename(columns={"index": "id", "totalseconds": "cov_completion_time_s"})
 
 
 def convert():
     df = fetch()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    long = df.melt(id_vars=["id", "rt"], value_vars=ITEM_COLS, var_name="item", value_name="resp_raw")
+    long = df.melt(id_vars=["id", "cov_completion_time_s"], value_vars=ITEM_COLS, var_name="item", value_name="resp_raw")
     long["resp"] = pd.to_numeric(long["resp_raw"].astype(str).map(LIKERT_MAP).combine_first(
         pd.to_numeric(long["resp_raw"], errors="coerce")), errors="coerce")
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
-    long = long[["id", "item", "resp", "rt"]]
+    long = long[["id", "item", "resp", "cov_completion_time_s"]]
     out_path = OUT_DIR / "an_2020_efl_self_regulated.csv"
     long.to_csv(out_path, index=False)
     print(f"an_2020_efl_self_regulated: rows={len(long)} ids={long['id'].nunique()} "

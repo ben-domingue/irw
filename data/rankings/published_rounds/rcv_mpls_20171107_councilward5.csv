@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2017-Ward-5-RCV-Tabulation-Summary.pdf
+1,c01,1617
+1,c02,159
+1,c03,1987
+1,c04,445
+1,(exhausted),0
+1,(write-in),8
+2,c01,1769
+2,c02,0
+2,c03,2313
+2,c04,0
+2,(exhausted),134
+2,(write-in),0
+1,(threshold),2109
+1,(elected:c03),

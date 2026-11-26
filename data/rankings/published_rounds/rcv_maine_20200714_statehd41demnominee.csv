@@ -1,0 +1,8 @@
+round,item,votes
+1,(source),https://www1.maine.gov/sos/sites/maine.gov.sos/files/content/assets/offsr41summary.xls
+1,c01,368
+1,c02,912
+1,c03,1239
+2,c02,1067
+2,c03,1397
+1,(elected:c03),

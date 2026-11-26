@@ -1,0 +1,14 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2021-Park-Board-District-2-Round-Results-Summary.pdf
+1,c01,4479
+1,c02,3047
+1,c03,3212
+1,(exhausted),0
+1,(write-in),73
+2,c01,5280
+2,c02,0
+2,c03,4136
+2,(exhausted),1395
+2,(write-in),0
+1,(threshold),5406
+1,(elected:c01),

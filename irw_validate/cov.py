@@ -38,7 +38,9 @@ from .model import Finding, Report
 REQUIRED = ("stat", "var1", "var2", "value", "n")
 OPTIONAL = ("group",)
 MATRIX_STATS = {"cor", "cov"}
-MOMENT_STATS = {"sd", "mean"}
+#: Per-variable rows: SD, mean, and reliability as the source reports it
+#: (`rel`, e.g. Cronbach's alpha; Ben, 2026-11-18).
+MOMENT_STATS = {"sd", "mean", "rel"}
 #: Published correlations are rounded to two or three places; a diagonal of
 #: 0.9995 or an |r| of 1.0004 is rounding, not an error.
 TOL = 1e-3
@@ -222,7 +224,7 @@ def validate_cov_frame(df, *, label: str = "") -> Report:
     stat = df["stat"].astype(str).str.strip()
     bad = sorted(set(stat) - MATRIX_STATS - MOMENT_STATS)
     if bad:
-        out.append(_f("cov_stat", "error", f"[V2] stat value(s) {bad[:5]}; allowed: cor, cov, sd, mean", table))
+        out.append(_f("cov_stat", "error", f"[V2] stat value(s) {bad[:5]}; allowed: cor, cov, sd, mean, rel", table))
 
     # V6: value numeric, n a positive integer
     val = pd.to_numeric(df["value"], errors="coerce")
@@ -264,7 +266,7 @@ def validate_cov_frame(df, *, label: str = "") -> Report:
             continue
         order = _check_matrix(mat, gname, table, out, report.stats)
         # V7 (moments): one per variable, for variables in the matrix, sd > 0
-        for s in ("sd", "mean"):
+        for s in ("sd", "mean", "rel"):
             r = mom[mom["stat"] == s]
             stray = sorted(set(r["var1"]) - set(order))
             if stray:
@@ -273,6 +275,8 @@ def validate_cov_frame(df, *, label: str = "") -> Report:
                 out.append(_f("cov_moments", "error", f"[V7] a variable has two {s} rows{where}", table))
         if ((mom["stat"] == "sd") & (mom["value"] <= 0)).any():
             out.append(_f("cov_moments", "error", f"[V7] sd <= 0{where}", table))
+        if ((mom["stat"] == "rel") & (mom["value"] > 1 + TOL)).any():
+            out.append(_f("cov_moments", "error", f"[V7] a reliability above 1{where}", table))
         report.stats.setdefault("has_sd", {})[gname if gname is not None else ""] = bool((mom["stat"] == "sd").any())
         report.stats.setdefault("n_obs", {})[gname if gname is not None else ""] = int(mat["n"].max())
     report.stats["n_rows"] = int(len(df))
