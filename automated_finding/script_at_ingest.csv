@@ -1592,3 +1592,4 @@ kuroda_2026_socialgoals7,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 luo_2024_lifesat7,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 shen_2026_genaiuse4,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 cruz_2025_campusclimate6,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
+poole_2020_toj,core,data/timing_db/timing_db.R,2026-11-26
