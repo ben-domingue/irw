@@ -6,7 +6,8 @@
 # Data: sheet 'Anonymized Data', 250 Indonesian consumers aged 17-35, the deposit's Respondent_ID; the 'Codebook'
 #   sheet gives each code's construct and English wording. No anchors; every item observed within 1-5.
 # Tables: one per codebook construct. Covariates: none in the deposit. PII: none.
-# Item text: English stems for all 42 items in the xlsx 'Codebook' sheet (cheap later build).
+# Item text: shipped 2026-11-25c -- English stems from the xlsx 'Codebook' sheet (no anchors in the deposit);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

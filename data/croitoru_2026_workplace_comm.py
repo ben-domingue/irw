@@ -8,7 +8,8 @@
 # Tables: one per construct in the codebook (CM, CA, AT, SAT, PERF, 4 items each).
 # Covariates: age, gender, position level, tenure (years), education, sector (Romanian labels translated per the codebook).
 # PII: none.
-# Item text: English stems for all 20 items in README_codebook.txt (administered in Romanian; cheap later build).
+# Item text: shipped 2026-11-25c -- the depositors' English from README_codebook.txt (administered in Romanian,
+#   fallback); automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

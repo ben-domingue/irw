@@ -10,7 +10,8 @@
 # Covariates: sample, age band, sex, education, income band, seafood frequency, coastal municipality, purchase-decision role, main form.
 # Dropped: consent text, eligibility screens, region/state/municipality (geographic), multi-select place/species lists.
 # PII: none.
-# Item text: Portuguese wording + English translation for 48 items in Supplementary Table S1 (cheap later build).
+# Item text: shipped 2026-11-25c -- Portuguese from the Forms headers, English from Table_S1 (+ IRW English for the 7
+#   barrier items and prompts); automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

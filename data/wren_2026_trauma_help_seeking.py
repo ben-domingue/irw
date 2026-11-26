@@ -10,7 +10,9 @@
 #   employment, military service, substance-use timing (codes; labels in the .sav).
 # Dropped: consent/eligibility screens, all free-text fields, substance checklists and per-substance 30-day frequencies.
 # PII: none.
-# Item text: English stems are the .sav variable labels (cheap later build; ACE / CTQ-SF / GHSQ / CAGE-AID are published instruments -- register checks).
+# Item text: shipped 2026-11-25c for ACE (.sav labels; register ACE = ship); CTQ-SF, GHSQ x3, CAGE-AID held 2026-11-25
+#   (automated_finding/itemtext_hold_2026-11-25.csv);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

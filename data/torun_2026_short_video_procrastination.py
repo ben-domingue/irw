@@ -9,7 +9,9 @@
 # Covariates: gender, year, perceived income, main short-video platform, daily short-video hours (text labels).
 # Dropped: timestamp.
 # PII: none.
-# Item text: Turkish stems are in the column headers (cheap later build).
+# Item text: all four tables held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv) -- Turkish adaptations
+#   (KVB, AEO, OK, BIS-11); stems in the column headers;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

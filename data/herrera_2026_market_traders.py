@@ -10,7 +10,8 @@
 #   CTD/OCT/PTE, 12 items each) and the three 4-item moderators (DC, FE, TRD), item = the deposit's code.
 # Covariates: none in the deposit (emails and timestamps removed by the depositors).
 # PII: none (all columns numeric).
-# Item text: not shipped -- Spanish stems for all 36 items in diccionario_de_datos.csv (cheap later build).
+# Item text: shipped 2026-11-25c -- Spanish stems + anchors from diccionario_de_datos.csv (codigo = item), IRW English;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

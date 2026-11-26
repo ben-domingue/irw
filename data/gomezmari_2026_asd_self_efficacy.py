@@ -8,7 +8,8 @@
 # Covariates: label group, sex (1 man, 2 woman), age, programme (1 primary, 2 special-needs teaching), training/experience yes-no codes.
 # Dropped: four free-text follow-ups and the sum.
 # PII: none.
-# Item text: Spanish wording of all 30 items in the column headers (cheap later build; the TEA/Asperger word differs by group).
+# Item text: held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv) -- ASSET (Ruble et al. 2013) in Spanish;
+#   stems in the column headers; automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

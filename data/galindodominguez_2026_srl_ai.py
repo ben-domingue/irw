@@ -10,7 +10,9 @@
 # Covariates: faculty, age, gender.
 # Dropped: prompt-log counts/ratios, scale totals, participation flag.
 # PII: none.
-# Item text: Basque stems in the .sav variable labels (cheap later build).
+# Item text: all six tables held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv) -- SRL-SRS (Toering et al.)
+#   in Basque + an unnamed AI-dependence set; Basque stems in the .sav labels;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

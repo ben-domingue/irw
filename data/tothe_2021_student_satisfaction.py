@@ -14,8 +14,8 @@
 #   transport, food hygiene), _overall_satisfaction (b3_1-4, same four domains overall), _other_satisfaction (b4_1-8).
 # Covariates: cov_major (a2), cov_gender (a3), cov_father_occupation (a6), decoded from the details sheet.
 # PII: none (all columns numeric).
-# Item text: not shipped -- stems for every item are in the "details" sheet with the endpoint anchors (1 = Bad,
-#   5 = Good); a cheap build later. The questionnaire appears author-developed (no source cited).
+# Item text: shipped 2026-11-25c -- 'details' sheet stems, endpoints 1 = Bad / 5 = Good; b4_8 stem left blank (SWLS
+#   register match); automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

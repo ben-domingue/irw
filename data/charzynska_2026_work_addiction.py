@@ -9,7 +9,9 @@
 # Covariate: country (CULTURE mapped through the codebook).
 # Dropped: the IWAS and UWES sums.
 # PII: none.
-# Item text: full English wording + response labels for all 14 items in Codebook.csv/xlsx (cheap later build; administered in many languages).
+# Item text: shipped 2026-11-25c for IWAS-5 (Codebook.csv, the depositors' own scale); UWES-3 (block) and MWMS-6 held
+#   2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

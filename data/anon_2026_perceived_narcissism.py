@@ -10,7 +10,8 @@
 # Not carried: PROLIFIC_PID (platform ID; id = row order instead), ResponseId, free-text "other" answers, race checklist,
 #   attention checks, consent/terminate flags.
 # Covariates: sample, gender, ethnic background, country, age, target/relationship descriptors.
-# Item text: item stems are the .sav variable labels ('This person is selfish' ...); the survey PDFs give the rest (cheap later build).
+# Item text: shipped 2026-11-25c -- .sav variable + value labels (EFA/CFA files), the depositors' own inventory;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

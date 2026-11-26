@@ -9,7 +9,9 @@
 # One HS9 value of 0 (outside 1-5, per the codebook) set missing.
 # Covariates: the 13 socio-demographic columns as coded in the public file.
 # PII: none.
-# Item text: English wording for all 31 items in AR_Codebook.xlsx (cheap later build); questionnaire .docx in the deposit.
+# Item text: shipped 2026-11-25c for social_capital + health_stressors (AR_Codebook.xlsx); life_satisfaction (SWLS-
+#   derived) held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

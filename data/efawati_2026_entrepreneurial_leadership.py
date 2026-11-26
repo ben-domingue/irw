@@ -10,7 +10,8 @@
 #   stored codes (gender stored 0-2 for two categories; age 1-3 for four bands), so the codes are carried as they are.
 # Dropped: the three sums.
 # PII: none.
-# Item text: English wording for all 29 items in the xlsx 'codebook' sheet; questionnaire PDF in the deposit (cheap later build).
+# Item text: shipped 2026-11-25c -- codebook sheet stems + the questionnaire PDF's instructions/anchors;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

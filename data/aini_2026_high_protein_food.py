@@ -9,7 +9,8 @@
 # Item codes are positional within each block (smm1 = 2nd header .. purchase_intention4 = last).
 # Covariate: the first column (how often the respondent buys food/drink online, 1-5).
 # PII: none.
-# Item text: Indonesian stems are the column headers (cheap later build; codes are positional, so verify against the header order).
+# Item text: shipped 2026-11-25c -- Indonesian stems = the headers, tied by this script's positional slicing, IRW
+#   English; automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

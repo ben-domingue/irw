@@ -12,7 +12,8 @@
 # Covariates: cov_age_band (Usia), cov_invest_experience (months investing).
 # Dropped: Timestamp, the empty "Column 28", Domisili (city of residence; geographic rule).
 # PII: none.
-# Item text: not shipped -- Indonesian stems are in the item headers (cheap later build).
+# Item text: shipped 2026-11-25c -- Indonesian stems from the Google Forms headers, IRW English, no anchors;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

@@ -9,7 +9,9 @@
 # Covariates: status, country, institution type, profile codes B05-B08, AI-use frequency, paid tools, survey language.
 # Dropped: date, institution/employer name (B04), multi-select lists, guidance single items, free text, derived scores.
 # PII: none.
-# Item text: exact English wording for every item in the Instrument_EN sheet (+ bilingual sheet) -- cheap later build; author-written instrument.
+# Item text: shipped 2026-11-25c -- Instrument_EN sheet, every item 'Author-written'; the French version (72
+#   respondents) is in Bilingual_Instrument_A1;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

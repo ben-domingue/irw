@@ -8,7 +8,8 @@
 #   the music) and CC (cultural meaning) are IRW's reading of the stems.
 # Covariates: recruitment source, completion time (s), age band, gender, education, hours played, game progress.
 # PII: none.
-# Item text: English + Chinese wording for all 26 items in the first two sheet rows (cheap later build).
+# Item text: shipped 2026-11-25c -- Chinese (row 2) + the depositor's English (row 1) from the sheet header rows;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

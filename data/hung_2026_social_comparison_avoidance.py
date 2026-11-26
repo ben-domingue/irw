@@ -8,7 +8,9 @@
 # Tables: one per construct; EX = five impression-management items (dichotomised copies Exp1-5 and their mean SDR not shipped).
 # Covariates: gender, age, ethnicity code, grade, parental education, retained/attrited flag (group: 0 retained, 1 lost).
 # PII: none.
-# Item text: English stems for every item in the .sav variable labels (cheap later build; administered in Chinese).
+# Item text: all six tables held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv) -- named third-party scales
+#   (MC-SDS, RCBS-, BSMAS-style, comparison items); English labels in the .sav;
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys

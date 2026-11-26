@@ -8,7 +8,9 @@
 # Tables: one per codebook construct (nine).
 # Covariates: gender, age group, education, occupation, AI-use frequency.
 # PII: none.
-# Item text: English wording for every item in the xlsx 'Codebook' sheet (cheap later build).
+# Item text: shipped 2026-11-25c for 7 constructs (Codebook sheet); mastery (Pearlin) and self_esteem (CSES/RSES mix)
+#   held 2026-11-25 (automated_finding/itemtext_hold_2026-11-25.csv);
+#   automated_finding/itemtext_verification/make_itemtext_repos_2026-11-25c.py
 import io
 import re
 import sys
