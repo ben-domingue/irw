@@ -14042,6 +14042,18 @@ thoma_2018_socr,cov_religion,2,Catholic (Roman-Catholic)
 thoma_2018_socr,cov_religion,3,Muslim / Islamic
 thoma_2018_socr,cov_religion,4,Other religion / denomination
 thoma_2018_socr,cov_religion,5,None
+thurston_2021_mrt,cov_education,1,Less than primary
+thurston_2021_mrt,cov_education,2,Primary
+thurston_2021_mrt,cov_education,3,Some high school
+thurston_2021_mrt,cov_education,4,High school diploma
+thurston_2021_mrt,cov_education,5,Some college/trade school/uni
+thurston_2021_mrt,cov_education,6,College diploma or trade school
+thurston_2021_mrt,cov_education,7,University degree (bachelor's)
+thurston_2021_mrt,cov_education,8,University degree (master's/PhD or professional degree)
+thurston_2021_mrt,cov_female,0,Male
+thurston_2021_mrt,cov_female,1,Female
+thurston_2021_mrt,cov_mrt_excluded,0,Included
+thurston_2021_mrt,cov_mrt_excluded,1,Excluded
 tiemensma_2018_iesr,cov_latino,0,non_Latino
 tiemensma_2018_iesr,cov_latino,1,Latino
 tims_2017_autonomy,cov_country,1,Netherlands
@@ -15720,6 +15732,118 @@ wolbers_2017_teach_contact,cov_pupil_birth_country,7,"Overige Westerse landen (E
 wolbers_2017_teach_contact,cov_pupil_birth_country,8,Overige niet-Westerse landen
 wolbers_2017_teach_contact,cov_sex,0,vrouw
 wolbers_2017_teach_contact,cov_sex,1,man
+wong_2025_embedded_figures,cov_education,1,Primary school
+wong_2025_embedded_figures,cov_education,2,Middle school
+wong_2025_embedded_figures,cov_education,3,High school
+wong_2025_embedded_figures,cov_education,4,Associate or Higher Diploma
+wong_2025_embedded_figures,cov_education,5,Bachelor
+wong_2025_embedded_figures,cov_education,6,Master or Postgraduate
+wong_2025_embedded_figures,cov_education,7,Doctorate
+wong_2025_embedded_figures,cov_language,1,English
+wong_2025_embedded_figures,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_embedded_figures,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_embedded_figures,cov_male,0,Female
+wong_2025_embedded_figures,cov_male,1,Male
+wong_2025_embedded_figures,cov_order,0,paper first
+wong_2025_embedded_figures,cov_order,1,laptop first
+wong_2025_mental_rotation,cov_education,1,Primary school
+wong_2025_mental_rotation,cov_education,2,Middle school
+wong_2025_mental_rotation,cov_education,3,High school
+wong_2025_mental_rotation,cov_education,4,Associate or Higher Diploma
+wong_2025_mental_rotation,cov_education,5,Bachelor
+wong_2025_mental_rotation,cov_education,6,Master or Postgraduate
+wong_2025_mental_rotation,cov_education,7,Doctorate
+wong_2025_mental_rotation,cov_language,1,English
+wong_2025_mental_rotation,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_mental_rotation,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_mental_rotation,cov_male,0,Female
+wong_2025_mental_rotation,cov_male,1,Male
+wong_2025_mental_rotation,cov_order,0,paper first
+wong_2025_mental_rotation,cov_order,1,laptop first
+wong_2025_perspective_taking,cov_education,1,Primary school
+wong_2025_perspective_taking,cov_education,2,Middle school
+wong_2025_perspective_taking,cov_education,3,High school
+wong_2025_perspective_taking,cov_education,4,Associate or Higher Diploma
+wong_2025_perspective_taking,cov_education,5,Bachelor
+wong_2025_perspective_taking,cov_education,6,Master or Postgraduate
+wong_2025_perspective_taking,cov_education,7,Doctorate
+wong_2025_perspective_taking,cov_language,1,English
+wong_2025_perspective_taking,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_perspective_taking,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_perspective_taking,cov_male,0,Female
+wong_2025_perspective_taking,cov_male,1,Male
+wong_2025_perspective_taking,cov_order,0,paper first
+wong_2025_perspective_taking,cov_order,1,laptop first
+wong_2025_raven12,cov_education,1,Primary school
+wong_2025_raven12,cov_education,2,Middle school
+wong_2025_raven12,cov_education,3,High school
+wong_2025_raven12,cov_education,4,Associate or Higher Diploma
+wong_2025_raven12,cov_education,5,Bachelor
+wong_2025_raven12,cov_education,6,Master or Postgraduate
+wong_2025_raven12,cov_education,7,Doctorate
+wong_2025_raven12,cov_language,1,English
+wong_2025_raven12,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_raven12,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_raven12,cov_male,0,Female
+wong_2025_raven12,cov_male,1,Male
+wong_2025_raven12,cov_order,0,paper first
+wong_2025_raven12,cov_order,1,laptop first
+wong_2025_sbsod,cov_education,1,Primary school
+wong_2025_sbsod,cov_education,2,Middle school
+wong_2025_sbsod,cov_education,3,High school
+wong_2025_sbsod,cov_education,4,Associate or Higher Diploma
+wong_2025_sbsod,cov_education,5,Bachelor
+wong_2025_sbsod,cov_education,6,Master or Postgraduate
+wong_2025_sbsod,cov_education,7,Doctorate
+wong_2025_sbsod,cov_language,1,English
+wong_2025_sbsod,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_sbsod,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_sbsod,cov_male,0,Female
+wong_2025_sbsod,cov_male,1,Male
+wong_2025_sbsod,cov_order,0,paper first
+wong_2025_sbsod,cov_order,1,laptop first
+wong_2025_spatial_scaling,cov_education,1,Primary school
+wong_2025_spatial_scaling,cov_education,2,Middle school
+wong_2025_spatial_scaling,cov_education,3,High school
+wong_2025_spatial_scaling,cov_education,4,Associate or Higher Diploma
+wong_2025_spatial_scaling,cov_education,5,Bachelor
+wong_2025_spatial_scaling,cov_education,6,Master or Postgraduate
+wong_2025_spatial_scaling,cov_education,7,Doctorate
+wong_2025_spatial_scaling,cov_language,1,English
+wong_2025_spatial_scaling,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_spatial_scaling,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_spatial_scaling,cov_male,0,Female
+wong_2025_spatial_scaling,cov_male,1,Male
+wong_2025_spatial_scaling,cov_order,0,paper first
+wong_2025_spatial_scaling,cov_order,1,laptop first
+wong_2025_vswm,cov_education,1,Primary school
+wong_2025_vswm,cov_education,2,Middle school
+wong_2025_vswm,cov_education,3,High school
+wong_2025_vswm,cov_education,4,Associate or Higher Diploma
+wong_2025_vswm,cov_education,5,Bachelor
+wong_2025_vswm,cov_education,6,Master or Postgraduate
+wong_2025_vswm,cov_education,7,Doctorate
+wong_2025_vswm,cov_language,1,English
+wong_2025_vswm,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_vswm,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_vswm,cov_male,0,Female
+wong_2025_vswm,cov_male,1,Male
+wong_2025_vswm,cov_order,0,paper first
+wong_2025_vswm,cov_order,1,laptop first
+wong_2025_vwm,cov_education,1,Primary school
+wong_2025_vwm,cov_education,2,Middle school
+wong_2025_vwm,cov_education,3,High school
+wong_2025_vwm,cov_education,4,Associate or Higher Diploma
+wong_2025_vwm,cov_education,5,Bachelor
+wong_2025_vwm,cov_education,6,Master or Postgraduate
+wong_2025_vwm,cov_education,7,Doctorate
+wong_2025_vwm,cov_language,1,English
+wong_2025_vwm,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_vwm,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_vwm,cov_male,0,Female
+wong_2025_vwm,cov_male,1,Male
+wong_2025_vwm,cov_order,0,paper first
+wong_2025_vwm,cov_order,1,laptop first
 xue_2026_aaai,cov_age,1,25岁及以下
 xue_2026_aaai,cov_age,2,26-35岁
 xue_2026_aaai,cov_age,3,36-45岁
