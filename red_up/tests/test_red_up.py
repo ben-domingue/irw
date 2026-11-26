@@ -77,7 +77,9 @@ class Registry(unittest.TestCase):
         conj = [t.name for t in targets_mod.conj_shards(targets)]
         rank = [t.name for t in targets_mod.rank_shards(targets)]
         aux = [t.name for t in targets
-               if t.kind == "aux" and not t.is_itemtext and not t.is_conj and not t.is_rank]
+               if t.kind == "aux" and not t.is_itemtext and not t.is_conj and not t.is_rank
+               and not t.is_cov]
+        cov = [t.name for t in targets if t.is_cov]
 
         # Both families are shard lists that grow, so assert their shape rather
         # than a frozen tail -- pinning the newest name here means every future
@@ -101,9 +103,13 @@ class Registry(unittest.TestCase):
         self.assertEqual(sorted(aux),
                          ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
 
+        # irw_cov is a single dataset, registered 2026-11-17, last in AUX_LABELS.
+        self.assertEqual(cov, ["irw_cov"])
+
         # Core first, then text shards, then the rest in AUX_LABELS order, the
-        # conj and rank shards where AUX_LABELS puts them -- the menu order.
-        self.assertEqual(names, core + text + aux + conj + rank)
+        # conj and rank shards and irw_cov where AUX_LABELS puts them -- the
+        # menu order.
+        self.assertEqual(names, core + text + aux + conj + rank + cov)
         self.assertEqual(newest_shard(targets).name, core[-1])
         self.assertEqual(newest_text_shard(targets).name, text[-1])
         # New conjoint tables go to the newest conj shard (Ben, 2026-10-09).
@@ -233,6 +239,10 @@ class RankShards(unittest.TestCase):
     def test_the_real_config_registers_the_rank_shard(self):
         _, targets = targets_mod.load_registry()
         self.assertEqual([t.name for t in targets_mod.rank_shards(targets)][:1], ["irw_rank"])
+
+    def test_the_real_config_registers_irw_cov(self):
+        _, targets = targets_mod.load_registry()
+        self.assertEqual([t.name for t in targets if t.is_cov], ["irw_cov"])
 
 
 class TwoConjShards(unittest.TestCase):
@@ -1193,6 +1203,83 @@ class ValidatorGate(unittest.TestCase):
         report = self._check(path, "rcv_x_20240101_mayor", target=self.RANK)
         self.assertFalse(report.ok)
         self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
+
+    COV = Target(name="irw_cov", label="covariance matrices", kind="aux", source="cov")
+
+    def _cov_record(self, rows=(("smith_1990_abilities", ""),)):
+        """A matrices.csv in a scratch dir, pointed to by IRW_COV_RECORD_DIR."""
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        (d / "matrices.csv").write_text(
+            "table,group,n_obs,matrix_type\n" + "".join(f"{t},{g},200,pearson\n" for t, g in rows),
+            encoding="utf-8")
+        patcher = mock.patch.dict(os.environ, {"IRW_COV_RECORD_DIR": str(d)})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        return d
+
+    def _cov_rows(self, r=0.5, group=None):
+        cells = [("a", "a", 1.0), ("b", "a", r), ("b", "b", 1.0)]
+        head = "stat,var1,var2,value,n" + (",group" if group else "")
+        tail = f",{group}" if group else ""
+        return head + "\n" + "".join(f"cor,{a},{b},{v},200{tail}\n" for a, b, v in cells)
+
+    def test_a_cov_table_with_a_record_row_passes(self):
+        """No id/item/resp: the destination selects irw_validate.cov."""
+        self._cov_record()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(report.ok, report.errors)
+
+    def test_a_cov_table_without_a_record_row_is_blocked(self):
+        self._cov_record(rows=())
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("cov_record" in e and "matrices.csv" in e for e in report.errors), report.errors)
+
+    def test_cov_record_groups_must_match_the_table(self):
+        self._cov_record(rows=(("smith_1990_abilities", "boys"), ("smith_1990_abilities", "girls")))
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows(group="boys"))
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("cov_record" in e and "groups" in e for e in report.errors), report.errors)
+
+    def test_cov_record_variables_must_name_the_matrix(self):
+        """The `variables` field (published order and labels, #3594): blank passes,
+        an exact list passes, a list missing or inventing a variable is blocked."""
+        for field, ok in (("", True), ("b = second | a = first", True), ("a", False), ("a | b | c", False),
+                          ("a | a | b", False)):
+            d = self._cov_record()
+            (d / "matrices.csv").write_text(
+                "table,group,n_obs,matrix_type,variables\n"
+                f"smith_1990_abilities,,200,pearson,{field}\n", encoding="utf-8")
+            path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+            report = self._check(path, "smith_1990_abilities", target=self.COV)
+            self.assertEqual(report.ok, ok, (field, report.errors))
+
+    def test_a_bad_cov_matrix_is_blocked_by_its_validator(self):
+        self._cov_record()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows(r=1.4))
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("[V5]" in e for e in report.errors), report.errors)
+
+    def test_unreadable_cov_records_block(self):
+        d = self._cov_record()
+        (d / "matrices.csv").unlink()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
+
+    def test_cov_registers_as_a_single_aux_dataset(self):
+        config = ('IRW_OWNER <- "datapages"\nIRW_CORE_DATASETS <- c("item_response_warehouse")\n'
+                  'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                  'IRW_AUX_DATASETS <- c(meta = "irw_meta", cov = "irw_cov")\n')
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "redivis_config.R"
+            path.write_text(config)
+            _, targets = targets_mod.load_registry(path)
+        cov = [t for t in targets if t.is_cov]
+        self.assertEqual([(t.name, t.kind, t.label) for t in cov], [("irw_cov", "aux", "covariance matrices")])
 
     def _conj_rows(self, chosen_both=False, opted_out=0):
         rows = []

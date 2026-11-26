@@ -191,7 +191,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [15]=15_codebook_links.py [16]=16_conjoint.R
                           [17]=17_coverage.R [18]=18_rankings.R
                           [19]=19_item_classical.py [20]=20_k1.py
-                          [21]=collection_recall.py )
+                          [21]=collection_recall.py [22]=22_cov.R )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -218,7 +218,7 @@ declare -A STAGE_ARGS=( [21]="--report" )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
-  [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv conj_biblio.csv rank_biblio.csv"
+  [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv conj_biblio.csv rank_biblio.csv cov_biblio.csv"
   [03]="tags.csv nominal_tags.csv"
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
@@ -234,6 +234,7 @@ declare -A STAGE_OUTPUTS=(
   [16]="conj_metadata.csv conj_outcomes.csv"
   [17]="coverage_matrix.csv"   # + coverage_report.md, not diffed (prose)
   [18]="rank_metadata.csv rank_refresh_stamps.csv"
+  [22]="cov_metadata.csv"
   [19]=""   # item_classical.csv and its stamps are gitignored (78 MB, see
             # .gitignore) and metadata.csv was snapshotted before stage 01, so
             # diffing it again here would only reprint 01's diff. The stage
@@ -258,7 +259,9 @@ declare -A STAGE_OUTPUTS=(
 # columns back on, so it too has to be after 01. Its order relative to 19 is
 # only tidiness -- both stages rewrite metadata.csv preserving every column they
 # did not author, so neither can drop the other's.
-DEFAULT_ORDER=(01 19 20 05 06 07 16 18 02 03 08 10 21 11 12 13 14 15 17)
+# 22 (covariance matrices) runs with 16 and 18, before 02: cov_metadata.csv is
+# 02's liveness oracle for cov_biblio.
+DEFAULT_ORDER=(01 19 20 05 06 07 16 18 22 02 03 08 10 21 11 12 13 14 15 17)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -272,6 +275,7 @@ declare -A DIFF_KEY=(
   [codebook_links.csv]="table,url"
   [codebook_links_checked.csv]="table,data_url"
   [conj_outcomes.csv]="table,outcome"
+  [cov_metadata.csv]="table,group"
   [coverage_matrix.csv]="table,source"
   [item_classical.csv]="table,item"   # unused while 19 has no diffed output;
                                       # kept so a future committed store sorts right

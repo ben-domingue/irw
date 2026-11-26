@@ -35,6 +35,7 @@ AUX_LABELS = {
     "sim": "simulated + synthetic",
     "conj": "conjoint experiments",
     "rank": "rankings",
+    "cov": "covariance matrices",
 }
 
 
@@ -66,6 +67,10 @@ class Target:
     @property
     def is_rank(self) -> bool:
         return self.source == "rank"
+
+    @property
+    def is_cov(self) -> bool:
+        return self.source == "cov"
 
 
 #: The aux sources declared as their own shard-list vector in redivis_config.R
@@ -227,6 +232,8 @@ def newest_shard(targets: list[Target]) -> Target:
 #: registering a shard is all it takes to redirect new tables to it.
 #: 2026-11-09: still unpinned; item_response_warehouse_9 registered with shard 8
 #: at 864 released tables, so new tables now go to shard 9.
+#: 2026-11-23: still unpinned; item_response_warehouse_10 (0q2k) registered with
+#: shard 9 at 990 in its draft, so new tables now go to shard 10.
 CORE_DEFAULT: str | None = None
 
 
@@ -358,6 +365,11 @@ REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     #: The column check alone cannot tell a rankings table from a core one;
     #: the destination does.
     "rank": ("id", "task", "item", "resp"),
+    #: Covariance tables hold one published matrix, not responses: a row per
+    #: cell of the lower triangle plus optional sd/mean rows
+    #: (data/covariance/README.md). checks.validate_for_target runs
+    #: irw_validate.cov for this source, gated on data/covariance/matrices.csv.
+    "cov": ("stat", "var1", "var2", "value", "n"),
 }
 
 

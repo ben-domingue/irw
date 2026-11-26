@@ -653,6 +653,18 @@ missing row, verdict included, is normal work for this step, not something to
 hand back. 14 of the 15 instruments behind the 2026-10-18 holds had no row at
 all, which is why nothing warned.
 
+**One generic sentence matching a held instrument's item does not hold the
+table** (ben-domingue, 2026-11-25: "ship. that one question is going to be
+quite common"). When an author-developed list contains a single common
+sentence that is word-for-word an item of a `hold` instrument -- e.g.
+`tothe_2021_other_satisfaction` b4_8 "I am satisfied with my life", an SWLS
+stem, in an otherwise original satisfaction list -- ship the stem, and say so
+in the provenance `note`. The hold covers the instrument, not every common
+sentence it contains. `irw-validate` will still WARN `rights_register` on that
+item; that WARN is explained by this ruling. This is about ONE stray generic
+line. Several items from the same instrument, or its distinctive wording, is
+the instrument -- that is still a hold.
+
 **Hold it before upload, not after.** Pulling a table from an unpublished
 draft is one `draft.table(name).delete()`. Pulling a published one took a
 dedicated withdrawal script and a corpus-wide sweep. The record for a hold is
@@ -909,6 +921,13 @@ output-format one:
   because the deposit stays public either way. **Null the offending cell**
   (don't carry it into a `cov_*` column), say in `BATCH_LOG.md` which cell it
   was and why it was read as incidental, and process the rest.
+
+  **`screen_for_pii` will not find these for you.** Its value checks fire
+  only on a column OF identifiers (at least 5 matches and 20% of values), so
+  one email typed into a free-text `Edad` (age) column screens clean, as it
+  did on `10.7910/DVN/VSFCVG` (2026-10-19). When a questionnaire collects age
+  or any other demographic as free text, read that column's distinct values
+  yourself before shipping.
 
   **Narrowed 2026-10-19** from the blanket form, which had been reaffirmed
   earlier the same day. It bit on the Parkins Energy Literacy deposit over
@@ -1385,6 +1404,15 @@ and the table page links it from its Codebook section
 it the weekly sweep (pipeline stage 15) can only find a codebook by its file
 name.
 
+**Give `script` whenever the build script is not named exactly after the
+table** (a battery script writing several tables, or names assembled at run
+time like `f"rcv_{jur}_{date}_{office}"`): `"script": "data/foo_2026_battery.py"`,
+a repo path that exists. It goes to `automated_finding/script_at_ingest.csv`,
+which pipeline stage 13 folds into `table_scripts.csv`, so the MCP's
+`get_processing_notes` and the table page's Codebook section can find the
+script. Code reading cannot see run-time names; on 2026-11-16 ~2,400 live
+tables had no findable script for that reason.
+
 **Coded covariates: run the label harvest before opening the data PR.** If the
 new script reads an SPSS or Stata file (`.sav`, `.dta`) and ships `cov_*`
 columns, their value labels (1 = hombre, 2 = mujer) reach the table page only
@@ -1443,6 +1471,16 @@ otherwise.** Chase it: if the non-integer cells each equal the column's mean
 over the integer cells (or its reflection, when a reverse-code was applied
 after imputation), the file is mean-imputed and those cells must be dropped,
 not shipped.
+
+Test the pattern per item before dropping anything (Ben approved "flag and
+remove", 2026-10-06). **Exactly one distinct non-integer value per item** is
+item-mean imputation, and dropping the non-integer cells removes every imputed
+cell. Under multiple or person-mean imputation, imputed cells can be whole
+numbers, so dropping the fractions misses some: hold that deposit rather than
+ship it. **Halves and thirds are not imputation at all**: in pone.0263022 they
+were the averages of repeat attempts by the same respondent (built as
+`meyer_2022_*`, with those respondents' rows dropped whole). Check for them
+before calling fractions imputation.
 
 **An item's observed range is not its permitted response set.** A rarely used
 extreme can make one item's observed range narrower than another's. The shared

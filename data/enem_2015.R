@@ -2,8 +2,12 @@ library(tidyverse)
 library(vroom)
 
 year <- 2015
-standard_prova_codes <- c(231, 234, 235, 238, 240, 241, 242, 244, 245, 246)
-regular_prova_codes  <- c(231, 234, 235, 238, 240, 241, 242, 244, 245, 246, 253, 254)
+# All four colours of each area's main booklet (4 areas x 4 colours = 16 codes). Earlier versions listed only
+# the first and last colour of each block of four, which dropped two of the four CH/CN day-1 colours (and with
+# them those examinees from every area, since regular_ids filters on CO_PROVA_CH) and the LC/MT Amarelo booklets
+# from the standard item set.
+standard_prova_codes <- c(231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246)
+regular_prova_codes  <- c(231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 253, 254)
 
 # INEP response codes: A-E, "." blank, "*" double mark
 ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")

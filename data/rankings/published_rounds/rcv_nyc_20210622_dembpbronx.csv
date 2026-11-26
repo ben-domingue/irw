@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://www.vote.nyc/sites/default/files/pdf/election_results/2021/20210622Primary%20Election/rcv/024339_1.html
+1,c01,34022
+1,c02,10407
+1,c03,14397
+1,c04,1958
+1,c05,40097
+1,(write-in),582
+2,c01,34130
+2,c02,10444
+2,c03,14501
+2,c04,1971
+2,c05,40148
+3,c01,42957
+3,c05,49401
+1,(elected:c05),

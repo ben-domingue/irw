@@ -21,8 +21,12 @@
 ##0.186, learning 0.064, compliance 0.053; spending 0.084, 0.024, 0.015; first-order legitimacy 0.145, 0.044, 0.090; second-order 0.036, 0.048,
 ##0.150) and only with this assignment of learning and compliance to the two low bits (the swap would exchange those columns). The paper's text
 ##extraction has no minus signs, so only magnitudes were compared; the signs of my fit are those of the paper's text (sanctions lower approval).
-##Sample: 1,748 rows; as the authors, keep respondents who passed both attention checks (AC_benefit == 2 and AC_condition == 1): N = 1,602,
-##group sizes 187,181,203,209,206,202,208,206 = the paper's Table 1. cov_attention_pass is therefore 1 for all rows (not stored).
+##Sample: all 1,748 respondents in the deposit are kept (IRW conjoint ruling, Ben 2026-11-10: no author sample exclusions). The authors'
+##analysis sample excludes respondents who failed either of two attention checks; reproduce it with cov_attention_pass_1 == 1 &
+##cov_attention_pass_2 == 1 (N = 1,602, group sizes 187,181,203,209,206,202,208,206 = the paper's Table 1, checked below).
+##  cov_attention_pass_1  AC_benefit == 2 (1 = passed, 0 = answered 1 or 3)
+##  cov_attention_pass_2  AC_condition == 1 (1 = passed, 0 = answered 3)
+##Every respondent has at least one outcome: 1,748 rows.
 ##Outcomes (all ratings of the same vignette set, raw; numeric codes with the paper's directions; item wording from Variables.pdf, German with
 ##English gloss; the 7-point agreement anchors are not stated in the deposit):
 ##  rating                   PS_general  approval of ALG II, 1-7 (7 point Likert; the paper's coefficients say higher = more approval)
@@ -32,6 +36,7 @@
 ##                           as 1-101 (the file's own *_n columns are value - 1 = the 0-100 count); stored raw.
 ##  rating_legit_*           LE01_01..09 Alexiou & Wiggins legitimacy items, 1-7; column order follows Variables.pdf (inter-item correlations agree:
 ##                           the first two, "general public approves" and "most people think practices morally correct", form their own cluster).
+##Missing: -9, SoSci Survey's "not answered" code (one LE01_07 value), -> NA (stored as -9 until 2026-11-15).
 ##Dropped: the authors' derived scales (prejudices_means, PU*_n, PU*_nreverse), manipulation check (MC), attention checks, ZG01_CP (duration-like
 ##code), IV01_01 (block order), FL01 literacy items, education (10 unlabelled codes), income (unlabelled), employment, job security, ALG II
 ##experience, free-text education and employment (SD_edu_other, CV_empl_stat_other).
@@ -43,8 +48,8 @@ library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 x <- fread(file.path(raw, "Burden_Data.csv"), encoding = "Latin-1", showProgress = FALSE)
 stopifnot(nrow(x) == 1748)
-x <- x[AC_benefit == 2 & AC_condition == 1]
-stopifnot(nrow(x) == 1602, identical(as.integer(x[, .N, treat_group][order(treat_group)]$N), c(187L,181L,203L,209L,206L,202L,208L,206L)))
+stopifnot(!anyNA(x$AC_benefit), !anyNA(x$AC_condition), sum(x$AC_benefit == 2 & x$AC_condition == 1) == 1602,
+          identical(as.integer(x[AC_benefit == 2 & AC_condition == 1, .N, treat_group][order(treat_group)]$N), c(187L,181L,203L,209L,206L,202L,208L,206L)))
 LD <- "Arbeitslosengeld II beantragen: Arbeitslosengeld II beantragen Sie in Ihrem zuständigen Jobcenter. Alle notwendigen Informationen und Formulare finden Sie auf dieser Seite. Für weitere Informationen kontaktieren Sie bitte Ihr zuständiges Jobcenter. Downloads: Merkblatt zum Arbeitslosengeld II und Sozialgeld.pdf; Antrag auf Arbeitslosengeld II.pdf; Ausfüllhinweise zum Antrag auf Arbeitslosengeld II.pdf; Weiterbewilligungsantrag (WBA) online (Stellen Sie den Weiterbewilligungsantrag für Arbeitslosengeld II online. Den Online-Zugang erhalten Sie bei Ihrem Jobcenter.); Anlage zur Einkommenserklärung (EK).pdf; Anlage für Unterhaltsansprüche gegenüber getrennt Lebenden (UH1).pdf; Anlage zu weiteren Personen der Bedarfsgemeinschaft.pdf; Anlage zu Kosten der Unterkunft und Heizung (KDU).pdf; Anlage zum Mehrbedarf für kostenaufwändigere Ernährung (MEB).pdf"
 CD <- "Voraussetzungen für Arbeitslosengeld II: Um die Leistungen des ALG II zu erhalten, müssen Sie einen Antrag beim zuständigen Jobcenter stellen; müssen Sie Ihre Einkommens-, Vermögens- und Wohnverhältnisse offenlegen; müssen Sie nach erfolgreichem Antrag ein Erstgespräch mit Ihrem Jobcenter absolvieren. Während des Leistungsempfangs müssen Sie jede Arbeit annehmen, zu der Sie geistig, seelisch und körperlich in der Lage sind; das Jobcenter bei Bedarf täglich aufsuchen können; sich bei Verlassen des Wohnorts (Ortsabwesenheit) die Zustimmung des Jobcenters einholen (die Ortsabwesenheit ist im Regelfall auf 3 Wochen pro Jahr beschränkt); gegebenenfalls zu einer ärztlichen oder psychologischen Untersuchung erscheinen, wenn das Jobcenter Sie dazu auffordert."
 SA <- "Folgen von Pflichtverletzungen: Kommen Sie einer Meldeaufforderung des Jobcenters (Einladung) nicht nach, ohne hierfür einen wichtigen Grund zu haben, beträgt die Minderung 10 Prozent des für Sie maßgebenden Regelbedarfes. Kommen Sie einer anderen Pflicht nicht nach, zum Beispiel der Verpflichtung eine zumutbare Arbeit aufzunehmen, ohne hierfür einen wichtigen Grund zu haben, beträgt die Minderung 30 Prozent des für Sie maßgebenden Regelbedarfes. Eine Minderung wird zunächst für 3 Monate ausgesprochen. Wenn Sie Ihre verletzte Pflicht nachholen, kann sich diese verkürzen. BITTE BEACHTEN SIE: Kommen Sie Ihren Pflichten ohne wichtigen Grund nicht nach, hat dies weitreichende Folgen. Sie müssen mit einer Minderung Ihrer Leistung bis zu 30 Prozent rechnen."
@@ -56,11 +61,17 @@ for (n in names(pj)) d[[paste0("rating_prejudice_", n)]] <- x[[pj[[n]]]]
 lg <- c(public_approves = 1, morally_correct = 2, common_good = 3, ethical_standards = 4, appropriate_rules = 5, better_world = 6,
         creates_value = 7, in_stakeholder_interest = 8, benefits_stakeholders = 9)
 for (n in names(lg)) d[[paste0("rating_legit_", n)]] <- x[[sprintf("LE01_%02d", lg[[n]])]]
+# -9 is SoSci Survey's "not answered" code (one LE01_07 value); stored as -9 until 2026-11-15.
+rc0 <- grep("^rating", names(d), value = TRUE)
+for (n in rc0) d[get(n) == -9, (n) := NA]
+stopifnot(all(unlist(d[, ..rc0]) >= 1, na.rm = TRUE))
 d[, `:=`(attr_learning_demands = ifelse(bitwAnd(g, 1L) > 0, LD, NS), attr_compliance_demands = ifelse(bitwAnd(g, 2L) > 0, CD, NS),
          attr_sanctions = ifelse(bitwAnd(g, 4L) > 0, SA, NS),
-         cov_gender = c("female", "male", "other")[x$SD_gender], cov_age = as.integer(x$SD_age), cov_left_right_code = as.integer(x$pol_ideology))]
+         cov_gender = c("female", "male", "other")[x$SD_gender], cov_age = as.integer(x$SD_age), cov_left_right_code = as.integer(x$pol_ideology),
+         cov_attention_pass_1 = as.integer(x$AC_benefit == 2), cov_attention_pass_2 = as.integer(x$AC_condition == 1))]
 stopifnot(d[, .N, .(attr_learning_demands, attr_compliance_demands, attr_sanctions)][, .N] == 8)
 d <- d[rowSums(!is.na(d[, .SD, .SDcols = patterns("^rating")])) > 0]
+stopifnot(nrow(d) == 1748, d[cov_attention_pass_1 == 1 & cov_attention_pass_2 == 1, .N] == 1602)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "sievert_2024_burden_perceptions.csv"))
 cat(nrow(d), "rows\n")

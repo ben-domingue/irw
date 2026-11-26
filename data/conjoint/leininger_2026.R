@@ -21,7 +21,8 @@
 ##rating_election_chance = perceived trustworthiness / local knowledge / representativeness of the district / election chances of the
 ##candidate, each 1-5 (anchors not deposited; higher read as more). No opt-out is recorded: every task with a recorded choice has
 ##exactly one chosen profile (checked). 628 tasks have no choice (both profiles NA); those are kept only where a rating exists
-##(choice NA on both profiles; 1 task with neither is dropped); 4 further rows with no outcome at all are omitted.
+##(choice NA on both profiles; 1 task with neither is dropped). A profile left unrated in such a task keeps its row with the
+##outcomes NA (4 tasks; #3536).
 ##Covariates: cov_gender (male 0/1 -> female/male), cov_age, cov_education_level (authors' high/medium/low/other grouping, not the source
 ##categories), cov_region, cov_urban (urban/rural), cov_local_born, cov_local_identity_index (mean of three items, 1-5),
 ##cov_attach_birth and cov_attach_localknow (agreement that representatives should be born locally / have local knowledge, 1-5).
@@ -38,7 +39,7 @@ ch <- d[, .(s = sum(chosencand, na.rm = TRUE), na = sum(is.na(chosencand)), rt =
 stopifnot(ch[, all((s == 1 & na == 0) | (s == 0 & na == 2))])
 keep <- ch[(s == 1) | (rt > 0), tk]
 cat("tasks total", uniqueN(d$tk), "kept", length(keep), "no choice but rated", ch[s == 0 & rt > 0, .N], "\n")
-d <- d[tk %in% keep]
+d <- d[tk %in% keep]   # task-level: a shown profile stays
 d[, rid := as.integer(factor(id, levels = unique(sort(id))))]
 cap <- function(x) as.character(x)
 r <- data.table(id = d$rid, task = as.integer(d$task), profile = match(as.character(d$profile), c("A", "B")), choice = as.integer(d$chosencand),
@@ -51,6 +52,5 @@ r <- data.table(id = d$rid, task = as.integer(d$task), profile = match(as.charac
   cov_local_identity_index = d$localid_index, cov_attach_birth = as.integer(d$localattachment_politicianbirth),
   cov_attach_localknow = as.integer(d$localattachment_politicianlocalknow))
 r[, attr_gender := tools::toTitleCase(attr_gender)]
-r <- r[!(is.na(choice) & is.na(rating_trustworthy) & is.na(rating_local_knowledge) & is.na(rating_district_representative) & is.na(rating_election_chance))]  # rows with no outcome at all
 setorder(r, id, task, profile)
 fwrite(r, file.path(out, "leininger_2026_name_recognition.csv")); cat("rows", nrow(r), "resp", uniqueN(r$id), "\n")

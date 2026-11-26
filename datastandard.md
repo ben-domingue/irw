@@ -36,6 +36,11 @@ either silently.*
   site or an API, broadcast video, a Kaggle re-upload of someone else's data):
   **do not host**, even under a permissive licence. The re-uploader's licence
   does not clear data they did not own; the originator's terms govern.
+- **A README that says the data cannot be shared**: check which file it means
+  before holding. "The raw data cannot be shared due to data protection laws"
+  governs a raw file that is then not in the deposit; the prepared analysis
+  file the authors did deposit is covered by the deposit's licence and can be
+  ingested (Ben, 2026-10-21, irw#3141).
 
 Anything that fits none of these goes to ben-domingue. Do not process it on your
 own judgment, and do not skip it silently either: say what it is and ask.
@@ -45,6 +50,10 @@ own judgment, and do not skip it silently either: say what it is and ask.
 **Check the sample size.** The floor is 100 unique `id` values, flat — a table with fewer respondents is skipped outright, with no judgment call in between. Count unique `id`s before writing a script, not after.
 
 The one exception is **non-human (animal) data**, which the floor does not apply to (#2220). Animal studies are small by nature, often a few subjects with many trials each, so for them the floor would measure the wrong thing. Judge them by the complexity step below instead, and check that `resp` means what a modeller will assume: in a spontaneous-alternation maze, for example, it records which arm was chosen, not whether that was correct. Tag the `sample` as Animal.
+
+**Intensive longitudinal (ESM / EMA) tables get a lower floor: 30 unique `id`s, and a median of at least 20 responses per person per item, in the table as shipped** (ruled on #3421). Both conditions have to hold. The median is one number for the table, taken over its whole person × item grid and counting zero where a person skipped an item, so a thin item can stay in a table that clears 20 overall. With many prompts per person the per-person part of a model is well estimated, and what limits these data is the number of people as level-2 units; 30 is the usual lower bound for that in the multilevel literature. The 20-responses condition makes the exception about the design, not the source. It also keeps out thin tables inside a qualifying study, such as an end-of-day item asked once a day for 5 days. Count people from the data file, not from a catalogue's participant count. A table with 100 or more people clears the ordinary floor and needs neither condition. Everything else keeps the 100 floor, including panels with a handful of waves. `automated_finding/openesm_ingest.py` flags a record under 30 people as a stop, flags each table under the median as a per-table stop, and its generated scripts check both thresholds again on the tables they write. `irw-validate` reports a table under 100 people that has a `wave`, `timepoint` or `date` column and clears both thresholds as `sample_floor` info rather than a warning.
+
+**Psychophysics and chronometric rotation tasks have their own floor: 50 people** (Ben, 2026-11-23 and 2026-11-25, #3686). The lower floor follows the design, not the topic: it applies when the stimulus is varied along a physical dimension the experimenter controls (contrast, orientation, rotation angle, size, numerosity, duration, illusion strength) and the item is defined by those parameter values, as in discrimination, detection and estimation tasks and chronometric mental rotation (angle x same/mirror). Such tables are judged at 50 unique `id` values instead of 100; the people are few by design and each contributes many trials. A fixed-item test of a perceptual or spatial ability (a paper-and-pencil mental rotation test whose angles are not recorded, a sensory identification test) keeps the ordinary floor of 100, whatever collection it joins. Membership of the `psychophysics` and `mental_rotation` collections is decided separately from this floor. The 3-item floor below still applies. `irw-validate`'s `sample_floor` check still warns below 100, because it cannot tell these tables from any other; the warning is expected for them.
 
 **Check the item count too: the floor is 3 distinct items.** Ruled 2026-10-19 by
 ben-domingue ("i can live with 3 items. 2 gets extreme"), settling six deferrals
@@ -337,6 +346,9 @@ If column names are in a non-English language, create a mapping to `item_1`, `it
 
 ### Subscale aggregate columns
 Aggregate columns often share a prefix with item columns but have a suffix like `_total`, `_TT`, `_FAMIL`, `_001`, `_002`. Exclude them explicitly by checking for these suffixes before building the item column list.
+
+### Counts and measured quantities
+Ruled by ben-domingue on #1700 (2026-10-01). **A self-reported count is a response**: how many drinks, binge episodes, close friends, times played sport. Keep it as an item, with a data note when it sits beside ratings. **A measure of time, length or mass is not a response**, even when self-reported: minutes per day, hh:mm durations, amounts consumed. Take those columns out of the items and keep the rest of the table; a person-level one that is useful (hours of work missed, say) may ship as a `cov_*` column. When this changes a live table, add `metadata/data_notes.csv` and `metadata/table_changes.csv` rows. The `continuous_response` collection (`collections/registry.csv`) holds tables that are mainly (at least half their items) judgements on a continuum, bounded or not; scored or graded values (partial credit, essay marks) are not members, and neither are counts or measured quantities.
 
 ### Verifying a continuous-looking column is actually a raw response
 Not every column with plausible, in-range-looking values is a raw single-observation response — some are already a mean/contrast/index computed across several trials or items, which is a composite (see "Subscale aggregate columns" above), not a `resp`. This is easy to miss when the composite happens to fall in a plausible range, or when its non-integer look is (wrongly) taken as evidence it's a legitimate continuous rating rather than checked. Before accepting a continuous or oddly-fractional column as `resp`:

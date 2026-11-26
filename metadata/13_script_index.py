@@ -18,8 +18,13 @@ ambiguous rather than guessing.
 
 What it cannot see: names assembled at run time (`paste0(prefix, i)`,
 `f"{stem}_{k}"`). Those tables keep whatever the prefix match gives them,
-unless metadata/table_scripts_manual.csv (same `table,scripts` columns,
-hand-maintained) maps them. A manual row replaces the computed one for its
+unless automated_finding/script_at_ingest.csv (written by stage_dict_row.py's
+`script` field when the table is built) or metadata/table_scripts_manual.csv
+(same `table,scripts` columns, hand-maintained) maps them; the manual file
+wins. The manual file's bulk (2026-11-16, ~2,400 rows) is a reviewed backfill
+of tables whose names a script assembles at run time -- FairVote/NSW/Scottish
+`rcv_*`, ENCCEJA, imos, neuroqol, battery scripts -- found by matching a
+string literal in exactly one script that prefixes the table name. A manual row replaces the computed one for its
 table; a script it names that is not tracked under data/ is dropped with a
 warning, so a renamed script cannot leave a dead path in the index. The first
 rows are the himmelstein-<task>-2025 tables, whose names fpt_common.py builds
@@ -127,8 +132,11 @@ def build_index(tables: Iterable[str], scripts: Dict[str, str]) -> Dict[str, Lis
     return {t: sorted(p) for t, p in sorted(hits.items())}
 
 
-def read_manual(path: Path, listed: Iterable[str]) -> Dict[str, List[str]]:
-    """Hand-maintained table -> scripts rows, keeping only tracked scripts."""
+def read_manual(path: Path, listed: Iterable[str], column: str = "scripts") -> Dict[str, List[str]]:
+    """Hand-maintained table -> scripts rows, keeping only tracked scripts.
+
+    Also reads automated_finding/script_at_ingest.csv (column `script`), the
+    build script stage_dict_row.py records when a table is built."""
     if not path.exists():
         return {}
     known = set(listed)
@@ -136,7 +144,7 @@ def read_manual(path: Path, listed: Iterable[str]) -> Dict[str, List[str]]:
     with path.open(encoding="utf-8-sig", newline="") as fh:
         for row in csv.DictReader(fh):
             table = (row.get("table") or "").strip()
-            paths = [p.strip() for p in (row.get("scripts") or "").split("|") if p.strip()]
+            paths = [p.strip() for p in (row.get(column) or "").split("|") if p.strip()]
             missing = [p for p in paths if p not in known]
             for p in missing:
                 print(f"WARNING: {path.name}: {table} names {p}, not a tracked "
@@ -169,7 +177,10 @@ def main(argv: List[str] | None = None) -> int:
         for p in paths
     }
     index = build_index(tables, texts)
+    ingest = read_manual(args.repo / "automated_finding" / "script_at_ingest.csv", paths, "script")
     manual = read_manual(args.repo / "metadata" / "table_scripts_manual.csv", paths)
+    ##recorded at build time beats reading code; a hand row beats both
+    index.update(ingest)
     index.update(manual)
     index = dict(sorted(index.items()))
     write_index(index, args.out)

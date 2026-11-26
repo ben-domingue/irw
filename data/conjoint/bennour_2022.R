@@ -41,26 +41,31 @@
 ##  rating  "How likely is it that you would choose to live in Municipality A [B]?" 0-10 (codebook:
 ##          0 = worst evaluation, 10 = best evaluation); export columns Howlikelyisitthatyouwould/S,
 ##          U/V, X/Y, AA/AB, AD/AE.
-##Respondents: only the 1,589 FINISHED records are kept (Finished = True; each answered all five
-##choices and all ten ratings); the 437 unfinished records with 1-4 answered tasks are dropped, in
-##line with the authors' published long file (codebook: 1,596 respondents x 5 tasks; 7 more than
-##the finished records here, not identifiable).
+##Respondents: every record with at least one answered task is kept (IRW conjoint ruling, Ben
+##2026-11-10: no author sample exclusions): the 1,589 finished records (Finished = True; each
+##answered all five choices and all ten ratings) and the unfinished records that answered 1-4 tasks
+##(counts checked below). The export has no consent item (respondents were recruited from the
+##Migration-Mobility Survey) and no recorded age is under 18. The authors' published long file (codebook:
+##1,596 respondents x 5 tasks; 7 more than the finished records here, not identifiable) excludes
+##respondents who did not finish; reproduce the finished records with cov_finished == 1 (1,589).
+##Unfinished records have only the tasks they answered; a choice left blank is NA on both rows, a
+##rating left blank is NA.
 ##Covariates: cov_age (Whatisyourageinyears, years; only whole numbers 15-99 kept), cov_gender
 ##(Male/Female/Other -> male/female/other; the free-text field is dropped), cov_language
 ##(UserLanguage), cov_duration_sec
-##(Durationinseconds, the whole conjoint module).
+##(Durationinseconds, the whole conjoint module; for an unfinished record, up to when it was closed),
+##cov_finished (Finished: 1 = True, 0 = False).
 ##Dropped: ExternalDataReference and RecipientFirstName (the respondent's Migration-Mobility Survey
 ##id, which links to that restricted survey; respondents re-keyed 1..N), placeholder recipient
 ##name/e-mail fields, dates, Progress, ResponseType, DistributionChannel. No survey weight.
 ##N: codebook 1,596 respondents (15,960 rows, 5 tasks); export 2,309 records, 1,589 finished.
-##This table: 1,589 respondents, 7,945 tasks, 15,890 rows.
+##This table: 2,026 respondents (437 unfinished, with 1-4 tasks), 8,999 tasks, 17,998 rows (1,589 / 7,945 / 15,890 with cov_finished == 1).
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(read_sav(file.path(raw, "c_LocationDecision.sav")))
 stopifnot(nrow(s) == 2309)
 s[, rid := .I]
 stopifnot(all(s$Finished %in% c("True", "False")))
-s <- s[Finished == "True"]
 ch <- c("Imagineyouhaveanattractivel", "MunicipalityAMunicipality", "W", "Z", "AC")
 ra <- c("Howlikelyisitthatyouwould", "U", "X", "AA", "AD"); rb <- c("S", "V", "Y", "AB", "AE")
 at <- c(Transport = "transport", Nature = "nature", Cost = "cost", Attitudes = "attitudes", Naturalization = "naturalization",
@@ -82,7 +87,8 @@ d[, task_blank := any(blank), .(rid, task)]
 d[, task_out := any(!is.na(choice) | !is.na(rating)), .(rid, task)]
 cat("tasks with outcome but blank attributes:", d[task_out & task_blank, uniqueN(paste(rid, task))], "\n")
 d <- d[task_out & !task_blank][, c("blank", "task_blank", "task_out") := NULL]
-stopifnot(d[, uniqueN(task), rid][, all(V1 == 5)], !anyNA(d$choice), !anyNA(d$rating))
+fin <- s[Finished == "True", rid]
+stopifnot(d[rid %in% fin, uniqueN(task), rid][, all(V1 == 5)], d[rid %in% fin, !anyNA(choice) & !anyNA(rating)], uniqueN(d[rid %in% fin, rid]) == 1589)
 stopifnot(d[, .N, .(rid, task)][, all(N == 2)])
 stopifnot(d[!is.na(choice), sum(choice), .(rid, task)][, all(V1 == 1)], d[, uniqueN(is.na(choice)), .(rid, task)][, all(V1 == 1)])
 levs <- list(transport = c("Connection every half hour until 24:00", "Connection every hour until 20:00"),
@@ -98,11 +104,12 @@ age <- as.numeric(s$Whatisyourageinyears)
 cv <- data.table(rid = s$rid, cov_age = fifelse(!is.na(age) & age == round(age) & age >= 15 & age <= 99, as.integer(age), NA_integer_),
                  cov_gender = c(Male = "male", Female = "female", Other = "other")[s$WhatisyourgenderSelected],
                  cov_language = s$UserLanguage,
-                 cov_duration_sec = as.numeric(s$Durationinseconds))
+                 cov_duration_sec = as.numeric(s$Durationinseconds), cov_finished = as.integer(s$Finished == "True"))
 stopifnot(all(s$WhatisyourgenderSelected %in% c("", "Male", "Female", "Other")))
 d <- merge(d, cv, by = "rid")
 ids <- sort(unique(d$rid)); d[, id := match(rid, ids)][, rid := NULL]
 setcolorder(d, c("id", "task", "profile", "choice", "rating", acols))
 setorder(d, id, task, profile)
 cat(uniqueN(d$id), "respondents,", nrow(d), "rows,", d[, uniqueN(paste(id, task))], "tasks\n")
+stopifnot(uniqueN(d$id) == 2026, nrow(d) == 17998, d[cov_finished == 1, uniqueN(id)] == 1589)
 fwrite(d, file.path(out, "bennour_2022_location_decision.csv"))

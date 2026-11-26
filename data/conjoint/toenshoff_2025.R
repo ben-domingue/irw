@@ -11,8 +11,12 @@
 ##Usage: Rscript toenshoff_2025.R <dir holding rawdata.csv and weights_data.csv> <output dir>
 ##
 ##German online panel, fielded 20-26 Sep 2021 (Qualtrics StartDate), survey in German (UserLanguage DE).
-##Sample = the authors' analysis sample (preprocessing_data.R): consented, passed the energy attention
-##question (attention2 == "Atomkraft"; 57.6% pass rate per the authors) and finished: 2,191 responses.
+##Sample: every consenting response ("Ja, ich nehme an der Studie teil") with at least one answered task in
+##that experiment (IRW conjoint ruling, Ben 2026-11-10: no author sample exclusions); unanswered tasks are
+##omitted. The 94 refusals stay out. The authors' analysis sample (preprocessing_data.R) excludes responses that
+##failed the energy attention question (attention2 == "Atomkraft"; 57.6% pass rate per the authors) or did not
+##finish: 2,191 responses; reproduce it with cov_attention_pass == 1 & cov_finished == 1 (checked below).
+##Kept: 3,361 consenting responses with an answer in either experiment, ids shared by the two tables.
 ##Three panel ids (tic) occur twice with different ResponseIds and different answers; like the authors
 ##(who cluster on ResponseId) each response is kept as its own respondent. The paper's N could not be
 ##checked (article not accessible); the authors' cleaned files also hold 2,191 respondents.
@@ -33,7 +37,11 @@
 ##Attribute text = the German embedded-data strings that were piped into the profiles (leading and
 ##trailing blanks trimmed; e.g. " CDU/CSU", " Bündnis90/ Grünen "). The spelling slip "bestehenen" in a
 ##compensation level is kept as displayed. Attribute display order and any randomization restrictions
-##are not documented in the deposit (every pair of levels occurs). Level weights OBSERVED for the candidates:
+##are not documented in the deposit (every pair of levels occurs). The "slow down" energy level has TWO
+##strings in the export: "... unterstützt Verlangsamung der Maßnahmen ..." (every finished response) and
+##"... unterstützt eine Verlangsamung der Maßnahmen ..." (only in 501 unfinished responses, 126 of them with an
+##answered candidate task: 300 profiles). Both are stored as the export has them (no source says which was
+##shown); treat them as one level. Level weights OBSERVED for the candidates:
 ##energy policy "Unterstützt eine Weiterführung ... im derzeit vorgesehenen Tempo" in 40% of profiles, the
 ##three other levels 20% each; all other attributes near-uniform. Check: energy-policy AMCEs from this
 ##table equal the authors' data.cand.final.tab estimates (-0.049 slow down, +0.046 low-income subsidies vs
@@ -49,7 +57,11 @@
 ##1 = at least 2 of 3 mock-vignette quiz items right AND the mock vignette came before that experiment in
 ##the randomized block order FL_112_DO; rebuilt with the authors' code), cov_survey_weight (authors'
 ##raking weight from weights_data.csv: gender, age group, income quintile; joined on panel id, identical
-##for the 3 duplicated ids).
+##for the 3 duplicated ids; the authors weighted only their 2,191, so NA for everyone else),
+##cov_attention_pass (attention2, "... um zu zeigen, dass Sie bis hier hin gelesen haben, ... wählen Sie
+##'Atomkraft' aus": 1 = Atomkraft, 0 = another source, NA = not answered; it comes after the experiments for
+##some, so many who quit early have NA), cov_finished (Qualtrics Finished, 1 = TRUE, 0 = FALSE).
+##The mock-vignette flags are 0 when a response stopped before the mock vignette's questions.
 ##Dropped: ResponseId and tic (platform/panel ids; re-keyed to integers in file order), postcode
 ##(PII), DB2 free-text comments, timing, coal-exit vignette experiment
 ##(single-factor), authoritarianism and work items, the authors' derived indices and dummies.
@@ -57,16 +69,18 @@ library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 r <- fread(file.path(raw, "rawdata.csv"), encoding = "UTF-8", colClasses = "character")
 r <- r[-(1:2)]
-r <- r[Consent == "Ja, ich nehme an der Studie teil" & attention2 == "Atomkraft" & Finished == "TRUE"]
-stopifnot(nrow(r) == 2191, uniqueN(r$ResponseId) == 2191, all(r$UserLanguage == "DE"))
+qc <- c(sprintf("%d_E1_candchoice", 1:5), sprintf("%d_E4_prefplan", 1:5))
+r <- r[Consent == "Ja, ich nehme an der Studie teil" & rowSums(r[, lapply(.SD, function(v) v != ""), .SDcols = qc]) > 0]
+stopifnot(nrow(r) == 3361, uniqueN(r$ResponseId) == 3361, all(r$UserLanguage == "DE"), all(r$Finished %in% c("TRUE", "FALSE")),
+          r[attention2 == "Atomkraft" & Finished == "TRUE", .N] == 2191)
 r[, id := seq_len(.N)]
 ## covariates
 w <- fread(file.path(raw, "weights_data.csv"))
 stopifnot(w[, uniqueN(weights), tic][, all(V1 == 1)])
 w <- unique(w)
 r[, cov_survey_weight := w$weights[match(tic, w$tic)]]
-stopifnot(!anyNA(r$cov_survey_weight))
-stopifnot(all(r$gender %in% c("weiblich", "männlich", "anderes")))
+stopifnot(r[attention2 == "Atomkraft" & Finished == "TRUE", !anyNA(cov_survey_weight)])
+stopifnot(all(r$gender %in% c("weiblich", "männlich", "anderes", "")))   # "" = not reached (unfinished) -> NA
 by <- suppressWarnings(as.integer(ifelse(grepl("^[0-9]{4}$", r$D1), r$D1, NA)))
 by[!is.na(by) & (by < 1900 | by > 2005)] <- NA
 mv <- (r$MVQ1 == "Reduktion von Schwefel") + (r$MVQ2 == "Internationale Seeschifffahrts-Organisation") +
@@ -82,7 +96,9 @@ cv <- data.table(id = r$id,
   cov_duration_sec = as.integer(r[["Duration (in seconds)"]]),
   cov_attention_pass_mv_cand = as.integer(mv > 1 & mvp < pos("ExperimentCandidates")),
   cov_attention_pass_mv_plan = as.integer(mv > 1 & mvp < pos("ConditionalWillingnesstoPayVignette/ConjointExperiment")),
-  cov_survey_weight = r$cov_survey_weight)
+  cov_survey_weight = r$cov_survey_weight,
+  cov_attention_pass = fifelse(r$attention2 == "", NA_integer_, as.integer(r$attention2 == "Atomkraft")),
+  cov_finished = as.integer(r$Finished == "TRUE"))
 stopifnot(all(cv$cov_left_right %in% c(0:10, NA)), !anyNA(cv$cov_attention_pass_mv_cand))
 ## long builder
 build <- function(qcol, opt, attrs) {
@@ -90,7 +106,7 @@ build <- function(qcol, opt, attrs) {
     d <- data.table(id = r$id, task = t, profile = p,
                     choice = as.integer(r[[sprintf("%d_%s", t, qcol)]] == opt[p]))
     for (nm in names(attrs)) d[, paste0("attr_", nm) := trimws(r[[sprintf("choice%d_%s%d", t, attrs[[nm]], p)]])]
-    d }))))
+    d[r[[sprintf("%d_%s", t, qcol)]] != ""] }))))
   stopifnot(L[, sum(choice), .(id, task)][, all(V1 == 1)], !anyNA(L), L[, all(sapply(.SD, function(x) all(x != ""))), .SDcols = patterns("^attr_")])
   L }
 cand <- build("E1_candchoice", c("Kandidat/in 1", "Kandidat/in 2"),
@@ -99,7 +115,7 @@ cand <- build("E1_candchoice", c("Kandidat/in 1", "Kandidat/in 2"),
 plan <- build("E4_prefplan", c("Plan 1", "Plan 2"),
               list(cost = "Kosten", effectiveness = "Effektivitat", compensation = "Entschadigung",
                    competition = "Wettbewerbsforderung"))
-stopifnot(cand[, uniqueN(attr_party)] == 6, cand[, uniqueN(attr_energy_policy)] == 4, plan[, uniqueN(attr_compensation)] == 5,
+stopifnot(cand[, uniqueN(attr_party)] == 6, cand[, uniqueN(attr_energy_policy)] == 5, cand[r$Finished[id] == "TRUE", uniqueN(attr_energy_policy)] == 4, plan[, uniqueN(attr_compensation)] == 5,
           plan[, uniqueN(attr_cost)] == 4)
 arm <- c("1" = "Control", "2" = "Compensation Treatment", "3" = "Carbon Tax Treatment")[r$willingnesstopay]
 stopifnot(!anyNA(arm))

@@ -29,6 +29,18 @@ Run:
     python irw_discover_pmc_monthly.py --mode weekly
     python irw_discover_pmc_monthly.py --mode full --limit 150
     python irw_discover_pmc_monthly.py --mode weekly --dry-run
+    python irw_discover_pmc_monthly.py --mode full --limit 150 --max-minutes 90 --term-offset 320
+
+--max-minutes stops the term loop cleanly once the wall clock passes the
+budget, so the seen-DOI ledger, Step 2b and the search-log row still run.
+The 2026-11-16 scheduled run was hard-killed by its session's 2-hour limit
+at 123/125 terms; a kill skips `finally:` and all of that bookkeeping.
+Searching, not triage, is where the time goes (66 candidates, never near
+--limit), so --limit cannot bound it.
+
+--term-offset rotates the start of the term list, so a run cut short by
+--max-minutes does not always leave the same tail terms unvisited. The
+scheduled routine passes the day of the year.
 """
 
 from __future__ import annotations
@@ -36,6 +48,7 @@ from __future__ import annotations
 import csv
 import os
 import argparse
+import time
 from datetime import datetime, timezone
 
 from irw_discover_updated import _load_auto_exclusions, resolve_out_path
@@ -114,6 +127,12 @@ def main():
                           f"{ATTEMPTS_PER_CAP}x the cap in attempts "
                           "(default: max(1, limit // n_terms), so a run's budget spreads "
                           "across the whole term list instead of one broad term eating it)")
+    ap.add_argument("--max-minutes", type=float, default=None,
+                     help="stop starting new work after this many minutes, then finish "
+                          "the ledger, Step 2b and the search log as normal (default: none)")
+    ap.add_argument("--term-offset", type=int, default=0,
+                     help="start at term number N (mod the term count) and wrap around, "
+                          "so a time-bounded run reaches different terms each time")
     ap.add_argument("--dry-run", action="store_true",
                      help="print term/journal counts and seen-DOI store size, no queries run")
     args = ap.parse_args()
@@ -123,7 +142,10 @@ def main():
     if bad:
         raise SystemExit(f"Unknown journal slug(s): {bad}. Choose from: {list(JOURNALS)}")
 
-    terms = HIGH_YIELD_TERMS if args.mode == "weekly" else FULL_TERM_LIST
+    terms = list(HIGH_YIELD_TERMS if args.mode == "weekly" else FULL_TERM_LIST)
+    offset = args.term_offset % len(terms)
+    terms = terms[offset:] + terms[:offset]
+    deadline = (time.monotonic() + args.max_minutes * 60) if args.max_minutes else None
     limit = args.limit if args.limit is not None else DEFAULT_LIMIT_BY_MODE[args.mode]
     per_term_cap = args.per_term_cap if args.per_term_cap is not None else max(1, limit // len(terms))
 
@@ -135,6 +157,8 @@ def main():
         print(f"Seen-DOI store ({SEEN_DOIS_PATH}): {len(seen):,} DOIs already attempted "
               f"by any manual or scheduled run (never re-triaged)")
         print(f"Limit this run: {limit} (per-term cap: {per_term_cap})")
+        print(f"Term offset: {offset} (first term {terms[0]!r}); "
+              f"time budget: {args.max_minutes or 'none'} min")
         return
 
     exclude = _load_auto_exclusions()
@@ -155,8 +179,14 @@ def main():
     terms_exhausted = 0
     pool = _new_pool()
     limit_hit = False
+    time_hit = False
     try:
         for term in terms:
+            if deadline is not None and time.monotonic() >= deadline:
+                time_hit = True
+                print(f"\nHit --max-minutes={args.max_minutes}; stopping before {term!r}. "
+                      f"Unvisited terms are picked up by a later run.", flush=True)
+                break
             print(f"\n[term] {term!r}", flush=True)
             terms_visited += 1
             term_done = 0
@@ -204,7 +234,11 @@ def main():
                     if n_done >= limit:
                         limit_hit = True
                         break
+                    if deadline is not None and time.monotonic() >= deadline:
+                        break
                 if term_capped or term_exhausted or limit_hit:
+                    break
+                if deadline is not None and time.monotonic() >= deadline:
                     break
             if term_capped:
                 terms_capped += 1
@@ -240,7 +274,8 @@ def main():
         "notes": f"pmc monthly-script automated run; mode={args.mode}; "
                  f"{n_done} candidates triaged; {terms_visited}/{len(terms)} terms visited "
                  f"({terms_capped} hit per-term cap {per_term_cap}, "
-                 f"{terms_exhausted} out of attempts)",
+                 f"{terms_exhausted} out of attempts); term offset {offset}"
+                 + (f"; stopped at --max-minutes={args.max_minutes}" if time_hit else ""),
     }])
 
 

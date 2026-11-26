@@ -18,6 +18,11 @@
 ##Assignment is read from the survey-platform columns Vignettes_DO_treat1..6 (non-missing = shown; Portugal, Spain, UK:
 ##the Vignettes_DO text "treat1".."treat6"; AusNorFrance: QSAMPLE21..23 = 1; the authors' code comments: treat 1 = all-male,
 ##2 = gender-balanced, 3 = quota gender-balanced). Australia, France and Norway only had the harassment vignettes (1-3).
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, clayton_2025_gender_quotas_<iso2> (nz, au, fr, no,
+##es, ar, br, pt, gb, us, mx, pe), replacing the pooled clayton_2025_gender_quotas, because the design differs by
+##country: Australia, France and Norway saw only the harassment vignettes (attr_policy_issue is constant there), and
+##their Ipsos file has no overturn or trust question (rating_overturn, rating_trust all NA; columns kept so every
+##country table has one column set). Respondents: nz 1,628, au 1,500, fr 1,499, no 1,498, es 1,415, ar 1,326, br 1,325, pt 1,313, gb 1,303, us 1,288, mx 1,207, pe 1,125.
 ##Attribute levels are stored in English from the codebook, whatever the respondent's language (Spanish, Portuguese, English;
 ##French and Norwegian display language is not documented in the deposit, whose Ipsos file holds English text).
 ##Outcomes (all stored as the authors' 1-4 coding from their processing scripts; text answers mapped by the
@@ -112,4 +117,10 @@ o <- data.table(id = seq_len(nrow(x)), task = 1L, profile = 1L,
   cov_duration_sec = x$dur, cov_module_sec = x$module, cov_manipulation_pass = x$manip)
 stopifnot(!anyNA(o$attr_council_composition))
 setorder(o, id, task, profile)
-fwrite(o, file.path(out, "clayton_2025_gender_quotas.csv"))
+iso <- c("New Zealand" = "nz", Australia = "au", France = "fr", Norway = "no", Spain = "es", Argentina = "ar", Brazil = "br", Portugal = "pt", "United Kingdom" = "gb", "United States" = "us", Mexico = "mx", Peru = "pe")
+stopifnot(all(o$cov_country %in% names(iso)), all(names(iso) %in% o$cov_country))
+# A column that is NA for every respondent of a country was not asked there; the country table leaves it out (#3536).
+nw <- sum(vapply(names(iso), function(cn) { x <- o[cov_country == cn]
+  x <- x[, names(x)[!vapply(x, function(v) all(is.na(v)), NA)], with = FALSE]
+  fwrite(x, file.path(out, paste0("clayton_2025_gender_quotas_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(o))

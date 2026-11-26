@@ -11,9 +11,13 @@
 ##
 ##Online samples (Lucid Marketplace, quotas on age, gender, education; fielded late Feb to
 ##early Mar 2022, around the Russian invasion of Ukraine) in 22 countries, each in its national
-##language(s). ONE table with cov_country, because the authors pool all 22 surveys (one design,
-##one fielding; replication_code.R estimates pooled marginal means) and the deposit carries
-##English master labels for every country.
+##language(s). The authors pool all 22 surveys (replication_code.R estimates pooled marginal means)
+##and the deposit carries English master labels for every country.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, wimmer_2024_rivalry_immigrants_<iso2>
+##(fr, pl, us, hu, jp, de, br, pe, ar, es, it, tr, ca, ph, in, gb, za, se, kr, nl, au, gr), replacing the
+##pooled wimmer_2024_rivalry_immigrants, because the level text differs by country: attr_origin's four
+##countries are chosen per survey country (list below), and the prompt and attr_language refer to the
+##respondent's own country and official language. Respondents: fr 3,013, pl 2,939, us 2,934, hu 2,677, jp 2,671, de 2,638, br 2,475, pe 2,369, ar 2,116, es 1,999, it 1,983, tr 1,933, ca 1,854, ph 1,835, in 1,742, gb 1,705, za 1,660, se 1,546, kr 1,462, nl 1,454, au 1,360, gr 1,359.
 ##Prompt (US version): "Imagine that you are an American immigration officer tasked with
 ##deciding who should be granted permanent resident status in your country. You will be given
 ##brief excerpts from two applications. Please choose which of the two applications should be
@@ -91,4 +95,8 @@ d[, id := as.integer(factor(src, levels = unique(s$ResponseId)))][, src := NULL]
 setcolorder(d, c("id", "task", "profile", "choice"))
 stopifnot(uniqueN(d$id) == 45724, nrow(d) == 548688, d[, uniqueN(cov_country), id][, all(V1 == 1)])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "wimmer_2024_rivalry_immigrants.csv"))
+iso <- c(france = "fr", poland = "pl", us = "us", hungary = "hu", japan = "jp", germany = "de", brazil = "br", peru = "pe", argentina = "ar", spain = "es", italy = "it", turkey = "tr", canada = "ca", philippines = "ph", india = "in", uk = "gb", "south africa" = "za", sweden = "se", korea = "kr", netherlands = "nl", australia = "au", greece = "gr")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("wimmer_2024_rivalry_immigrants_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

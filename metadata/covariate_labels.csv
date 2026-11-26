@@ -91,6 +91,94 @@ addy_2021_sdq_ghana,cov_sex,1,Male
 addy_2021_sdq_ghana,cov_sex,2,Female
 addy_2021_sdq_ghana,cov_status,1,Day
 addy_2021_sdq_ghana,cov_status,2,Boarding
+afzali_2026_body_appreciation,cov_age_band,1,20_29 سال
+afzali_2026_body_appreciation,cov_age_band,2,30_39 سال
+afzali_2026_body_appreciation,cov_age_band,3,40_49 سال
+afzali_2026_body_appreciation,cov_age_band,4,50_55 سال
+afzali_2026_body_appreciation,cov_children,1,بدون فرزند
+afzali_2026_body_appreciation,cov_children,2,1 فرزند
+afzali_2026_body_appreciation,cov_children,3,2 فرزند
+afzali_2026_body_appreciation,cov_children,4,3 فرزند و بیشتر
+afzali_2026_body_appreciation,cov_education,1,دیپلم
+afzali_2026_body_appreciation,cov_education,2,فوق دیپلم
+afzali_2026_body_appreciation,cov_education,3,کارشناسی
+afzali_2026_body_appreciation,cov_education,4,کارشناسی ارشد
+afzali_2026_body_appreciation,cov_education,5,دکتری
+afzali_2026_body_appreciation,cov_employment,1,شاغل
+afzali_2026_body_appreciation,cov_employment,2,خانه دار
+afzali_2026_body_appreciation,cov_employment,3,دانشجو
+afzali_2026_body_appreciation,cov_marriage_duration,1,یکسال اول
+afzali_2026_body_appreciation,cov_marriage_duration,2,سال 1_5
+afzali_2026_body_appreciation,cov_marriage_duration,3,5_10 سال
+afzali_2026_body_appreciation,cov_marriage_duration,4,10_15 سال
+afzali_2026_body_appreciation,cov_marriage_duration,5,15_20 سال
+afzali_2026_body_appreciation,cov_marriage_duration,6,20_25 سال
+afzali_2026_relational_flourishing,cov_age_band,1,20_29 سال
+afzali_2026_relational_flourishing,cov_age_band,2,30_39 سال
+afzali_2026_relational_flourishing,cov_age_band,3,40_49 سال
+afzali_2026_relational_flourishing,cov_age_band,4,50_55 سال
+afzali_2026_relational_flourishing,cov_children,1,بدون فرزند
+afzali_2026_relational_flourishing,cov_children,2,1 فرزند
+afzali_2026_relational_flourishing,cov_children,3,2 فرزند
+afzali_2026_relational_flourishing,cov_children,4,3 فرزند و بیشتر
+afzali_2026_relational_flourishing,cov_education,1,دیپلم
+afzali_2026_relational_flourishing,cov_education,2,فوق دیپلم
+afzali_2026_relational_flourishing,cov_education,3,کارشناسی
+afzali_2026_relational_flourishing,cov_education,4,کارشناسی ارشد
+afzali_2026_relational_flourishing,cov_education,5,دکتری
+afzali_2026_relational_flourishing,cov_employment,1,شاغل
+afzali_2026_relational_flourishing,cov_employment,2,خانه دار
+afzali_2026_relational_flourishing,cov_employment,3,دانشجو
+afzali_2026_relational_flourishing,cov_marriage_duration,1,یکسال اول
+afzali_2026_relational_flourishing,cov_marriage_duration,2,سال 1_5
+afzali_2026_relational_flourishing,cov_marriage_duration,3,5_10 سال
+afzali_2026_relational_flourishing,cov_marriage_duration,4,10_15 سال
+afzali_2026_relational_flourishing,cov_marriage_duration,5,15_20 سال
+afzali_2026_relational_flourishing,cov_marriage_duration,6,20_25 سال
+afzali_2026_sexual_mindfulness,cov_age_band,1,20_29 سال
+afzali_2026_sexual_mindfulness,cov_age_band,2,30_39 سال
+afzali_2026_sexual_mindfulness,cov_age_band,3,40_49 سال
+afzali_2026_sexual_mindfulness,cov_age_band,4,50_55 سال
+afzali_2026_sexual_mindfulness,cov_children,1,بدون فرزند
+afzali_2026_sexual_mindfulness,cov_children,2,1 فرزند
+afzali_2026_sexual_mindfulness,cov_children,3,2 فرزند
+afzali_2026_sexual_mindfulness,cov_children,4,3 فرزند و بیشتر
+afzali_2026_sexual_mindfulness,cov_education,1,دیپلم
+afzali_2026_sexual_mindfulness,cov_education,2,فوق دیپلم
+afzali_2026_sexual_mindfulness,cov_education,3,کارشناسی
+afzali_2026_sexual_mindfulness,cov_education,4,کارشناسی ارشد
+afzali_2026_sexual_mindfulness,cov_education,5,دکتری
+afzali_2026_sexual_mindfulness,cov_employment,1,شاغل
+afzali_2026_sexual_mindfulness,cov_employment,2,خانه دار
+afzali_2026_sexual_mindfulness,cov_employment,3,دانشجو
+afzali_2026_sexual_mindfulness,cov_marriage_duration,1,یکسال اول
+afzali_2026_sexual_mindfulness,cov_marriage_duration,2,سال 1_5
+afzali_2026_sexual_mindfulness,cov_marriage_duration,3,5_10 سال
+afzali_2026_sexual_mindfulness,cov_marriage_duration,4,10_15 سال
+afzali_2026_sexual_mindfulness,cov_marriage_duration,5,15_20 سال
+afzali_2026_sexual_mindfulness,cov_marriage_duration,6,20_25 سال
+afzali_2026_sexual_self_concept,cov_age_band,1,20_29 سال
+afzali_2026_sexual_self_concept,cov_age_band,2,30_39 سال
+afzali_2026_sexual_self_concept,cov_age_band,3,40_49 سال
+afzali_2026_sexual_self_concept,cov_age_band,4,50_55 سال
+afzali_2026_sexual_self_concept,cov_children,1,بدون فرزند
+afzali_2026_sexual_self_concept,cov_children,2,1 فرزند
+afzali_2026_sexual_self_concept,cov_children,3,2 فرزند
+afzali_2026_sexual_self_concept,cov_children,4,3 فرزند و بیشتر
+afzali_2026_sexual_self_concept,cov_education,1,دیپلم
+afzali_2026_sexual_self_concept,cov_education,2,فوق دیپلم
+afzali_2026_sexual_self_concept,cov_education,3,کارشناسی
+afzali_2026_sexual_self_concept,cov_education,4,کارشناسی ارشد
+afzali_2026_sexual_self_concept,cov_education,5,دکتری
+afzali_2026_sexual_self_concept,cov_employment,1,شاغل
+afzali_2026_sexual_self_concept,cov_employment,2,خانه دار
+afzali_2026_sexual_self_concept,cov_employment,3,دانشجو
+afzali_2026_sexual_self_concept,cov_marriage_duration,1,یکسال اول
+afzali_2026_sexual_self_concept,cov_marriage_duration,2,سال 1_5
+afzali_2026_sexual_self_concept,cov_marriage_duration,3,5_10 سال
+afzali_2026_sexual_self_concept,cov_marriage_duration,4,10_15 سال
+afzali_2026_sexual_self_concept,cov_marriage_duration,5,15_20 سال
+afzali_2026_sexual_self_concept,cov_marriage_duration,6,20_25 سال
 aguirre_camacho_2021_champion,cov_living_with,1,parents
 aguirre_camacho_2021_champion,cov_living_with,2,other family
 aguirre_camacho_2021_champion,cov_living_with,3,roommates
@@ -603,6 +691,77 @@ amiot_2022_vitality,cov_pet_owner,1,Yes
 amiot_2022_vitality,cov_pet_owner,2,No
 amiot_2022_vitality,cov_survey_language,1,English / Anglais
 amiot_2022_vitality,cov_survey_language,2,Français / French
+anon_2026_pni,cov_country,1,United States
+anon_2026_pni,cov_country,2,United Kingdom
+anon_2026_pni,cov_country,3,Ireland
+anon_2026_pni,cov_country,4,Australia
+anon_2026_pni,cov_current_relationship,5,No Contact
+anon_2026_pni,cov_current_relationship,6,Hostile
+anon_2026_pni,cov_current_relationship,7,Civil
+anon_2026_pni,cov_current_relationship,8,Friendly
+anon_2026_pni,cov_current_relationship,9,Other
+anon_2026_pni,cov_ethnic_background,1,Hispanic/Latino
+anon_2026_pni,cov_ethnic_background,2,Not Hispanic/Latino
+anon_2026_pni,cov_gender,1,Man
+anon_2026_pni,cov_gender,2,Woman
+anon_2026_pni,cov_gender,3,Non-binary
+anon_2026_pni,cov_gender,5,Transgender Man
+anon_2026_pni,cov_gender,6,Transgender Woman
+anon_2026_pni,cov_gender,7,Agender / I don't identify with any gender
+anon_2026_pni,cov_gender,8,Other (please specify)
+anon_2026_pni,cov_gender,9,Prefer not to say
+anon_2026_pni,cov_rated_narcissist,1,Strongly Disagree
+anon_2026_pni,cov_rated_narcissist,2,Moderately Disagree
+anon_2026_pni,cov_rated_narcissist,3,Slightly Disagree
+anon_2026_pni,cov_rated_narcissist,4,Neither Agree Nor Disagree
+anon_2026_pni,cov_rated_narcissist,5,Slightly Agree
+anon_2026_pni,cov_rated_narcissist,6,Moderately Agree
+anon_2026_pni,cov_rated_narcissist,7,Strongly Agree
+anon_2026_pni,cov_relationship_length,1,Less than 3 months
+anon_2026_pni,cov_relationship_length,2,3-12 months
+anon_2026_pni,cov_relationship_length,3,1-3 years
+anon_2026_pni,cov_relationship_length,4,More than 3 years
+anon_2026_pni,cov_target_type,1,Ex-Partner
+anon_2026_pni,cov_target_type,2,Ex-Friend
+anon_2026_pni,cov_who_ended,1,I ended the relationship
+anon_2026_pni,cov_who_ended,2,The other person ended the relationship
+anon_2026_pni,cov_who_ended,4,It was a mutual ending
+anon_2026_pni,cov_who_ended,5,Other
+anon_2026_pni_impressions,cov_country,1,United States
+anon_2026_pni_impressions,cov_country,2,United Kingdom
+anon_2026_pni_impressions,cov_country,3,Ireland
+anon_2026_pni_impressions,cov_current_relationship,5,No Contact
+anon_2026_pni_impressions,cov_current_relationship,6,Hostile
+anon_2026_pni_impressions,cov_current_relationship,7,Civil
+anon_2026_pni_impressions,cov_current_relationship,8,Friendly
+anon_2026_pni_impressions,cov_current_relationship,9,Other
+anon_2026_pni_impressions,cov_ethnic_background,1,Hispanic/Latino
+anon_2026_pni_impressions,cov_ethnic_background,2,Not Hispanic/Latino
+anon_2026_pni_impressions,cov_gender,1,Man
+anon_2026_pni_impressions,cov_gender,2,Woman
+anon_2026_pni_impressions,cov_gender,3,Non-binary
+anon_2026_pni_impressions,cov_gender,5,Transgender Man
+anon_2026_pni_impressions,cov_gender,6,Transgender Woman
+anon_2026_pni_impressions,cov_gender,7,Agender / I don't identify with any gender
+anon_2026_pni_impressions,cov_gender,8,Other (please specify)
+anon_2026_pni_impressions,cov_gender,9,Prefer not to say
+anon_2026_pni_impressions,cov_rated_narcissist,1,Strongly Disagree
+anon_2026_pni_impressions,cov_rated_narcissist,2,Moderately Disagree
+anon_2026_pni_impressions,cov_rated_narcissist,3,Slightly Disagree
+anon_2026_pni_impressions,cov_rated_narcissist,4,Neither Agree Nor Disagree
+anon_2026_pni_impressions,cov_rated_narcissist,5,Slightly Agree
+anon_2026_pni_impressions,cov_rated_narcissist,6,Moderately Agree
+anon_2026_pni_impressions,cov_rated_narcissist,7,Strongly Agree
+anon_2026_pni_impressions,cov_relationship_length,1,Less than 3 months
+anon_2026_pni_impressions,cov_relationship_length,2,3-12 months
+anon_2026_pni_impressions,cov_relationship_length,3,1-3 years
+anon_2026_pni_impressions,cov_relationship_length,4,More than 3 years
+anon_2026_pni_impressions,cov_target_type,1,Ex-Partner
+anon_2026_pni_impressions,cov_target_type,2,Ex-Friend
+anon_2026_pni_impressions,cov_who_ended,1,I ended the relationship
+anon_2026_pni_impressions,cov_who_ended,2,The other person ended the relationship
+anon_2026_pni_impressions,cov_who_ended,4,It was a mutual ending
+anon_2026_pni_impressions,cov_who_ended,5,Other
 arbinaga_2025_aaq2,cov_gender,1,Male
 arbinaga_2025_aaq2,cov_gender,2,Female
 arbinaga_2025_perfectionism,cov_gender,1,Male
@@ -872,6 +1031,34 @@ babaei_2023_oral_kap,cov_gender,0,girl
 babaei_2023_oral_kap,cov_gender,1,boy
 babaei_2023_oral_kap,cov_group,1,control
 babaei_2023_oral_kap,cov_group,2,intervention
+bacchini_2015_bullying,cov_centre,1,[institution name withheld]
+bacchini_2015_bullying,cov_centre,2,[institution name withheld]
+bacchini_2015_bullying,cov_centre,3,[institution name withheld]
+bacchini_2015_bullying,cov_centre,4,[institution name withheld]
+bacchini_2015_bullying,cov_centre,5,[institution name withheld]
+bacchini_2015_bullying,cov_centre,6,[institution name withheld]
+bacchini_2015_bullying,cov_centre,7,[institution name withheld]
+bacchini_2015_bullying,cov_centre,8,[institution name withheld]
+bacchini_2015_bullying,cov_centre,9,[institution name withheld]
+bacchini_2015_bullying,cov_centre,10,[institution name withheld]
+bacchini_2015_bullying,cov_centre,11,[institution name withheld]
+bacchini_2015_bullying,cov_centre,12,[institution name withheld]
+bacchini_2015_bullying,cov_centre,13,[institution name withheld]
+bacchini_2015_bullying,cov_centre,14,[institution name withheld]
+bacchini_2015_victimization,cov_centre,1,[institution name withheld]
+bacchini_2015_victimization,cov_centre,2,[institution name withheld]
+bacchini_2015_victimization,cov_centre,3,[institution name withheld]
+bacchini_2015_victimization,cov_centre,4,[institution name withheld]
+bacchini_2015_victimization,cov_centre,5,[institution name withheld]
+bacchini_2015_victimization,cov_centre,6,[institution name withheld]
+bacchini_2015_victimization,cov_centre,7,[institution name withheld]
+bacchini_2015_victimization,cov_centre,8,[institution name withheld]
+bacchini_2015_victimization,cov_centre,9,[institution name withheld]
+bacchini_2015_victimization,cov_centre,10,[institution name withheld]
+bacchini_2015_victimization,cov_centre,11,[institution name withheld]
+bacchini_2015_victimization,cov_centre,12,[institution name withheld]
+bacchini_2015_victimization,cov_centre,13,[institution name withheld]
+bacchini_2015_victimization,cov_centre,14,[institution name withheld]
 baekgaard_2023_autonomy_loss,cov_meeting_attendance,0,Nej
 baekgaard_2023_autonomy_loss,cov_meeting_attendance,1,Om mere end 2 uger
 baekgaard_2023_autonomy_loss,cov_meeting_attendance,2,Om 1-2 uger
@@ -1779,6 +1966,10 @@ blotner_2026_hexaco60,cov_study,1,"Study 1 (scale derivation; commercial panel B
 blotner_2026_hexaco60,cov_study,2,Study 2 (replication and validation; predominantly students)
 blotner_2026_people_pleasing,cov_study,1,"Study 1 (scale derivation; commercial panel Bilendi plus German university social-media groups, planned-missingness design)"
 blotner_2026_people_pleasing,cov_study,2,Study 2 (replication and validation; predominantly students)
+braniecka_2022_bdi,cov_comorbidity,0,no
+braniecka_2022_bdi,cov_comorbidity,1,yes
+braniecka_2022_bdi,cov_medicated,0,unmedicated
+braniecka_2022_bdi,cov_medicated,1,medicated
 brederecke_2020_phq4,cov_nationality,1,Deutsch
 brederecke_2020_phq4,cov_nationality,2,not German
 brederecke_2020_phq4,cov_sex,1,male
@@ -3168,6 +3359,22 @@ corti_2023_academic_adaptation,cov_field_of_study,2,Pedagogia
 corti_2023_academic_adaptation,cov_field_of_study,3,Ed. Infantil
 corti_2023_academic_adaptation,cov_sexo,1,Mujer
 corti_2023_academic_adaptation,cov_sexo,2,Hombre
+costello_2026_spane,cov_employment,1,Employed full time
+costello_2026_spane,cov_employment,2,Employed part time
+costello_2026_spane,cov_employment,3,Self-employed
+costello_2026_spane,cov_employment,4,Unemployed
+costello_2026_spane,cov_gender,1,Male
+costello_2026_spane,cov_gender,2,Female
+costello_2026_spane,cov_gender,3,Non-binary / third gender
+costello_2026_spane,cov_manip_check,1,Not at all
+costello_2026_spane,cov_manip_check,2,Very little
+costello_2026_spane,cov_manip_check,3,A little
+costello_2026_spane,cov_manip_check,4,Moderately
+costello_2026_spane,cov_manip_check,5,Quite a lot
+costello_2026_spane,cov_manip_check,6,A lot
+costello_2026_spane,cov_manip_check,7,A great deal
+costello_2026_spane,cov_student_status,1,Undergraduate
+costello_2026_spane,cov_student_status,2,Postgraduate
 cucchi_2018_kims,cov_education,1,Secondary School to age 16
 cucchi_2018_kims,cov_education,2,Secondary school/college to age 18
 cucchi_2018_kims,cov_education,3,Non-degree level vocational work-based training
@@ -3417,6 +3624,12 @@ daderman_2023_naqr,cov_self_labelled_bullied,2,"Yes, but only rarely"
 daderman_2023_naqr,cov_self_labelled_bullied,3,"Yes, now and then"
 daderman_2023_naqr,cov_self_labelled_bullied,4,"Yes, several times per week"
 daderman_2023_naqr,cov_self_labelled_bullied,5,"Yes, almost daily"
+dagdelen_2026_flourishing,cov_gender,1,kadın
+dagdelen_2026_flourishing,cov_gender,2,erkek
+dagdelen_2026_ierq,cov_gender,1,kadın
+dagdelen_2026_ierq,cov_gender,2,erkek
+dagdelen_2026_mspss,cov_gender,1,kadın
+dagdelen_2026_mspss,cov_gender,2,erkek
 danielgonzalez_2020_cdrisc10,cov_gender,1,Hombre
 danielgonzalez_2020_cdrisc10,cov_gender,2,Mujer
 danielgonzalez_2020_cdrisc10,cov_program,1,Estudiante Medicina
@@ -4171,6 +4384,81 @@ durand_2022_stai6,cov_sex,1,Male
 durand_2022_stai6,cov_sex,2,Female
 durand_2022_stai6,cov_student,1,Yes
 durand_2022_stai6,cov_student,2,No
+dursun_2026_career_decisiveness,cov_career_thought,1,Olumlu
+dursun_2026_career_decisiveness,cov_career_thought,2,Olumsuz
+dursun_2026_career_decisiveness,cov_career_thought,3,Değişmedi
+dursun_2026_career_decisiveness,cov_department,1,Antrenörlük
+dursun_2026_career_decisiveness,cov_department,2,Öğretmenlik
+dursun_2026_career_decisiveness,cov_department,3,Yöneticilik
+dursun_2026_career_decisiveness,cov_department,4,Rekreasyon
+dursun_2026_career_decisiveness,cov_does_sport,1,Evet
+dursun_2026_career_decisiveness,cov_does_sport,2,Hayır
+dursun_2026_career_decisiveness,cov_gender,1,Kadın
+dursun_2026_career_decisiveness,cov_gender,2,Erkek
+dursun_2026_career_decisiveness,cov_reason,1,Okuduğum (ihtisaslaştığım) alanda iş sahibi olmakOkuduğum (ihtisaslaştığım) alanda iş sahibi olmak
+dursun_2026_career_decisiveness,cov_reason,2,Genel olarak üniversite mezunu olmak
+dursun_2026_career_decisiveness,cov_reason,3,Kişisel gelişim ve hobi olarak
+dursun_2026_career_decisiveness,cov_reason,4,Zorunluluk
+dursun_2026_career_decisiveness,cov_satisfied_department,1,Evet
+dursun_2026_career_decisiveness,cov_satisfied_department,2,Hayır
+dursun_2026_career_decisiveness,cov_university,1,[institution name withheld]
+dursun_2026_career_decisiveness,cov_university,2,[institution name withheld]
+dursun_2026_career_decisiveness,cov_university,3,[institution name withheld]
+dursun_2026_career_decisiveness,cov_university,4,[institution name withheld]
+dursun_2026_career_decisiveness,cov_year,1,1. Sınıf
+dursun_2026_career_decisiveness,cov_year,2,2. Sınıf
+dursun_2026_career_decisiveness,cov_year,3,3. Sınıf
+dursun_2026_career_decisiveness,cov_year,4,4. Sınıf
+dursun_2026_ohq_short,cov_career_thought,1,Olumlu
+dursun_2026_ohq_short,cov_career_thought,2,Olumsuz
+dursun_2026_ohq_short,cov_career_thought,3,Değişmedi
+dursun_2026_ohq_short,cov_department,1,Antrenörlük
+dursun_2026_ohq_short,cov_department,2,Öğretmenlik
+dursun_2026_ohq_short,cov_department,3,Yöneticilik
+dursun_2026_ohq_short,cov_department,4,Rekreasyon
+dursun_2026_ohq_short,cov_does_sport,1,Evet
+dursun_2026_ohq_short,cov_does_sport,2,Hayır
+dursun_2026_ohq_short,cov_gender,1,Kadın
+dursun_2026_ohq_short,cov_gender,2,Erkek
+dursun_2026_ohq_short,cov_reason,1,Okuduğum (ihtisaslaştığım) alanda iş sahibi olmakOkuduğum (ihtisaslaştığım) alanda iş sahibi olmak
+dursun_2026_ohq_short,cov_reason,2,Genel olarak üniversite mezunu olmak
+dursun_2026_ohq_short,cov_reason,3,Kişisel gelişim ve hobi olarak
+dursun_2026_ohq_short,cov_reason,4,Zorunluluk
+dursun_2026_ohq_short,cov_satisfied_department,1,Evet
+dursun_2026_ohq_short,cov_satisfied_department,2,Hayır
+dursun_2026_ohq_short,cov_university,1,[institution name withheld]
+dursun_2026_ohq_short,cov_university,2,[institution name withheld]
+dursun_2026_ohq_short,cov_university,3,[institution name withheld]
+dursun_2026_ohq_short,cov_university,4,[institution name withheld]
+dursun_2026_ohq_short,cov_year,1,1. Sınıf
+dursun_2026_ohq_short,cov_year,2,2. Sınıf
+dursun_2026_ohq_short,cov_year,3,3. Sınıf
+dursun_2026_ohq_short,cov_year,4,4. Sınıf
+dursun_2026_swemwbs,cov_career_thought,1,Olumlu
+dursun_2026_swemwbs,cov_career_thought,2,Olumsuz
+dursun_2026_swemwbs,cov_career_thought,3,Değişmedi
+dursun_2026_swemwbs,cov_department,1,Antrenörlük
+dursun_2026_swemwbs,cov_department,2,Öğretmenlik
+dursun_2026_swemwbs,cov_department,3,Yöneticilik
+dursun_2026_swemwbs,cov_department,4,Rekreasyon
+dursun_2026_swemwbs,cov_does_sport,1,Evet
+dursun_2026_swemwbs,cov_does_sport,2,Hayır
+dursun_2026_swemwbs,cov_gender,1,Kadın
+dursun_2026_swemwbs,cov_gender,2,Erkek
+dursun_2026_swemwbs,cov_reason,1,Okuduğum (ihtisaslaştığım) alanda iş sahibi olmakOkuduğum (ihtisaslaştığım) alanda iş sahibi olmak
+dursun_2026_swemwbs,cov_reason,2,Genel olarak üniversite mezunu olmak
+dursun_2026_swemwbs,cov_reason,3,Kişisel gelişim ve hobi olarak
+dursun_2026_swemwbs,cov_reason,4,Zorunluluk
+dursun_2026_swemwbs,cov_satisfied_department,1,Evet
+dursun_2026_swemwbs,cov_satisfied_department,2,Hayır
+dursun_2026_swemwbs,cov_university,1,[institution name withheld]
+dursun_2026_swemwbs,cov_university,2,[institution name withheld]
+dursun_2026_swemwbs,cov_university,3,[institution name withheld]
+dursun_2026_swemwbs,cov_university,4,[institution name withheld]
+dursun_2026_swemwbs,cov_year,1,1. Sınıf
+dursun_2026_swemwbs,cov_year,2,2. Sınıf
+dursun_2026_swemwbs,cov_year,3,3. Sınıf
+dursun_2026_swemwbs,cov_year,4,4. Sınıf
 dwyer_2019_clinton_activist,cov_gender,1,Female
 dwyer_2019_clinton_activist,cov_gender,2,Male
 dwyer_2019_clinton_cesd,cov_gender,1,Female
@@ -4181,6 +4469,90 @@ elshafie_2020_edsc,cov_ses,2,Moderate
 elshafie_2020_edsc,cov_ses,3,High
 elshafie_2020_edsc,cov_sex,1,Male
 elshafie_2020_edsc,cov_sex,2,Female
+ercan_2026_ai_anxiety,cov_age_band,1,20-24 yaş arası
+ercan_2026_ai_anxiety,cov_age_band,2,25-29 yaş arası
+ercan_2026_ai_anxiety,cov_age_band,3,30-34 yaş arası
+ercan_2026_ai_anxiety,cov_age_band,4,35 yaş üzeri
+ercan_2026_ai_anxiety,cov_dahaonsekden,1,Evet
+ercan_2026_ai_anxiety,cov_dahaonsekden,2,Hayır
+ercan_2026_ai_anxiety,cov_dahaonsekden,3,Sadece staj
+ercan_2026_ai_anxiety,cov_gender,1,kadın
+ercan_2026_ai_anxiety,cov_gender,2,erkek
+ercan_2026_ai_anxiety,cov_programme,1,Gastronomi ve mutfak san.
+ercan_2026_ai_anxiety,cov_programme,2,Turizm rehberliği
+ercan_2026_ai_anxiety,cov_programme,3,Rekreasyon yönetimi
+ercan_2026_ai_anxiety,cov_programme,4,Turizm işl.
+ercan_2026_ai_anxiety,cov_school,1,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,2,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,3,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,4,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,5,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,6,[institution name withheld]
+ercan_2026_ai_anxiety,cov_school,7,[institution name withheld]
+ercan_2026_ai_anxiety,cov_tourism_experience,1,yok
+ercan_2026_ai_anxiety,cov_tourism_experience,2,1 yıldan az
+ercan_2026_ai_anxiety,cov_tourism_experience,3,1-3 yıl arası
+ercan_2026_ai_anxiety,cov_tourism_experience,4,3-5 yıl arazı
+ercan_2026_ai_anxiety,cov_year,1,1. sınıf
+ercan_2026_ai_anxiety,cov_year,2,2.sınıf
+ercan_2026_ai_anxiety,cov_year,3,3.sınıf
+ercan_2026_ai_anxiety,cov_year,4,4.sınıf
+ercan_2026_career_motivation,cov_age_band,1,20-24 yaş arası
+ercan_2026_career_motivation,cov_age_band,2,25-29 yaş arası
+ercan_2026_career_motivation,cov_age_band,3,30-34 yaş arası
+ercan_2026_career_motivation,cov_age_band,4,35 yaş üzeri
+ercan_2026_career_motivation,cov_dahaonsekden,1,Evet
+ercan_2026_career_motivation,cov_dahaonsekden,2,Hayır
+ercan_2026_career_motivation,cov_dahaonsekden,3,Sadece staj
+ercan_2026_career_motivation,cov_gender,1,kadın
+ercan_2026_career_motivation,cov_gender,2,erkek
+ercan_2026_career_motivation,cov_programme,1,Gastronomi ve mutfak san.
+ercan_2026_career_motivation,cov_programme,2,Turizm rehberliği
+ercan_2026_career_motivation,cov_programme,3,Rekreasyon yönetimi
+ercan_2026_career_motivation,cov_programme,4,Turizm işl.
+ercan_2026_career_motivation,cov_school,1,[institution name withheld]
+ercan_2026_career_motivation,cov_school,2,[institution name withheld]
+ercan_2026_career_motivation,cov_school,3,[institution name withheld]
+ercan_2026_career_motivation,cov_school,4,[institution name withheld]
+ercan_2026_career_motivation,cov_school,5,[institution name withheld]
+ercan_2026_career_motivation,cov_school,6,[institution name withheld]
+ercan_2026_career_motivation,cov_school,7,[institution name withheld]
+ercan_2026_career_motivation,cov_tourism_experience,1,yok
+ercan_2026_career_motivation,cov_tourism_experience,2,1 yıldan az
+ercan_2026_career_motivation,cov_tourism_experience,3,1-3 yıl arası
+ercan_2026_career_motivation,cov_tourism_experience,4,3-5 yıl arazı
+ercan_2026_career_motivation,cov_year,1,1. sınıf
+ercan_2026_career_motivation,cov_year,2,2.sınıf
+ercan_2026_career_motivation,cov_year,3,3.sınıf
+ercan_2026_career_motivation,cov_year,4,4.sınıf
+ercan_2026_self_efficacy,cov_age_band,1,20-24 yaş arası
+ercan_2026_self_efficacy,cov_age_band,2,25-29 yaş arası
+ercan_2026_self_efficacy,cov_age_band,3,30-34 yaş arası
+ercan_2026_self_efficacy,cov_age_band,4,35 yaş üzeri
+ercan_2026_self_efficacy,cov_dahaonsekden,1,Evet
+ercan_2026_self_efficacy,cov_dahaonsekden,2,Hayır
+ercan_2026_self_efficacy,cov_dahaonsekden,3,Sadece staj
+ercan_2026_self_efficacy,cov_gender,1,kadın
+ercan_2026_self_efficacy,cov_gender,2,erkek
+ercan_2026_self_efficacy,cov_programme,1,Gastronomi ve mutfak san.
+ercan_2026_self_efficacy,cov_programme,2,Turizm rehberliği
+ercan_2026_self_efficacy,cov_programme,3,Rekreasyon yönetimi
+ercan_2026_self_efficacy,cov_programme,4,Turizm işl.
+ercan_2026_self_efficacy,cov_school,1,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,2,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,3,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,4,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,5,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,6,[institution name withheld]
+ercan_2026_self_efficacy,cov_school,7,[institution name withheld]
+ercan_2026_self_efficacy,cov_tourism_experience,1,yok
+ercan_2026_self_efficacy,cov_tourism_experience,2,1 yıldan az
+ercan_2026_self_efficacy,cov_tourism_experience,3,1-3 yıl arası
+ercan_2026_self_efficacy,cov_tourism_experience,4,3-5 yıl arazı
+ercan_2026_self_efficacy,cov_year,1,1. sınıf
+ercan_2026_self_efficacy,cov_year,2,2.sınıf
+ercan_2026_self_efficacy,cov_year,3,3.sınıf
+ercan_2026_self_efficacy,cov_year,4,4.sınıf
 estevespairazaman_2022_anxiety_symptoms,cov_age_band,1,18-29
 estevespairazaman_2022_anxiety_symptoms,cov_age_band,2,30-59
 estevespairazaman_2022_anxiety_symptoms,cov_age_band,3,60-84
@@ -5328,6 +5700,18 @@ galindo_2025_procrastination,cov_year,2,2. Curso
 galindo_2025_procrastination,cov_year,3,3. Curso
 galindo_2025_procrastination,cov_year,4,4. Curso
 galindo_2025_procrastination,cov_year,5,Master
+galindodominguez_2026_effort,cov_gender,1,Masculino
+galindodominguez_2026_effort,cov_gender,2,Femenino
+galindodominguez_2026_evaluation,cov_gender,1,Masculino
+galindodominguez_2026_evaluation,cov_gender,2,Femenino
+galindodominguez_2026_overreliance,cov_gender,1,Masculino
+galindodominguez_2026_overreliance,cov_gender,2,Femenino
+galindodominguez_2026_planning,cov_gender,1,Masculino
+galindodominguez_2026_planning,cov_gender,2,Femenino
+galindodominguez_2026_reflection,cov_gender,1,Masculino
+galindodominguez_2026_reflection,cov_gender,2,Femenino
+galindodominguez_2026_self_monitoring,cov_gender,1,Masculino
+galindodominguez_2026_self_monitoring,cov_gender,2,Femenino
 gerou_2023_dass21,cov_education,1,Primary School Graduate
 gerou_2023_dass21,cov_education,2,Secondary School Graduate
 gerou_2023_dass21,cov_education,3,High School Graduate
@@ -6118,6 +6502,18 @@ gulec_2023_tipi,cov_witnessed_death,1,evet
 gulec_2023_tipi,cov_witnessed_death,2,hayır
 gulec_2023_tipi,cov_witnessed_injury,1,evet
 gulec_2023_tipi,cov_witnessed_injury,2,hayır
+gutierrezangel_2026_mimd,cov_degree,1,CAFD
+gutierrezangel_2026_mimd,cov_degree,2,MASTER EE
+gutierrezangel_2026_mimd,cov_degree,3,INF
+gutierrezangel_2026_mimd,cov_degree,4,PRIM
+gutierrezangel_2026_mimd,cov_degree,5,ING.MEC
+gutierrezangel_2026_mimd,cov_degree,6,MAES
+gutierrezangel_2026_tmms24,cov_degree,1,CAFD
+gutierrezangel_2026_tmms24,cov_degree,2,MASTER EE
+gutierrezangel_2026_tmms24,cov_degree,3,INF
+gutierrezangel_2026_tmms24,cov_degree,4,PRIM
+gutierrezangel_2026_tmms24,cov_degree,5,ING.MEC
+gutierrezangel_2026_tmms24,cov_degree,6,MAES
 guzmanmuzante_2025_gse,cov_education,1,Primario Incompleto
 guzmanmuzante_2025_gse,cov_education,2,Secundario Incompleto
 guzmanmuzante_2025_gse,cov_education,3,Terciario/Universitario Incompleto
@@ -6395,6 +6791,106 @@ hernandez_martinez_2025_math_attitudes,cov_institution,8,[institution name withh
 hernandez_martinez_2025_math_attitudes,cov_institution,9,[institution name withheld]
 hernandez_martinez_2025_math_attitudes,cov_institution,10,[institution name withheld]
 hernandez_martinez_2025_math_attitudes,cov_institution,11,[institution name withheld]
+hill_2026_mbi,cov_ethnicity,1,Arab
+hill_2026_mbi,cov_ethnicity,2,Asian or Asian British – Indian
+hill_2026_mbi,cov_ethnicity,3,Asian or Asian British – Pakistani
+hill_2026_mbi,cov_ethnicity,4,Asian or Asian British – Bangladeshi
+hill_2026_mbi,cov_ethnicity,5,Asian or Asian British – any other Asian background
+hill_2026_mbi,cov_ethnicity,6,Black or Black British – Caribbean
+hill_2026_mbi,cov_ethnicity,7,Black or Black British – African
+hill_2026_mbi,cov_ethnicity,9,Chinese
+hill_2026_mbi,cov_ethnicity,12,Mixed – White and Asian
+hill_2026_mbi,cov_ethnicity,13,Mixed – Any other mixed background
+hill_2026_mbi,cov_ethnicity,14,White – British
+hill_2026_mbi,cov_ethnicity,15,White – Irish
+hill_2026_mbi,cov_ethnicity,17,White – any other White background… please state
+hill_2026_mbi,cov_ethnicity,18,Any other ethnic origin group…. please state
+hill_2026_mbi,cov_ethnicity,19,Prefer not to say
+hill_2026_mbi,cov_gmc_registered,1,Yes
+hill_2026_mbi,cov_gmc_registered,2,No
+hill_2026_mbi,cov_grade,1,CTI2/STI-2
+hill_2026_mbi,cov_grade,2,ST3/4
+hill_2026_mbi,cov_grade,3,ST5/6
+hill_2026_mbi,cov_grade,4,"ST7/8, Post-CCT Fellow"
+hill_2026_mbi,cov_grade,5,Non-Consultant career grade doctor
+hill_2026_mbi,cov_grade,6,Consultant
+hill_2026_mbi,cov_marital_status,1,Single
+hill_2026_mbi,cov_marital_status,2,In a relationship
+hill_2026_mbi,cov_marital_status,3,Married
+hill_2026_mbi,cov_marital_status,4,Divorced
+hill_2026_mbi,cov_marital_status,5,Separated
+hill_2026_mbi,cov_marital_status,6,Other
+hill_2026_mbi,cov_sex,1,Male
+hill_2026_mbi,cov_sex,2,Female
+hill_2026_mbi,cov_sex,4,Prefer not to say
+hill_2026_mbi,cov_specialty,1,General surgeon
+hill_2026_mbi,cov_specialty,2,Colorectal surgeon
+hill_2026_mbi,cov_specialty,3,Upper GI surgeon
+hill_2026_mbi,cov_specialty,4,Hepato-Pancreatico-Biliary surgeon
+hill_2026_mbi,cov_specialty,5,Breast Surgeon
+hill_2026_mbi,cov_specialty,6,Transplant surgeon
+hill_2026_mbi,cov_specialty,7,Neurosurgeon
+hill_2026_mbi,cov_specialty,8,Emergency Surgeon
+hill_2026_mbi,cov_specialty,9,Obstetrician and gynecologist
+hill_2026_mbi,cov_specialty,10,Max-Fax surgeon
+hill_2026_mbi,cov_specialty,11,Ophthalmologist
+hill_2026_mbi,cov_specialty,12,Orthopedic surgeon
+hill_2026_mbi,cov_specialty,13,ENT surgeon
+hill_2026_mbi,cov_specialty,14,Pediatric surgeon
+hill_2026_mbi,cov_specialty,15,Plastic surgeon
+hill_2026_mbi,cov_specialty,16,Thoracic surgeon
+hill_2026_mbi,cov_specialty,17,Urologist
+hill_2026_mbi,cov_specialty,18,Vascular surgeon
+hill_2026_mps15,cov_ethnicity,1,Arab
+hill_2026_mps15,cov_ethnicity,2,Asian or Asian British – Indian
+hill_2026_mps15,cov_ethnicity,3,Asian or Asian British – Pakistani
+hill_2026_mps15,cov_ethnicity,4,Asian or Asian British – Bangladeshi
+hill_2026_mps15,cov_ethnicity,5,Asian or Asian British – any other Asian background
+hill_2026_mps15,cov_ethnicity,6,Black or Black British – Caribbean
+hill_2026_mps15,cov_ethnicity,7,Black or Black British – African
+hill_2026_mps15,cov_ethnicity,9,Chinese
+hill_2026_mps15,cov_ethnicity,12,Mixed – White and Asian
+hill_2026_mps15,cov_ethnicity,13,Mixed – Any other mixed background
+hill_2026_mps15,cov_ethnicity,14,White – British
+hill_2026_mps15,cov_ethnicity,15,White – Irish
+hill_2026_mps15,cov_ethnicity,17,White – any other White background… please state
+hill_2026_mps15,cov_ethnicity,18,Any other ethnic origin group…. please state
+hill_2026_mps15,cov_ethnicity,19,Prefer not to say
+hill_2026_mps15,cov_gmc_registered,1,Yes
+hill_2026_mps15,cov_gmc_registered,2,No
+hill_2026_mps15,cov_grade,1,CTI2/STI-2
+hill_2026_mps15,cov_grade,2,ST3/4
+hill_2026_mps15,cov_grade,3,ST5/6
+hill_2026_mps15,cov_grade,4,"ST7/8, Post-CCT Fellow"
+hill_2026_mps15,cov_grade,5,Non-Consultant career grade doctor
+hill_2026_mps15,cov_grade,6,Consultant
+hill_2026_mps15,cov_marital_status,1,Single
+hill_2026_mps15,cov_marital_status,2,In a relationship
+hill_2026_mps15,cov_marital_status,3,Married
+hill_2026_mps15,cov_marital_status,4,Divorced
+hill_2026_mps15,cov_marital_status,5,Separated
+hill_2026_mps15,cov_marital_status,6,Other
+hill_2026_mps15,cov_sex,1,Male
+hill_2026_mps15,cov_sex,2,Female
+hill_2026_mps15,cov_sex,4,Prefer not to say
+hill_2026_mps15,cov_specialty,1,General surgeon
+hill_2026_mps15,cov_specialty,2,Colorectal surgeon
+hill_2026_mps15,cov_specialty,3,Upper GI surgeon
+hill_2026_mps15,cov_specialty,4,Hepato-Pancreatico-Biliary surgeon
+hill_2026_mps15,cov_specialty,5,Breast Surgeon
+hill_2026_mps15,cov_specialty,6,Transplant surgeon
+hill_2026_mps15,cov_specialty,7,Neurosurgeon
+hill_2026_mps15,cov_specialty,8,Emergency Surgeon
+hill_2026_mps15,cov_specialty,9,Obstetrician and gynecologist
+hill_2026_mps15,cov_specialty,10,Max-Fax surgeon
+hill_2026_mps15,cov_specialty,11,Ophthalmologist
+hill_2026_mps15,cov_specialty,12,Orthopedic surgeon
+hill_2026_mps15,cov_specialty,13,ENT surgeon
+hill_2026_mps15,cov_specialty,14,Pediatric surgeon
+hill_2026_mps15,cov_specialty,15,Plastic surgeon
+hill_2026_mps15,cov_specialty,16,Thoracic surgeon
+hill_2026_mps15,cov_specialty,17,Urologist
+hill_2026_mps15,cov_specialty,18,Vascular surgeon
 hitlan_2025_celebrity_attitude,cov_ethnicity,1,Native American (American Indian or Alaskan Native)
 hitlan_2025_celebrity_attitude,cov_ethnicity,2,Asian
 hitlan_2025_celebrity_attitude,cov_ethnicity,3,Black (African American or Black African descent)
@@ -6721,6 +7217,8 @@ huang_2016_pdsq_depression,cov_religion,4,Buddhism
 huang_2016_pdsq_depression,cov_religion,5,Atheism
 huang_2016_pdsq_depression,cov_religion,6,Agnosticism
 huang_2016_pdsq_depression,cov_religion,7,Other
+hung_2026_downward_comparison,cov_attrited,0,留存
+hung_2026_downward_comparison,cov_attrited,1,流失
 hung_2026_fomo,cov_grade,1,Freshman
 hung_2026_fomo,cov_grade,2,Sophomore
 hung_2026_fomo,cov_grade,3,Junior
@@ -6804,6 +7302,8 @@ hung_2026_problematic_video,cov_grade,2,Sophomore
 hung_2026_problematic_video,cov_grade,3,Junior
 hung_2026_problematic_video,cov_grade,4,Senior
 hung_2026_problematic_video,cov_grade,5,Graduate student
+hung_2026_psmu,cov_attrited,0,留存
+hung_2026_psmu,cov_attrited,1,流失
 hung_2026_restraint,cov_grade,1,Freshman
 hung_2026_restraint,cov_grade,2,Sophomore
 hung_2026_restraint,cov_grade,3,Junior
@@ -6819,6 +7319,12 @@ hung_2026_sensation_seek,cov_grade,2,Sophomore
 hung_2026_sensation_seek,cov_grade,3,Junior
 hung_2026_sensation_seek,cov_grade,4,Senior
 hung_2026_sensation_seek,cov_grade,5,Graduate student
+hung_2026_shyness,cov_attrited,0,留存
+hung_2026_shyness,cov_attrited,1,流失
+hung_2026_social_avoidance,cov_attrited,0,留存
+hung_2026_social_avoidance,cov_attrited,1,流失
+hung_2026_social_desirability,cov_attrited,0,留存
+hung_2026_social_desirability,cov_attrited,1,流失
 hung_2026_subjective_happiness,cov_father_education,1,Primary school or below
 hung_2026_subjective_happiness,cov_father_education,2,junior high school
 hung_2026_subjective_happiness,cov_father_education,3,high school
@@ -6846,6 +7352,8 @@ hung_2026_swls,cov_location,2,town
 hung_2026_swls,cov_location,3,city
 hung_2026_swls,cov_nation,0,the Han nationality
 hung_2026_swls,cov_nation,1,minority nationality
+hung_2026_upward_comparison,cov_attrited,0,留存
+hung_2026_upward_comparison,cov_attrited,1,流失
 hung_2026_uwes_s,cov_gender,0,boy
 hung_2026_uwes_s,cov_gender,1,girl
 hung_2026_uwes_s,cov_grade,1,Grade7
@@ -9002,6 +9510,130 @@ khatun_2026_sas,cov_ses,4,upper-middle class
 khatun_2026_sas,cov_ses,5,upper class
 khatun_2026_sas,cov_smoking,1,yes
 khatun_2026_sas,cov_smoking,2,no
+kim_2026_mips,cov_main_event,5,Sprint 400m
+kim_2026_mips,cov_main_event,6,Hurdles 400m
+kim_2026_mips,cov_main_event,11,Middle distances 800m
+kim_2026_mips,cov_main_event,13,Middle distances 1500m
+kim_2026_mips,cov_main_event,16,Steeplechase 2000m
+kim_2026_mips,cov_main_event,17,Long distance 3000m
+kim_2026_mips,cov_main_event,18,Steeplechase 3000m
+kim_2026_mips,cov_main_event,20,Long distance 5000m
+kim_2026_mips,cov_main_event,21,Long distance 10000m
+kim_2026_mips,cov_main_event,22,Road running 10km
+kim_2026_mips,cov_main_event,24,Road running 10 miles
+kim_2026_mips,cov_main_event,26,Half marathon
+kim_2026_mips,cov_main_event,29,Full marathon
+kim_2026_mips,cov_main_event,30,Road running 100km
+kim_2026_mips,cov_main_event,35,Race walking 30km
+kim_2026_mips,cov_main_event,38,High Jump
+kim_2026_mips,cov_main_event,39,Pole Vault
+kim_2026_mips,cov_main_event,40,Long Jump
+kim_2026_mips,cov_main_event,41,Triple Jump
+kim_2026_mips,cov_main_event,42,Shot Put
+kim_2026_mips,cov_main_event,43,Discus Throw
+kim_2026_mips,cov_main_event,44,Hammer Throw
+kim_2026_mips,cov_main_event,45,Javelin Throw
+kim_2026_mips,cov_main_event,46,Decathlon
+kim_2026_mips,cov_main_event,47,Hurdles 100m
+kim_2026_mips,cov_main_event,48,Sprint 100m
+kim_2026_mips,cov_main_event,49,Sprint 200m
+kim_2026_mips,cov_main_event,50,Hurdles 110m
+kim_2026_mips,cov_main_event,51,Heptathlon
+kim_2026_mips,cov_sex,1,Male
+kim_2026_mips,cov_sex,2,Female
+kim_2026_pps_s,cov_main_event,5,Sprint 400m
+kim_2026_pps_s,cov_main_event,6,Hurdles 400m
+kim_2026_pps_s,cov_main_event,11,Middle distances 800m
+kim_2026_pps_s,cov_main_event,13,Middle distances 1500m
+kim_2026_pps_s,cov_main_event,16,Steeplechase 2000m
+kim_2026_pps_s,cov_main_event,17,Long distance 3000m
+kim_2026_pps_s,cov_main_event,18,Steeplechase 3000m
+kim_2026_pps_s,cov_main_event,20,Long distance 5000m
+kim_2026_pps_s,cov_main_event,21,Long distance 10000m
+kim_2026_pps_s,cov_main_event,22,Road running 10km
+kim_2026_pps_s,cov_main_event,24,Road running 10 miles
+kim_2026_pps_s,cov_main_event,26,Half marathon
+kim_2026_pps_s,cov_main_event,29,Full marathon
+kim_2026_pps_s,cov_main_event,30,Road running 100km
+kim_2026_pps_s,cov_main_event,35,Race walking 30km
+kim_2026_pps_s,cov_main_event,38,High Jump
+kim_2026_pps_s,cov_main_event,39,Pole Vault
+kim_2026_pps_s,cov_main_event,40,Long Jump
+kim_2026_pps_s,cov_main_event,41,Triple Jump
+kim_2026_pps_s,cov_main_event,42,Shot Put
+kim_2026_pps_s,cov_main_event,43,Discus Throw
+kim_2026_pps_s,cov_main_event,44,Hammer Throw
+kim_2026_pps_s,cov_main_event,45,Javelin Throw
+kim_2026_pps_s,cov_main_event,46,Decathlon
+kim_2026_pps_s,cov_main_event,47,Hurdles 100m
+kim_2026_pps_s,cov_main_event,48,Sprint 100m
+kim_2026_pps_s,cov_main_event,49,Sprint 200m
+kim_2026_pps_s,cov_main_event,50,Hurdles 110m
+kim_2026_pps_s,cov_main_event,51,Heptathlon
+kim_2026_pps_s,cov_sex,1,Male
+kim_2026_pps_s,cov_sex,2,Female
+kim_2026_smps2,cov_main_event,5,Sprint 400m
+kim_2026_smps2,cov_main_event,6,Hurdles 400m
+kim_2026_smps2,cov_main_event,11,Middle distances 800m
+kim_2026_smps2,cov_main_event,13,Middle distances 1500m
+kim_2026_smps2,cov_main_event,16,Steeplechase 2000m
+kim_2026_smps2,cov_main_event,17,Long distance 3000m
+kim_2026_smps2,cov_main_event,18,Steeplechase 3000m
+kim_2026_smps2,cov_main_event,20,Long distance 5000m
+kim_2026_smps2,cov_main_event,21,Long distance 10000m
+kim_2026_smps2,cov_main_event,22,Road running 10km
+kim_2026_smps2,cov_main_event,24,Road running 10 miles
+kim_2026_smps2,cov_main_event,26,Half marathon
+kim_2026_smps2,cov_main_event,29,Full marathon
+kim_2026_smps2,cov_main_event,30,Road running 100km
+kim_2026_smps2,cov_main_event,35,Race walking 30km
+kim_2026_smps2,cov_main_event,38,High Jump
+kim_2026_smps2,cov_main_event,39,Pole Vault
+kim_2026_smps2,cov_main_event,40,Long Jump
+kim_2026_smps2,cov_main_event,41,Triple Jump
+kim_2026_smps2,cov_main_event,42,Shot Put
+kim_2026_smps2,cov_main_event,43,Discus Throw
+kim_2026_smps2,cov_main_event,44,Hammer Throw
+kim_2026_smps2,cov_main_event,45,Javelin Throw
+kim_2026_smps2,cov_main_event,46,Decathlon
+kim_2026_smps2,cov_main_event,47,Hurdles 100m
+kim_2026_smps2,cov_main_event,48,Sprint 100m
+kim_2026_smps2,cov_main_event,49,Sprint 200m
+kim_2026_smps2,cov_main_event,50,Hurdles 110m
+kim_2026_smps2,cov_main_event,51,Heptathlon
+kim_2026_smps2,cov_sex,1,Male
+kim_2026_smps2,cov_sex,2,Female
+kim_2026_spes,cov_main_event,5,Sprint 400m
+kim_2026_spes,cov_main_event,6,Hurdles 400m
+kim_2026_spes,cov_main_event,11,Middle distances 800m
+kim_2026_spes,cov_main_event,13,Middle distances 1500m
+kim_2026_spes,cov_main_event,16,Steeplechase 2000m
+kim_2026_spes,cov_main_event,17,Long distance 3000m
+kim_2026_spes,cov_main_event,18,Steeplechase 3000m
+kim_2026_spes,cov_main_event,20,Long distance 5000m
+kim_2026_spes,cov_main_event,21,Long distance 10000m
+kim_2026_spes,cov_main_event,22,Road running 10km
+kim_2026_spes,cov_main_event,24,Road running 10 miles
+kim_2026_spes,cov_main_event,26,Half marathon
+kim_2026_spes,cov_main_event,29,Full marathon
+kim_2026_spes,cov_main_event,30,Road running 100km
+kim_2026_spes,cov_main_event,35,Race walking 30km
+kim_2026_spes,cov_main_event,38,High Jump
+kim_2026_spes,cov_main_event,39,Pole Vault
+kim_2026_spes,cov_main_event,40,Long Jump
+kim_2026_spes,cov_main_event,41,Triple Jump
+kim_2026_spes,cov_main_event,42,Shot Put
+kim_2026_spes,cov_main_event,43,Discus Throw
+kim_2026_spes,cov_main_event,44,Hammer Throw
+kim_2026_spes,cov_main_event,45,Javelin Throw
+kim_2026_spes,cov_main_event,46,Decathlon
+kim_2026_spes,cov_main_event,47,Hurdles 100m
+kim_2026_spes,cov_main_event,48,Sprint 100m
+kim_2026_spes,cov_main_event,49,Sprint 200m
+kim_2026_spes,cov_main_event,50,Hurdles 110m
+kim_2026_spes,cov_main_event,51,Heptathlon
+kim_2026_spes,cov_sex,1,Male
+kim_2026_spes,cov_sex,2,Female
 koksal_2023_life_satisfaction,cov_education,1,Ortaokul
 koksal_2023_life_satisfaction,cov_education,2,Lise
 koksal_2023_life_satisfaction,cov_education,3,Ön Lİsans
@@ -9482,6 +10114,118 @@ li_2017_phq9,cov_mdd,0,without MDD
 li_2017_phq9,cov_mdd,1,MDD
 li_2017_phq9,cov_suicide_risk,0,without suicide risk
 li_2017_phq9,cov_suicide_risk,1,suicide risk
+li_2022_adoption_intention,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_adoption_intention,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_adoption_intention,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_adoption_intention,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_adoption_intention,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_adoption_intention,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_adoption_intention,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_adoption_intention,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_adoption_intention,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_adoption_intention,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_adoption_intention,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_adoption_intention,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_adoption_intention,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_adoption_intention,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_effort_expectancy,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_effort_expectancy,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_effort_expectancy,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_effort_expectancy,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_effort_expectancy,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_effort_expectancy,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_effort_expectancy,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_effort_expectancy,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_effort_expectancy,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_effort_expectancy,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_effort_expectancy,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_effort_expectancy,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_effort_expectancy,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_effort_expectancy,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_facilitating_conditions,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_facilitating_conditions,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_facilitating_conditions,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_facilitating_conditions,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_facilitating_conditions,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_facilitating_conditions,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_facilitating_conditions,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_facilitating_conditions,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_facilitating_conditions,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_facilitating_conditions,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_facilitating_conditions,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_facilitating_conditions,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_facilitating_conditions,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_facilitating_conditions,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_hedonic_motivation,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_hedonic_motivation,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_hedonic_motivation,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_hedonic_motivation,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_hedonic_motivation,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_hedonic_motivation,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_hedonic_motivation,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_hedonic_motivation,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_hedonic_motivation,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_hedonic_motivation,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_hedonic_motivation,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_hedonic_motivation,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_hedonic_motivation,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_hedonic_motivation,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_lifestyle_compatibility,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_lifestyle_compatibility,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_lifestyle_compatibility,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_lifestyle_compatibility,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_lifestyle_compatibility,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_lifestyle_compatibility,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_lifestyle_compatibility,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_lifestyle_compatibility,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_lifestyle_compatibility,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_lifestyle_compatibility,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_lifestyle_compatibility,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_lifestyle_compatibility,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_lifestyle_compatibility,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_lifestyle_compatibility,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_perceived_trust,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_perceived_trust,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_perceived_trust,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_perceived_trust,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_perceived_trust,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_perceived_trust,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_perceived_trust,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_perceived_trust,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_perceived_trust,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_perceived_trust,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_perceived_trust,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_perceived_trust,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_perceived_trust,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_perceived_trust,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_performance_expectancy,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_performance_expectancy,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_performance_expectancy,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_performance_expectancy,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_performance_expectancy,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_performance_expectancy,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_performance_expectancy,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_performance_expectancy,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_performance_expectancy,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_performance_expectancy,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_performance_expectancy,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_performance_expectancy,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_performance_expectancy,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_performance_expectancy,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
+li_2022_social_influence,cov_city_tier,1,"Ò»Ïß³ÇÊÐ£¨ÀýÈç:±±¾©£¬ÉÏº£µÈ£©Tier 1 cities (e.g. Beijing, Shanghai, etc.)"
+li_2022_social_influence,cov_city_tier,2,"¶þÏß³ÇÊÐ£¨ÀýÈç:Î÷°²£¬ÖØÇìµÈ£©Tier 2 cities (e.g. Xi 'an, Chongqing, etc.)"
+li_2022_social_influence,cov_city_tier,3,"ÈýÏß³ÇÊÐ£¨ÀýÈç:¼ªÁÖ£¬Öéº£µÈ£©Tier 3 cities (e.g. Jilin, Zhuhai, etc.)"
+li_2022_social_influence,cov_city_tier,4,"ËÄÏß³ÇÊÐ¼°Å©´å£¨ÀýÈç:µØ¼¶ÊÐ£©Tier 4 cities and rural areas (e.g., prefecture-level cities)"
+li_2022_social_influence,cov_education,1,¸ßÖÐSecondary school certificate
+li_2022_social_influence,cov_education,2,×¨¿ÆDiploma/technical school certificate
+li_2022_social_influence,cov_education,3,Ñ§Ê¿Ñ§Î»Bachelor degree or equivalent
+li_2022_social_influence,cov_education,4,Ë¶Ê¿Ñ§Î»Master¡¯s degree
+li_2022_social_influence,cov_education,5,²©Ê¿Ñ§Î»Doctoral degree
+li_2022_social_influence,cov_income_band,1,µÍÓÚ2500ÔªBelow 2500RMB
+li_2022_social_influence,cov_income_band,2,2501-5000Ôª2501RMB- 5000RMB
+li_2022_social_influence,cov_income_band,3,5001-7500Ôª5001RMB- 7500RMB
+li_2022_social_influence,cov_income_band,4,7501-10000Ôª7501RMB- 10000RMB
+li_2022_social_influence,cov_income_band,5,¸ßÓÚ10000ÔªMore than 10000 RMB
 li_2024_csc,cov_age,1,below 18
 li_2024_csc,cov_age,2,18-20
 li_2024_csc,cov_age,3,21-23
@@ -10133,6 +10877,18 @@ martindelcampo_2020_ptsd,cov_sex,1,Male
 martindelcampo_2020_ptsd,cov_sex,2,Female
 martindelcampo_2020_tipi,cov_sex,1,Male
 martindelcampo_2020_tipi,cov_sex,2,Female
+mastrothanasis_2026_sprs_s,cov_class,1,Fifth grade
+mastrothanasis_2026_sprs_s,cov_class,2,Sixth grade
+mastrothanasis_2026_sprs_s,cov_class,3,First year of middle school
+mastrothanasis_2026_sprs_s,cov_class,4,Second year of middle school
+mastrothanasis_2026_sprs_s,cov_class,5,Third year of middle school
+mastrothanasis_2026_sprs_s,cov_class,6,First year of high school
+mastrothanasis_2026_sprs_s,cov_class,7,Second year of high school
+mastrothanasis_2026_sprs_s,cov_class,8,Third year of high school
+mastrothanasis_2026_sprs_s,cov_gender,1,Boy
+mastrothanasis_2026_sprs_s,cov_gender,2,Girl
+mastrothanasis_2026_sprs_s,cov_instructor_gender,1,Man
+mastrothanasis_2026_sprs_s,cov_instructor_gender,2,Woman
 mavromoustakos_2016_fasq,cov_flying_phobic_group,1,Non-flying phobic
 mavromoustakos_2016_fasq,cov_flying_phobic_group,2,Flying phobic
 mavromoustakos_2016_probability_scale,cov_flying_phobic_group,1,Non-flying phobic
@@ -10419,6 +11175,14 @@ modzelewska_2021_maia,cov_place,2,"city below 50,000 residents"
 modzelewska_2021_maia,cov_place,3,city 50 - 500 thousand residents
 modzelewska_2021_maia,cov_place,4,"city 500,000 - 1 million inhabitants"
 modzelewska_2021_maia,cov_place,5,city pow. 1 million inhabitants
+mokhtar_2026_growth_mindset,cov_age,1,8 years old
+mokhtar_2026_growth_mindset,cov_age,2,9 years old
+mokhtar_2026_growth_mindset,cov_gender,1,male
+mokhtar_2026_growth_mindset,cov_gender,2,female
+mokhtar_2026_stem_self_efficacy,cov_age,1,8 years old
+mokhtar_2026_stem_self_efficacy,cov_age,2,9 years old
+mokhtar_2026_stem_self_efficacy,cov_gender,1,male
+mokhtar_2026_stem_self_efficacy,cov_gender,2,female
 moon_2023_coping_emotion,cov_education,1,No academic background
 moon_2023_coping_emotion,cov_education,2,elementary school graduate
 moon_2023_coping_emotion,cov_education,3,a junior high school graduate
@@ -10710,6 +11474,98 @@ neivasantos_2026_oeq,cov_nationality,2,Brasileira
 neivasantos_2026_oeq,cov_nationality,3,Outra
 neivasantos_2026_oeq,cov_session,1,Sim
 neivasantos_2026_oeq,cov_session,2,Não
+ngunda_2026_brief_cope,cov_alcohol,0,no use
+ngunda_2026_brief_cope,cov_alcohol,1,use
+ngunda_2026_brief_cope,cov_art_duration,1,Between 6 months and 1 year
+ngunda_2026_brief_cope,cov_art_duration,2,Between 1 year and 5 years
+ngunda_2026_brief_cope,cov_art_duration,3,More than 5 years
+ngunda_2026_brief_cope,cov_diabetes_dx,0,no
+ngunda_2026_brief_cope,cov_diabetes_dx,1,yes
+ngunda_2026_brief_cope,cov_education,1,Informal
+ngunda_2026_brief_cope,cov_education,2,Secondary
+ngunda_2026_brief_cope,cov_education,3,Higher
+ngunda_2026_brief_cope,cov_hiv_duration,1,Between 6 months and 1 year
+ngunda_2026_brief_cope,cov_hiv_duration,2,Between 1 year and 5 years
+ngunda_2026_brief_cope,cov_hiv_duration,3,More than 5 years
+ngunda_2026_brief_cope,cov_marital,1,single
+ngunda_2026_brief_cope,cov_marital,2,married
+ngunda_2026_brief_cope,cov_marital,3,divorced
+ngunda_2026_brief_cope,cov_occupation,1,unemployed
+ngunda_2026_brief_cope,cov_occupation,2,employed
+ngunda_2026_brief_cope,cov_sex,1,Male
+ngunda_2026_brief_cope,cov_sex,2,Female
+ngunda_2026_brief_cope,cov_site,1,[institution name withheld]
+ngunda_2026_brief_cope,cov_site,2,[institution name withheld]
+ngunda_2026_brief_cope,cov_site,3,[institution name withheld]
+ngunda_2026_fssq,cov_alcohol,0,no use
+ngunda_2026_fssq,cov_alcohol,1,use
+ngunda_2026_fssq,cov_art_duration,1,Between 6 months and 1 year
+ngunda_2026_fssq,cov_art_duration,2,Between 1 year and 5 years
+ngunda_2026_fssq,cov_art_duration,3,More than 5 years
+ngunda_2026_fssq,cov_diabetes_dx,0,no
+ngunda_2026_fssq,cov_diabetes_dx,1,yes
+ngunda_2026_fssq,cov_education,1,Informal
+ngunda_2026_fssq,cov_education,2,Secondary
+ngunda_2026_fssq,cov_education,3,Higher
+ngunda_2026_fssq,cov_hiv_duration,1,Between 6 months and 1 year
+ngunda_2026_fssq,cov_hiv_duration,2,Between 1 year and 5 years
+ngunda_2026_fssq,cov_hiv_duration,3,More than 5 years
+ngunda_2026_fssq,cov_marital,1,single
+ngunda_2026_fssq,cov_marital,2,married
+ngunda_2026_fssq,cov_marital,3,divorced
+ngunda_2026_fssq,cov_occupation,1,unemployed
+ngunda_2026_fssq,cov_occupation,2,employed
+ngunda_2026_fssq,cov_sex,1,Male
+ngunda_2026_fssq,cov_sex,2,Female
+ngunda_2026_fssq,cov_site,1,[institution name withheld]
+ngunda_2026_fssq,cov_site,2,[institution name withheld]
+ngunda_2026_fssq,cov_site,3,[institution name withheld]
+ngunda_2026_hiv_stigma,cov_alcohol,0,no use
+ngunda_2026_hiv_stigma,cov_alcohol,1,use
+ngunda_2026_hiv_stigma,cov_art_duration,1,Between 6 months and 1 year
+ngunda_2026_hiv_stigma,cov_art_duration,2,Between 1 year and 5 years
+ngunda_2026_hiv_stigma,cov_art_duration,3,More than 5 years
+ngunda_2026_hiv_stigma,cov_diabetes_dx,0,no
+ngunda_2026_hiv_stigma,cov_diabetes_dx,1,yes
+ngunda_2026_hiv_stigma,cov_education,1,Informal
+ngunda_2026_hiv_stigma,cov_education,2,Secondary
+ngunda_2026_hiv_stigma,cov_education,3,Higher
+ngunda_2026_hiv_stigma,cov_hiv_duration,1,Between 6 months and 1 year
+ngunda_2026_hiv_stigma,cov_hiv_duration,2,Between 1 year and 5 years
+ngunda_2026_hiv_stigma,cov_hiv_duration,3,More than 5 years
+ngunda_2026_hiv_stigma,cov_marital,1,single
+ngunda_2026_hiv_stigma,cov_marital,2,married
+ngunda_2026_hiv_stigma,cov_marital,3,divorced
+ngunda_2026_hiv_stigma,cov_occupation,1,unemployed
+ngunda_2026_hiv_stigma,cov_occupation,2,employed
+ngunda_2026_hiv_stigma,cov_sex,1,Male
+ngunda_2026_hiv_stigma,cov_sex,2,Female
+ngunda_2026_hiv_stigma,cov_site,1,[institution name withheld]
+ngunda_2026_hiv_stigma,cov_site,2,[institution name withheld]
+ngunda_2026_hiv_stigma,cov_site,3,[institution name withheld]
+ngunda_2026_phq9,cov_alcohol,0,no use
+ngunda_2026_phq9,cov_alcohol,1,use
+ngunda_2026_phq9,cov_art_duration,1,Between 6 months and 1 year
+ngunda_2026_phq9,cov_art_duration,2,Between 1 year and 5 years
+ngunda_2026_phq9,cov_art_duration,3,More than 5 years
+ngunda_2026_phq9,cov_diabetes_dx,0,no
+ngunda_2026_phq9,cov_diabetes_dx,1,yes
+ngunda_2026_phq9,cov_education,1,Informal
+ngunda_2026_phq9,cov_education,2,Secondary
+ngunda_2026_phq9,cov_education,3,Higher
+ngunda_2026_phq9,cov_hiv_duration,1,Between 6 months and 1 year
+ngunda_2026_phq9,cov_hiv_duration,2,Between 1 year and 5 years
+ngunda_2026_phq9,cov_hiv_duration,3,More than 5 years
+ngunda_2026_phq9,cov_marital,1,single
+ngunda_2026_phq9,cov_marital,2,married
+ngunda_2026_phq9,cov_marital,3,divorced
+ngunda_2026_phq9,cov_occupation,1,unemployed
+ngunda_2026_phq9,cov_occupation,2,employed
+ngunda_2026_phq9,cov_sex,1,Male
+ngunda_2026_phq9,cov_sex,2,Female
+ngunda_2026_phq9,cov_site,1,[institution name withheld]
+ngunda_2026_phq9,cov_site,2,[institution name withheld]
+ngunda_2026_phq9,cov_site,3,[institution name withheld]
 niazi_2020_mfq,cov_gender,0,female
 niazi_2020_mfq,cov_gender,1,male
 niazi_2020_mfq_stereotype,cov_gender,0,female
@@ -10757,6 +11613,16 @@ niu_2026_ai_recommendation,cov_gender,1,Male
 niu_2026_ai_recommendation,cov_gender,2,Female
 niu_2026_ai_recommendation,cov_initiation,0,System-initiated
 niu_2026_ai_recommendation,cov_initiation,1,User-initiated
+ogden_2022_dass21,cov_covid_risk,1,Yes
+ogden_2022_dass21,cov_covid_risk,2,No
+ogden_2022_dass21,cov_covid_risk,3,Unsure
+ogden_2022_dass21,cov_shielding,1,Yes
+ogden_2022_dass21,cov_shielding,2,No
+ogden_2022_tlx,cov_covid_risk,1,Yes
+ogden_2022_tlx,cov_covid_risk,2,No
+ogden_2022_tlx,cov_covid_risk,3,Unsure
+ogden_2022_tlx,cov_shielding,1,Yes
+ogden_2022_tlx,cov_shielding,2,No
 okamura_2018_burnout,cov_age,2,20代
 okamura_2018_burnout,cov_age,3,30代
 okamura_2018_burnout,cov_age,4,40代
@@ -11059,6 +11925,54 @@ orovou_2021_lec5,cov_csection_type,1,Emergency
 orovou_2021_lec5,cov_csection_type,2,Elective
 orovou_2021_pcl5,cov_csection_type,1,Emergency
 orovou_2021_pcl5,cov_csection_type,2,Elective
+ozen_2026_epworth,cov_dialysis_duration,1,bir yıl
+ozen_2026_epworth,cov_dialysis_duration,2,2-5 yıl
+ozen_2026_epworth,cov_dialysis_duration,3,6-10 yıl
+ozen_2026_epworth,cov_dialysis_duration,4,11-15 yıl
+ozen_2026_epworth,cov_dialysis_session,1,Sabah
+ozen_2026_epworth,cov_dialysis_session,2,Öğle
+ozen_2026_epworth,cov_education,1,okuryazar değil
+ozen_2026_epworth,cov_education,2,ilköğretim
+ozen_2026_epworth,cov_education,3,Lise ve üstü
+ozen_2026_epworth,cov_employed,1,Evet
+ozen_2026_epworth,cov_employed,2,Hayır
+ozen_2026_epworth,cov_income,1,Gelir giderden az
+ozen_2026_epworth,cov_income,2,Gelir gidere eşit
+ozen_2026_epworth,cov_income,3,Gelir giderden fazla
+ozen_2026_epworth,cov_kidney_failure_duration,1,bir yıl
+ozen_2026_epworth,cov_kidney_failure_duration,2,2-5 yıl
+ozen_2026_epworth,cov_kidney_failure_duration,3,6-10 yıl
+ozen_2026_epworth,cov_kidney_failure_duration,4,11-15 yıl
+ozen_2026_epworth,cov_marital,1,Evli
+ozen_2026_epworth,cov_marital,2,Bekar
+ozen_2026_epworth,cov_sex,1,Kadın
+ozen_2026_epworth,cov_sex,2,Erkek
+ozen_2026_epworth,cov_smoking,1,Evet
+ozen_2026_epworth,cov_smoking,2,Hayır
+ozen_2026_fss,cov_dialysis_duration,1,bir yıl
+ozen_2026_fss,cov_dialysis_duration,2,2-5 yıl
+ozen_2026_fss,cov_dialysis_duration,3,6-10 yıl
+ozen_2026_fss,cov_dialysis_duration,4,11-15 yıl
+ozen_2026_fss,cov_dialysis_session,1,Sabah
+ozen_2026_fss,cov_dialysis_session,2,Öğle
+ozen_2026_fss,cov_education,1,okuryazar değil
+ozen_2026_fss,cov_education,2,ilköğretim
+ozen_2026_fss,cov_education,3,Lise ve üstü
+ozen_2026_fss,cov_employed,1,Evet
+ozen_2026_fss,cov_employed,2,Hayır
+ozen_2026_fss,cov_income,1,Gelir giderden az
+ozen_2026_fss,cov_income,2,Gelir gidere eşit
+ozen_2026_fss,cov_income,3,Gelir giderden fazla
+ozen_2026_fss,cov_kidney_failure_duration,1,bir yıl
+ozen_2026_fss,cov_kidney_failure_duration,2,2-5 yıl
+ozen_2026_fss,cov_kidney_failure_duration,3,6-10 yıl
+ozen_2026_fss,cov_kidney_failure_duration,4,11-15 yıl
+ozen_2026_fss,cov_marital,1,Evli
+ozen_2026_fss,cov_marital,2,Bekar
+ozen_2026_fss,cov_sex,1,Kadın
+ozen_2026_fss,cov_sex,2,Erkek
+ozen_2026_fss,cov_smoking,1,Evet
+ozen_2026_fss,cov_smoking,2,Hayır
 ozkurt_2026_basic_psych_needs,cov_education,2,Ön Lisans
 ozkurt_2026_basic_psych_needs,cov_education,3,Lisans
 ozkurt_2026_basic_psych_needs,cov_education,4,Lisansüstü
@@ -11131,6 +12045,38 @@ peng_2026_mhl_knowledge,cov_gender,1,Boy
 peng_2026_mhl_knowledge,cov_gender,2,Girl
 peng_2026_pyd,cov_gender,1,Boy
 peng_2026_pyd,cov_gender,2,Girl
+perezdearrilucea_2026_genai_attitudes,cov_misused_ai,0,No
+perezdearrilucea_2026_genai_attitudes,cov_misused_ai,1,Sí
+perezdearrilucea_2026_genai_attitudes,cov_sex,0,Mujer
+perezdearrilucea_2026_genai_attitudes,cov_sex,1,Varón
+perezdearrilucea_2026_genai_attitudes,cov_uses_ai_academic,0,No
+perezdearrilucea_2026_genai_attitudes,cov_uses_ai_academic,1,Sí
+perezdearrilucea_2026_genai_attitudes,cov_uses_ai_daily_life,0,No
+perezdearrilucea_2026_genai_attitudes,cov_uses_ai_daily_life,1,Sí
+perezdearrilucea_2026_genai_ethics,cov_misused_ai,0,No
+perezdearrilucea_2026_genai_ethics,cov_misused_ai,1,Sí
+perezdearrilucea_2026_genai_ethics,cov_sex,0,Mujer
+perezdearrilucea_2026_genai_ethics,cov_sex,1,Varón
+perezdearrilucea_2026_genai_ethics,cov_uses_ai_academic,0,No
+perezdearrilucea_2026_genai_ethics,cov_uses_ai_academic,1,Sí
+perezdearrilucea_2026_genai_ethics,cov_uses_ai_daily_life,0,No
+perezdearrilucea_2026_genai_ethics,cov_uses_ai_daily_life,1,Sí
+perezdearrilucea_2026_genai_perceptions,cov_misused_ai,0,No
+perezdearrilucea_2026_genai_perceptions,cov_misused_ai,1,Sí
+perezdearrilucea_2026_genai_perceptions,cov_sex,0,Mujer
+perezdearrilucea_2026_genai_perceptions,cov_sex,1,Varón
+perezdearrilucea_2026_genai_perceptions,cov_uses_ai_academic,0,No
+perezdearrilucea_2026_genai_perceptions,cov_uses_ai_academic,1,Sí
+perezdearrilucea_2026_genai_perceptions,cov_uses_ai_daily_life,0,No
+perezdearrilucea_2026_genai_perceptions,cov_uses_ai_daily_life,1,Sí
+perezdearrilucea_2026_genai_use,cov_misused_ai,0,No
+perezdearrilucea_2026_genai_use,cov_misused_ai,1,Sí
+perezdearrilucea_2026_genai_use,cov_sex,0,Mujer
+perezdearrilucea_2026_genai_use,cov_sex,1,Varón
+perezdearrilucea_2026_genai_use,cov_uses_ai_academic,0,No
+perezdearrilucea_2026_genai_use,cov_uses_ai_academic,1,Sí
+perezdearrilucea_2026_genai_use,cov_uses_ai_daily_life,0,No
+perezdearrilucea_2026_genai_use,cov_uses_ai_daily_life,1,Sí
 pham_2026_bsgt,cov_age_band,1,18-22 tuổi
 pham_2026_bsgt,cov_age_band,2,23-25 tuổi
 pham_2026_bsgt,cov_age_band,3,26-29 tuổi
@@ -11559,6 +12505,121 @@ pilch_2021_protection_motivation,cov_risk_contact,1,yes
 pilch_2021_protection_motivation,cov_risk_contact,2,no
 pilch_2021_protection_motivation,cov_risk_group,1,yes
 pilch_2021_protection_motivation,cov_risk_group,2,no
+pimchangthong_2026_attitude,cov_age_band,1,20-30 years old 20-30岁
+pimchangthong_2026_attitude,cov_age_band,2,31-40 years old 31-40岁
+pimchangthong_2026_attitude,cov_age_band,3,41-50 years old 41-50岁
+pimchangthong_2026_attitude,cov_age_band,4,51-60 years old 51-60岁
+pimchangthong_2026_attitude,cov_education,1,High school or lower 高中或以下
+pimchangthong_2026_attitude,cov_education,2,Vocational and Technical Colleges 职业技术学院
+pimchangthong_2026_attitude,cov_education,3,Bachelor's degree 学士学位
+pimchangthong_2026_attitude,cov_education,4,Master's degree or higher 硕士及以上学历
+pimchangthong_2026_attitude,cov_gender,1,Male 男性
+pimchangthong_2026_attitude,cov_gender,2,Female 女性
+pimchangthong_2026_attitude,cov_income,1,Less than 3000 yuan 3000元及以下
+pimchangthong_2026_attitude,cov_income,2,3001-6000 yuan 3001-6000 元
+pimchangthong_2026_attitude,cov_income,3,6001-10000 yuan 6001-10000 元
+pimchangthong_2026_attitude,cov_income,4,10001-15000 yuan 10001-15000 元
+pimchangthong_2026_attitude,cov_income,5,More than 15001 yuan 超过15001元
+pimchangthong_2026_attitude,cov_position,1,Self-employed 个体经营户
+pimchangthong_2026_attitude,cov_position,2,Enterprise manager 企业管理者
+pimchangthong_2026_attitude,cov_position,3,Party and government personnel 党政机关职工
+pimchangthong_2026_attitude,cov_position,4,Freelance 自由职业者
+pimchangthong_2026_attitude,cov_position,5,Teacher 教师
+pimchangthong_2026_attitude,cov_position,6,Student 学生
+pimchangthong_2026_attitude,cov_position,7,Severed/Retired 离退休人员
+pimchangthong_2026_attitude,cov_position,8,Other 其他
+pimchangthong_2026_perceived_control,cov_age_band,1,20-30 years old 20-30岁
+pimchangthong_2026_perceived_control,cov_age_band,2,31-40 years old 31-40岁
+pimchangthong_2026_perceived_control,cov_age_band,3,41-50 years old 41-50岁
+pimchangthong_2026_perceived_control,cov_age_band,4,51-60 years old 51-60岁
+pimchangthong_2026_perceived_control,cov_education,1,High school or lower 高中或以下
+pimchangthong_2026_perceived_control,cov_education,2,Vocational and Technical Colleges 职业技术学院
+pimchangthong_2026_perceived_control,cov_education,3,Bachelor's degree 学士学位
+pimchangthong_2026_perceived_control,cov_education,4,Master's degree or higher 硕士及以上学历
+pimchangthong_2026_perceived_control,cov_gender,1,Male 男性
+pimchangthong_2026_perceived_control,cov_gender,2,Female 女性
+pimchangthong_2026_perceived_control,cov_income,1,Less than 3000 yuan 3000元及以下
+pimchangthong_2026_perceived_control,cov_income,2,3001-6000 yuan 3001-6000 元
+pimchangthong_2026_perceived_control,cov_income,3,6001-10000 yuan 6001-10000 元
+pimchangthong_2026_perceived_control,cov_income,4,10001-15000 yuan 10001-15000 元
+pimchangthong_2026_perceived_control,cov_income,5,More than 15001 yuan 超过15001元
+pimchangthong_2026_perceived_control,cov_position,1,Self-employed 个体经营户
+pimchangthong_2026_perceived_control,cov_position,2,Enterprise manager 企业管理者
+pimchangthong_2026_perceived_control,cov_position,3,Party and government personnel 党政机关职工
+pimchangthong_2026_perceived_control,cov_position,4,Freelance 自由职业者
+pimchangthong_2026_perceived_control,cov_position,5,Teacher 教师
+pimchangthong_2026_perceived_control,cov_position,6,Student 学生
+pimchangthong_2026_perceived_control,cov_position,7,Severed/Retired 离退休人员
+pimchangthong_2026_perceived_control,cov_position,8,Other 其他
+pimchangthong_2026_subjective_norms,cov_age_band,1,20-30 years old 20-30岁
+pimchangthong_2026_subjective_norms,cov_age_band,2,31-40 years old 31-40岁
+pimchangthong_2026_subjective_norms,cov_age_band,3,41-50 years old 41-50岁
+pimchangthong_2026_subjective_norms,cov_age_band,4,51-60 years old 51-60岁
+pimchangthong_2026_subjective_norms,cov_education,1,High school or lower 高中或以下
+pimchangthong_2026_subjective_norms,cov_education,2,Vocational and Technical Colleges 职业技术学院
+pimchangthong_2026_subjective_norms,cov_education,3,Bachelor's degree 学士学位
+pimchangthong_2026_subjective_norms,cov_education,4,Master's degree or higher 硕士及以上学历
+pimchangthong_2026_subjective_norms,cov_gender,1,Male 男性
+pimchangthong_2026_subjective_norms,cov_gender,2,Female 女性
+pimchangthong_2026_subjective_norms,cov_income,1,Less than 3000 yuan 3000元及以下
+pimchangthong_2026_subjective_norms,cov_income,2,3001-6000 yuan 3001-6000 元
+pimchangthong_2026_subjective_norms,cov_income,3,6001-10000 yuan 6001-10000 元
+pimchangthong_2026_subjective_norms,cov_income,4,10001-15000 yuan 10001-15000 元
+pimchangthong_2026_subjective_norms,cov_income,5,More than 15001 yuan 超过15001元
+pimchangthong_2026_subjective_norms,cov_position,1,Self-employed 个体经营户
+pimchangthong_2026_subjective_norms,cov_position,2,Enterprise manager 企业管理者
+pimchangthong_2026_subjective_norms,cov_position,3,Party and government personnel 党政机关职工
+pimchangthong_2026_subjective_norms,cov_position,4,Freelance 自由职业者
+pimchangthong_2026_subjective_norms,cov_position,5,Teacher 教师
+pimchangthong_2026_subjective_norms,cov_position,6,Student 学生
+pimchangthong_2026_subjective_norms,cov_position,7,Severed/Retired 离退休人员
+pimchangthong_2026_subjective_norms,cov_position,8,Other 其他
+pimchangthong_2026_tech_readiness,cov_age_band,1,20-30 years old 20-30岁
+pimchangthong_2026_tech_readiness,cov_age_band,2,31-40 years old 31-40岁
+pimchangthong_2026_tech_readiness,cov_age_band,3,41-50 years old 41-50岁
+pimchangthong_2026_tech_readiness,cov_age_band,4,51-60 years old 51-60岁
+pimchangthong_2026_tech_readiness,cov_education,1,High school or lower 高中或以下
+pimchangthong_2026_tech_readiness,cov_education,2,Vocational and Technical Colleges 职业技术学院
+pimchangthong_2026_tech_readiness,cov_education,3,Bachelor's degree 学士学位
+pimchangthong_2026_tech_readiness,cov_education,4,Master's degree or higher 硕士及以上学历
+pimchangthong_2026_tech_readiness,cov_gender,1,Male 男性
+pimchangthong_2026_tech_readiness,cov_gender,2,Female 女性
+pimchangthong_2026_tech_readiness,cov_income,1,Less than 3000 yuan 3000元及以下
+pimchangthong_2026_tech_readiness,cov_income,2,3001-6000 yuan 3001-6000 元
+pimchangthong_2026_tech_readiness,cov_income,3,6001-10000 yuan 6001-10000 元
+pimchangthong_2026_tech_readiness,cov_income,4,10001-15000 yuan 10001-15000 元
+pimchangthong_2026_tech_readiness,cov_income,5,More than 15001 yuan 超过15001元
+pimchangthong_2026_tech_readiness,cov_position,1,Self-employed 个体经营户
+pimchangthong_2026_tech_readiness,cov_position,2,Enterprise manager 企业管理者
+pimchangthong_2026_tech_readiness,cov_position,3,Party and government personnel 党政机关职工
+pimchangthong_2026_tech_readiness,cov_position,4,Freelance 自由职业者
+pimchangthong_2026_tech_readiness,cov_position,5,Teacher 教师
+pimchangthong_2026_tech_readiness,cov_position,6,Student 学生
+pimchangthong_2026_tech_readiness,cov_position,7,Severed/Retired 离退休人员
+pimchangthong_2026_tech_readiness,cov_position,8,Other 其他
+pimchangthong_2026_usage_intention,cov_age_band,1,20-30 years old 20-30岁
+pimchangthong_2026_usage_intention,cov_age_band,2,31-40 years old 31-40岁
+pimchangthong_2026_usage_intention,cov_age_band,3,41-50 years old 41-50岁
+pimchangthong_2026_usage_intention,cov_age_band,4,51-60 years old 51-60岁
+pimchangthong_2026_usage_intention,cov_education,1,High school or lower 高中或以下
+pimchangthong_2026_usage_intention,cov_education,2,Vocational and Technical Colleges 职业技术学院
+pimchangthong_2026_usage_intention,cov_education,3,Bachelor's degree 学士学位
+pimchangthong_2026_usage_intention,cov_education,4,Master's degree or higher 硕士及以上学历
+pimchangthong_2026_usage_intention,cov_gender,1,Male 男性
+pimchangthong_2026_usage_intention,cov_gender,2,Female 女性
+pimchangthong_2026_usage_intention,cov_income,1,Less than 3000 yuan 3000元及以下
+pimchangthong_2026_usage_intention,cov_income,2,3001-6000 yuan 3001-6000 元
+pimchangthong_2026_usage_intention,cov_income,3,6001-10000 yuan 6001-10000 元
+pimchangthong_2026_usage_intention,cov_income,4,10001-15000 yuan 10001-15000 元
+pimchangthong_2026_usage_intention,cov_income,5,More than 15001 yuan 超过15001元
+pimchangthong_2026_usage_intention,cov_position,1,Self-employed 个体经营户
+pimchangthong_2026_usage_intention,cov_position,2,Enterprise manager 企业管理者
+pimchangthong_2026_usage_intention,cov_position,3,Party and government personnel 党政机关职工
+pimchangthong_2026_usage_intention,cov_position,4,Freelance 自由职业者
+pimchangthong_2026_usage_intention,cov_position,5,Teacher 教师
+pimchangthong_2026_usage_intention,cov_position,6,Student 学生
+pimchangthong_2026_usage_intention,cov_position,7,Severed/Retired 离退休人员
+pimchangthong_2026_usage_intention,cov_position,8,Other 其他
 piotrowski_2024_fczkt,cov_child_disability,0,no
 piotrowski_2024_fczkt,cov_child_disability,1,yes
 piotrowski_2024_fczkt,cov_education,1,primary educ
@@ -11735,6 +12796,26 @@ platte_2026_self_monitoring,cov_school,11,school 11
 platte_2026_self_monitoring,cov_school,13,school 13
 platte_2026_self_monitoring,cov_school,14,school 14
 platte_2026_self_monitoring,cov_school,15,school 15
+polin_2026_crt,cov_bioinformatics,0,Other program
+polin_2026_crt,cov_bioinformatics,1,Bioinformatics
+polin_2026_crt,cov_female,0,Male
+polin_2026_crt,cov_female,1,Female
+polin_2026_crt,cov_school,1,Business
+polin_2026_crt,cov_school,2,Engineering and Computer Science
+polin_2026_crt,cov_school,3,Health Sciences
+polin_2026_crt,cov_year,1,Year 1
+polin_2026_crt,cov_year,2,Year 2
+polin_2026_crt,cov_year,3,Year 3
+polin_2026_crt2,cov_bioinformatics,0,Other program
+polin_2026_crt2,cov_bioinformatics,1,Bioinformatics
+polin_2026_crt2,cov_female,0,Male
+polin_2026_crt2,cov_female,1,Female
+polin_2026_crt2,cov_school,1,Business
+polin_2026_crt2,cov_school,2,Engineering and Computer Science
+polin_2026_crt2,cov_school,3,Health Sciences
+polin_2026_crt2,cov_year,1,Year 1
+polin_2026_crt2,cov_year,2,Year 2
+polin_2026_crt2,cov_year,3,Year 3
 poza2026_hlseu,cov_education,0,Sin estudios
 poza2026_hlseu,cov_education,1,primaria
 poza2026_hlseu,cov_education,2,"secundaria, ciclo formativo"
@@ -13347,6 +14428,163 @@ tatala_2023_ucla_loneliness,cov_residence_poland,3,City (more than 150000 habita
 tatala_2023_ucla_loneliness,cov_time_abroad,1,up to 1 year
 tatala_2023_ucla_loneliness,cov_time_abroad,2,from 1 to 5 year
 tatala_2023_ucla_loneliness,cov_time_abroad,3,more than 5 year
+tekin_2025_commitment,cov_age_band,1,18-27
+tekin_2025_commitment,cov_age_band,2,28-43
+tekin_2025_commitment,cov_age_band,3,44-59
+tekin_2025_commitment,cov_education,1,İlköğretim
+tekin_2025_commitment,cov_education,2,Lise
+tekin_2025_commitment,cov_education,3,Önlisans
+tekin_2025_commitment,cov_education,4,Lisans
+tekin_2025_commitment,cov_education,5,Lisansüstü
+tekin_2025_commitment,cov_gender,1,Erkek
+tekin_2025_commitment,cov_gender,2,Kadın
+tekin_2025_commitment,cov_hiring_type,1,Beyaz Yaka
+tekin_2025_commitment,cov_hiring_type,2,Mavi Yaka
+tekin_2025_commitment,cov_income,1,19234 TL altında
+tekin_2025_commitment,cov_income,2,19234 – 62652
+tekin_2025_commitment,cov_income,3,62652 TL üzeri
+tekin_2025_commitment,cov_marital,1,Evli
+tekin_2025_commitment,cov_marital,2,Bekar
+tekin_2025_commitment,cov_org_type,1,Kamu
+tekin_2025_commitment,cov_org_type,2,Özel Sektör
+tekin_2025_commitment,cov_org_type,3,Kamu+Özel Sektör
+tekin_2025_commitment,cov_public_private,1,Kamu
+tekin_2025_commitment,cov_public_private,2,Özel Sektör
+tekin_2025_commitment,cov_role,1,Yönetici
+tekin_2025_commitment,cov_role,2,Çalışan
+tekin_2025_commitment,cov_role,3,Diğer
+tekin_2025_commitment,cov_seniority,1,1-3
+tekin_2025_commitment,cov_seniority,2,4-6
+tekin_2025_commitment,cov_seniority,3,7-10
+tekin_2025_commitment,cov_seniority,4,11-15
+tekin_2025_commitment,cov_seniority,5,16-20
+tekin_2025_commitment,cov_seniority,6,20 Üstü
+tekin_2025_commitment,cov_settlement_type,1,Metropol/Büyük Şehir
+tekin_2025_commitment,cov_settlement_type,2,İl
+tekin_2025_commitment,cov_settlement_type,3,İlçe/Kasaba
+tekin_2025_commitment,cov_settlement_type,4,Köy
+tekin_2025_commitment,cov_unit_tenure,1,1-4 Yıl
+tekin_2025_commitment,cov_unit_tenure,2,5-8 Yıl
+tekin_2025_commitment,cov_unit_tenure,3,9 üstü
+tekin_2025_favoritism,cov_age_band,1,18-27
+tekin_2025_favoritism,cov_age_band,2,28-43
+tekin_2025_favoritism,cov_age_band,3,44-59
+tekin_2025_favoritism,cov_education,1,İlköğretim
+tekin_2025_favoritism,cov_education,2,Lise
+tekin_2025_favoritism,cov_education,3,Önlisans
+tekin_2025_favoritism,cov_education,4,Lisans
+tekin_2025_favoritism,cov_education,5,Lisansüstü
+tekin_2025_favoritism,cov_gender,1,Erkek
+tekin_2025_favoritism,cov_gender,2,Kadın
+tekin_2025_favoritism,cov_hiring_type,1,Beyaz Yaka
+tekin_2025_favoritism,cov_hiring_type,2,Mavi Yaka
+tekin_2025_favoritism,cov_income,1,19234 TL altında
+tekin_2025_favoritism,cov_income,2,19234 – 62652
+tekin_2025_favoritism,cov_income,3,62652 TL üzeri
+tekin_2025_favoritism,cov_marital,1,Evli
+tekin_2025_favoritism,cov_marital,2,Bekar
+tekin_2025_favoritism,cov_org_type,1,Kamu
+tekin_2025_favoritism,cov_org_type,2,Özel Sektör
+tekin_2025_favoritism,cov_org_type,3,Kamu+Özel Sektör
+tekin_2025_favoritism,cov_public_private,1,Kamu
+tekin_2025_favoritism,cov_public_private,2,Özel Sektör
+tekin_2025_favoritism,cov_role,1,Yönetici
+tekin_2025_favoritism,cov_role,2,Çalışan
+tekin_2025_favoritism,cov_role,3,Diğer
+tekin_2025_favoritism,cov_seniority,1,1-3
+tekin_2025_favoritism,cov_seniority,2,4-6
+tekin_2025_favoritism,cov_seniority,3,7-10
+tekin_2025_favoritism,cov_seniority,4,11-15
+tekin_2025_favoritism,cov_seniority,5,16-20
+tekin_2025_favoritism,cov_seniority,6,20 Üstü
+tekin_2025_favoritism,cov_settlement_type,1,Metropol/Büyük Şehir
+tekin_2025_favoritism,cov_settlement_type,2,İl
+tekin_2025_favoritism,cov_settlement_type,3,İlçe/Kasaba
+tekin_2025_favoritism,cov_settlement_type,4,Köy
+tekin_2025_favoritism,cov_unit_tenure,1,1-4 Yıl
+tekin_2025_favoritism,cov_unit_tenure,2,5-8 Yıl
+tekin_2025_favoritism,cov_unit_tenure,3,9 üstü
+tekin_2025_justice,cov_age_band,1,18-27
+tekin_2025_justice,cov_age_band,2,28-43
+tekin_2025_justice,cov_age_band,3,44-59
+tekin_2025_justice,cov_education,1,İlköğretim
+tekin_2025_justice,cov_education,2,Lise
+tekin_2025_justice,cov_education,3,Önlisans
+tekin_2025_justice,cov_education,4,Lisans
+tekin_2025_justice,cov_education,5,Lisansüstü
+tekin_2025_justice,cov_gender,1,Erkek
+tekin_2025_justice,cov_gender,2,Kadın
+tekin_2025_justice,cov_hiring_type,1,Beyaz Yaka
+tekin_2025_justice,cov_hiring_type,2,Mavi Yaka
+tekin_2025_justice,cov_income,1,19234 TL altında
+tekin_2025_justice,cov_income,2,19234 – 62652
+tekin_2025_justice,cov_income,3,62652 TL üzeri
+tekin_2025_justice,cov_marital,1,Evli
+tekin_2025_justice,cov_marital,2,Bekar
+tekin_2025_justice,cov_org_type,1,Kamu
+tekin_2025_justice,cov_org_type,2,Özel Sektör
+tekin_2025_justice,cov_org_type,3,Kamu+Özel Sektör
+tekin_2025_justice,cov_public_private,1,Kamu
+tekin_2025_justice,cov_public_private,2,Özel Sektör
+tekin_2025_justice,cov_role,1,Yönetici
+tekin_2025_justice,cov_role,2,Çalışan
+tekin_2025_justice,cov_role,3,Diğer
+tekin_2025_justice,cov_seniority,1,1-3
+tekin_2025_justice,cov_seniority,2,4-6
+tekin_2025_justice,cov_seniority,3,7-10
+tekin_2025_justice,cov_seniority,4,11-15
+tekin_2025_justice,cov_seniority,5,16-20
+tekin_2025_justice,cov_seniority,6,20 Üstü
+tekin_2025_justice,cov_settlement_type,1,Metropol/Büyük Şehir
+tekin_2025_justice,cov_settlement_type,2,İl
+tekin_2025_justice,cov_settlement_type,3,İlçe/Kasaba
+tekin_2025_justice,cov_settlement_type,4,Köy
+tekin_2025_justice,cov_unit_tenure,1,1-4 Yıl
+tekin_2025_justice,cov_unit_tenure,2,5-8 Yıl
+tekin_2025_justice,cov_unit_tenure,3,9 üstü
+tekin_2025_trust,cov_age_band,1,18-27
+tekin_2025_trust,cov_age_band,2,28-43
+tekin_2025_trust,cov_age_band,3,44-59
+tekin_2025_trust,cov_education,1,İlköğretim
+tekin_2025_trust,cov_education,2,Lise
+tekin_2025_trust,cov_education,3,Önlisans
+tekin_2025_trust,cov_education,4,Lisans
+tekin_2025_trust,cov_education,5,Lisansüstü
+tekin_2025_trust,cov_gender,1,Erkek
+tekin_2025_trust,cov_gender,2,Kadın
+tekin_2025_trust,cov_hiring_type,1,Beyaz Yaka
+tekin_2025_trust,cov_hiring_type,2,Mavi Yaka
+tekin_2025_trust,cov_income,1,19234 TL altında
+tekin_2025_trust,cov_income,2,19234 – 62652
+tekin_2025_trust,cov_income,3,62652 TL üzeri
+tekin_2025_trust,cov_marital,1,Evli
+tekin_2025_trust,cov_marital,2,Bekar
+tekin_2025_trust,cov_org_type,1,Kamu
+tekin_2025_trust,cov_org_type,2,Özel Sektör
+tekin_2025_trust,cov_org_type,3,Kamu+Özel Sektör
+tekin_2025_trust,cov_public_private,1,Kamu
+tekin_2025_trust,cov_public_private,2,Özel Sektör
+tekin_2025_trust,cov_role,1,Yönetici
+tekin_2025_trust,cov_role,2,Çalışan
+tekin_2025_trust,cov_role,3,Diğer
+tekin_2025_trust,cov_seniority,1,1-3
+tekin_2025_trust,cov_seniority,2,4-6
+tekin_2025_trust,cov_seniority,3,7-10
+tekin_2025_trust,cov_seniority,4,11-15
+tekin_2025_trust,cov_seniority,5,16-20
+tekin_2025_trust,cov_seniority,6,20 Üstü
+tekin_2025_trust,cov_settlement_type,1,Metropol/Büyük Şehir
+tekin_2025_trust,cov_settlement_type,2,İl
+tekin_2025_trust,cov_settlement_type,3,İlçe/Kasaba
+tekin_2025_trust,cov_settlement_type,4,Köy
+tekin_2025_trust,cov_unit_tenure,1,1-4 Yıl
+tekin_2025_trust,cov_unit_tenure,2,5-8 Yıl
+tekin_2025_trust,cov_unit_tenure,3,9 üstü
+tenan_2024_emcb,cov_condition,1,Control
+tenan_2024_emcb,cov_condition,2,Default Nudge
+tenan_2024_emcb,cov_condition,3,Social Norms Nudge
+tenan_2024_emcb,cov_condition,4,Information Nudge
+tenan_2024_emcb,cov_condition,5,Visual Salience Nudge
 teodorini_2020_modafinil_attitudes,cov_sex,1,Male
 teodorini_2020_modafinil_attitudes,cov_sex,2,Female
 thoma_2018_ctq,cov_education,1,Without primary ‎/ national school education
@@ -13529,6 +14767,18 @@ thoma_2018_socr,cov_religion,2,Catholic (Roman-Catholic)
 thoma_2018_socr,cov_religion,3,Muslim / Islamic
 thoma_2018_socr,cov_religion,4,Other religion / denomination
 thoma_2018_socr,cov_religion,5,None
+thurston_2021_mrt,cov_education,1,Less than primary
+thurston_2021_mrt,cov_education,2,Primary
+thurston_2021_mrt,cov_education,3,Some high school
+thurston_2021_mrt,cov_education,4,High school diploma
+thurston_2021_mrt,cov_education,5,Some college/trade school/uni
+thurston_2021_mrt,cov_education,6,College diploma or trade school
+thurston_2021_mrt,cov_education,7,University degree (bachelor's)
+thurston_2021_mrt,cov_education,8,University degree (master's/PhD or professional degree)
+thurston_2021_mrt,cov_female,0,Male
+thurston_2021_mrt,cov_female,1,Female
+thurston_2021_mrt,cov_mrt_excluded,0,Included
+thurston_2021_mrt,cov_mrt_excluded,1,Excluded
 tiemensma_2018_iesr,cov_latino,0,non_Latino
 tiemensma_2018_iesr,cov_latino,1,Latino
 tims_2017_autonomy,cov_country,1,Netherlands
@@ -14155,6 +15405,306 @@ trevisan_2018_aq,cov_sex,0,Male
 trevisan_2018_aq,cov_sex,1,Female
 trevisan_2018_mscs,cov_sex,0,Male
 trevisan_2018_mscs,cov_sex,1,Female
+trumbull_2024_aim,cov_education,2,Some high school
+trumbull_2024_aim,cov_education,3,GED
+trumbull_2024_aim,cov_education,4,High school graduate
+trumbull_2024_aim,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_aim,cov_education,6,Some college
+trumbull_2024_aim,cov_education,7,College graduate
+trumbull_2024_aim,cov_education,8,Some graduate school (post-college)
+trumbull_2024_aim,cov_education,9,Masters degree
+trumbull_2024_aim,cov_education,10,Doctoral degree or higher
+trumbull_2024_aim,cov_gender,1,Male
+trumbull_2024_aim,cov_gender,2,Female
+trumbull_2024_aim,cov_gender,3,Other
+trumbull_2024_aim,cov_hispanic,1,Yes
+trumbull_2024_aim,cov_hispanic,2,No
+trumbull_2024_aim,cov_income,1,"0-$10,000"
+trumbull_2024_aim,cov_income,2,"$10,001-$20,000"
+trumbull_2024_aim,cov_income,3,"$20,001-$40,000"
+trumbull_2024_aim,cov_income,4,"$40,001-$65,000"
+trumbull_2024_aim,cov_income,5,"$65,001-$100,000"
+trumbull_2024_aim,cov_income,6,"more than $100,000"
+trumbull_2024_aim,cov_race,1,White/Caucasian
+trumbull_2024_aim,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_aim,cov_race,3,Black or African American
+trumbull_2024_aim,cov_race,4,Chinese or Chinese American
+trumbull_2024_aim,cov_race,5,Japanese or Japanese American
+trumbull_2024_aim,cov_race,6,Korean or Korean American
+trumbull_2024_aim,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_aim,cov_race,8,East Indian
+trumbull_2024_aim,cov_race,11,Other
+trumbull_2024_aim,cov_race,12,More than one other racial group (list all:
+trumbull_2024_iads_arousal,cov_education,2,Some high school
+trumbull_2024_iads_arousal,cov_education,3,GED
+trumbull_2024_iads_arousal,cov_education,4,High school graduate
+trumbull_2024_iads_arousal,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_iads_arousal,cov_education,6,Some college
+trumbull_2024_iads_arousal,cov_education,7,College graduate
+trumbull_2024_iads_arousal,cov_education,8,Some graduate school (post-college)
+trumbull_2024_iads_arousal,cov_education,9,Masters degree
+trumbull_2024_iads_arousal,cov_education,10,Doctoral degree or higher
+trumbull_2024_iads_arousal,cov_gender,1,Male
+trumbull_2024_iads_arousal,cov_gender,2,Female
+trumbull_2024_iads_arousal,cov_gender,3,Other
+trumbull_2024_iads_arousal,cov_hispanic,1,Yes
+trumbull_2024_iads_arousal,cov_hispanic,2,No
+trumbull_2024_iads_arousal,cov_income,1,"0-$10,000"
+trumbull_2024_iads_arousal,cov_income,2,"$10,001-$20,000"
+trumbull_2024_iads_arousal,cov_income,3,"$20,001-$40,000"
+trumbull_2024_iads_arousal,cov_income,4,"$40,001-$65,000"
+trumbull_2024_iads_arousal,cov_income,5,"$65,001-$100,000"
+trumbull_2024_iads_arousal,cov_income,6,"more than $100,000"
+trumbull_2024_iads_arousal,cov_race,1,White/Caucasian
+trumbull_2024_iads_arousal,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_iads_arousal,cov_race,3,Black or African American
+trumbull_2024_iads_arousal,cov_race,4,Chinese or Chinese American
+trumbull_2024_iads_arousal,cov_race,5,Japanese or Japanese American
+trumbull_2024_iads_arousal,cov_race,6,Korean or Korean American
+trumbull_2024_iads_arousal,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_iads_arousal,cov_race,8,East Indian
+trumbull_2024_iads_arousal,cov_race,11,Other
+trumbull_2024_iads_arousal,cov_race,12,More than one other racial group (list all:
+trumbull_2024_iads_avoidance,cov_education,2,Some high school
+trumbull_2024_iads_avoidance,cov_education,3,GED
+trumbull_2024_iads_avoidance,cov_education,4,High school graduate
+trumbull_2024_iads_avoidance,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_iads_avoidance,cov_education,6,Some college
+trumbull_2024_iads_avoidance,cov_education,7,College graduate
+trumbull_2024_iads_avoidance,cov_education,8,Some graduate school (post-college)
+trumbull_2024_iads_avoidance,cov_education,9,Masters degree
+trumbull_2024_iads_avoidance,cov_education,10,Doctoral degree or higher
+trumbull_2024_iads_avoidance,cov_gender,1,Male
+trumbull_2024_iads_avoidance,cov_gender,2,Female
+trumbull_2024_iads_avoidance,cov_gender,3,Other
+trumbull_2024_iads_avoidance,cov_hispanic,1,Yes
+trumbull_2024_iads_avoidance,cov_hispanic,2,No
+trumbull_2024_iads_avoidance,cov_income,1,"0-$10,000"
+trumbull_2024_iads_avoidance,cov_income,2,"$10,001-$20,000"
+trumbull_2024_iads_avoidance,cov_income,3,"$20,001-$40,000"
+trumbull_2024_iads_avoidance,cov_income,4,"$40,001-$65,000"
+trumbull_2024_iads_avoidance,cov_income,5,"$65,001-$100,000"
+trumbull_2024_iads_avoidance,cov_income,6,"more than $100,000"
+trumbull_2024_iads_avoidance,cov_race,1,White/Caucasian
+trumbull_2024_iads_avoidance,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_iads_avoidance,cov_race,3,Black or African American
+trumbull_2024_iads_avoidance,cov_race,4,Chinese or Chinese American
+trumbull_2024_iads_avoidance,cov_race,5,Japanese or Japanese American
+trumbull_2024_iads_avoidance,cov_race,6,Korean or Korean American
+trumbull_2024_iads_avoidance,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_iads_avoidance,cov_race,8,East Indian
+trumbull_2024_iads_avoidance,cov_race,11,Other
+trumbull_2024_iads_avoidance,cov_race,12,More than one other racial group (list all:
+trumbull_2024_iads_similarity,cov_education,2,Some high school
+trumbull_2024_iads_similarity,cov_education,3,GED
+trumbull_2024_iads_similarity,cov_education,4,High school graduate
+trumbull_2024_iads_similarity,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_iads_similarity,cov_education,6,Some college
+trumbull_2024_iads_similarity,cov_education,7,College graduate
+trumbull_2024_iads_similarity,cov_education,8,Some graduate school (post-college)
+trumbull_2024_iads_similarity,cov_education,9,Masters degree
+trumbull_2024_iads_similarity,cov_education,10,Doctoral degree or higher
+trumbull_2024_iads_similarity,cov_gender,1,Male
+trumbull_2024_iads_similarity,cov_gender,2,Female
+trumbull_2024_iads_similarity,cov_gender,3,Other
+trumbull_2024_iads_similarity,cov_hispanic,1,Yes
+trumbull_2024_iads_similarity,cov_hispanic,2,No
+trumbull_2024_iads_similarity,cov_income,1,"0-$10,000"
+trumbull_2024_iads_similarity,cov_income,2,"$10,001-$20,000"
+trumbull_2024_iads_similarity,cov_income,3,"$20,001-$40,000"
+trumbull_2024_iads_similarity,cov_income,4,"$40,001-$65,000"
+trumbull_2024_iads_similarity,cov_income,5,"$65,001-$100,000"
+trumbull_2024_iads_similarity,cov_income,6,"more than $100,000"
+trumbull_2024_iads_similarity,cov_race,1,White/Caucasian
+trumbull_2024_iads_similarity,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_iads_similarity,cov_race,3,Black or African American
+trumbull_2024_iads_similarity,cov_race,4,Chinese or Chinese American
+trumbull_2024_iads_similarity,cov_race,5,Japanese or Japanese American
+trumbull_2024_iads_similarity,cov_race,6,Korean or Korean American
+trumbull_2024_iads_similarity,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_iads_similarity,cov_race,8,East Indian
+trumbull_2024_iads_similarity,cov_race,11,Other
+trumbull_2024_iads_similarity,cov_race,12,More than one other racial group (list all:
+trumbull_2024_iads_valence,cov_education,2,Some high school
+trumbull_2024_iads_valence,cov_education,3,GED
+trumbull_2024_iads_valence,cov_education,4,High school graduate
+trumbull_2024_iads_valence,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_iads_valence,cov_education,6,Some college
+trumbull_2024_iads_valence,cov_education,7,College graduate
+trumbull_2024_iads_valence,cov_education,8,Some graduate school (post-college)
+trumbull_2024_iads_valence,cov_education,9,Masters degree
+trumbull_2024_iads_valence,cov_education,10,Doctoral degree or higher
+trumbull_2024_iads_valence,cov_gender,1,Male
+trumbull_2024_iads_valence,cov_gender,2,Female
+trumbull_2024_iads_valence,cov_gender,3,Other
+trumbull_2024_iads_valence,cov_hispanic,1,Yes
+trumbull_2024_iads_valence,cov_hispanic,2,No
+trumbull_2024_iads_valence,cov_income,1,"0-$10,000"
+trumbull_2024_iads_valence,cov_income,2,"$10,001-$20,000"
+trumbull_2024_iads_valence,cov_income,3,"$20,001-$40,000"
+trumbull_2024_iads_valence,cov_income,4,"$40,001-$65,000"
+trumbull_2024_iads_valence,cov_income,5,"$65,001-$100,000"
+trumbull_2024_iads_valence,cov_income,6,"more than $100,000"
+trumbull_2024_iads_valence,cov_race,1,White/Caucasian
+trumbull_2024_iads_valence,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_iads_valence,cov_race,3,Black or African American
+trumbull_2024_iads_valence,cov_race,4,Chinese or Chinese American
+trumbull_2024_iads_valence,cov_race,5,Japanese or Japanese American
+trumbull_2024_iads_valence,cov_race,6,Korean or Korean American
+trumbull_2024_iads_valence,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_iads_valence,cov_race,8,East Indian
+trumbull_2024_iads_valence,cov_race,11,Other
+trumbull_2024_iads_valence,cov_race,12,More than one other racial group (list all:
+trumbull_2024_iip47,cov_education,2,Some high school
+trumbull_2024_iip47,cov_education,3,GED
+trumbull_2024_iip47,cov_education,4,High school graduate
+trumbull_2024_iip47,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_iip47,cov_education,6,Some college
+trumbull_2024_iip47,cov_education,7,College graduate
+trumbull_2024_iip47,cov_education,8,Some graduate school (post-college)
+trumbull_2024_iip47,cov_education,9,Masters degree
+trumbull_2024_iip47,cov_education,10,Doctoral degree or higher
+trumbull_2024_iip47,cov_gender,1,Male
+trumbull_2024_iip47,cov_gender,2,Female
+trumbull_2024_iip47,cov_gender,3,Other
+trumbull_2024_iip47,cov_hispanic,1,Yes
+trumbull_2024_iip47,cov_hispanic,2,No
+trumbull_2024_iip47,cov_income,1,"0-$10,000"
+trumbull_2024_iip47,cov_income,2,"$10,001-$20,000"
+trumbull_2024_iip47,cov_income,3,"$20,001-$40,000"
+trumbull_2024_iip47,cov_income,4,"$40,001-$65,000"
+trumbull_2024_iip47,cov_income,5,"$65,001-$100,000"
+trumbull_2024_iip47,cov_income,6,"more than $100,000"
+trumbull_2024_iip47,cov_race,1,White/Caucasian
+trumbull_2024_iip47,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_iip47,cov_race,3,Black or African American
+trumbull_2024_iip47,cov_race,4,Chinese or Chinese American
+trumbull_2024_iip47,cov_race,5,Japanese or Japanese American
+trumbull_2024_iip47,cov_race,6,Korean or Korean American
+trumbull_2024_iip47,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_iip47,cov_race,8,East Indian
+trumbull_2024_iip47,cov_race,11,Other
+trumbull_2024_iip47,cov_race,12,More than one other racial group (list all:
+trumbull_2024_mq,cov_education,2,Some high school
+trumbull_2024_mq,cov_education,3,GED
+trumbull_2024_mq,cov_education,4,High school graduate
+trumbull_2024_mq,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_mq,cov_education,6,Some college
+trumbull_2024_mq,cov_education,7,College graduate
+trumbull_2024_mq,cov_education,8,Some graduate school (post-college)
+trumbull_2024_mq,cov_education,9,Masters degree
+trumbull_2024_mq,cov_education,10,Doctoral degree or higher
+trumbull_2024_mq,cov_gender,1,Male
+trumbull_2024_mq,cov_gender,2,Female
+trumbull_2024_mq,cov_gender,3,Other
+trumbull_2024_mq,cov_hispanic,1,Yes
+trumbull_2024_mq,cov_hispanic,2,No
+trumbull_2024_mq,cov_income,1,"0-$10,000"
+trumbull_2024_mq,cov_income,2,"$10,001-$20,000"
+trumbull_2024_mq,cov_income,3,"$20,001-$40,000"
+trumbull_2024_mq,cov_income,4,"$40,001-$65,000"
+trumbull_2024_mq,cov_income,5,"$65,001-$100,000"
+trumbull_2024_mq,cov_income,6,"more than $100,000"
+trumbull_2024_mq,cov_race,1,White/Caucasian
+trumbull_2024_mq,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_mq,cov_race,3,Black or African American
+trumbull_2024_mq,cov_race,4,Chinese or Chinese American
+trumbull_2024_mq,cov_race,5,Japanese or Japanese American
+trumbull_2024_mq,cov_race,6,Korean or Korean American
+trumbull_2024_mq,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_mq,cov_race,8,East Indian
+trumbull_2024_mq,cov_race,11,Other
+trumbull_2024_mq,cov_race,12,More than one other racial group (list all:
+trumbull_2024_pai_bor,cov_education,2,Some high school
+trumbull_2024_pai_bor,cov_education,3,GED
+trumbull_2024_pai_bor,cov_education,4,High school graduate
+trumbull_2024_pai_bor,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_pai_bor,cov_education,6,Some college
+trumbull_2024_pai_bor,cov_education,7,College graduate
+trumbull_2024_pai_bor,cov_education,8,Some graduate school (post-college)
+trumbull_2024_pai_bor,cov_education,9,Masters degree
+trumbull_2024_pai_bor,cov_education,10,Doctoral degree or higher
+trumbull_2024_pai_bor,cov_gender,1,Male
+trumbull_2024_pai_bor,cov_gender,2,Female
+trumbull_2024_pai_bor,cov_gender,3,Other
+trumbull_2024_pai_bor,cov_hispanic,1,Yes
+trumbull_2024_pai_bor,cov_hispanic,2,No
+trumbull_2024_pai_bor,cov_income,1,"0-$10,000"
+trumbull_2024_pai_bor,cov_income,2,"$10,001-$20,000"
+trumbull_2024_pai_bor,cov_income,3,"$20,001-$40,000"
+trumbull_2024_pai_bor,cov_income,4,"$40,001-$65,000"
+trumbull_2024_pai_bor,cov_income,5,"$65,001-$100,000"
+trumbull_2024_pai_bor,cov_income,6,"more than $100,000"
+trumbull_2024_pai_bor,cov_race,1,White/Caucasian
+trumbull_2024_pai_bor,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_pai_bor,cov_race,3,Black or African American
+trumbull_2024_pai_bor,cov_race,4,Chinese or Chinese American
+trumbull_2024_pai_bor,cov_race,5,Japanese or Japanese American
+trumbull_2024_pai_bor,cov_race,6,Korean or Korean American
+trumbull_2024_pai_bor,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_pai_bor,cov_race,8,East Indian
+trumbull_2024_pai_bor,cov_race,11,Other
+trumbull_2024_pai_bor,cov_race,12,More than one other racial group (list all:
+trumbull_2024_panas,cov_education,2,Some high school
+trumbull_2024_panas,cov_education,3,GED
+trumbull_2024_panas,cov_education,4,High school graduate
+trumbull_2024_panas,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_panas,cov_education,6,Some college
+trumbull_2024_panas,cov_education,7,College graduate
+trumbull_2024_panas,cov_education,8,Some graduate school (post-college)
+trumbull_2024_panas,cov_education,9,Masters degree
+trumbull_2024_panas,cov_education,10,Doctoral degree or higher
+trumbull_2024_panas,cov_gender,1,Male
+trumbull_2024_panas,cov_gender,2,Female
+trumbull_2024_panas,cov_gender,3,Other
+trumbull_2024_panas,cov_hispanic,1,Yes
+trumbull_2024_panas,cov_hispanic,2,No
+trumbull_2024_panas,cov_income,1,"0-$10,000"
+trumbull_2024_panas,cov_income,2,"$10,001-$20,000"
+trumbull_2024_panas,cov_income,3,"$20,001-$40,000"
+trumbull_2024_panas,cov_income,4,"$40,001-$65,000"
+trumbull_2024_panas,cov_income,5,"$65,001-$100,000"
+trumbull_2024_panas,cov_income,6,"more than $100,000"
+trumbull_2024_panas,cov_race,1,White/Caucasian
+trumbull_2024_panas,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_panas,cov_race,3,Black or African American
+trumbull_2024_panas,cov_race,4,Chinese or Chinese American
+trumbull_2024_panas,cov_race,5,Japanese or Japanese American
+trumbull_2024_panas,cov_race,6,Korean or Korean American
+trumbull_2024_panas,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_panas,cov_race,8,East Indian
+trumbull_2024_panas,cov_race,11,Other
+trumbull_2024_panas,cov_race,12,More than one other racial group (list all:
+trumbull_2024_snap_ocpd,cov_education,2,Some high school
+trumbull_2024_snap_ocpd,cov_education,3,GED
+trumbull_2024_snap_ocpd,cov_education,4,High school graduate
+trumbull_2024_snap_ocpd,cov_education,5,Bus/tech training beyond high school
+trumbull_2024_snap_ocpd,cov_education,6,Some college
+trumbull_2024_snap_ocpd,cov_education,7,College graduate
+trumbull_2024_snap_ocpd,cov_education,8,Some graduate school (post-college)
+trumbull_2024_snap_ocpd,cov_education,9,Masters degree
+trumbull_2024_snap_ocpd,cov_education,10,Doctoral degree or higher
+trumbull_2024_snap_ocpd,cov_gender,1,Male
+trumbull_2024_snap_ocpd,cov_gender,2,Female
+trumbull_2024_snap_ocpd,cov_gender,3,Other
+trumbull_2024_snap_ocpd,cov_hispanic,1,Yes
+trumbull_2024_snap_ocpd,cov_hispanic,2,No
+trumbull_2024_snap_ocpd,cov_income,1,"0-$10,000"
+trumbull_2024_snap_ocpd,cov_income,2,"$10,001-$20,000"
+trumbull_2024_snap_ocpd,cov_income,3,"$20,001-$40,000"
+trumbull_2024_snap_ocpd,cov_income,4,"$40,001-$65,000"
+trumbull_2024_snap_ocpd,cov_income,5,"$65,001-$100,000"
+trumbull_2024_snap_ocpd,cov_income,6,"more than $100,000"
+trumbull_2024_snap_ocpd,cov_race,1,White/Caucasian
+trumbull_2024_snap_ocpd,cov_race,2,"Native American, American Indian, or Alaska Native"
+trumbull_2024_snap_ocpd,cov_race,3,Black or African American
+trumbull_2024_snap_ocpd,cov_race,4,Chinese or Chinese American
+trumbull_2024_snap_ocpd,cov_race,5,Japanese or Japanese American
+trumbull_2024_snap_ocpd,cov_race,6,Korean or Korean American
+trumbull_2024_snap_ocpd,cov_race,7,"Other Asian or other Asian American (includes India, Malaysia, Pakistan, Philippines)"
+trumbull_2024_snap_ocpd,cov_race,8,East Indian
+trumbull_2024_snap_ocpd,cov_race,11,Other
+trumbull_2024_snap_ocpd,cov_race,12,More than one other racial group (list all:
 tu_2022_achievement_motivation,cov_gender,1,male
 tu_2022_achievement_motivation,cov_gender,2,female
 tu_2022_achievement_motivation,cov_grade,1,大一
@@ -14217,11 +15767,19 @@ usc_2026_wellbeing,cov_gender,1,FEMENINO
 usc_2026_wellbeing,cov_gender,2,OTROS
 usc_2026_wellbeing,cov_repeated_grade,0,NO
 usc_2026_wellbeing,cov_repeated_grade,1,SÍ
+useche_2021_cie_a,cov_repeated_grade,0,No
+useche_2021_cie_a,cov_repeated_grade,1,Si
 valenciano_2022_paqc,cov_gender,1,Hombre
 valenciano_2022_paqc,cov_gender,2,Mujer
 valenciano_2022_paqc,cov_grade,4,4º PRIMARIA
 valenciano_2022_paqc,cov_grade,5,5º PRIMARIA
 valenciano_2022_paqc,cov_grade,6,6º PRIMARIA
+valenzuela_2026_ai_attitudes_negative,cov_age,1,Menos de 16
+valenzuela_2026_ai_attitudes_negative,cov_age,2,De 16 a 18
+valenzuela_2026_ai_attitudes_negative,cov_age,3,Más de 18
+valenzuela_2026_ai_attitudes_positive,cov_age,1,Menos de 16
+valenzuela_2026_ai_attitudes_positive,cov_age,2,De 16 a 18
+valenzuela_2026_ai_attitudes_positive,cov_age,3,Más de 18
 van_beveren_2019_cdi,cov_gender,1,boy
 van_beveren_2019_cdi,cov_gender,2,girl
 van_beveren_2019_feelkj,cov_gender,1,boy
@@ -14905,6 +16463,472 @@ wolbers_2017_teach_contact,cov_pupil_birth_country,7,"Overige Westerse landen (E
 wolbers_2017_teach_contact,cov_pupil_birth_country,8,Overige niet-Westerse landen
 wolbers_2017_teach_contact,cov_sex,0,vrouw
 wolbers_2017_teach_contact,cov_sex,1,man
+wong_2025_embedded_figures,cov_education,1,Primary school
+wong_2025_embedded_figures,cov_education,2,Middle school
+wong_2025_embedded_figures,cov_education,3,High school
+wong_2025_embedded_figures,cov_education,4,Associate or Higher Diploma
+wong_2025_embedded_figures,cov_education,5,Bachelor
+wong_2025_embedded_figures,cov_education,6,Master or Postgraduate
+wong_2025_embedded_figures,cov_education,7,Doctorate
+wong_2025_embedded_figures,cov_language,1,English
+wong_2025_embedded_figures,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_embedded_figures,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_embedded_figures,cov_male,0,Female
+wong_2025_embedded_figures,cov_male,1,Male
+wong_2025_embedded_figures,cov_order,0,paper first
+wong_2025_embedded_figures,cov_order,1,laptop first
+wong_2025_mental_rotation,cov_education,1,Primary school
+wong_2025_mental_rotation,cov_education,2,Middle school
+wong_2025_mental_rotation,cov_education,3,High school
+wong_2025_mental_rotation,cov_education,4,Associate or Higher Diploma
+wong_2025_mental_rotation,cov_education,5,Bachelor
+wong_2025_mental_rotation,cov_education,6,Master or Postgraduate
+wong_2025_mental_rotation,cov_education,7,Doctorate
+wong_2025_mental_rotation,cov_language,1,English
+wong_2025_mental_rotation,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_mental_rotation,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_mental_rotation,cov_male,0,Female
+wong_2025_mental_rotation,cov_male,1,Male
+wong_2025_mental_rotation,cov_order,0,paper first
+wong_2025_mental_rotation,cov_order,1,laptop first
+wong_2025_perspective_taking,cov_education,1,Primary school
+wong_2025_perspective_taking,cov_education,2,Middle school
+wong_2025_perspective_taking,cov_education,3,High school
+wong_2025_perspective_taking,cov_education,4,Associate or Higher Diploma
+wong_2025_perspective_taking,cov_education,5,Bachelor
+wong_2025_perspective_taking,cov_education,6,Master or Postgraduate
+wong_2025_perspective_taking,cov_education,7,Doctorate
+wong_2025_perspective_taking,cov_language,1,English
+wong_2025_perspective_taking,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_perspective_taking,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_perspective_taking,cov_male,0,Female
+wong_2025_perspective_taking,cov_male,1,Male
+wong_2025_perspective_taking,cov_order,0,paper first
+wong_2025_perspective_taking,cov_order,1,laptop first
+wong_2025_raven12,cov_education,1,Primary school
+wong_2025_raven12,cov_education,2,Middle school
+wong_2025_raven12,cov_education,3,High school
+wong_2025_raven12,cov_education,4,Associate or Higher Diploma
+wong_2025_raven12,cov_education,5,Bachelor
+wong_2025_raven12,cov_education,6,Master or Postgraduate
+wong_2025_raven12,cov_education,7,Doctorate
+wong_2025_raven12,cov_language,1,English
+wong_2025_raven12,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_raven12,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_raven12,cov_male,0,Female
+wong_2025_raven12,cov_male,1,Male
+wong_2025_raven12,cov_order,0,paper first
+wong_2025_raven12,cov_order,1,laptop first
+wong_2025_sbsod,cov_education,1,Primary school
+wong_2025_sbsod,cov_education,2,Middle school
+wong_2025_sbsod,cov_education,3,High school
+wong_2025_sbsod,cov_education,4,Associate or Higher Diploma
+wong_2025_sbsod,cov_education,5,Bachelor
+wong_2025_sbsod,cov_education,6,Master or Postgraduate
+wong_2025_sbsod,cov_education,7,Doctorate
+wong_2025_sbsod,cov_language,1,English
+wong_2025_sbsod,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_sbsod,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_sbsod,cov_male,0,Female
+wong_2025_sbsod,cov_male,1,Male
+wong_2025_sbsod,cov_order,0,paper first
+wong_2025_sbsod,cov_order,1,laptop first
+wong_2025_spatial_scaling,cov_education,1,Primary school
+wong_2025_spatial_scaling,cov_education,2,Middle school
+wong_2025_spatial_scaling,cov_education,3,High school
+wong_2025_spatial_scaling,cov_education,4,Associate or Higher Diploma
+wong_2025_spatial_scaling,cov_education,5,Bachelor
+wong_2025_spatial_scaling,cov_education,6,Master or Postgraduate
+wong_2025_spatial_scaling,cov_education,7,Doctorate
+wong_2025_spatial_scaling,cov_language,1,English
+wong_2025_spatial_scaling,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_spatial_scaling,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_spatial_scaling,cov_male,0,Female
+wong_2025_spatial_scaling,cov_male,1,Male
+wong_2025_spatial_scaling,cov_order,0,paper first
+wong_2025_spatial_scaling,cov_order,1,laptop first
+wong_2025_vswm,cov_education,1,Primary school
+wong_2025_vswm,cov_education,2,Middle school
+wong_2025_vswm,cov_education,3,High school
+wong_2025_vswm,cov_education,4,Associate or Higher Diploma
+wong_2025_vswm,cov_education,5,Bachelor
+wong_2025_vswm,cov_education,6,Master or Postgraduate
+wong_2025_vswm,cov_education,7,Doctorate
+wong_2025_vswm,cov_language,1,English
+wong_2025_vswm,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_vswm,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_vswm,cov_male,0,Female
+wong_2025_vswm,cov_male,1,Male
+wong_2025_vswm,cov_order,0,paper first
+wong_2025_vswm,cov_order,1,laptop first
+wong_2025_vwm,cov_education,1,Primary school
+wong_2025_vwm,cov_education,2,Middle school
+wong_2025_vwm,cov_education,3,High school
+wong_2025_vwm,cov_education,4,Associate or Higher Diploma
+wong_2025_vwm,cov_education,5,Bachelor
+wong_2025_vwm,cov_education,6,Master or Postgraduate
+wong_2025_vwm,cov_education,7,Doctorate
+wong_2025_vwm,cov_language,1,English
+wong_2025_vwm,cov_language,2,Cantonese & Traditional Chinese
+wong_2025_vwm,cov_language,3,Mandarin & Simplified Chinese
+wong_2025_vwm,cov_male,0,Female
+wong_2025_vwm,cov_male,1,Male
+wong_2025_vwm,cov_order,0,paper first
+wong_2025_vwm,cov_order,1,laptop first
+wren_2026_ace,cov_age_first_exposed,1,0-5 years old
+wren_2026_ace,cov_age_first_exposed,2,6-10 years old
+wren_2026_ace,cov_age_first_exposed,3,11-15 years old
+wren_2026_ace,cov_age_first_exposed,4,16-20 years old
+wren_2026_ace,cov_age_first_exposed,5,21-25 years old
+wren_2026_ace,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_ace,cov_age_first_tried,1,I have never tried substances
+wren_2026_ace,cov_age_first_tried,2,0-5 years old
+wren_2026_ace,cov_age_first_tried,3,6-10 years old
+wren_2026_ace,cov_age_first_tried,4,11-15 years old
+wren_2026_ace,cov_age_first_tried,5,16-20 years old
+wren_2026_ace,cov_age_first_tried,6,21-25 years old
+wren_2026_ace,cov_age_first_tried,7,26-30 years old
+wren_2026_ace,cov_age_first_tried,12,I prefer not to answer
+wren_2026_ace,cov_education,1,High School/GED
+wren_2026_ace,cov_education,2,Trade School
+wren_2026_ace,cov_education,3,Some College
+wren_2026_ace,cov_education,4,Associate's Degree
+wren_2026_ace,cov_education,5,Bachelor's Degree
+wren_2026_ace,cov_education,6,Master's Degree
+wren_2026_ace,cov_education,7,Doctoral Degree
+wren_2026_ace,cov_employment,1,Full-time
+wren_2026_ace,cov_employment,2,Part-time
+wren_2026_ace,cov_employment,3,Retired
+wren_2026_ace,cov_employment,4,Self-employed
+wren_2026_ace,cov_employment,5,Unemployed
+wren_2026_ace,cov_employment,6,Full-time Student
+wren_2026_ace,cov_employment,7,Disability
+wren_2026_ace,cov_first_gen,1,Yes
+wren_2026_ace,cov_first_gen,2,No
+wren_2026_ace,cov_gender,1,Male
+wren_2026_ace,cov_gender,2,Female
+wren_2026_ace,cov_gender,3,Transgender
+wren_2026_ace,cov_gender,4,Non-Binary
+wren_2026_ace,cov_gender,5,Self Identify:
+wren_2026_ace,cov_last_substance_use,1,I have never used substances
+wren_2026_ace,cov_last_substance_use,2,In the last 6 months
+wren_2026_ace,cov_last_substance_use,3,1-2 years ago
+wren_2026_ace,cov_last_substance_use,4,3-5 years ago
+wren_2026_ace,cov_last_substance_use,5,6-10 years ago
+wren_2026_ace,cov_last_substance_use,6,11 or more years ago
+wren_2026_ace,cov_last_substance_use,7,I prefer not to answer
+wren_2026_ace,cov_military,1,Yes
+wren_2026_ace,cov_military,2,Maybe
+wren_2026_ace,cov_military,3,No
+wren_2026_ace,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_ace,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_ace,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_ace,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_ace,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_ace,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_ace,cov_race_ethnicity,8,Self Identify
+wren_2026_ace,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_ace,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_ace,cov_sexual_orientation,3,Bisexual
+wren_2026_ace,cov_sexual_orientation,4,Self Identify:
+wren_2026_ace,cov_still_using,1,Yes (please specify):
+wren_2026_ace,cov_still_using,2,No
+wren_2026_ace,cov_still_using,3,I prefer not to answer
+wren_2026_cage_aid,cov_age_first_exposed,1,0-5 years old
+wren_2026_cage_aid,cov_age_first_exposed,2,6-10 years old
+wren_2026_cage_aid,cov_age_first_exposed,3,11-15 years old
+wren_2026_cage_aid,cov_age_first_exposed,4,16-20 years old
+wren_2026_cage_aid,cov_age_first_exposed,5,21-25 years old
+wren_2026_cage_aid,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_cage_aid,cov_age_first_tried,1,I have never tried substances
+wren_2026_cage_aid,cov_age_first_tried,2,0-5 years old
+wren_2026_cage_aid,cov_age_first_tried,3,6-10 years old
+wren_2026_cage_aid,cov_age_first_tried,4,11-15 years old
+wren_2026_cage_aid,cov_age_first_tried,5,16-20 years old
+wren_2026_cage_aid,cov_age_first_tried,6,21-25 years old
+wren_2026_cage_aid,cov_age_first_tried,7,26-30 years old
+wren_2026_cage_aid,cov_age_first_tried,12,I prefer not to answer
+wren_2026_cage_aid,cov_education,1,High School/GED
+wren_2026_cage_aid,cov_education,2,Trade School
+wren_2026_cage_aid,cov_education,3,Some College
+wren_2026_cage_aid,cov_education,4,Associate's Degree
+wren_2026_cage_aid,cov_education,5,Bachelor's Degree
+wren_2026_cage_aid,cov_education,6,Master's Degree
+wren_2026_cage_aid,cov_education,7,Doctoral Degree
+wren_2026_cage_aid,cov_employment,1,Full-time
+wren_2026_cage_aid,cov_employment,2,Part-time
+wren_2026_cage_aid,cov_employment,3,Retired
+wren_2026_cage_aid,cov_employment,4,Self-employed
+wren_2026_cage_aid,cov_employment,5,Unemployed
+wren_2026_cage_aid,cov_employment,6,Full-time Student
+wren_2026_cage_aid,cov_employment,7,Disability
+wren_2026_cage_aid,cov_first_gen,1,Yes
+wren_2026_cage_aid,cov_first_gen,2,No
+wren_2026_cage_aid,cov_gender,1,Male
+wren_2026_cage_aid,cov_gender,2,Female
+wren_2026_cage_aid,cov_gender,3,Transgender
+wren_2026_cage_aid,cov_gender,4,Non-Binary
+wren_2026_cage_aid,cov_gender,5,Self Identify:
+wren_2026_cage_aid,cov_last_substance_use,1,I have never used substances
+wren_2026_cage_aid,cov_last_substance_use,2,In the last 6 months
+wren_2026_cage_aid,cov_last_substance_use,3,1-2 years ago
+wren_2026_cage_aid,cov_last_substance_use,4,3-5 years ago
+wren_2026_cage_aid,cov_last_substance_use,5,6-10 years ago
+wren_2026_cage_aid,cov_last_substance_use,6,11 or more years ago
+wren_2026_cage_aid,cov_last_substance_use,7,I prefer not to answer
+wren_2026_cage_aid,cov_military,1,Yes
+wren_2026_cage_aid,cov_military,2,Maybe
+wren_2026_cage_aid,cov_military,3,No
+wren_2026_cage_aid,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_cage_aid,cov_race_ethnicity,8,Self Identify
+wren_2026_cage_aid,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_cage_aid,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_cage_aid,cov_sexual_orientation,3,Bisexual
+wren_2026_cage_aid,cov_sexual_orientation,4,Self Identify:
+wren_2026_cage_aid,cov_still_using,1,Yes (please specify):
+wren_2026_cage_aid,cov_still_using,2,No
+wren_2026_cage_aid,cov_still_using,3,I prefer not to answer
+wren_2026_ctq_sf,cov_age_first_exposed,1,0-5 years old
+wren_2026_ctq_sf,cov_age_first_exposed,2,6-10 years old
+wren_2026_ctq_sf,cov_age_first_exposed,3,11-15 years old
+wren_2026_ctq_sf,cov_age_first_exposed,4,16-20 years old
+wren_2026_ctq_sf,cov_age_first_exposed,5,21-25 years old
+wren_2026_ctq_sf,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_ctq_sf,cov_age_first_tried,1,I have never tried substances
+wren_2026_ctq_sf,cov_age_first_tried,2,0-5 years old
+wren_2026_ctq_sf,cov_age_first_tried,3,6-10 years old
+wren_2026_ctq_sf,cov_age_first_tried,4,11-15 years old
+wren_2026_ctq_sf,cov_age_first_tried,5,16-20 years old
+wren_2026_ctq_sf,cov_age_first_tried,6,21-25 years old
+wren_2026_ctq_sf,cov_age_first_tried,7,26-30 years old
+wren_2026_ctq_sf,cov_age_first_tried,12,I prefer not to answer
+wren_2026_ctq_sf,cov_education,1,High School/GED
+wren_2026_ctq_sf,cov_education,2,Trade School
+wren_2026_ctq_sf,cov_education,3,Some College
+wren_2026_ctq_sf,cov_education,4,Associate's Degree
+wren_2026_ctq_sf,cov_education,5,Bachelor's Degree
+wren_2026_ctq_sf,cov_education,6,Master's Degree
+wren_2026_ctq_sf,cov_education,7,Doctoral Degree
+wren_2026_ctq_sf,cov_employment,1,Full-time
+wren_2026_ctq_sf,cov_employment,2,Part-time
+wren_2026_ctq_sf,cov_employment,3,Retired
+wren_2026_ctq_sf,cov_employment,4,Self-employed
+wren_2026_ctq_sf,cov_employment,5,Unemployed
+wren_2026_ctq_sf,cov_employment,6,Full-time Student
+wren_2026_ctq_sf,cov_employment,7,Disability
+wren_2026_ctq_sf,cov_first_gen,1,Yes
+wren_2026_ctq_sf,cov_first_gen,2,No
+wren_2026_ctq_sf,cov_gender,1,Male
+wren_2026_ctq_sf,cov_gender,2,Female
+wren_2026_ctq_sf,cov_gender,3,Transgender
+wren_2026_ctq_sf,cov_gender,4,Non-Binary
+wren_2026_ctq_sf,cov_gender,5,Self Identify:
+wren_2026_ctq_sf,cov_last_substance_use,1,I have never used substances
+wren_2026_ctq_sf,cov_last_substance_use,2,In the last 6 months
+wren_2026_ctq_sf,cov_last_substance_use,3,1-2 years ago
+wren_2026_ctq_sf,cov_last_substance_use,4,3-5 years ago
+wren_2026_ctq_sf,cov_last_substance_use,5,6-10 years ago
+wren_2026_ctq_sf,cov_last_substance_use,6,11 or more years ago
+wren_2026_ctq_sf,cov_last_substance_use,7,I prefer not to answer
+wren_2026_ctq_sf,cov_military,1,Yes
+wren_2026_ctq_sf,cov_military,2,Maybe
+wren_2026_ctq_sf,cov_military,3,No
+wren_2026_ctq_sf,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_ctq_sf,cov_race_ethnicity,8,Self Identify
+wren_2026_ctq_sf,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_ctq_sf,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_ctq_sf,cov_sexual_orientation,3,Bisexual
+wren_2026_ctq_sf,cov_sexual_orientation,4,Self Identify:
+wren_2026_ctq_sf,cov_still_using,1,Yes (please specify):
+wren_2026_ctq_sf,cov_still_using,2,No
+wren_2026_ctq_sf,cov_still_using,3,I prefer not to answer
+wren_2026_ghsq_emotional,cov_age_first_exposed,1,0-5 years old
+wren_2026_ghsq_emotional,cov_age_first_exposed,2,6-10 years old
+wren_2026_ghsq_emotional,cov_age_first_exposed,3,11-15 years old
+wren_2026_ghsq_emotional,cov_age_first_exposed,4,16-20 years old
+wren_2026_ghsq_emotional,cov_age_first_exposed,5,21-25 years old
+wren_2026_ghsq_emotional,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_ghsq_emotional,cov_age_first_tried,1,I have never tried substances
+wren_2026_ghsq_emotional,cov_age_first_tried,2,0-5 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,3,6-10 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,4,11-15 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,5,16-20 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,6,21-25 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,7,26-30 years old
+wren_2026_ghsq_emotional,cov_age_first_tried,12,I prefer not to answer
+wren_2026_ghsq_emotional,cov_education,1,High School/GED
+wren_2026_ghsq_emotional,cov_education,2,Trade School
+wren_2026_ghsq_emotional,cov_education,3,Some College
+wren_2026_ghsq_emotional,cov_education,4,Associate's Degree
+wren_2026_ghsq_emotional,cov_education,5,Bachelor's Degree
+wren_2026_ghsq_emotional,cov_education,6,Master's Degree
+wren_2026_ghsq_emotional,cov_education,7,Doctoral Degree
+wren_2026_ghsq_emotional,cov_employment,1,Full-time
+wren_2026_ghsq_emotional,cov_employment,2,Part-time
+wren_2026_ghsq_emotional,cov_employment,3,Retired
+wren_2026_ghsq_emotional,cov_employment,4,Self-employed
+wren_2026_ghsq_emotional,cov_employment,5,Unemployed
+wren_2026_ghsq_emotional,cov_employment,6,Full-time Student
+wren_2026_ghsq_emotional,cov_employment,7,Disability
+wren_2026_ghsq_emotional,cov_first_gen,1,Yes
+wren_2026_ghsq_emotional,cov_first_gen,2,No
+wren_2026_ghsq_emotional,cov_gender,1,Male
+wren_2026_ghsq_emotional,cov_gender,2,Female
+wren_2026_ghsq_emotional,cov_gender,3,Transgender
+wren_2026_ghsq_emotional,cov_gender,4,Non-Binary
+wren_2026_ghsq_emotional,cov_gender,5,Self Identify:
+wren_2026_ghsq_emotional,cov_last_substance_use,1,I have never used substances
+wren_2026_ghsq_emotional,cov_last_substance_use,2,In the last 6 months
+wren_2026_ghsq_emotional,cov_last_substance_use,3,1-2 years ago
+wren_2026_ghsq_emotional,cov_last_substance_use,4,3-5 years ago
+wren_2026_ghsq_emotional,cov_last_substance_use,5,6-10 years ago
+wren_2026_ghsq_emotional,cov_last_substance_use,6,11 or more years ago
+wren_2026_ghsq_emotional,cov_last_substance_use,7,I prefer not to answer
+wren_2026_ghsq_emotional,cov_military,1,Yes
+wren_2026_ghsq_emotional,cov_military,2,Maybe
+wren_2026_ghsq_emotional,cov_military,3,No
+wren_2026_ghsq_emotional,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_ghsq_emotional,cov_race_ethnicity,8,Self Identify
+wren_2026_ghsq_emotional,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_ghsq_emotional,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_ghsq_emotional,cov_sexual_orientation,3,Bisexual
+wren_2026_ghsq_emotional,cov_sexual_orientation,4,Self Identify:
+wren_2026_ghsq_emotional,cov_still_using,1,Yes (please specify):
+wren_2026_ghsq_emotional,cov_still_using,2,No
+wren_2026_ghsq_emotional,cov_still_using,3,I prefer not to answer
+wren_2026_ghsq_substance,cov_age_first_exposed,1,0-5 years old
+wren_2026_ghsq_substance,cov_age_first_exposed,2,6-10 years old
+wren_2026_ghsq_substance,cov_age_first_exposed,3,11-15 years old
+wren_2026_ghsq_substance,cov_age_first_exposed,4,16-20 years old
+wren_2026_ghsq_substance,cov_age_first_exposed,5,21-25 years old
+wren_2026_ghsq_substance,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_ghsq_substance,cov_age_first_tried,1,I have never tried substances
+wren_2026_ghsq_substance,cov_age_first_tried,2,0-5 years old
+wren_2026_ghsq_substance,cov_age_first_tried,3,6-10 years old
+wren_2026_ghsq_substance,cov_age_first_tried,4,11-15 years old
+wren_2026_ghsq_substance,cov_age_first_tried,5,16-20 years old
+wren_2026_ghsq_substance,cov_age_first_tried,6,21-25 years old
+wren_2026_ghsq_substance,cov_age_first_tried,7,26-30 years old
+wren_2026_ghsq_substance,cov_age_first_tried,12,I prefer not to answer
+wren_2026_ghsq_substance,cov_education,1,High School/GED
+wren_2026_ghsq_substance,cov_education,2,Trade School
+wren_2026_ghsq_substance,cov_education,3,Some College
+wren_2026_ghsq_substance,cov_education,4,Associate's Degree
+wren_2026_ghsq_substance,cov_education,5,Bachelor's Degree
+wren_2026_ghsq_substance,cov_education,6,Master's Degree
+wren_2026_ghsq_substance,cov_education,7,Doctoral Degree
+wren_2026_ghsq_substance,cov_employment,1,Full-time
+wren_2026_ghsq_substance,cov_employment,2,Part-time
+wren_2026_ghsq_substance,cov_employment,3,Retired
+wren_2026_ghsq_substance,cov_employment,4,Self-employed
+wren_2026_ghsq_substance,cov_employment,5,Unemployed
+wren_2026_ghsq_substance,cov_employment,6,Full-time Student
+wren_2026_ghsq_substance,cov_employment,7,Disability
+wren_2026_ghsq_substance,cov_first_gen,1,Yes
+wren_2026_ghsq_substance,cov_first_gen,2,No
+wren_2026_ghsq_substance,cov_gender,1,Male
+wren_2026_ghsq_substance,cov_gender,2,Female
+wren_2026_ghsq_substance,cov_gender,3,Transgender
+wren_2026_ghsq_substance,cov_gender,4,Non-Binary
+wren_2026_ghsq_substance,cov_gender,5,Self Identify:
+wren_2026_ghsq_substance,cov_last_substance_use,1,I have never used substances
+wren_2026_ghsq_substance,cov_last_substance_use,2,In the last 6 months
+wren_2026_ghsq_substance,cov_last_substance_use,3,1-2 years ago
+wren_2026_ghsq_substance,cov_last_substance_use,4,3-5 years ago
+wren_2026_ghsq_substance,cov_last_substance_use,5,6-10 years ago
+wren_2026_ghsq_substance,cov_last_substance_use,6,11 or more years ago
+wren_2026_ghsq_substance,cov_last_substance_use,7,I prefer not to answer
+wren_2026_ghsq_substance,cov_military,1,Yes
+wren_2026_ghsq_substance,cov_military,2,Maybe
+wren_2026_ghsq_substance,cov_military,3,No
+wren_2026_ghsq_substance,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_ghsq_substance,cov_race_ethnicity,8,Self Identify
+wren_2026_ghsq_substance,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_ghsq_substance,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_ghsq_substance,cov_sexual_orientation,3,Bisexual
+wren_2026_ghsq_substance,cov_sexual_orientation,4,Self Identify:
+wren_2026_ghsq_substance,cov_still_using,1,Yes (please specify):
+wren_2026_ghsq_substance,cov_still_using,2,No
+wren_2026_ghsq_substance,cov_still_using,3,I prefer not to answer
+wren_2026_ghsq_suicidal,cov_age_first_exposed,1,0-5 years old
+wren_2026_ghsq_suicidal,cov_age_first_exposed,2,6-10 years old
+wren_2026_ghsq_suicidal,cov_age_first_exposed,3,11-15 years old
+wren_2026_ghsq_suicidal,cov_age_first_exposed,4,16-20 years old
+wren_2026_ghsq_suicidal,cov_age_first_exposed,5,21-25 years old
+wren_2026_ghsq_suicidal,cov_age_first_exposed,11,I prefer not to answer
+wren_2026_ghsq_suicidal,cov_age_first_tried,1,I have never tried substances
+wren_2026_ghsq_suicidal,cov_age_first_tried,2,0-5 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,3,6-10 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,4,11-15 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,5,16-20 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,6,21-25 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,7,26-30 years old
+wren_2026_ghsq_suicidal,cov_age_first_tried,12,I prefer not to answer
+wren_2026_ghsq_suicidal,cov_education,1,High School/GED
+wren_2026_ghsq_suicidal,cov_education,2,Trade School
+wren_2026_ghsq_suicidal,cov_education,3,Some College
+wren_2026_ghsq_suicidal,cov_education,4,Associate's Degree
+wren_2026_ghsq_suicidal,cov_education,5,Bachelor's Degree
+wren_2026_ghsq_suicidal,cov_education,6,Master's Degree
+wren_2026_ghsq_suicidal,cov_education,7,Doctoral Degree
+wren_2026_ghsq_suicidal,cov_employment,1,Full-time
+wren_2026_ghsq_suicidal,cov_employment,2,Part-time
+wren_2026_ghsq_suicidal,cov_employment,3,Retired
+wren_2026_ghsq_suicidal,cov_employment,4,Self-employed
+wren_2026_ghsq_suicidal,cov_employment,5,Unemployed
+wren_2026_ghsq_suicidal,cov_employment,6,Full-time Student
+wren_2026_ghsq_suicidal,cov_employment,7,Disability
+wren_2026_ghsq_suicidal,cov_first_gen,1,Yes
+wren_2026_ghsq_suicidal,cov_first_gen,2,No
+wren_2026_ghsq_suicidal,cov_gender,1,Male
+wren_2026_ghsq_suicidal,cov_gender,2,Female
+wren_2026_ghsq_suicidal,cov_gender,3,Transgender
+wren_2026_ghsq_suicidal,cov_gender,4,Non-Binary
+wren_2026_ghsq_suicidal,cov_gender,5,Self Identify:
+wren_2026_ghsq_suicidal,cov_last_substance_use,1,I have never used substances
+wren_2026_ghsq_suicidal,cov_last_substance_use,2,In the last 6 months
+wren_2026_ghsq_suicidal,cov_last_substance_use,3,1-2 years ago
+wren_2026_ghsq_suicidal,cov_last_substance_use,4,3-5 years ago
+wren_2026_ghsq_suicidal,cov_last_substance_use,5,6-10 years ago
+wren_2026_ghsq_suicidal,cov_last_substance_use,6,11 or more years ago
+wren_2026_ghsq_suicidal,cov_last_substance_use,7,I prefer not to answer
+wren_2026_ghsq_suicidal,cov_military,1,Yes
+wren_2026_ghsq_suicidal,cov_military,2,Maybe
+wren_2026_ghsq_suicidal,cov_military,3,No
+wren_2026_ghsq_suicidal,cov_race_ethnicity,1,"White (Eg: German, Irish, English, Italian, Polish, French, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,2,"Hispanic, Latino or Spanish origin (Eg: Mexican or Mexican American, Puerto Rican, Cuban, Salvadoran, Dominican, Colombian, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,3,"Black or African American (Eg: African American, Jamaican, Haitian, Nigerian, Ethiopian, Somalian, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,4,"Asian (Eg: Chinese, Filipino, Asian Indian, Vietnamese, Korean, Japanese, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,5,"American Indian or Alaska Native(Eg: Navajo nation, Blackfeet tribe, Mayan, Aztec, Native Village or Barrow Inupiat Traditional Government, Nome Eskimo Community, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,6,"Middle Eastern or North African (Eg: Lebanese, Iranian, Egyptian, Syrian, Moroccan, Algerian, etc)"
+wren_2026_ghsq_suicidal,cov_race_ethnicity,8,Self Identify
+wren_2026_ghsq_suicidal,cov_sexual_orientation,1,Heterosexual/Straight
+wren_2026_ghsq_suicidal,cov_sexual_orientation,2,Homosexual/Gay
+wren_2026_ghsq_suicidal,cov_sexual_orientation,3,Bisexual
+wren_2026_ghsq_suicidal,cov_sexual_orientation,4,Self Identify:
+wren_2026_ghsq_suicidal,cov_still_using,1,Yes (please specify):
+wren_2026_ghsq_suicidal,cov_still_using,2,No
+wren_2026_ghsq_suicidal,cov_still_using,3,I prefer not to answer
 xue_2026_aaai,cov_age,1,25岁及以下
 xue_2026_aaai,cov_age,2,26-35岁
 xue_2026_aaai,cov_age,3,36-45岁
@@ -15436,6 +17460,31 @@ yuan_2024_ucla,cov_grade,4,Grade 10
 yuan_2024_ucla,cov_grade,5,Grade 11
 yuan_2024_ucla,cov_han_or_minority,1,Han Chinese
 yuan_2024_ucla,cov_han_or_minority,2,Ethnic Minorities
+zancu_2026_bicsi,cov_occupation,0,unemployed
+zancu_2026_bicsi,cov_occupation,1,student
+zancu_2026_bicsi,cov_occupation,2,employee
+zancu_2026_bicsi,cov_sex,1,masculin
+zancu_2026_bicsi,cov_sex,2,feminin
+zancu_2026_cebracs,cov_occupation,0,unemployed
+zancu_2026_cebracs,cov_occupation,1,student
+zancu_2026_cebracs,cov_occupation,2,employee
+zancu_2026_cebracs,cov_sex,1,masculin
+zancu_2026_cebracs,cov_sex,2,feminin
+zancu_2026_ders18,cov_occupation,0,unemployed
+zancu_2026_ders18,cov_occupation,1,student
+zancu_2026_ders18,cov_occupation,2,employee
+zancu_2026_ders18,cov_sex,1,masculin
+zancu_2026_ders18,cov_sex,2,feminin
+zancu_2026_edeq_body_image,cov_occupation,0,unemployed
+zancu_2026_edeq_body_image,cov_occupation,1,student
+zancu_2026_edeq_body_image,cov_occupation,2,employee
+zancu_2026_edeq_body_image,cov_sex,1,masculin
+zancu_2026_edeq_body_image,cov_sex,2,feminin
+zancu_2026_negative_urgency,cov_occupation,0,unemployed
+zancu_2026_negative_urgency,cov_occupation,1,student
+zancu_2026_negative_urgency,cov_occupation,2,employee
+zancu_2026_negative_urgency,cov_sex,1,masculin
+zancu_2026_negative_urgency,cov_sex,2,feminin
 zhang_2024_ftcd,cov_age_first_smoked,1,below 11
 zhang_2024_ftcd,cov_age_first_smoked,2,12-17
 zhang_2024_ftcd,cov_age_first_smoked,3,18-24
@@ -15552,3 +17601,39 @@ zhou_2016_personality,cov_professional_title,4,Senior title
 zhou_2016_personality,cov_professional_title,5,None
 zhou_2016_personality,cov_sex,1,Male
 zhou_2016_personality,cov_sex,2,Female
+zhu_2026_ls_brand_image_congruence,cov_gender,1,남자
+zhu_2026_ls_brand_image_congruence,cov_gender,2,여자
+zhu_2026_ls_brand_image_congruence,cov_purchased,1,구매
+zhu_2026_ls_brand_image_congruence,cov_purchased,2,구매하지 않다
+zhu_2026_ls_loneliness,cov_gender,1,남자
+zhu_2026_ls_loneliness,cov_gender,2,여자
+zhu_2026_ls_loneliness,cov_purchased,1,구매
+zhu_2026_ls_loneliness,cov_purchased,2,구매하지 않다
+zhu_2026_ls_parasocial_interaction,cov_gender,1,남자
+zhu_2026_ls_parasocial_interaction,cov_gender,2,여자
+zhu_2026_ls_parasocial_interaction,cov_purchased,1,구매
+zhu_2026_ls_parasocial_interaction,cov_purchased,2,구매하지 않다
+zhu_2026_ls_pl,cov_gender,1,남자
+zhu_2026_ls_pl,cov_gender,2,여자
+zhu_2026_ls_pl,cov_purchased,1,구매
+zhu_2026_ls_pl,cov_purchased,2,구매하지 않다
+zhu_2026_ls_purchase_intention,cov_gender,1,남자
+zhu_2026_ls_purchase_intention,cov_gender,2,여자
+zhu_2026_ls_purchase_intention,cov_purchased,1,구매
+zhu_2026_ls_purchase_intention,cov_purchased,2,구매하지 않다
+zhu_2026_ls_puri,cov_gender,1,남자
+zhu_2026_ls_puri,cov_gender,2,여자
+zhu_2026_ls_puri,cov_purchased,1,구매
+zhu_2026_ls_puri,cov_purchased,2,구매하지 않다
+zhu_2026_ls_vi,cov_gender,1,남자
+zhu_2026_ls_vi,cov_gender,2,여자
+zhu_2026_ls_vi,cov_purchased,1,구매
+zhu_2026_ls_vi,cov_purchased,2,구매하지 않다
+zhu_2026_ls_vii,cov_gender,1,남자
+zhu_2026_ls_vii,cov_gender,2,여자
+zhu_2026_ls_vii,cov_purchased,1,구매
+zhu_2026_ls_vii,cov_purchased,2,구매하지 않다
+zhu_2026_ls_vsc,cov_gender,1,남자
+zhu_2026_ls_vsc,cov_gender,2,여자
+zhu_2026_ls_vsc,cov_purchased,1,구매
+zhu_2026_ls_vsc,cov_purchased,2,구매하지 않다

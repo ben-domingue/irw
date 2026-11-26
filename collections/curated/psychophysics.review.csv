@@ -1,0 +1,5 @@
+table,verdict,note
+jaen_2024_odor_id,DECIDE,"odour identification test: fixed odours, no stimulus manipulation"
+wine_luckett2021,REJECT,odour ratings with no manipulation (stimulus norms)
+dmct_addis_2020_mct,REJECT,"mental imagery comparison, not a perceptual stimulus"
+cifar10h,DECIDE,image categorisation by crowd annotators; no noise manipulation

@@ -25,8 +25,9 @@
 ##  rating: "Please rate each applicant on a scale from 1 to 7, where 1 indicates they should
 ##    definitely not be recruited and 7 indicates they should definitely be recruited."
 ##    1 = Definitely Not Recruit .. 7 = Definitely Recruit (conjoint_rating), stored raw.
-##Rows with neither outcome are omitted; tasks with a missing choice keep choice = NA on both
-##profiles (the respondent skipped the choice but rated).
+##Tasks with neither outcome are omitted; tasks with a missing choice keep choice = NA on both
+##profiles (the respondent skipped the choice but rated), and an applicant left unrated in such a
+##task keeps its row with both outcomes NA (residents 1 task; #3536).
 ##Attribute levels are the authors' factor labels in conjoints_stacked.rds, which are shortened
 ##versions of the displayed text (Fig. S10 shows e.g. "Scored in top 10% of applicants" for
 ##exam "Top 10%", "Job benefits (i.e. medical/pension)" for "Job benefits", "Does not live in
@@ -58,7 +59,7 @@ at <- c(sex = "sex_", age = "age_", race = "race_", education = "education_", re
 for (v in names(at)) s[, paste0("attr_", v) := as.character(get(at[[v]]))]
 stopifnot(!anyNA(s[, paste0("attr_", names(at)), with = FALSE]))
 stopifnot(s[attr_occupation %in% c("School teacher", "Social worker"), all(attr_education %in% c("Bachelors degree", "Graduate degree"))])
-s <- s[!(is.na(choice) & is.na(rating))]
+s <- s[s[, .I[any(!is.na(choice) | !is.na(rating))], .(person_id, task)]$V1]   # task-level: a shown profile stays
 keep <- c("person_id", "task", "profile", "choice", "rating", paste0("attr_", names(at)))
 build <- function(d, file) {
   d <- copy(d)

@@ -1,6 +1,10 @@
 table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
 BPAQ_Christopher_2024_PCL5,PTSD Checklist for DSM-5 amongst police officers,PTSD Checklist for DSM-5 (PCL-5),eng,study_materials,20,109,20,20,0,MATCH,wording,
-armour_2017_pcl5,NA,,eng,none_recorded,20,221,20,20,0,MATCH,supplied,
+armour_2017_pcl5,NA,PTSD Checklist for DSM-5 (PCL-5),eng,canonical_instrument,20,221,20,20,0,MATCH,supplied,
 orovou_2021_pcl5,NA,PTSD Checklist for DSM-5 (PCL-5),gre,translated_substitute,20,469,20,20,0,MATCH,supplied,
-pcl5_xiong_2025,Posttraumatic stress disorder checklist for DSM-5 (PCL-5),"PTSD Checklist for DSM-5 (PCL-5), Chinese version",chi,none_recorded,20,9506,20,20,0,MATCH,supplied,
+pcl5_xiong_2025,Posttraumatic stress disorder checklist for DSM-5 (PCL-5),"PTSD Checklist for DSM-5 (PCL-5), Chinese version",chi,translated_substitute,20,9506,20,20,0,MATCH,supplied,
 wesselmann_2018_pcl,PTSD Checklist for DSM-5 (PCL-5),PTSD Checklist for DSM-5 (PCL-5),eng,study_materials,20,128,20,20,2,MATCH,wording,
+ahmed_2025_pcl5,PTSD symptoms (PCL-5),,ara,none_recorded,20,714,20,0,0,NAME_ONLY,name,no item text
+gulec_2023_pcl5,Post-traumatic stress symptoms (PCL-5),,tur,none_recorded,20,503,20,0,0,NAME_ONLY,name,no item text
+guo_2015_pcl,PTSD symptoms (PCL-C),,chi,none_recorded,17,662,20,0,0,NAME_ONLY,name,no item text
+sandoz_2021_pcl5,PTSD symptoms (PCL-5),,fre,none_recorded,20,541,20,0,0,NAME_ONLY,name,no item text

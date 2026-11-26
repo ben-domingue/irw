@@ -38,10 +38,13 @@
 ##saw a female alter in vignette 1 and a male alter in vignette 2 (article footnote; borne
 ##out by the data), which is why the pooled gender shares are unequal and why the design
 ##record carries restrictions = yes.
-##ONE TABLE PER VIGNETTE POOLING THE THREE COUNTRIES, with cov_country: the authors analyse
-##the three samples together (country x profile interactions in one regression,
-##ReplicationDoFile L130-139) and work with the same English labels throughout. The language
-##respondents saw is not documented for any of the three fieldings.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): each vignette table is split into one table per country,
+##gereke_2023_trust_<iso2> and gereke_2023_trustworthiness_<iso2> (za, us, ch), replacing the pooled
+##gereke_2023_trust and gereke_2023_trustworthiness (the authors analyse the three samples together
+##with country x profile interactions, ReplicationDoFile L130-139), because the design differs by
+##country: attr_gender was randomized only in the US and South Africa; in Switzerland it is fixed
+##(female in vignette 1, male in vignette 2). The language respondents saw is not documented for any
+##of the three fieldings. Respondents: trust za 1,374, us 1,274, ch 411; trustworthiness za 1,365, us 1,211, ch 390.
 ##
 ##Outcomes (binary; the exact question wording is not deposited and the article paraphrases
 ##it, so design_outcomes carries a paraphrase):
@@ -124,5 +127,13 @@ t2 <- make("profile_t2", "t2", c(cov_check_female = "man_check_1",
 stopifnot(t1[cov_country == "Switzerland", all(attr_gender == "female")],
           t2[cov_country == "Switzerland", all(attr_gender == "male")],
           t1[cov_country != "Switzerland", uniqueN(attr_gender) == 2L])
-fwrite(t1, file.path(out, "gereke_2023_trust.csv"))
-fwrite(t2, file.path(out, "gereke_2023_trustworthiness.csv"))
+iso <- c("South Africa" = "za", "United States" = "us", Switzerland = "ch")
+stopifnot(all(t1$cov_country %in% names(iso)), all(names(iso) %in% t1$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- t1[cov_country == cn]
+  fwrite(x, file.path(out, paste0("gereke_2023_trust_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(t1))
+iso <- c("South Africa" = "za", "United States" = "us", Switzerland = "ch")
+stopifnot(all(t2$cov_country %in% names(iso)), all(names(iso) %in% t2$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- t2[cov_country == cn]
+  fwrite(x, file.path(out, paste0("gereke_2023_trustworthiness_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(t2))

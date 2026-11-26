@@ -35,6 +35,11 @@ metadata/**/*.txt
 !metadata/rank_biblio.csv
 !metadata/rank_biblio_provenance.csv
 !metadata/rank_biblio_pending.csv
+##covariance (22_cov.R, 2026-11-17): same shape as rank, same reason.
+!metadata/cov_metadata.csv
+!metadata/cov_biblio.csv
+!metadata/cov_biblio_provenance.csv
+!metadata/cov_biblio_pending.csv
 !metadata/simsyn_metadata.csv
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv

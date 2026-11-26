@@ -81,9 +81,9 @@ Conjoint's rules apply unchanged: newest-first, a name in two
 shards flagged by `18_rankings.R` and both packages, `RANK_DEFAULT` in
 `red_up/targets.py` for where NEW tables go.
 
-**Data families.** Every response table belongs to exactly one of six *data
+**Data families.** Every table of data belongs to exactly one of seven *data
 families*, and each family lives in its own Redivis dataset or shard list. Core,
-conjoint and rankings are shard lists; the other three are single datasets, only
+conjoint and rankings are shard lists; the other four are single datasets, only
 because none is near the cap:
 
 | Family | `source =` | Redivis dataset | What defines it | Standard |
@@ -94,8 +94,9 @@ because none is near the cap:
 | simsyn | `sim` | `irw_simsyn` | responses not produced by real people | site `simsyn.qmd` |
 | conjoint | `conj` | `irw_conjoint`, `_2`, … | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
 | rankings | `rank` | `irw_rank`, … | respondent × task × marked position, `resp` a rank (ranked-choice ballots, jury rankings, survey ranking questions) | `data/rankings/README.md`, site `rankings_standard.qmd` (planned) |
+| covariance | `cov` | `irw_cov` | a published correlation or covariance matrix with no raw data in the IRW: one row per cell of the lower triangle (`stat`, `var1`, `var2`, `value`, `n`), not responses. Matrices computed from IRW tables are never stored; the packages compute them on fetch | `data/covariance/README.md`, site `cov_standard.qmd` (planned) |
 
-Five families are defined by the shape of the data; simsyn is defined by
+Six families are defined by the shape of the data; simsyn is defined by
 provenance (a simulated table can be dichotomous, nominal, anything). The
 families are still exclusive in practice, one table to one dataset. The line
 between competitions and conjoint is what is compared: competitions compare the
@@ -306,10 +307,9 @@ Two things about this are easy to get wrong:
 
 **Everything scheduled is a GitHub Action.** There is no crontab anywhere, on
 any machine. `.github/workflows/metadata-pipeline.yml` runs Mondays,
-Wednesdays and Fridays at 13:00 UTC (Monday always; the other two when a
-core-shard table has appeared or disappeared since the last run, or when the
-rolling refresh in `01_metadata.R` has fallen behind; `scripts/pipeline_gate.py`
-decides): it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
+Wednesdays and Fridays at 13:00 UTC, every slot, ungated -- each run also
+re-checks 400 existing tables in `01_metadata.R`'s rolling refresh, so there is
+always work: it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
 table names across the metadata, tags and biblio outputs against the live
 Redivis datasets), and opens a **pull request** with the diff. It does not open
 an issue and does not auto-merge — there, the review is the product.

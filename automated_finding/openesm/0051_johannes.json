@@ -1,0 +1,304 @@
+{
+ "dataset_id": "0051_johannes",
+ "openesm": {
+  "first_author": "Johannes",
+  "year": 2021,
+  "licence": "CC-BY 4.0",
+  "zenodo_concept_doi": "10.5281/zenodo.17348348",
+  "zenodo_record": 22953104,
+  "zenodo_version_doi": "10.5281/zenodo.22953104",
+  "filename": "0051_johannes_ts.tsv",
+  "codebook_url": "https://zenodo.org/records/22953104/files/0051_johannes_codebook.docx",
+  "link_to_data": "https://osf.io/ps3rk/files",
+  "paper_doi": "https://doi.org/10.1080/15213269.2020.1768122",
+  "sampling_scheme": "8x semi-random with at least 45 minutes between surveys",
+  "participants": "Dutch undergraduate students using social media",
+  "n_participants": 77,
+  "n_days": "5",
+  "n_beeps_per_day": "8"
+ },
+ "original_licence": {
+  "value": "CC BY 4.0",
+  "how": "OSF API, node ps3rk"
+ },
+ "licence": "CC BY 4.0",
+ "reference": "Johannes, N., Meier, A., Reinecke, L., Ehlert, S., Setiawan, D. N., Walasek, N., Dienlin, T., Buijzen, M., & Veling, H. (2021). The relationship between online vigilance and affective well-being in everyday life: Combining smartphone logging with experience sampling. Media Psychology, 24(5), 581-605.",
+ "script": "johannes_2021_mood_esm",
+ "input": {
+  "n_rows": 2828,
+  "n_ids": 77
+ },
+ "order": {
+  "by": "timestamp",
+  "column": "scheduled_time"
+ },
+ "date": {
+  "column": "scheduled_time",
+  "tz": "UTC",
+  "tz_evidence": "The paper (Procedure) sends eight surveys a day between 09:00 and 21:00 local time. As written, the stamps run 08-19h UTC before the 2018-03-25 DST change (09-20 CET) and 07-18h after it (09-20 CEST), shifting by exactly the hour true UTC stamps would; time_survey holds local midnight converted to UTC (23:00Z before the change, 22:00Z after). So the Z stamps are true UTC.",
+  "window": [
+   "2018-02-01",
+   "2018-09-01"
+  ]
+ },
+ "tables": [
+  {
+   "name": "johannes_2021_mood",
+   "instrument": "Short mood scale (Wilhelm & Schoebi, 2007), six bipolar items, plus a depressed-happy item added by the authors",
+   "description": "Experience sampling, 8 prompts a day between 09:00 and 21:00 for 5 working days, 77 Dutch undergraduate students: seven bipolar mood items after 'At this moment, I feel:' (tired-awake, content-discontent, agitated-calm, full of energy-without energy, unwell-well, relaxed-tense, depressed-happy). 1..7; discontent, without_energy and tense run towards the negative pole.",
+   "items": [
+    {
+     "column": "awake",
+     "item": "awake",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Tired",
+      "7": "Awake"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "alertness, energy, positive affect, affect",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "discontent",
+     "item": "discontent",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Content",
+      "7": "Discontent"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "discontent, negative affect, affect",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "calm",
+     "item": "calm",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Agitated",
+      "7": "Calm"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "calmness, positive affect, affect, neuroticism, big five",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "without_energy",
+     "item": "without_energy",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Full of energy",
+      "7": "Without energy"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "low energy, negative affect, affect",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "well",
+     "item": "well",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Unwell",
+      "7": "Well"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "positive affect, affect",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "tense",
+     "item": "tense",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Relaxed",
+      "7": "Tense"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "tense, negative affect, affect, neuroticism, big five",
+     "source": "Wilhelm Schoebi Short-scale to measure three basic dimensions of mood"
+    },
+    {
+     "column": "happy",
+     "item": "happy",
+     "stem": "At this moment, I feel:",
+     "anchors": {
+      "1": "Depressed",
+      "7": "Happy"
+     },
+     "scale": [
+      1,
+      7
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      7.0,
+      1684
+     ],
+     "asked_at_beeps": null,
+     "construct": "happiness, positive affect, affect",
+     "source": ""
+    }
+   ],
+   "dict_note": "One participant (id 66 in openESM's copy) is excluded: a technical fault sent them 69 prompts, 11 to 16 a day and often under the study's 45-minute minimum spacing, and the authors judged those data untrustworthy. The participant the paper excluded for answering too few surveys is kept."
+  }
+ ],
+ "candidates": [],
+ "not_shipped": {
+  "date": "Date: Date",
+  "time_prompt": "PosixCt: Time of the prompt",
+  "survey_taken": "binary: Survey taken",
+  "time_survey": "PosixCt: Time of the survey",
+  "number_days_total": "numeric: Total number of days",
+  "prompt_id": "numeric: Identifier variable for the prompt",
+  "fraction_of_days_with_notification": "numeric: Fraction of days with notification",
+  "phone_use": "numeric: Phone use duration",
+  "social_media_use": "numeric: Social media use duration",
+  "social_media_use_no_notification": "numeric: Social media use without notification duration",
+  "reactibility_notification_avg": "numeric: Average notification reactibility",
+  "reactibility_notification_sd": "numeric: Variability notifcation reactibility",
+  "reactibility_social_notification_avg": "numeric: Average social media notification reactibility",
+  "reactibility_social_notification_sd": "numeric: Variability social media notification reactibility",
+  "concentrated_activity_alone": "filler question to keep the question count constant (codebook)",
+  "stressed": "single item; the codebook says it was 'aimed at different RQ'",
+  "vigilance_salience_mediated": "state online vigilance, one item per dimension (Reinecke et al., 2018); analysed separately in the paper and with different anchors on salience; left out, question raised for Ben",
+  "vigilance_reactibility": "state online vigilance, one item per dimension; see vigilance_salience_mediated",
+  "vigilance_monitoring": "state online vigilance, one item per dimension; see vigilance_salience_mediated",
+  "salience_ft_f": "exploratory single item (thoughts about face-to-face interactions; paper, Measures)",
+  "valence_mediated": "single item on the pleasantness of thoughts about mediated interactions; not a measure",
+  "valence_ft_f": "single item on the pleasantness of thoughts about face-to-face interactions; not a measure",
+  "valence_activity": "single item on the pleasantness of the current activity; not a measure",
+  "social_pressure_phone": "single item on a different construct (pressure to be available)",
+  "concentration_extent": "single item, asked only when concentrated_activity_binary is Yes (579 answers)",
+  "prompt_duration": "time to complete the whole survey, not a per-item response time",
+  "reactibility_survey": "logged delay between receiving and opening the survey (a behavioural measure in the paper), not a response; 17 values are negative",
+  "concentrated_activity_binary": "filter question for concentration_extent"
+ },
+ "itemtext": {
+  "ship": false,
+  "language": "TODO",
+  "translation_source": "TODO",
+  "why": "No item text for this PR, per #3421."
+ },
+ "notes": [
+  "date is when the prompt was sent (scheduled_time), not when it was answered: the data hold no answer time stamp. time_prompt equals scheduled_time, and time_survey is only the date (local midnight). Prompt time plus reactibility_survey would give an opening time, but 17 of those delays are negative, so it is not used.",
+  "Person 66 is dropped (EXCLUDE_IDS); person 51 is kept. The paper recruited 111 and kept the 77 with complete logging and survey data, which are openESM's 77; it then analysed 75. Person 66 received 69 surveys (11 to 16 a day) because of technical problems, and the authors excluded the data as untrustworthy; all 27 prompts in the data that come less than 45 minutes after the previous one (the study's minimum spacing) are person 66's. That is a broken protocol, not an analysis choice, so IRW drops them too (ruled on #3674). Person 51 answered 6 surveys, under the preregistered minimum of 8 (20% of 40); that is an analysis choice, and IRW ships the deposited data, so person 51 stays.",
+  "Responses are as given: discontent, without_energy and tense run towards the negative pole and are not reversed. The paper averages all seven into one affective well-being index.",
+  "Item text: none for this PR (#3421). For whoever does item text later: the study ran in English (participants had to be proficient in English), so openESM's wording is the original, matching the paper and the deposit's codebook.",
+  "For the openESM report (#1698): 0051_johannes's counter (and beep within a day) count backwards in time, exactly reversing the scheduled_time order, and its day column is the weekday (1 = Monday), not the study day."
+ ],
+ "flags": [
+  {
+   "what": "`wave` = each person's prompts numbered in scheduled_time order (openESM time columns, best first: ['scheduled_time', 'time_prompt', 'time_survey']). `date` = scheduled_time as Unix seconds. Data run 2018-02-26 08:15 .. 2018-05-24 18:05 as written. Set date.window from the paper's collection period.",
+   "resolution": "wave = each person's prompts numbered in time order of scheduled_time; date = scheduled_time in Unix seconds, the time the prompt was sent (no answer time stamp exists; see coding notes). date.window is the paper's recruitment period, 'between February and September 2018', ending at the preregistered stop date of 1 September 2018; the data run 2018-02-26 to 2018-05-24."
+  },
+  {
+   "what": "Time zone of scheduled_time. Written with a `Z`, but in 0072_neubauer and 0056/0057_ryvkina the `Z` stamps are local time. Hour-of-day counts as written: 7h:156, 8h:216, 9h:234, 10h:220, 11h:203, 12h:269, 13h:227, 14h:238, 15h:257, 16h:238, 17h:208, 18h:259, 19h:103. No Unix time column to check against: compare with the paper. Set date.tz to 'UTC' if the stamps are true UTC, or to the study's IANA zone (e.g. 'Europe/Berlin') if they are local time, and say how you know in date.tz_evidence.",
+   "resolution": "UTC: see date.tz_evidence (one-hour shift at the DST change, matching a 09:00-21:00 local window)."
+  },
+  {
+   "what": "time order and ['counter'] order disagree for 2798 prompts. Usually the time stamp is right (in 0018_bailon the file listed App rows before Web rows); confirm.",
+   "resolution": "Time order is right; counter is exactly reversed (each person's last prompt is 1). Noted for #1698."
+  },
+  {
+   "what": "1 proposed table(s) hold a single item (johannes_2021_cognitive_load). Decide for each whether it belongs with a neighbouring table of the same questionnaire, stands alone, or is not shipped.",
+   "resolution": "concentration_extent is not shipped: a single item asked only after the concentration filter."
+  },
+  {
+   "what": "Tables are a first guess from file order, response scale, source, prompts asked at, and column-name prefixes. Read the codebook and split or merge so each table is one instrument or subscale (datastandard.md, 'One file per scale'); rename each `<author>_<year>_<construct>`, and set `script` to the record's name.",
+   "resolution": "One table, johannes_2021_mood: the seven items of the codebook's WellBeing_ block, all after 'At this moment, I feel:', which the paper (Measures, State affective well-being) describes as six Wilhelm & Schoebi (2007) mood dichotomies plus an added depressed-happy item, averaged into one index. The plan's split of happy into a separate table did not match the block. The three state online vigilance items are left out (one item per dimension, analysed separately, different anchors on salience), as are stressed, the salience/valence single items and social_pressure_phone; reasons in not_shipped."
+  },
+  {
+   "what": "`candidates` holds columns that may or may not be items (binary checkboxes, counts, rating scales whose coding gives no anchors -- prompt_duration, reactibility_survey). Move any that are responses into a table; the rest go to `not_shipped` with a reason. prompt_duration, reactibility_survey, concentrated_activity_binary",
+   "resolution": "prompt_duration, reactibility_survey and concentrated_activity_binary go to not_shipped: a survey duration, a logged delay, and a filter question."
+  },
+  {
+   "what": "openESM says cross-sectional (baseline) data exist. Covariates such as age and gender are not handled by this tool: add them by hand to the generated script if wanted (neubauer_2023_stecco does), or note why not.",
+   "resolution": "No covariates. Age and gender are in the deposit's intake file (raw_data_intake.csv) if wanted later."
+  },
+  {
+   "what": "Read openESM's additional_comments: 'some participants pre-excluded due to compliance by authors'",
+   "resolution": "openESM's 77 are the paper's 77 with complete logging and survey data (of 111 recruited, the rest lost to technical problems). The paper's two further exclusions (persons 51 and 66) are kept and described in the coding notes."
+  },
+  {
+   "what": "Licence: openESM 'CC-BY 4.0'; original deposit 'CC BY 4.0' (OSF API, node ps3rk). IRW carries openESM's label when it is stricter (ruled 2026-10-04); if the two differ, the difference goes in the notes and in the report to openESM.",
+   "resolution": "CC BY 4.0 at the source (OSF ps3rk) and on openESM; nothing differs. (The article's CC BY-NC-ND covers the paper, not the data.)"
+  },
+  {
+   "what": "`reference` is drafted from openESM's BibTeX. Check it against the paper's DOI: the year (online vs print), page range and author list are where it goes wrong.",
+   "resolution": "Title added from Crossref (10.1080/15213269.2020.1768122): Media Psychology 24(5), 581-605, 2021 issue (online 2020), nine authors."
+  }
+ ],
+ "exclude_ids": [
+  "66"
+ ]
+}

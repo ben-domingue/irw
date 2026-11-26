@@ -8,9 +8,12 @@
 ##Usage: Rscript munzert_2022.R <dir holding conjoint_df.rds> <output dir>
 ##
 ##Respondi online panels, 8 Sep - 9 Dec 2020 (article n = 4,366; 4,365 respondents in the file),
-##4 forced-choice tasks (time 1-4) of two persons (cand a/b = Person A/B), 7 attributes. One table
-##with cov_country: the authors pool the five samples (sample-size weighted) and the attribute set is
-##shared. Respondents saw the survey in their language (Q_Language: DE, EN, IT, PL, PT-BR); the
+##4 forced-choice tasks (time 1-4) of two persons (cand a/b = Person A/B), 7 attributes.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, munzert_2022_vaccine_priority_<iso2> (de, it,
+##pl, br, us), replacing the pooled munzert_2022_vaccine_priority (the authors pool the five samples,
+##sample-size weighted), because the design and level text differ by country: attr_job has a sixth level,
+##Teacher, only in the German survey, and attr_citizenship "Country" stands for the respondent's own country.
+##Respondents: de 1,578, it 952, pl 743, br 645, us 436. Respondents saw the survey in their language (Q_Language: DE, EN, IT, PL, PT-BR); the
 ##deposit stores the levels in English and the outcome wording is the English instrument (Supp. Fig 5):
 ##"Please look at the profiles of the two persons thoroughly and then make your decision. Note: Please
 ##assume that the vaccine is both safe and effective [...] Which person would you prioritize for access
@@ -71,4 +74,8 @@ d[, personid := NULL]
 setcolorder(d, c("id", "task", "profile", "choice"))
 stopifnot(uniqueN(d$id) == 4354, d[attr_job == "Teacher", all(cov_country == "Germany")])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "munzert_2022_vaccine_priority.csv"))
+iso <- c(Germany = "de", Italy = "it", Poland = "pl", Brazil = "br", USA = "us")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("munzert_2022_vaccine_priority_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

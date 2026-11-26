@@ -12,8 +12,12 @@
 ##
 ##6,617 respondents (Kantar opt-in online panel, quota sample on age, education, gender, region;
 ##Oct 2020-Jan 2021): Germany 3,250, France 3,367. The authors analyse the two countries pooled
-##(main AMCEs) and compare them, with the same design and English master labels, so this is ONE
-##table with cov_country. Each respondent saw 6 pairs (task 1-6) of hypothetical arms deliveries
+##(main AMCEs) and compare them, with the same design and English master labels.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, rudolph_2024_arms_exports_<iso2> (fr, de),
+##replacing the pooled rudolph_2024_arms_exports, because the level text differs by country:
+##attr_other_suppliers names France for German respondents and Germany for French respondents ("<other
+##country>" and "NATO partners (USA, UK, <other country>)"), and the security_partner, trade, economic_value
+##and jobs attributes refer to the respondent's own country. Respondents: fr 3,367, de 3,250. Each respondent saw 6 pairs (task 1-6) of hypothetical arms deliveries
 ##("Waffenlieferung 1/2" = profile 1/2), 9 attributes, levels drawn uniformly, no restrictions.
 ##Outcomes, both on the same screen as each pair:
 ##  choice: "If you had to decide between the two arms deliveries, which one would you personally
@@ -119,4 +123,8 @@ cv <- s[, .(id = rid, cov_country = ctry, cov_gender = tolower(fc(Gender)), cov_
 d <- merge(d, cv, by = "id")
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], nrow(d) == 6617 * 12, d[cov_country == "Germany", uniqueN(id)] == 3250)
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "rudolph_2024_arms_exports.csv"))
+iso <- c(France = "fr", Germany = "de")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("rudolph_2024_arms_exports_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

@@ -18,6 +18,10 @@
 ##  wording:   which of six German or six Polish adjectives ("important", "significant", "necessary", ...) the quoted
 ##             spokesperson used about the policy (the authors' robustness factor rt; language-specific codes).
 ##Level text is the authors' English codes (the displayed text is German/Polish HTML, not stored as levels).
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, levis_2026_carbon_messenger_<iso2> (de, pl),
+##replacing the pooled levis_2026_carbon_messenger, because the level text differs by country: attr_wording draws
+##from six German adjectives in Germany and six Polish ones in Poland (language-specific codes), and every
+##vignette was shown in the country's own language. Respondents: de 1,597, pl 1,595.
 ##Task order: rounds 1-5, then Qualtrics "round 0" (the authors rename it round 6), then a 7th vignette which in the Rmd
 ##reuses the attributes of round 1 (rp1, rc1, rs1, rt1 with sup7): it is a REPEAT of task 1 (same text, not swapped), so
 ##trial_repeat_of = 1 on task 7. Task and profile are recorded as column names; profile = 1 (single vignette).
@@ -77,4 +81,8 @@ ac <- grep("^attr_", names(t), value = TRUE)
 stopifnot(!anyNA(t[, ..ac]), !anyNA(t$rating))
 setcolorder(t, c("id", "task", "profile", "rating"))
 setorder(t, id, task, profile)
-fwrite(t, file.path(out, "levis_2026_carbon_messenger.csv"))
+iso <- c(DE = "de", PL = "pl")
+stopifnot(all(t$cov_country %in% names(iso)), all(names(iso) %in% t$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- t[cov_country == cn]
+  fwrite(x, file.path(out, paste0("levis_2026_carbon_messenger_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(t))

@@ -17,8 +17,11 @@
 ##"before innovation" (fixed) and "after innovation" (randomized). Task t = the source fields
 ##with suffix "" / 1 / 2 / 3 (product, product1, ...) and scen<t>_agree_*, as in the authors'
 ##reshape; task and profile are recorded.
-##ONE TABLE pooling the four countries (cov_country, cov_language): the authors estimate all
-##models pooled (article p.790) and the attributes are the same except for currency.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, magistro_2024_automation_fairness_<iso2>
+##(gb, us, au, ca), replacing the pooled magistro_2024_automation_fairness (the authors estimate all models
+##pooled, article p.790), because the level text differs by country: attr_high_skilled_wage_after and
+##attr_low_skilled_wage_after are country-specific amounts and currencies, and attr_product is in French
+##for French-Canadian respondents. Respondents: gb 1,327, us 1,285, au 1,265, ca 1,249.
 ##Outcomes (each table, 5-point agreement + "don't know"; don't know is missing in the deposit):
 ##  rating: "The company's decision to introduce the new technology is fair" (1 = strongly
 ##    disagree .. 5 = strongly agree).
@@ -95,4 +98,9 @@ for (p in c("socialspend", "basicincome", "jobguarantee", "unskilled", "skilled"
   cv[, paste0("cov_policy_", p) := as.integer(s[[paste0("policy_", p)]])]
 d <- merge(d, cv, by = "id")
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "magistro_2024_automation_fairness.csv"), scipen = 50)   # cov_income as 100000, not 1e+05
+# scipen = 50: cov_income as 100000, not 1e+05
+iso <- c(UK = "gb", US = "us", Australia = "au", Canada = "ca")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("magistro_2024_automation_fairness_", iso[[cn]], ".csv")), scipen = 50); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

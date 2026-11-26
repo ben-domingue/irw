@@ -8,8 +8,8 @@
 ##Usage: Rscript mader_2024.R <dir with the RData; optional 3rd arg = file name, default EUP_Costs_ReplicationData.RData> <output dir>
 ##
 ##Design: online survey in 25 EU member states (1,500-2,000 respondents each, 40,500 in total; quota samples; the deposit's QCOUNTRY / iso).
-##EVERY respondent answered BOTH experiments (question order randomized: Q31_32_order 1/2, kept as trial_question_order; which code
-##means which experiment came first is not documented). Each experiment is a 2 x 3 factorial vignette about an EU policy to which
+##EVERY respondent answered BOTH experiments (question order randomized: Q31_32_order 1/2, kept as trial_question_order; the
+##authors' 08_appendix.R labels 1 = "Military Intervention First", 2 = "Defence Procurement First"). Each experiment is a 2 x 3 factorial vignette about an EU policy to which
 ##cost information was added; the authors' levels (the displayed sentence is not in the deposit; same convention as
 ##levis_2026_carbon_messenger):
 ##  Experiment 1 (EU military intervention in a crisis): factor 1 = soldiers at risk (SoldiersRisk, "Casualties" in the figures) or

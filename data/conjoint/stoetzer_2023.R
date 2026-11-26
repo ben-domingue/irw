@@ -10,10 +10,12 @@
 ##Usage: Rscript stoetzer_2023.R <raw dir> <output dir>
 ##
 ##6,415 respondents from a commercial access panel (Respondi) with age/gender/education quotas,
-##August 2020: USA 1,078, Germany 2,044, Italy 1,103, Poland 1,097, Brazil 1,093. One table with
-##cov_country: the authors pool the five countries ("Countries combined") and the attribute set is
-##shared; only the party named in the partisanship attribute differs by country (US Republican/
-##Democrat, Germany AfD/Greens, Italy Lega/Italia Viva, Poland PiS/PO, Brazil PSL/PT). dat_cnj.RDS
+##August 2020: USA 1,078, Germany 2,044, Italy 1,103, Poland 1,097, Brazil 1,093.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, stoetzer_2023_covid_triage_<iso2> (de, us, pl,
+##it, br), replacing the pooled stoetzer_2023_covid_triage (the authors pool the five countries, "Countries
+##combined"), because the level text differs by country: attr_partisanship names each country's own two
+##parties (US Republican/Democrat, Germany AfD/Greens, Italy Lega/Italia Viva, Poland PiS/PO, Brazil PSL/PT).
+##Respondents: de 1,936, us 1,042, pl 1,034, it 1,020, br 1,015. dat_cnj.RDS
 ##stacks every row twice (once under its country, once under "Countries combined"); only the
 ##country rows are kept. Interview language (dat_wide Q_Language): EN, DE, IT, PL, PT-BR.
 ##Task: respondents imagine COVID-19 overwhelms intensive care and choose which of two patients to
@@ -56,4 +58,8 @@ d[, k1 := ctry[cov_country]][, k2 := as.integer(sub(".*_", "", rid))]
 setorder(d, k1, k2, task, profile)
 d[, id := rleid(rid)][, c("rid", "k1", "k2") := NULL]
 setcolorder(d, c("id", "task", "profile"))
-fwrite(d, file.path(out, "stoetzer_2023_covid_triage.csv"))
+iso <- c(Germany = "de", USA = "us", Poland = "pl", Italy = "it", Brazil = "br")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("stoetzer_2023_covid_triage_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

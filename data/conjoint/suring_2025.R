@@ -17,9 +17,11 @@
 ##Choice question (Danish questionnaire): "Vi vil nu bede dig om at træffe 9 valg mellem to
 ##forskellige kontraktversioner A og B ... Hvis ingen af de to præsenterede kontraktversioner er
 ##attraktive for dig, kan du vælge 'Ingen af dem'", row "Dit valg".
-##ONE TABLE with cov_country: the depositors pool both countries in one file with one codebook,
-##the design is identical, and the level text is shared (English codebook labels); only the
-##compensation currency differs (see below). Display languages Danish and Finnish.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, suring_2025_forest_contracts_<iso2> (dk, fi),
+##replacing the pooled suring_2025_forest_contracts (the depositors pool both countries in one file with one
+##codebook), because the level text differs by country: attr_compensation is in DKK in Denmark and EUR in
+##Finland, with each country's own amounts (see below). Display languages Danish and Finnish.
+##Respondents: dk 1,716, fi 1,631.
 ##Kept: main surveys only (data_collec "Main survey (Danish)" / "(Finnish)"); the two Danish
 ##pilots (107 respondents, ids 1P*/2P*) are dropped as separate fieldings. Tasks with
 ##avail = 0 ("choice not available": no answer or more than one option ticked, codebook var96)
@@ -110,4 +112,10 @@ stopifnot(uniqueN(d[cov_country == "Denmark", id]) == 1716, uniqueN(d[cov_countr
           !anyDuplicated(d[, .(id, task, profile)]), d[, sum(choice), .(id, task)][, all(V1 <= 1)],
           !anyNA(d[, .SD, .SDcols = patterns("^attr_")]))
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "suring_2025_forest_contracts.csv"))
+iso <- c(Denmark = "dk", Finland = "fi")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+# A column that is NA for every respondent of a country was not asked there; the country table leaves it out (#3536).
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  x <- x[, names(x)[!vapply(x, function(v) all(is.na(v)), NA)], with = FALSE]
+  fwrite(x, file.path(out, paste0("suring_2025_forest_contracts_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

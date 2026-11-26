@@ -22,7 +22,9 @@
 ##Restrictions (observed in the data, not documented): other language is tied to cultural
 ##background (Chinese -> Mandarin, Indian -> Hindi, Middle Eastern -> Arabic; Anglo-Caucasian
 ##-> any of None/Mandarin/Hindi/Arabic), and left_right to party. Level weights look
-##unequal for other language as a result (None appears only with Anglo-Caucasian).
+##unequal for other language as a result (None appears only with Anglo-Caucasian). Two more
+##dependencies (observed): marital status Single occurs only with No children, and previous
+##occupation Lawyer never with High school certificate.
 ##Outcome: choice = Q2 (Candidate 1 / Candidate 2; the do file's `chosen`). Question wording
 ##is not deposited. Q2 also has "Don't know" (2,154 rows = 1,077 tasks): kept, choice = 0 on
 ##both profiles (opt-out). "Refused" (176 tasks) is no answer: those tasks are dropped, which

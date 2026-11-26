@@ -48,7 +48,9 @@
 ##  No choice between the two scenarios was asked; there is no choice column.
 ##Restrictions: none is documented, but some type x origin pairs never occur (observed): "A group
 ##of terrorists" only from Iran, Russia or the United States; "A government agency" never from
-##the United States. Other attributes look independent and roughly uniform (target, damages,
+##the United States. Economic damage x deaths is dependent too: "Minimal" damage never occurs
+##with "Hundreds of people" and is about half the expected count with "Dozens of people", as is
+##"A few million dollars" with "Hundreds of people". Others look independent and roughly uniform (target, damages,
 ##deaths shares are visibly unequal, e.g. economic "Minimal" 1,795 vs "Billions" 4,057 raw
 ##profiles; level_weights observed).
 ##Sample: the authors' cleaning is reproduced to recover their caseid: drop respondents whose

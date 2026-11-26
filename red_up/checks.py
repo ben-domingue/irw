@@ -256,6 +256,89 @@ def run_rankings_validator(path: Path, design: dict | None = None) -> tuple[list
             [f"{f.check}: {f.message}" for f in report.warnings])
 
 
+def run_cov_validator(path: Path) -> tuple[list[str], list[str]]:
+    """The covariance-table checks (irw_validate.cov, V1-V8). -> (errors, warnings)
+
+    A cov table has no id/item/resp, so the core validator would fail it at C1.
+    Same failure rules as run_validator. A matrix that is not positive definite
+    comes back as a warning (V8): it is kept as published.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    try:
+        from irw_validate.cov import validate_cov_file
+    except ImportError as exc:
+        return ([f"cov validator unavailable ({exc}) -- install pandas, or pass "
+                 f"--no-validate to upload without a format check"], [])
+    try:
+        report = validate_cov_file(path)
+    except Exception as exc:
+        return ([f"cov validator could not read this file: {exc}"], [])
+    return ([f"{f.check}: {f.message}" for f in report.errors],
+            [f"{f.check}: {f.message}" for f in report.warnings])
+
+
+#: The per-matrix record (data/covariance/README.md, "Records kept for every
+#: table"). IRW_COV_RECORD_DIR points the check at another directory, for
+#: tests; production never sets it.
+def _cov_record_dir() -> Path:
+    env = os.environ.get("IRW_COV_RECORD_DIR")
+    return Path(env) if env else Path(__file__).resolve().parent.parent / "data" / "covariance"
+
+
+def check_cov_record(report: FileReport) -> tuple[list[str], list[str]]:
+    """A cov table needs its rows in matrices.csv before it goes up. -> (errors, warnings)
+
+    The record is where a matrix's N, type, missing-data handling, source
+    location and licence live; without it cov_metadata and cov_biblio would
+    carry NA for exactly what a user needs to judge the matrix. One row per
+    group: the groups in the record must be the groups in the table (a table
+    with no `group` column has one record row with group blank). Unreadable
+    records are an error, never a pass.
+    """
+    d = _cov_record_dir()
+    try:
+        with open(d / "matrices.csv", newline="", encoding="utf-8") as f:
+            rows = [r for r in csv.DictReader(f) if r["table"] == report.table]
+    except (OSError, KeyError) as exc:
+        return ([f"cov records unreadable in {d} ({exc})"], [])
+    if not rows:
+        return ([f"cov_record: {report.table} has no row in matrices.csv "
+                 f"(data/covariance/README.md, \"Records kept for every table\")"], [])
+    want = {(r.get("group") or "").strip() for r in rows}
+    try:
+        with open(report.path, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            have = {(r.get("group") or "").strip() for r in reader} if "group" in (reader.fieldnames or []) else {""}
+    except OSError as exc:
+        return ([f"cov_record: cannot read {report.path} ({exc})"], [])
+    if want != have:
+        return ([f"cov_record: groups in matrices.csv {sorted(want)} do not match the table's "
+                 f"groups {sorted(have)}"], [])
+    # `variables` (published order and labels): when given, it names exactly the
+    # variables of that group's matrix, once each. Blank is allowed (order unknown).
+    from irw_validate.cov import MATRIX_STATS, parse_variables
+    try:
+        with open(report.path, newline="", encoding="utf-8") as f:
+            cells = [r for r in csv.DictReader(f) if (r.get("stat") or "").strip() in MATRIX_STATS]
+    except OSError as exc:
+        return ([f"cov_record: cannot read {report.path} ({exc})"], [])
+    errors = []
+    for r in rows:
+        listed = [n for n, _ in parse_variables(r.get("variables"))]
+        if not listed:
+            continue
+        g = (r.get("group") or "").strip()
+        actual = {v.strip() for c in cells if (c.get("group") or "").strip() == g
+                  for v in (c.get("var1") or "", c.get("var2") or "") if v.strip()}
+        where = f" (group {g})" if g else ""
+        dup = sorted({n for n in listed if listed.count(n) > 1})
+        if dup or set(listed) != actual:
+            errors.append(f"cov_record: `variables`{where} does not list the matrix's variables once each"
+                          f" (missing {sorted(actual - set(listed))[:4]}, unknown {sorted(set(listed) - actual)[:4]},"
+                          f" repeated {dup[:4]})")
+    return (errors, [])
+
+
 #: The rankings design records (data/rankings/README.md, "Design record").
 #: IRW_RANK_DESIGN_DIR points the check at another directory, for tests;
 #: production never sets it.
@@ -336,6 +419,14 @@ def validate_for_target(report: FileReport, target: Target,
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         errors, warnings = check_rank_design(report)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        return
+    if target.source == "cov":
+        errors, warnings = run_cov_validator(report.path)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        errors, warnings = check_cov_record(report)
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         return

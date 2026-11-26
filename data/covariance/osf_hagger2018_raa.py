@@ -1,0 +1,199 @@
+"""Covariance family (irw_cov, source = "cov"): Hagger, Polet & Lintunen (2018) RAA MASEM.
+
+Source: OSF project w4hfr, "The reasoned action approach applied to health
+behavior: Role of past behavior and test of some key moderators using
+meta-analytic structural equation modeling" (Hagger, Polet & Lintunen, Social
+Science & Medicine, 213, 85-94, https://doi.org/10.1016/j.socscimed.2018.07.038),
+a reanalysis of the studies in McEachan et al. (2016, Annals of Behavioral
+Medicine, 50, 592-612, https://doi.org/10.1007/s12160-016-9798-4).
+Licence: CC BY 4.0 (stated on the node).
+
+Three deposit files are read:
+- "Raw data and moderator coding/mceachan.txt": the 81 study correlation
+  matrices the MASEM analysed, one per line, as metaSEM stacked vectors (the
+  lower triangle with diagonal, column by column) over Int, AA, IA, SN, DN, Aut,
+  Cap, Beh, PB.
+- "MASEM R code and output/R code McEachan RAA.txt": the sample size vector `n`,
+  in the same order. The file is R code; it is parsed as TEXT and never run.
+- "Main data file/RAA_reanalysis_data_file_FINAL.xlsx": the extraction sheet,
+  used for each study's label and behaviour, and for the reliabilities in its
+  "Alpha - <variable>" columns (Cronbach's alpha), written as `rel` rows for
+  the variables in that study's matrix (a cell that is not a number, such as
+  "Not measured", is skipped). It lists 89 studies; the 8
+  without a matrix (no data obtained, as the sheet says) are not in the
+  analysis file. Each matrix is matched to its row by n and by all 36
+  correlations; the only differences are that the analysis file rounds 16
+  intention-affective attitude correlations to two decimals (the sheet has
+  three or four). The analysis file's values are used.
+
+In the stacked vectors every diagonal is 1, measured or not. A variable with no
+correlation in a study was not measured there and is dropped (Ben, 2026-11-17),
+repeating until every remaining variable has a reported cell with another one.
+A pair between two variables the study did measure but did not report ("NA")
+is written as a row with an empty value (Ben, 2026-11-18). A study with fewer
+than two measured variables, or an off-diagonal |r| >= 1, is not built and is
+printed.
+
+Modification (2026-11-17): reshaped to the long lower-triangle layout in
+data/covariance/README.md, one group per study (the sheet's label).
+Modification (2026-11-18): unreported pairs among measured variables are empty
+values instead of holding the study (blank cells allowed, #3582).
+Modification (2026-11-18): per-variable Cronbach's alpha from the extraction
+sheet added as `rel` rows (value as stored), after each study's matrix rows.
+
+Usage: python3 data/covariance/osf_hagger2018_raa.py <out dir>
+"""
+import csv
+import io
+import json
+import re
+import sys
+import urllib.request
+from pathlib import Path
+
+import openpyxl
+
+NODE = "w4hfr"
+FILES = {"mat": "mceachan.txt", "code": "R code McEachan RAA.txt",
+         "sheet": "RAA_reanalysis_data_file_FINAL.xlsx"}
+TABLE = "hagger_2018_raa9"
+V = ["Int", "AA", "IA", "SN", "DN", "Aut", "Cap", "Beh", "PB"]
+K = len(V)
+ALPHA = ["Alpha - intention", "Alpha - affective attitude", "Alpha - instrumental attitudes",
+         "Alpha - injunctive (subjective) norm", "Alpha - descriptive norm",
+         "Alpha - Autonomy (up to me)", "Alpha - Capacity (Self-efficacy)", "Alpha - behavior",
+         "Alpha - past behavior"]
+
+
+def get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "irw-cov-build"})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return r.read()
+
+
+def listing(url):
+    out = []
+    while url:
+        d = json.loads(get(url))
+        out += d["data"]
+        url = d["links"].get("next")
+    return out
+
+
+def fetch():
+    """Walk the node's folders and download the three files by name."""
+    found, todo = {}, [f"https://api.osf.io/v2/nodes/{NODE}/files/osfstorage/"]
+    while todo and len(found) < len(FILES):
+        for f in listing(todo.pop()):
+            a = f["attributes"]
+            if a["kind"] == "folder":
+                todo.append(f["relationships"]["files"]["links"]["related"]["href"])
+            elif a["name"] in FILES.values():
+                found[a["name"]] = get(f["links"]["download"])
+    return {k: found[v] for k, v in FILES.items()}
+
+
+def unstack(vals):
+    M = [[None] * K for _ in range(K)]
+    it = iter(vals)
+    for c in range(K):
+        for r in range(c, K):
+            M[r][c] = M[c][r] = next(it)
+    return M
+
+
+def num(x):
+    """A sheet cell as a number, or None ("Not measured", blank). Some cells hold text like '0.42'."""
+    if isinstance(x, (int, float)) and not isinstance(x, bool):
+        return float(x)
+    try:
+        return float(str(x).strip())
+    except ValueError:
+        return None
+
+
+def main(out):
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    raw = fetch()
+    lines = [l.split() for l in raw["mat"].decode("utf-8").splitlines() if l.strip()]
+    if any(len(l) != K * (K + 1) // 2 for l in lines):
+        raise SystemExit("a line is not a 9-variable stacked vector")
+    code = raw["code"].decode("utf-8")
+    n = [int(x) for x in re.search(r"^n <-\s*c\(([^)]*)\)", code, re.M).group(1).split(",")]
+    if len(n) != len(lines):
+        raise SystemExit(f"{len(lines)} matrices but {len(n)} sample sizes")
+
+    ws = openpyxl.load_workbook(io.BytesIO(raw["sheet"]), read_only=True, data_only=True).worksheets[0]
+    rows = list(ws.iter_rows(values_only=True))
+    hdr = list(rows[1])
+    pair = hdr.index("Intention-Affective attitude")
+    beh = hdr.index("Behavior")
+    alpha = [hdr.index(a) for a in ALPHA]
+    studies = [r for r in rows[2:] if isinstance(r[0], int)]
+
+    long, records, held, j = [], [], [], 0
+    for s, (vals, ni) in enumerate(zip(lines, n)):
+        M = unstack(vals)
+        upper = [M[a][b] for a in range(K) for b in range(a + 1, K)]
+        while True:                       # the next sheet row with this n and these values
+            if j >= len(studies):
+                raise SystemExit(f"matrix {s + 1}: no matching row in the sheet")
+            r = studies[j]
+            j += 1
+            cells = r[pair:pair + len(upper)]
+            if r[4] == ni and all(
+                    (t == "NA") == (num(v) is None) and (t == "NA" or abs(float(t) - num(v)) < 0.0051)
+                    for t, v in zip(upper, cells)):
+                break
+        label = re.sub(r"\s+", " ", str(r[1])).strip()
+        if any(rec["group"] == label for rec in records) or label in held:
+            raise SystemExit(f"duplicate label {label}")
+        if any(M[i][i] != "1.000" for i in range(K)):
+            raise SystemExit(f"{label}: diagonal is not 1")
+        keep = list(range(K))
+        while True:                       # drop variables with no reported cell among the rest
+            k2 = [i for i in keep if any(M[i][x] != "NA" for x in keep if x != i)]
+            if k2 == keep:
+                break
+            keep = k2
+        dropped = [V[i] for i in range(K) if i not in keep]
+        lower = [M[i][x] for a, i in enumerate(keep) for x in keep[:a]]
+        if len(keep) < 2 or any(t != "NA" and abs(float(t)) >= 1 for t in lower):
+            held.append(label)
+            continue
+        for a, i in enumerate(keep):
+            for x in keep[:a + 1]:
+                value = "1" if i == x else ("" if M[i][x] == "NA" else M[i][x])
+                long.append({"stat": "cor", "var1": V[i], "var2": V[x],
+                             "value": value, "n": ni, "group": label})
+        for i in keep:                    # Cronbach's alpha as stored; non-numbers skipped
+            a = r[alpha[i]]
+            if isinstance(a, bool) or a is None:
+                continue
+            if isinstance(a, (int, float)):
+                txt = str(a) if isinstance(a, int) else repr(float(a))
+            elif re.fullmatch(r"\s*\d*\.?\d+\s*", str(a)):
+                txt = str(a).strip()
+            else:
+                continue
+            if not 0 < float(txt) <= 1:
+                raise SystemExit(f"{label}: alpha {txt} for {V[i]} out of range")
+            long.append({"stat": "rel", "var1": V[i], "var2": "", "value": txt, "n": ni, "group": label})
+        records.append({"group": label, "n_obs": ni, "dropped": dropped,
+                        "blank": [f"{V[i]}-{V[x]}" for a, i in enumerate(keep) for x in keep[:a]
+                                  if M[i][x] == "NA"],
+                        "behaviour": re.sub(r"\s+", " ", str(r[beh] or "")).strip()})
+    with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
+        w.writeheader()
+        w.writerows(long)
+    with open(out / "records.json", "w") as f:
+        json.dump({"table": TABLE, "records": records, "held": held}, f, indent=1)
+    print(f"wrote {TABLE}.csv: {len(records)} studies built, {len(held)} held {held}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: python3 osf_hagger2018_raa.py <out dir>")
+    main(sys.argv[1])

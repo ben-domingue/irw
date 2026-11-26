@@ -21,7 +21,9 @@
 ##  table, n_respondents (distinct id), n_rows, n_tasks (largest task index),
 ##  n_items (distinct item, reserved values included), max_resp (highest
 ##  position marked), n_duplicate_marks (rows beyond the first per
-##  id x task x item: a candidate marked at two positions).
+##  id x task x item: a candidate marked at two positions), n_tied_ballots
+##  (id x task with two or more rows at one resp: a tie, as the validator's R3
+##  counts it).
 ##Design columns, joined from the hand-kept data/rankings/design_tables.csv
 ##(everything but `evidence` and `rules_jurisdiction`, which is the key a
 ##table's counting rules are under in counting_rules.csv -- bookkeeping for
@@ -79,15 +81,18 @@ counts_sql <- function(name, ref)
   sprintf(paste("SELECT %s AS tbl, COUNT(*) AS n_rows, COUNT(DISTINCT id) AS n_respondents,",
                 "CAST(MAX(task) AS FLOAT64) AS n_tasks, COUNT(DISTINCT item) AS n_items,",
                 "CAST(MAX(resp) AS FLOAT64) AS max_resp,",
-                "COUNT(*) - (SELECT COUNT(*) FROM (SELECT DISTINCT id, task, item FROM `%s`)) AS n_duplicate_marks",
-                "FROM `%s`"), lit(name), ref, ref)
+                "COUNT(*) - (SELECT COUNT(*) FROM (SELECT DISTINCT id, task, item FROM `%s`)) AS n_duplicate_marks,",
+                "(SELECT COUNT(*) FROM (SELECT DISTINCT id, task FROM (SELECT id, task FROM `%s`",
+                "GROUP BY id, task, resp HAVING COUNT(*) > 1))) AS n_tied_ballots",
+                "FROM `%s`"), lit(name), ref, ref, ref)
 
 ##---------------------------------------------------------------------------
 ##What to recompute (header, "Carry-forward").
 ##---------------------------------------------------------------------------
 base_file <- "rank_metadata.csv"
 stamps_file <- "rank_refresh_stamps.csv"
-computed_cols <- c("table", "n_respondents", "n_rows", "n_tasks", "n_items", "max_resp", "n_duplicate_marks")
+computed_cols <- c("table", "n_respondents", "n_rows", "n_tasks", "n_items", "max_resp", "n_duplicate_marks",
+                   "n_tied_ballots")
 stamp_cols <- c("table", "updated_at", "num_rows", "hash", "refreshed_at")
 read_tracked <- function(f) {
   if (!file.exists(f)) return(NULL)
@@ -145,6 +150,7 @@ for (b in batches) {
                                 n_tasks = as.numeric(r$n_tasks), n_items = as.numeric(r$n_items),
                                 max_resp = as.numeric(r$max_resp),
                                 n_duplicate_marks = as.numeric(r$n_duplicate_marks),
+                                n_tied_ballots = as.numeric(r$n_tied_ballots),
                                 stringsAsFactors = FALSE)
   }
 }

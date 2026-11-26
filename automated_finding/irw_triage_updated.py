@@ -478,6 +478,73 @@ def _looks_like_id(series: pd.Series, n_rows: int) -> bool:
     return nun >= max(2, 0.5 * n_rows)
 
 
+#: A trial-index column: `trial`, `trial_number`, `Trial.order`, `TrialNum`.
+#: Not `trial_type` or `trial_condition`, which describe the probe, not the
+#: position of the row in a session.
+TRIAL_INDEX_COL = re.compile(
+    r"^trials?(?:[._ ]?(?:n|no|nr|num|number|idx|index|order|count))?$", re.I)
+#: Columns that number the sessions or blocks a trial index restarts within.
+SESSION_COL = re.compile(
+    r"^(?:date|day|session|sess|block|run|round|order)"
+    r"(?:[._ ]?(?:n|no|nr|num|number|id|index))?$", re.I)
+#: Column names that read as a person (or animal) identifier.
+ID_NAME = re.compile(
+    r"(?:^|[._ ])(?:id|subj|subject|participant|ppt|pp|sub|animal|individual)"
+    r"(?:$|[._ \d])", re.I)
+#: Prefix of the note a trial-level id leaves; irw_retriage_ha.py keys on it.
+TRIALS_MARKER = "Trial-level file:"
+
+
+def _trial_level_id(df: pd.DataFrame):
+    """(id_col, key_cols) when the file is one row per trial, else None.
+
+    `_looks_like_id` fails on trial-level data by construction: one subject
+    owns hundreds of rows, so no column is >=50% unique (irw#2607; the capuchin
+    Joint Simon file, 10 monkeys x ~280 trials, is the case that found it).
+    What does identify such a file is that a low-cardinality column plus a
+    trial index -- and, where trial numbering restarts each session, a
+    date/session/block column -- is unique row by row.
+
+    Smallest key wins; among keys of one size an id-like name wins, then the
+    column with more distinct values (the monkey, not the dyad it sat in)."""
+    n = len(df)
+    if n < 10:
+        return None
+    trials = []
+    for c in df.columns:
+        if not TRIAL_INDEX_COL.match(str(c).strip()):
+            continue
+        v = pd.to_numeric(df[c], errors="coerce")
+        if v.notna().mean() >= 0.95 and v.nunique() >= 2 and \
+                (v.dropna() % 1 == 0).all():
+            trials.append(c)
+    if not trials:
+        return None
+    sessions = [c for c in df.columns
+                if c not in trials and SESSION_COL.match(str(c).strip())]
+    ids = []
+    for c in df.columns:
+        if c in trials or c in sessions or pd.api.types.is_float_dtype(df[c]):
+            continue
+        s = df[c]
+        nun = s.nunique(dropna=True)
+        # many rows per id is what "trial-level" means; 5 is a loose floor
+        if nun >= 2 and n / nun >= 5 and s.notna().mean() >= 0.95:
+            ids.append(c)
+    for extra in [[]] + [[s] for s in sessions]:
+        hits = []
+        for t in trials:
+            for c in ids:
+                keys = [c] + extra + [t]
+                if not df.duplicated(subset=keys).any():
+                    hits.append((c, keys))
+        if hits:
+            hits.sort(key=lambda h: (not ID_NAME.search(str(h[0])),
+                                     -df[h[0]].nunique(dropna=True)))
+            return hits[0]
+    return None
+
+
 def _ordinalish(series: pd.Series) -> bool:
     """Numeric with a smallish set of distinct values, or clearly continuous."""
     s = pd.to_numeric(series, errors="coerce")
@@ -525,6 +592,25 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
             id_col = c
             break
     if id_col is None:
+        # One row per trial rather than per person: the id is there, it just
+        # repeats. Hand it off as a trials candidate rather than falling
+        # through to the row-position id below, which would invent one
+        # "respondent" per trial (irw#2607). Never melted here -- the item is
+        # usually a probe built from several columns, and a melt with ten
+        # subjects would land on below_min_n, a verdict nobody reviews.
+        trial_id = _trial_level_id(df)
+        if trial_id is not None:
+            tid, keys = trial_id
+            nun = df[tid].nunique(dropna=True)
+            notes.append(
+                f"{TRIALS_MARKER} '{tid}' is the likely person id ({nun} ids, "
+                f"~{n / nun:.0f} rows each); {keys} is unique, so one row is "
+                "one trial. Trials-based data (IRW standard, Trials): item = "
+                "the probe (C3), trial columns carry the repeats (C5). Manual "
+                "mapping required."
+            )
+            notes.append(f"Columns present: {list(df.columns)}")
+            return Coercion(None, "low", "trials_candidate", notes, orig_cols)
         # No identifier column. In a wide person x item export that is normal
         # and it does NOT mean the id is the first column -- taking column 0
         # grabs a real variable (typically the first demographic) and collapses

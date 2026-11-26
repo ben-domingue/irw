@@ -22,6 +22,11 @@
 ##fixed effects, Table 4 and appendix Tables A17-A18) and their processed files carry one shared
 ##English text for every level. Respondents saw the survey in Spanish (Chile), Chinese (China)
 ##and English (India, UK); the stored levels are the authors' English (= the UK/India display text).
+##SPLIT BY COUNTRY, duch_2022_destination_country ONLY (#3536, 2026-11-15): one table per country,
+##duch_2022_destination_country_<iso2> (cl, cn, in, gb), replacing the pooled
+##duch_2022_destination_country, because the level text differs by country: UK subjects saw Canada
+##in place of the U.K. among the attr_country labels. The muslim_ban and deportation tables stay
+##pooled (one level set in every country). Respondents: cn 303, in 229, cl 214, gb 196.
 ##Outcomes, each task:
 ##  choice = destination, "which of the employment destinations do you prefer?" (paper p. 12);
 ##           forced choice, exactly one chosen in every task.
@@ -117,5 +122,10 @@ for (j in 1:3) {
            cov_rating_canada_or_uk = as.numeric(x$can), cov_rating_us = as.numeric(x$us), cov_ret_correct = as.integer(x$dice))]
   stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), all(d$cov_gender %in% c("female", "male", "other", NA)))
   setorder(d, id, task, profile)
-  fwrite(d, file.path(out, paste0(nm[j], ".csv")))
+  if (j < 3) { fwrite(d, file.path(out, paste0(nm[j], ".csv"))); next }
+  iso <- c(CN = "cn", IN = "in", CL = "cl", GB = "gb")
+  stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+  nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+    fwrite(x, file.path(out, paste0("duch_2022_destination_country_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+  stopifnot(nw == nrow(d))
 }

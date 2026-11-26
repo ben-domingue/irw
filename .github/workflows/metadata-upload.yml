@@ -51,6 +51,8 @@ on:
       - "metadata/conj_outcomes.csv"
       - "metadata/rank_metadata.csv"
       - "metadata/rank_biblio.csv"
+      - "metadata/cov_metadata.csv"
+      - "metadata/cov_biblio.csv"
       - "metadata/itemtext_metadata.csv"
       - "metadata/collections.csv"
       - "metadata/collection_members.csv"

@@ -1,0 +1,829 @@
+{
+ "dataset_id": "0003_hawks",
+ "openesm": {
+  "first_author": "Hawks",
+  "year": 2023,
+  "licence": "CC BY-NC 4.0",
+  "zenodo_concept_doi": "10.5281/zenodo.17347389",
+  "zenodo_record": 17347390,
+  "zenodo_version_doi": "10.5281/zenodo.17347390",
+  "filename": "0003_hawks_ts.tsv",
+  "codebook_url": "https://zenodo.org/records/17347390/files/0003_hawks_codebook.pdf",
+  "link_to_data": "https://github.com/zwihawks/PredictingMomentaryCog",
+  "paper_doi": "https://doi.org/10.1016/j.bpsc.2022.12.002",
+  "sampling_scheme": "3x/day fixed time windows",
+  "participants": "adults",
+  "n_participants": 122,
+  "n_days": "10",
+  "n_beeps_per_day": "3"
+ },
+ "original_licence": {
+  "value": "MIT",
+  "how": "LICENSE in github.com/zwihawks/PredictingMomentaryCog (MIT, (c) 2022 BaCH Tech Lab, McLean Hospital)"
+ },
+ "licence": "CC BY-NC 4.0",
+ "reference": "Hawks, Z. W., Strong, R., Jung, L., Beck, E. D., Passell, E. J., Grinspoon, E., Singh, S., Frumkin, M. R., Sliwinski, M., & Germine, L. T. (2023). Accurate prediction of momentary cognition from intensive longitudinal data. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 8(8), 841-851.",
+ "script": "hawks_2023_momentary_cog_esm",
+ "input": {
+  "n_rows": 3109,
+  "n_ids": 122
+ },
+ "order": {
+  "by": "day_beep",
+  "day_min": 0,
+  "beep_min": 1,
+  "beeps_per_day": 4
+ },
+ "date": null,
+ "tables": [
+  {
+   "name": "hawks_2023_panas_pa",
+   "instrument": "PANAS short form (Mackinnon et al., 1999), positive affect",
+   "description": "EMA, 3 sittings a day for 10 days, before the cognitive tasks: five positive-affect words, 'to what extent you felt this way right before you started this survey'. 1 = very slightly or not at all .. 5 = extremely.",
+   "items": [
+    {
+     "column": "enthusiastic",
+     "item": "enthusiastic",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "enthusiasm, positive affect, affect, extraversion, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "excited",
+     "item": "excited",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "excitement, positive affect, affect, extraversion, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "alert",
+     "item": "alert",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "alertness, positive affect, affect, extraversion, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "determined",
+     "item": "determined",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "determination, positive affect, affect",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "inspired",
+     "item": "inspired",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "inspiration, positive affect, affect",
+     "source": "PANAS Short Form"
+    }
+   ]
+  },
+  {
+   "name": "hawks_2023_panas_na",
+   "instrument": "PANAS short form (Mackinnon et al., 1999), negative affect",
+   "description": "EMA, 3 sittings a day for 10 days, before the cognitive tasks: five negative-affect words, 'to what extent you felt this way right before you started this survey'. 1 = very slightly or not at all .. 5 = extremely.",
+   "items": [
+    {
+     "column": "nervous",
+     "item": "nervous",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "nervousness, negative affect, affect, neuroticism, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "afraid",
+     "item": "afraid",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "fear, negative affect, affect, neuroticism, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "distressed",
+     "item": "distressed",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "distress, negative affect, affect",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "scared",
+     "item": "scared",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "fear, negative affect, affect, neuroticism, big five",
+     "source": "PANAS Short Form"
+    },
+    {
+     "column": "upset",
+     "item": "upset",
+     "stem": "Indicate to what extent you felt this way right before you started this survey.",
+     "anchors": {
+      "1": "very slightly or not at all",
+      "2": "a little",
+      "3": "moderately",
+      "4": "quite a bit",
+      "5": "extremely"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "upset, negative affect, affect, neuroticism, big five",
+     "source": "PANAS Short Form"
+    }
+   ]
+  },
+  {
+   "name": "hawks_2023_anxdep",
+   "instrument": "Anxiety & Depression Scale (Sliwinski et al., 2009)",
+   "description": "EMA, 3 sittings a day for 10 days, before the cognitive tasks: seven items, 'since the last survey, how often have you felt...'. 1 = none of the time .. 5 = all the time.",
+   "items": [
+    {
+     "column": "depressed",
+     "item": "depressed",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "depression, negative affect, affect, neuroticism, big five, psychopathology",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "restless_or_fidgety",
+     "item": "restless_or_fidgety",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "restlessness, fidgety, anxiety, negative affect, affect, psychopathology",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "sadness_extreme",
+     "item": "sadness_extreme",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "sadness, depression, psychopathology, negative affect, affect",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "worried",
+     "item": "worried",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "worry, anxiety, psychopathology, negative affect, affect, neuroticism, big five",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "hopeless",
+     "item": "hopeless",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "hopelessness, depression, psychopathology",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "irritated",
+     "item": "irritated",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "irritability, anxiety, psychopathology, negative affect, affect",
+     "source": "Anxiety & Depression Scale"
+    },
+    {
+     "column": "effort_everything",
+     "item": "effort_everything",
+     "stem": "Since the last survey, how often have you felt...",
+     "anchors": {
+      "1": "none of the time",
+      "2": "a little of the time",
+      "3": "some of the time",
+      "4": "most of the time",
+      "5": "all the time"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "depression, psychopathology",
+     "source": "Anxiety & Depression Scale"
+    }
+   ]
+  },
+  {
+   "name": "hawks_2023_attention",
+   "instrument": "Attentional items (study-specific; the codebook cites no source)",
+   "description": "EMA, 3 sittings a day for 10 days, before the cognitive tasks: six items, 'to what extent are you currently having difficulty...'. 1 = not having difficulty at all .. 5 = extreme difficulty.",
+   "items": [
+    {
+     "column": "finish",
+     "item": "finish",
+     "stem": "To what extent are you currently having difficulty with following through on instructions and failing to finish things?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "task completion, executive functioning, self-regulation",
+     "source": ""
+    },
+    {
+     "column": "organization",
+     "item": "organization",
+     "stem": "To what extent are you currently having difficulty with organization?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "organization, executive functioning",
+     "source": ""
+    },
+    {
+     "column": "mentaleffort",
+     "item": "mentaleffort",
+     "stem": "To what extent are you currently having difficulty with avoiding, disliking, or reluctantly doing things that require a lot of mental effort?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "mental effort avoidance, executive functioning, self-regulation",
+     "source": ""
+    },
+    {
+     "column": "forgetful",
+     "item": "forgetful",
+     "stem": "To what extent are you currently having difficulty with being forgetful?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "forgefulness, attention, cognitive functioning",
+     "source": ""
+    },
+    {
+     "column": "fidgeting",
+     "item": "fidgeting",
+     "stem": "To what extent are you currently having difficulty fidgeting with your hands or feet or squirming in seat?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "fidgeting, motor control, executive functioning",
+     "source": ""
+    },
+    {
+     "column": "motor",
+     "item": "motor",
+     "stem": "To what extent are you currently having difficulty with feeling “on the go” or acting as if you are “driven by a motor”?",
+     "anchors": {
+      "1": "not having difficulty at all",
+      "5": "extreme difficulty"
+     },
+     "scale": [
+      1,
+      5
+     ],
+     "na_codes": [],
+     "integer": true,
+     "observed": [
+      1.0,
+      5.0,
+      3062
+     ],
+     "asked_at_beeps": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "construct": "hyperactivity, executive functioning",
+     "source": ""
+    }
+   ]
+  }
+ ],
+ "candidates": [],
+ "not_shipped": {
+  "sitting_id": "numeric: Study session id",
+  "interruptions": "binary: Did anything interrupt\nyou during this\nassessment?",
+  "study_time": "clock time of the sitting in hours (local); no calendar date, so no `date`",
+  "argument_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "let_pass_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "friend_relative_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "health_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "other_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "covid_stress": "Daily Inventory of Stressful Events: 1 = event not endorsed, 2-5 = how stressful it was; each item a different event (kept out, as for 0075_ballou)",
+  "going_on": "contextual item; the three are not presented as one measure (see notes)",
+  "concentrating": "contextual item; the three are not presented as one measure (see notes)",
+  "noisy": "contextual item; the three are not presented as one measure (see notes)",
+  "socialfunc_interactions": "single item (number of social interactions, 1-4); under the 3-item floor",
+  "alert_sleepiness": "single item (sleepiness, 1-9; Akerstedt et al., 2014); under the 3-item floor",
+  "sleep_duration": "derived at baseline from typical bed and wake times",
+  "social_functioning_composite": "composite: mean of three social functioning follow-up items",
+  "ds_median_r_tc": "cognitive task summary (Digit-Symbol median RT, correct trials)",
+  "test_position": "design variable: position of the test in the battery",
+  "crt_median_r_tc": "cognitive task summary (choice RT median, correct trials)",
+  "gcpt_dprime": "cognitive task summary (gradual-onset CPT d-prime)",
+  "mot_percent_correct": "cognitive task summary (multiple object tracking, proportion correct)"
+ },
+ "itemtext": {
+  "ship": false,
+  "language": "TODO",
+  "translation_source": "TODO",
+  "why": "No item text for this PR, per #3421."
+ },
+ "notes": [
+  "openESM's copy has 47 rows (sittings) with no sitting_id and every survey item empty, while the original deposit (cleanData.rds) has survey answers for all 47: each is a sitting with no Digit-Symbol row there. Shipped as openESM's copy is, so those 47 sittings (1.5%) are missing. Every shipped value in the other 3,062 sittings matches the original.",
+  "For the openESM report (#1698): 0003_hawks loses the survey answers of 47 sittings that have no Digit-Symbol row in cleanData.rds; and study_time is the original's fraction of a day multiplied by 24.",
+  "Instruments are named from the openESM codebook 0003_hawks_codebook.pdf (the paper's supplement, S1). It cites no source for the attentional items, so none is named here.",
+  "The contextual items (going_on, concentrating, noisy) are not shipped: the codebook lists them under 'Contextual Items' with no source or score, the supplement's models enter each as a separate predictor, and they describe different things (surroundings, noise, one's own concentration)."
+ ],
+ "flags": [
+  {
+   "what": "no time stamps or counter: `wave` = (day - day_min) * beeps_per_day + (beep - beep_min) + 1. Check beeps_per_day against the sampling scheme ('3x/day fixed time windows'); no `date`.",
+   "resolution": "wave = day * 4 + beep (day 0-9). The scheme is 3 sittings a day, but beep 4 occurs twice (a fourth sitting, CT54 day 1 and PT55 day 8), so beeps_per_day is 4 and waves have gaps. sitting_id and study_time order agree with day/beep everywhere. No `date`: study_time is clock time without a calendar date."
+  },
+  {
+   "what": "2 proposed table(s) hold a single item (hawks_2023_social_functioning_s, hawks_2023_sleepiness). Decide for each whether it belongs with a neighbouring table of the same questionnaire, stands alone, or is not shipped.",
+   "resolution": "socialfunc_interactions and alert_sleepiness are not shipped: single items, under the 3-item floor (datastandard.md)."
+  },
+  {
+   "what": "Tables are a first guess from file order, response scale, source, prompts asked at, and column-name prefixes. Read the codebook and split or merge so each table is one instrument or subscale (datastandard.md, 'One file per scale'); rename each `<author>_<year>_<construct>`, and set `script` to the record's name.",
+   "resolution": "Four tables from the openESM codebook 0003_hawks_codebook.pdf (the paper's supplement, S1): PANAS short form split into its positive- and negative-affect subscales (the codebook's own grouping), the Anxiety & Depression Scale, and the attentional items. The six Daily Inventory of Stressful Events items are not shipped, as for 0075_ballou: 1 = not endorsed is mixed with 2-5 stress ratings and each item is a different event. covid_stress is the DISE's sixth prompt, coded the same way. The contextual items are not shipped (see notes)."
+  },
+  {
+   "what": "`candidates` holds columns that may or may not be items (binary checkboxes, counts, rating scales whose coding gives no anchors -- sleep_duration, social_functioning_composite, ds_median_r_tc, test_position, crt_median_r_tc, gcpt_dprime, mot_percent_correct). Move any that are responses into a table; the rest go to `not_shipped` with a reason. sleep_duration, social_functioning_composite, ds_median_r_tc, test_position, crt_median_r_tc, gcpt_dprime, mot_percent_correct",
+   "resolution": "All seven to not_shipped: four cognitive-task summaries (median RT, d-prime, proportion correct), a social-functioning composite, a derived sleep duration, and test position."
+  },
+  {
+   "what": "Read openESM's additional_comments: '(none)'",
+   "resolution": "None."
+  },
+  {
+   "what": "Licence: openESM 'CC BY-NC 4.0'; original deposit 'TODO' (not OSF or Zenodo; read https://github.com/zwihawks/PredictingMomentaryCog). IRW carries openESM's label when it is stricter (ruled 2026-10-04); if the two differ, the difference goes in the notes and in the report to openESM.",
+   "resolution": "openESM labels the copy CC BY-NC 4.0; the original repository is MIT. CC BY-NC 4.0 is carried (the stricter label, ruled 2026-10-04 and on #3421); the MIT original is in the dictionary notes."
+  },
+  {
+   "what": "`reference` is drafted from openESM's BibTeX. Check it against the paper's DOI: the year (online vs print), page range and author list are where it goes wrong.",
+   "resolution": "Checked against Crossref (10.1016/j.bpsc.2022.12.002): 2023 print issue, 8(8), 841-851, ten authors; online 2022-12-14."
+  }
+ ]
+}

@@ -143,3 +143,22 @@ class ColumnDocsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DerivedSource(unittest.TestCase):
+    """A column recoded from exactly one named source column (2026-11-16)."""
+
+    def test_python_shapes(self):
+        ds = cd.derived_source
+        self.assertEqual(ds("cov_age", "a.py", 'd["cov_age"] = d["tuoi"]'), "tuoi")
+        self.assertEqual(ds("cov_sex", "a.py", '"cov_sex": df["sex"].map({1: "female", 2: "male"}),'), "sex")
+        self.assertEqual(ds("id", "a.py", 'x = pd.DataFrame({"id": d["pid"].astype(str), "cov_age": d["Age"]})'), "pid")
+        self.assertIsNone(ds("cov_bmi", "a.py", 'd["cov_bmi"] = d["w"] / d["h"] ** 2'))
+        self.assertIsNone(ds("resp", "a.py", 'l["resp"] = [k[i] == r for i, r in zip(l["item"], l["resp"])]'))
+        self.assertIsNone(ds("cov_age", "a.py", 'if d["cov_age"] == d["Age"]:'))
+
+    def test_r_shapes(self):
+        ds = cd.derived_source
+        self.assertEqual(ds("cov_gender", "a.R", "mutate(cov_gender = factor(Sex, levels = 1:2))"), "Sex")
+        self.assertEqual(ds("cov_age", "a.R", "cov_age = as.numeric(edad),"), "edad")
+        self.assertIsNone(ds("cov_age", "a.R", "cov_age = scale(edad)"))

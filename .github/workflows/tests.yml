@@ -315,6 +315,11 @@ jobs:
       - name: conjoint design records
         run: python metadata/tests/test_conj_design.py -v
 
+      # The covariance family's subject tags (#3645): core's construct type and
+      # sample values plus the cov additions; untagged tables are listed, not failed.
+      - name: cov subject tags
+        run: python metadata/tests/test_cov_tags.py -v
+
       # The rankings dictionary's release claim. Rankings has no dictionary
       # sheet, and nothing rewrites dictionary_auto_rank.csv after staging, so
       # "Not on Redivis yet." staged with a local table stayed true only until
@@ -331,10 +336,21 @@ jobs:
       # through `rules_jurisdiction` (Ben, 2026-10-29, #3024).
       - name: rankings counting-rules join
         run: python metadata/tests/test_rank_rules_join.py -v
+      # The same blind spot one file over: a value a rule set uses that the README
+      # never defines, or a definition left behind when a value is renamed, would
+      # show up nowhere either (#3461).
+      - name: rankings README values
+        run: python metadata/tests/test_rank_readme_values.py -v
       # The writer every rankings builder shares must keep design_tables.csv's
       # columns: rules_jurisdiction was one write from being dropped (#3330).
       - name: rankings design_tables writer
         run: python metadata/tests/test_rank_design_upsert.py -v
+      # The recount itself runs by hand (it needs the tables, and an edit to
+      # counting_rules.csv can touch hundreds of them). What CI can check offline is
+      # that each published-rounds file is well formed and joins a design row and a
+      # rule set (Ben, 2026-11-19, #3606).
+      - name: rankings published rounds
+        run: python metadata/tests/test_rank_published_rounds.py -v
 
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
@@ -362,8 +378,12 @@ jobs:
       # to unstick.
       - name: Contract
         run: |
-          base="origin/${{ github.base_ref }}"
-          git fetch -q origin "${{ github.base_ref }}"
+          # Always diff against main (#3566): a PR based on another branch
+          # (e.g. a contributor's patch branch) otherwise sees every data/
+          # script as "added" and pre-existing warnings become blocking.
+          base="origin/main"
+          git fetch -q origin main
+          echo "base=$base"
           added=$(git diff --name-only --diff-filter=A "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           modified=$(git diff --name-only --diff-filter=M "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           if [ -z "$added$modified" ]; then echo "no data/ scripts in this PR"; exit 0; fi
@@ -377,6 +397,6 @@ jobs:
       # label harvest gets a warning naming the command to run.
       - name: Covariate label harvest (advisory)
         run: |
-          base="origin/${{ github.base_ref }}"
+          base="origin/main"
           files=$(git diff --name-only --diff-filter=AM "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           if [ -n "$files" ]; then python metadata/check_label_harvest.py --annotate $files; fi

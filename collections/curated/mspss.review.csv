@@ -2,6 +2,14 @@ table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_
 chen2022b_socsupport,NA,Multidimensional Scale of Perceived Social Support (MSPSS),chi,translated_substitute,12,417,12,12,0,MATCH,supplied,
 ehealth_rioux_2025_mssps,Multidimensional Scale of Perceived Social Support,Multidimensional Scale of Perceived Social Support (MSPSS),eng,study_materials,12,312,12,12,0,MATCH,wording,
 laksmita_2020_mspss,NA,"Multidimensional Scale of Perceived Social Support (MSPSS), Indonesian version",ind,translated_substitute,12,299,12,12,2,MATCH,supplied,
-nguyen_2026_mspss,Perceived social support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS),vie,none_recorded,12,394,12,11,1,MATCH,supplied,
+martin_2021_mspss,Multidimensional Scale of Perceived Social Support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS),eng,none_recorded,12,1505,12,12,0,MATCH,supplied,
+nguyen_2026_mspss,Perceived social support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS),vie,translated_substitute,12,394,12,11,1,MATCH,supplied,
+cao_2024_mspss,Perceived social support (MSPSS),,chi,none_recorded,12,326,12,0,0,NAME_ONLY,name,no item text
+gwen_2025_social_support,"Perceived social support (record names the Multidimensional Scale of Perceived Social Support, MSPSS)",Social support,ind,none_recorded,3,225,12,0,0,NAME_ONLY,name,item text not in English
+huang_2025_perceived_social_support,Perceived social support (MSPSS),,chi,none_recorded,12,787,12,0,0,NAME_ONLY,name,no item text
+kopczynski_2021_mspss,Perceived social support,"Multidimensional Scale of Perceived Social Support (MSPSS, 12 items), Zimet, Dahlem, Zimet & Farley (1988), Polish administration",pol,none_recorded,12,1000,12,0,0,NAME_ONLY,name,item text not in English
+li_2023_social_support,"Multidimensional Scale of Perceived Social Support (MSPSS), 12 items","Multidimensional Scale of Perceived Social Support (MSPSS), Zimet et al. (1988), Chinese version",chi,none_recorded,12,990,12,1,0,NAME_ONLY,name,item text not in English
 qi_2024_mspss,NA,"Perceived Social Support Scale (PSSS / MSPSS), Chinese version",chi,none_recorded,12,293,12,0,0,NAME_ONLY,name,item text not in English
+song_2026_mspss,Multidimensional Scale of Perceived Social Support (MSPSS),,chi,none_recorded,12,519,12,0,0,NAME_ONLY,name,no item text
+yang_2025_mspss,Multidimensional Scale of Perceived Social Support,,chi,none_recorded,12,2267,12,0,0,NAME_ONLY,name,no item text
 jeilani_2024_social_outcomes,Social outcomes scale (SO),"Multidimensional Scale of Perceived Social Support (MSPSS), Significant Other subscale (Zimet, Dahlem, Zimet & Farley, 1988)",NA,study_materials,4,663,12,4,1,PARTIAL,,first item: there is a special person in my life that cares about my feelings

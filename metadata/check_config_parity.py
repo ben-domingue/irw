@@ -76,7 +76,7 @@ SHARDED = ("core", "text", "conj", "rank")
 # deliberately floors, not exact counts: adding a seventh warehouse is a normal
 # Tuesday and must not have to edit this file.
 MIN_DATASETS = {"core": 6, "text": 2, "meta": 1, "sim": 1, "comp": 1, "nom": 1, "conj": 1,
-                "rank": 1}
+                "rank": 1, "cov": 1}
 
 
 class ParseError(RuntimeError):
@@ -222,6 +222,7 @@ PY_NAMES = {
     "NOM_REF": "nom",
     "CONJ_REFS": "conj",
     "RANK_REFS": "rank",
+    "COV_REF": "cov",
 }
 
 

@@ -184,6 +184,51 @@ local({
           "a row the machine could not add anything to gets no provenance row")
 })
 
+cat("write_dict_provenance -- dates (#3680)\n")
+
+local({
+    f <- tempfile(fileext = ".csv")
+    on.exit(unlink(f), add = TRUE)
+    day1 <- as.Date("2026-11-01")
+    day2 <- as.Date("2026-11-08")
+    frame <- function(filled, day) dict_provenance_frame(filled, today = day)
+    write <- function(filled, day) {
+        suppressMessages(write_dict_provenance(frame(filled, day), f))
+        readr::read_csv(f, col_types = readr::cols(.default = "c"), progress = FALSE)
+    }
+    both <- c("a_2020\tNotes", "b_2020\tDOI (for paper)")
+
+    write(both, day1)
+    first <- readBin(f, "raw", file.size(f))
+    out <- write(both, day2)
+    check(identical(readBin(f, "raw", file.size(f)), first),
+          "a second write on a later day, with nothing new filled, leaves the file byte for byte unchanged")
+    check(all(out$generated == "2026-11-01"), "the dates stay those of the first write")
+
+    out <- write(c(both, "c_2020\tNotes"), day2)
+    check(out$generated[out$table == "c_2020"] == "2026-11-08",
+          "a newly filled table gets the new date")
+    check(all(out$generated[out$table != "c_2020"] == "2026-11-01"),
+          "the pairs already there keep theirs")
+
+    out <- write(c("a_2020\tNotes; DOI (for paper)", "b_2020\tDOI (for paper)",
+                   "c_2020\tNotes"), as.Date("2026-11-15"))
+    check(out$generated[out$table == "a_2020"] == "2026-11-15",
+          "a table whose filled columns change is a new pair and gets the new date")
+    check(out$generated[out$table == "b_2020"] == "2026-11-01",
+          "an untouched pair beside it keeps its date")
+
+    out <- write(c("a_2020\tNotes; DOI (for paper)", "b_2020\tDOI (for paper)"),
+                 as.Date("2026-11-22"))
+    check(!"c_2020" %in% out$table, "a table removed from the dictionary drops out")
+    check(nrow(out) == 2L, "and nothing is carried forward from the old file")
+
+    write_dict_provenance(frame(character(0), day1), f)
+    check(nrow(readr::read_csv(f, col_types = readr::cols(.default = "c"),
+                               progress = FALSE)) == 0L,
+          "an empty frame writes an empty sidecar")
+})
+
 cat("read_dict_auto -- refusals\n")
 
 tmp <- tempfile(fileext = ".csv")
@@ -1488,6 +1533,42 @@ local({
     lead <- suppressMessages(check_license_vocabulary(b, "core"))
     check(identical(lead, c("CC BY-NC-ND", "CC-BY (unspecified)")),
           "the unversioned values are reported as leads instead")
+})
+
+##------------------------------------------------------ data URL overrides ---
+##DATA_URL_OVERRIDES (#3316): exact match on the sheet's URL, self-disarming,
+##and it has to feed apply_license_overrides(), which is keyed on the URL.
+cat("\ndata URL overrides\n")
+local({
+    ov <- list(list(tables = c("t_a", "t_b"), issue = "#1",
+                    superseded = "https://wrong.example/key.htm",
+                    corrected  = "http://right.example/_rawdata/", why = "test"))
+    b <- data.frame(table = c("t_a", "t_b", "t_c"),
+                    URL__for_data_ = c("https://wrong.example/key.htm",
+                                       "https://hand-fixed.example/",
+                                       "https://wrong.example/key.htm"),
+                    Derived_License = "CC BY 4.0", Original_License = "Missing (NA)",
+                    stringsAsFactors = FALSE)
+    w <- NULL
+    out <- withCallingHandlers(suppressMessages(apply_data_url_overrides(b, "core", ov)),
+                               warning = function(x) { w <<- conditionMessage(x)
+                                                       invokeRestart("muffleWarning") })
+    check(identical(out$URL__for_data_[1], "http://right.example/_rawdata/"),
+          "a named table holding the superseded URL is corrected")
+    check(identical(out$URL__for_data_[2], "https://hand-fixed.example/"),
+          "a URL someone changed in the sheet is left alone")
+    check(!is.null(w) && grepl("t_b", w, fixed = TRUE),
+          "and reported as a stale entry")
+    check(identical(out$URL__for_data_[3], "https://wrong.example/key.htm"),
+          "a table not named is never touched")
+    again <- suppressMessages(suppressWarnings(apply_data_url_overrides(out[1, ], "core", ov)))
+    check(identical(again$URL__for_data_, out$URL__for_data_[1]),
+          "a second pass is a no-op")
+    lic <- list(list(url = "right\\.example", issue = "#1", superseded = "CC BY 4.0",
+                     derived = "CC BY 4.0", original = "Permission via Email", why = "test"))
+    fed <- suppressMessages(suppressWarnings(apply_license_overrides(out, "core", lic)))$biblio
+    check(identical(fed$Original_License[1], "Permission via Email"),
+          "the corrected URL reaches a licence override keyed on it")
 })
 
 ##------------------------------------------------------------------ result ---

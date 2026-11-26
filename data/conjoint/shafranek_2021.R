@@ -23,9 +23,10 @@
 ##    (choice blank) are kept when a rating exists.
 ##  rating: 1-7 rating of each profile; higher = more favourable (chosen profiles average 5.0,
 ##    unchosen 4.1); anchors unknown. 784 profile ratings are missing.
-##Rows with neither outcome are omitted. 2 respondents (40 rows) have no attribute values at all
-##(blank in source = missing, not "not shown") and are dropped: 203 respondents, 4,030 rows; 38
-##kept tasks have ratings but no choice.
+##Tasks with neither outcome on either profile are omitted; a profile with neither in an answered
+##task keeps its row with both NA (6 tasks; #3536). 2 respondents (40 rows) have no attribute values
+##at all (blank in source = missing, not "not shown") and are dropped: 203 respondents, 4,036 rows;
+##41 kept tasks have ratings but no choice (recounted 2026-11-15; earlier stated as 38).
 ##Level weights: the authors' cjoint design (replication.R, makeDesign level.probs) weights sexual
 ##orientation LGBT 1/5, Straight 4/5; everything else uniform. Race shares in the data are also
 ##unequal (White 48%, Asian American 21%, Black 16%, Hispanic 15%), contrary to that design. No
@@ -60,6 +61,7 @@ stopifnot(all(d$cov_gender %in% c("Male", "Female", "Other", "", NA)))
 d[, cov_gender := fifelse(cov_gender %in% c("", NA), NA_character_, tolower(cov_gender))]
 stopifnot(d[, .N, .(id, task)][, all(N == 2)], d[, sum(choice), .(id, task)][!is.na(V1), all(V1 == 1)])
 d[, miss := anyNA(.SD), .SDcols = patterns("^attr_"), by = .(id, task)]
-d <- d[miss == FALSE & !(is.na(choice) & is.na(rating))][, miss := NULL]
+d <- d[miss == FALSE][, miss := NULL]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "shafranek_2021_roommate_choice.csv"))

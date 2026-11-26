@@ -18,7 +18,7 @@ CONJ = Path(__file__).resolve().parents[2] / "data" / "conjoint"
 
 TABLE_COLS = ["table", "country", "display_language", "label_language", "restrictions",
               "level_weights", "restrictions_note", "attr_order", "survey_weight", "presentation",
-              "task_source", "profile_source", "evidence"]
+              "task_source", "profile_source", "repeat_source", "evidence"]
 TAG_COLS = ["table", "domain", "choice_object", "rater", "note"]
 #: data/conjoint/README.md, "Topic tags". Add a value there and here together.
 DOMAINS = {"candidate_choice", "immigration_asylum", "climate_energy_environment",
@@ -31,8 +31,10 @@ DOMAINS = {"candidate_choice", "immigration_asylum", "climate_energy_environment
 CHOICE_OBJECTS = {"person", "policy", "scenario", "product_service", "place", "organisation",
                   "message"}
 OUTCOME_COLS = ["table", "outcome", "type", "question", "opt_out", "scale_min", "scale_max",
-                "low_anchor", "high_anchor", "evidence"]
+                "low_anchor", "high_anchor", "rescaled_from", "evidence"]
 SOURCE = {"recorded", "inferred", "unknown"}
+#: README "Design records": where a repeated task's levels and positions come from.
+REPEAT_SOURCE = {"none", "recorded", "copied", "inferred_from_answers", "unknown"}
 ISO_LIST = re.compile(r"^(unknown|[a-z]{2,3}(;[a-z]{2,3})*)$")
 COUNTRY_LIST = re.compile(r"^(unknown|[A-Z]{2}(;[A-Z]{2})*)$")
 NAME = re.compile(r"^[a-z0-9_]+")
@@ -86,6 +88,7 @@ class TablesFile(unittest.TestCase):
             self.assertIn(r["presentation"], {"grid", "text", "image", "unknown"}, t)
             self.assertIn(r["task_source"], SOURCE, t)
             self.assertIn(r["profile_source"], SOURCE, t)
+            self.assertIn(r["repeat_source"], REPEAT_SOURCE, t)
 
     def test_ledger_covered(self):
         missing = ledger_tables() - {r["table"] for r in self.rows}
@@ -116,7 +119,7 @@ class OutcomesFile(unittest.TestCase):
             self.assertTrue(r["question"], k)
             if r["type"] == "choice":
                 self.assertIn(r["opt_out"], {"yes", "no", "unknown"}, k)
-                for c in ("scale_min", "scale_max", "low_anchor", "high_anchor"):
+                for c in ("scale_min", "scale_max", "low_anchor", "high_anchor", "rescaled_from"):
                     self.assertEqual(r[c], "", f"{k}: {c} is for ratings")
             else:
                 self.assertEqual(r["opt_out"], "", k)

@@ -1,5 +1,140 @@
 # IRW Automated Finding — TODO
 
+## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) uploaded to shard 10 + 81 item text tables
+
+Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-leads-2026-11-25`, rebased onto main).
+
+- [x] **UPLOADED 2026-11-25 by Claude (Ben's go-ahead in-session):** 403 response tables to the item_response_warehouse_10
+  draft (all row-count verified; ding_2026_who5 re-uploaded by Ben after an interrupted run left it empty) and 81 item text
+  tables to the irw_text_4 draft (81/81 verified; the 27 in `held_2026-11-25/` left behind). Ben publishes shard 10, then irw_text_4.
+- [ ] Merge #3729 once both drafts are published.
+- [x] Issues-page entries: datapages/irw#462 merged 2026-11-25 (41 entries). Were owed (`itemtext_issues.qmd`), one per table, the public_note text is in each
+  provenance row: IRW-translated English -- herrera_2026 x5, sucipto_2026 x7, aini_2026 x5, minozzo_2026 x13 (prompts, and the
+  barrier items); language/version notes -- croitoru_2026 x5 (Romanian administered, English shipped), ahmad_2026 x5 (72 read
+  French), charzynska_2026_iwas5 (85 cultures, English master). check_provenance.R does not read
+  automated_finding/itemtext_provenance.csv, so nothing will flag these.
+- [x] tothe_2021_other_satisfaction b4_8 'I am satisfied with my life' (matches an SWLS item): ruled SHIP 2026-11-25, stem restored.
+- [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
+  code-named construct tables ship as they are.
+- [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).
+- [ ] Covariate labels: after these tables are published and the weekly pipeline runs, `build.py`, `audit_gaps.py --write`, PR.
+
+## Repos backlog drain 2026-11-25b — 143 unworked leads
+
+Full write-up in `BATCH_LOG.md` (2026-11-25b).
+
+- [ ] Work `leads/repos_backlog_leads_2026-11-25.csv` (15 good, 32 worth_retrying, 86 recoverable_format,
+  10 aggregate_continuous). Shard 10 holds the room.
+- [ ] Backlog is 54 retry rows; figshare is most of the download failures again.
+
+## Repos monthly discovery+triage 2026-11-25 (mode 3, scheduled, full sweep)
+
+Full write-up in `BATCH_LOG.md` (2026-11-25). Discovery + triage only; no `data/`
+scripts written this run.
+
+- [ ] **`scholars_portal` is fully blocked in this sandbox** (0/125 terms, every
+  query hit a proxy 403 against `borealisdata.ca`) — a network-policy fix, not a
+  pipeline bug. Worth asking whoever owns the sandbox's agent-proxy allowlist to add
+  it before the next scheduled run, or the source stays permanently dark here.
+- [ ] **`dryad` failed on 69/125 terms** this run (403 directly from `datadryad.org`,
+  not the proxy) — intermittent/rate-limit shaped. If it recurs next month, worth
+  checking whether a slower per-query pace or a different pagination avoids it.
+- [ ] **This run's 150-triage cap was entirely consumed by the pre-existing
+  backlog** — none of this month's 1,269 newly discovered candidates were triaged
+  yet; they're now folded into the rewritten `repo_triage_backlog.csv` (618 rows
+  still owed: 574 past the cap, 44 download_failed/error to retry). The next
+  scheduled or manual triage run should expect another backlog-only pass before any
+  of this month's new finds surface as `good`/`human_assistance`.
+- [ ] **14 leads in `leads/repos_leads_2026-11-25.csv`, all `unworked`**: 3 `good`
+  (financial-literacy/tax, generative-AI-acceptance, e-commerce/fashion deposits, all
+  Zenodo, cc-by), 9 `recoverable_format` (mostly "re-read keeping only the N columns
+  that share one small integer domain" — a parse/column-selection fix, not a content
+  problem; one is semicolon-delimited and was read with the comma reader; one needs
+  a per-scale split on `resp_scale_mixed`), 2 `worth_retrying` (one has text-coded
+  Likert responses needing a recode, one needs the id-column mapping confirmed).
+- [ ] One `aggregate_continuous` row (zenodo.23621693, "From Clicks to Constructs")
+  was left out of the leads file as a probable genuine composite rather than a
+  legitimate per-item continuous measure — worth a second look if that reading is
+  wrong, since it was a judgement call, not a hard rule.
+
+## Repos sweep 2026-11-23 (mode 3, 15 new topics x 9 languages) — 128 tables uploaded to shards 9 and 2
+
+Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
+
+- [x] **UPLOADED 2026-11-23 by Claude (Ben's go-ahead in-session):** 93 response tables to the item_response_warehouse_9
+  draft and 35 to the item_response_warehouse_2 draft, 128/128 row-count verified; no item text tables.
+- [x] **Published 2026-11-23/24** (shard 9 v1.10, shard 2 v36.1; all 128 tables in the releases). Shard 9 is now at 990 of
+  1000: the next batch needs another shard.
+- [ ] Ben: ship zenodo 15260103 (name-free twin of the named-respondent figshare 28667843)? Pant 2023/2025 organic
+  pair (PV1-3 disagree): hold both, or ship one?
+- [ ] Covariate labels: the 9 .sav scripts (vilkaitevaitone_2026_ewom, kadlera_2025_ppis/_pops and lane 2's six) were
+  HARVESTED 2026-11-24; logs in ~/.cache/irw/covariate_labels/logs. `build.py` only labels tables in metadata.csv, which
+  the 2026-11-24 pipeline built before the shards were published. After the next weekly pipeline run: `build.py`,
+  `audit_gaps.py --write`, PR. endeshaw_2026, ghulman_2025, perttula_2026 sit in gaps.csv as never_examined although
+  harvested (build drops their pairs silently) -- worth a look then.
+- [x] 143 leads worked (lane 2): 69 deposits, 402 tables staged; 4 deferred leads still `unworked` (3, 54, 66, 86).
+- [x] **UPLOADED 2026-11-23 by Claude (Ben's go-ahead in-session):** lane 2's 402 tables to the new
+  item_response_warehouse_10 draft, 402/402 row-count verified. Shard 10 registered in PR #3697.
+- [x] **Published** item_response_warehouse_10 v1.0 (402 tables). Covariate labels: see the item above.
+- [ ] Ben: lane 2's ~30 code-named deposits ("IRW's reading") -- ship as is? Lead 107 halal v2 (137 rows) instead of
+  oemar_2022's v1 (100)?
+- [ ] Item text later: tothe_2021 ("details" sheet), upoma_2026 (codebook + docx), vilkaitevaitone_2026 (.sav labels).
+
+## Handoff 2026-11-23: merge PR #3693 (psychophysics collection) AFTER the shard-9 release
+
+- [x] Gate met 2026-11-24 (shard 9 v1.10 holds all 28); PR marked ready. Once Ben publishes the item_response_warehouse_9 release holding the 28 Confidence Database tables (#3686;
+  uploaded 2026-11-23, PRs #3691/#3694 merged): confirm all 28 are in the released version (names = the data rows of
+  #3691's and #3694's PR bodies), then `gh pr ready 3693`, wait for green CI, merge. **Not before**: 
+  `metadata/10_collections.R` halts if a curated member is missing from published metadata. Branch
+  `data/psychophysics-collection`, worktree `~/irw-wt/psychophysics-collection`.
+
+## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
+
+Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
+
+- [x] **UPLOADED 2026-11-21 by Claude (Ben's go-ahead in-session, "please do the uploads")**: 169 response tables
+  (396,057 responses) to the item_response_warehouse_9 draft, 169/169 row-count verified; Ben publishes.
+  (35 deposits; list in BATCH_LOG). No item text.
+- [ ] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: 36 never opened because Mendeley's public API
+  returned 502 all session (re-profile them first), ~66 Zenodo/figshare/Dataverse/OSF rows not yet opened (green
+  purchase, destination image, service quality, tax-compliance experiments), and 2 holds below.
+- [ ] Holds: Novela (Zenodo 17302208, blocks observed 1-4 vs 2-5 -- a shifted 4-point scale?) and Rigglets (Mendeley
+  wv525y5dn2, anchors printed Strongly agree..Strongly disagree; which end is 1?). Both need the paper or the authors.
+- [ ] Item text later, cheap from deposit files: fransisca_2026_*, prihatna_2025/2026_* (stems are the headers,
+  anchors the option labels), apsari_2025_* (form PDF), endeshaw_2026_healthperf (codebook PDF), ghulman_2025_*
+  (.sav labels + key), setiawan_2026_* (codebook). CAS / HEAS / EGuiQ / UTAUT2 need register rows first.
+
+## Replay-ha 2026-11-15 (72 unworked rows of leads/repos_replay_2026-11-02_good_ha.csv) — 45 tables staged, 11 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-15 — replay-ha). Every row's outcome is in its `status` cell.
+
+- [x] **UPLOADED 2026-11-15 by Claude (Ben's go-ahead in-session):** 45 response tables (262,423 responses) to the
+  item_response_warehouse_9 draft, all row-count verified (19 on the first pass, 26 retried after a DNS drop); no item
+  text tables.
+- [ ] **Ben publishes** the item_response_warehouse_9 draft.
+- [ ] **Holds for Ben:** nurse managers (figshare 34867032) and PLOS pone.0361505 S1, response-quality review (built
+  tables in the worktree's `runs/held/`); health literacy zenodo 23575980 (two sheets disagree); Hangzhou park figshare
+  32614038 (35 duplicate rows); zenodo 23376616 (no licence); JobCannon v3
+  (answer indices, no key); Bangladesh panel zenodo 23693213; NutSo-HH 3 single items zenodo 23691068.
+- [ ] Item text later: pesen_2026_ai_adoption (Turkish stems in .sav labels; anchors needed), dostiyarova_2026_kdocs
+  (K-DOCS stems in the Codebook sheet; register row needed), oseianim_2026_*, li_2026_* EFL, shafique_2026_*,
+  zemrani_2026_* Likert blocks.
+
+## Repos sweep 2026-11-14 (mode 3, 15 new topics x 9 languages) — 146 tables + 2 item text tables
+
+Full write-up in `BATCH_LOG.md` (2026-11-14 — repos sweep).
+
+- [x] **UPLOADED 2026-11-14 by Claude (Ben's go-ahead in-session)**: 146 response tables (682,722 responses) to the
+  item_response_warehouse_9 draft + 2 item text tables to the irw_text_4 draft, all row-count verified; provenance stamped.
+- [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
+- [x] Romanian IPIP-NEO-300 lead (Mendeley r2bdvzkzbj) worked 2026-11-14: 7 `gaianu_2021_*` tables (121,620 responses),
+  **UPLOADED by Claude** to the item_response_warehouse_9 draft (Ben's go-ahead in-session); see BATCH_LOG.
+- [ ] 5 `unworked` leads in `leads/repos_leads_2026-11-14.csv` (LLM-vs-examiner rater scores; Italian AI training
+  needs; wood-stove questionnaire; Coyhaique soundscape; Indonesian AI-BI).
+- [ ] Item text later: jin_2026_ipip_neo120 (Chinese headers = administered stems, IPIP English; a translated_substitute
+  build needs the translation's terms), rexandgalais_2022_ipo_fr (codebook PDF with explicit codes; IPO needs a
+  register row), lombard_2025_* and yumna_2025_* (statements are the headers; instruments unidentified).
+
 ## Repos sweep 2026-11-13 (mode 3, 15 new topics x 9 languages) — 47 tables + 2 item text tables
 
 Full write-up in `BATCH_LOG.md` (2026-11-13 — repos sweep).
@@ -28,6 +163,11 @@ Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
 - [ ] Item text later, each needs a register row first: kuhlmann_2021_schiphol_* (ISO/TS 15666 wording in the
   deposit PDF, by list order), connor_2022_* (questionnaire .docx, by order), fernandeztalaverano_2026_* (Spanish
   stems in the .sav labels; third-party EQ-i-M20/VE-I/PSS).
+
+## Bieleke 2022 (osf 3pmr4), 2026-11-18 — 2 tables staged
+
+- [ ] **Upload**: 2 response tables (14,517 responses) from `~/irw-wt/bieleke-2022/automated_finding/irw_output/`
+  (bieleke_2022_assess_enjoyment, bieleke_2022_assess_anxiety). No item text.
 
 ## Vigl 2022 (osf f8m7a), 2026-11-12 — 5 tables staged, ECR held
 

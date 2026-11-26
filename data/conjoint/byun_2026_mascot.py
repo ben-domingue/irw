@@ -20,8 +20,9 @@
 ##THE DESIGN IS FIXED, NOT RANDOMIZED PER RESPONDENT. The 18 profiles (6 tasks x 3) are the
 ##same for everyone and form a balanced orthogonal array: each of the 3 levels of each of
 ##the 5 attributes appears exactly 6 times across the 18, and only 18 of the 3^5 = 243
-##possible combinations ever occur. What does vary by respondent is the POSITION of the
-##three profiles within a task, so `profile` is a display position and not a profile label.
+##possible combinations ever occur. Profile POSITION is fixed too: every respondent saw the
+##same profile in each task and position (checked 2026-11-16: each task x profile holds one
+##attribute combination), so task and profile order do not vary.
 ##
 ##Outcome: use `Task_n`, NOT `Tn_Chosen`. The two agree on every completed response, but
 ##`Tn_Chosen` is embedded data that is blank for 4 partial respondents who did answer --

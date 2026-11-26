@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2017-Ward-4-Results-Summary.pdf
+1,c01,2258
+1,c02,220
+1,c03,2140
+1,c04,634
+1,(exhausted),0
+1,(write-in),11
+2,c01,2430
+2,c02,0
+2,c03,2605
+2,c04,0
+2,(exhausted),228
+2,(write-in),0
+1,(threshold),2632
+1,(elected:c03),

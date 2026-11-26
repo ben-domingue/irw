@@ -24,9 +24,12 @@
 ##Attribute text: price "$<n> million" (unit from replication.do), ballot size "<n> bond(s) on the
 ##ballot", bond type from the codebook variable descriptions ("land bond", "affordable housing bond",
 ##"k12 school bond", "higher education bond", "transportation bond", paraphrased into full names).
-##Sample rule: replication.do drops time_survey < 60 and any row missing city, home_own, under_rep,
-##age_cts, dem, ind, vote_frequency, educ_cts, inc_cts or sex_male; this script applies the same drops, so the
-##sample is the authors' estimation sample.
+##Sample: every respondent who voted on at least one bond is kept: 849 of 851 (IRW conjoint ruling, Ben
+##2026-11-10: no author sample exclusions). The authors' estimation sample (replication.do) excludes
+##respondents with time_survey < 60 and any row missing city, home_own, under_rep, age_cts, dem, ind,
+##vote_frequency, educ_cts, inc_cts or sex_male (732 of 851, 731 of them with a vote); reproduce it with cov_duration_sec >= 60 &
+##cov_complete_covariates == 1 (731, checked below). cov_complete_covariates = 1 when none of those ten
+##variables is missing, else 0 (several of them, e.g. city, are not carried in this table).
 ##Covariates (codebook.pdf): cov_gender from sex_male/sex_female (1 male); cov_age_group from the
 ##age_18_29..age_65plus binaries (text of the band); cov_party_id from party_dem/rep/ind/other
 ##binaries ("Democrat","Republican","Independent","Other"); cov_duration_sec = time_survey (seconds);
@@ -39,9 +42,10 @@
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 d <- as.data.table(read_dta(file.path(raw, "ready.dta")))
-keep <- d$time_survey >= 60 & !is.na(d$city) & !is.na(d$home_own) & !is.na(d$under_rep) & !is.na(d$age_cts) &
+cc <- !is.na(d$city) & !is.na(d$home_own) & !is.na(d$under_rep) & !is.na(d$age_cts) &
   !is.na(d$dem) & !is.na(d$ind) & !is.na(d$vote_frequency) & !is.na(d$educ_cts) & !is.na(d$inc_cts) & !is.na(d$sex_male)
-d <- d[keep]
+stopifnot(nrow(d) == 851, !anyNA(d$time_survey), sum(d$time_survey >= 60 & cc) == 732)
+d[, cov_complete_covariates := as.integer(cc)]
 d[, id := .I]
 bonds <- c(land = "land conservation bond", aff = "affordable housing bond", k12 = "K-12 school bond",
            higher_ed = "higher education bond", transportation = "transportation bond")
@@ -57,7 +61,7 @@ d[, `:=`(cov_duration_sec = as.numeric(time_survey), cov_education_years = as.in
          cov_home_own = as.integer(home_own), cov_hispanic = as.integer(hispanic),
          cov_vote_frequency_code = as.integer(vote_frequency), cov_govt_trust_code = as.integer(govt_trust))]
 cov <- c("cov_gender", "cov_age_group", "cov_party_id", "cov_duration_sec", "cov_education_years", "cov_home_own",
-         "cov_hispanic", "cov_vote_frequency_code", "cov_govt_trust_code")
+         "cov_hispanic", "cov_vote_frequency_code", "cov_govt_trust_code", "cov_complete_covariates")
 L <- list()
 for (i in seq_along(bonds)) {
   b <- names(bonds)[i]
@@ -69,6 +73,8 @@ for (i in seq_along(bonds)) {
 }
 r <- rbindlist(L)
 r[, task := as.integer(factor(task)) , by = id]  # renumber tasks 1..k within respondent
-stopifnot(!anyNA(r$choice), !anyNA(r$attr_price))
+stopifnot(!anyNA(r$choice), !anyNA(r$attr_price), uniqueN(r$id) == 849,
+          r[cov_duration_sec >= 60 & cov_complete_covariates == 1, uniqueN(id)] == 731)
+r[, id := match(id, sort(unique(id)))]
 setorder(r, id, task, profile)
 fwrite(r, file.path(out, "bechard_2024_bond_referendums.csv"))

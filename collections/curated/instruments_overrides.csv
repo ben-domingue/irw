@@ -81,3 +81,25 @@ ucla_ls,ren_2024_loneliness,REJECT,,,3-item loneliness scale: a short form
 ucla_ls,ucla_BrummerHoffman_2021,REJECT,,,3-item UCLA scale: a short form
 cesd,saha_2026_cesd,REJECT,,,"withdrawn 2026-09-30 (#2565, the author removed the deposit); was accepted before the withdrawal reached metadata.csv"
 erq,li_2024_bdyz,ACCEPT,supplied,subscale: suppression (4/10),"matched the suppression subscale 4/4 when scouted (2026-09-30); its item text was withdrawn 2026-10-18 (#3082), so the rule can no longer re-check it. Membership in erq.csv stands"
+bfi44,batool_2024_big_five,ACCEPT,name,,Ben 11-15: construct tag names BFI-44 and it has 44 items
+mspss,huang_2025_perceived_social_support,ACCEPT,name,,Ben 11-15: construct tag names the MSPSS and it has 12 items; Chinese
+mspss,li_2023_social_support,ACCEPT,name,,"Ben 11-15: construct tag and instrument field name the MSPSS (Zimet 1988, Chinese) and it has 12 items"
+phq9,yao_2023_depression,ACCEPT,name,,Ben 11-15: construct tag names the PHQ-9 and it has 9 items; Chinese
+rses,apaza_2026_self_esteem,ACCEPT,name,,Ben 11-15: construct tag names the RSES (Spanish) and it has 10 items
+gad7,baseke_2026_gad7,ACCEPT,name,,Ben 11-15: instrument field names the GAD-7 and it has 7 items; wording paraphrased (4/7 key items match)
+tipi,martindelcampo_2020_tipi,ACCEPT,name,,Ben 11-15: instrument field names the TIPI (Gosling 2003) and it has 10 items; Spanish text
+fcv19s,kopczynski_2021_fcv19s,ACCEPT,name,,Ben 11-15: instrument field names the FCV-19S (Ahorsu) and it has 7 items; Polish text
+tipi,kayir_2026_tipi,ACCEPT,name,,"Ben 11-15: construct tag names the TIPI and it has 10 items; Turkish, responses 1-5 (TIPI is usually 1-7)"
+gse,mutuyimana_2026_gse,ACCEPT,name,partial: 9/10 items,Ben 11-15: 9 of 10 items clears the 80% partial-table rule (by count; text not checkable)
+rses,contreras_valdez_2026_rses,ACCEPT,name,partial: 8/10 items,Ben 11-15: 8 of 10 items clears the 80% partial-table rule (by count; text not checkable)
+bfi10,mendezlopez_2023_bfi10,ACCEPT,name,,Ben 11-15: 11 items: the BFI-10 plus its optional 11th agreeableness item
+lotr,ramirez_maestre_2020_lotr,ACCEPT,name,scored items only: 6/10,"Ben 11-15: 6 items = the LOT-R's scored items, its 4 fillers dropped"
+lotr,stapleton_2021_lotr,ACCEPT,name,scored items only: 6/10,"Ben 11-15: 6 items = the LOT-R's scored items, its 4 fillers dropped"
+panas,gracio_michelon_2026_panas_na,REJECT,,,Ben 11-15: 5-item negative affect form (I-PANAS-SF half): a short form
+panas,gracio_michelon_2026_panas_pa,REJECT,,,Ben 11-15: 5-item positive affect form (I-PANAS-SF half): a short form
+panas,wang_2026_panas_na,REJECT,,,Ben 11-15: 5-item negative affect form: a short form
+panas,wang_2026_panas_pa,REJECT,,,Ben 11-15: 5-item positive affect form: a short form
+panas,manylabs4_klein_2022_panasx,REJECT,,,Ben 11-15: PANAS-X (60 items): a different instrument
+panas,van_beveren_2019_panasc,REJECT,,,"Ben 11-15: PANAS-C (30 items, children): a different instrument"
+gse,heekerens_2025_gse,REJECT,,,Ben 11-15: 3 items: a short form
+cesd,martin_2021_cesdr,REJECT,,,Ben 11-15: CESD-R (revised): a different instrument

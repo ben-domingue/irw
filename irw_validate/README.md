@@ -45,6 +45,19 @@ and none of that reasoning applies to a checker that opens a CSV.
 `irw-validate` is a console script. In a checkout without the install,
 `python3 -m irw_validate.cli` works from `src/`.
 
+### Releasing
+
+A release is three steps:
+
+1. Bump `version` in `irw_validate/pyproject.toml`.
+2. Tag the merge commit `irw-validate-vX.Y.Z` and push the tag; the tag
+   publishes to PyPI (Trusted Publishing is already set up).
+3. Bump the pin in `irw_site/validate.qmd`
+   (`const IRW_VALIDATE = "irw-validate==X.Y.Z"`). The browser validator runs
+   that pinned version in Pyodide, so without this step outside researchers
+   stay on the old release. The site's scheduled render picks the change up;
+   no dispatch is needed.
+
 ## Why this exists
 
 The checks were forked, and neither half could gate anything:
