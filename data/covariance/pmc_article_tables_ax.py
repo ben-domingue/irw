@@ -6,10 +6,9 @@ Source: Europe PMC full-text XML,
 https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML.
 Each article's <license> is read and must be CC BY (creativecommons.org/licenses/by/
 or the words "Creative Commons Attribution (CC BY)" / "Creative Commons Attribution
-License", optionally with a version) or CC0; the script stops otherwise. The one
-exception is NC_EXCEPTION below (PMC5577646, read as CC BY-NC by Ben on 2026-11-25): its
-exact licence text, for that PMCID only; its config is in PENDING (held for licence) and
-is built only with IRW_COV_PENDING=1. An article whose own metadata (<article-meta>)
+License", optionally with a version) or CC0; the script stops otherwise. (PMC5577646,
+Sinozic et al. 2017, is out: the journal states CC BY-NC-ND 4.0, which IRW does not
+reshare; Ben, 2026-11-26.) An article whose own metadata (<article-meta>)
 carries a retraction link (<related-article related-article-type="retraction-forward"> or
 "retracted-article") is refused. Links of that kind inside the reference list mark a
 retracted *cited* paper, not this article, so they are not read.
@@ -76,8 +75,7 @@ shortest round-trip form of the published decimal (for example "0.40" -> "0.4", 
 `n` is the matrix N on every row, unless the config gives per-cell n (above).
 
 Usage: python3 data/covariance/pmc_article_tables_ax.py <out dir>
-(set IRW_PMC_XML_DIR=<dir of PMCxxxx.xml> to read saved copies instead of Europe PMC;
-IRW_COV_PENDING=1 also builds the PENDING configs)
+(set IRW_PMC_XML_DIR=<dir of PMCxxxx.xml> to read saved copies instead of Europe PMC)
 """
 import csv
 import os
@@ -365,15 +363,6 @@ CONFIGS = [
            strip=r"[ab]$"),
 ]
 
-# Not built by default (IRW_COV_PENDING=1 builds them into the same out dir): held for a
-# licence question (see held.csv).
-PENDING = [
-    # Sinožić et al. (2017), Table 4: Spearman; upper triangle; each variable's label row is
-    # followed by "rs", "P" and "n" rows; no row for the last variable; per-cell n two rows
-    # below the rs. Licence CC BY-NC (Ben, 2026-11-25; NC_EXCEPTION).
-    square("PMC5577646", "Table 4", "sinozic_2017_civiq6", 428, CIV, [2, 6, 10, 14, 18, None], seq(1, 6), 0, CIV,
-           label_dr=-1, cell_n=dict(dr=2, dc=0, rx=r"(\d+)", lab=(0, "n"))),
-]
 
 
 DIAG = {"1", "-", "–", "—", "‐", "", "1.00", "1.0", "1.000", "1.0000"}
@@ -428,12 +417,6 @@ def label_of(lab, rx, where):
     return lab
 
 
-# The one non-CC BY licence accepted, for this article only (Ben, 2026-11-25, #3564): its
-# <license> reads "Creative Commons Attribution License, which permits unrestricted
-# non-commercial use" with no URL, read as CC BY-NC.
-NC_EXCEPTION = {"PMC5577646": "This is an open access article distributed under the Creative Commons Attribution "
-                              "License, which permits unrestricted non-commercial use, distribution, and reproduction "
-                              "in any medium, provided the original work is properly cited."}
 
 
 def check_article(pmcid, root):
@@ -441,10 +424,7 @@ def check_article(pmcid, root):
     href = (lic.get("{http://www.w3.org/1999/xlink}href") or "") if lic is not None else ""
     links = " ".join(e.get("{http://www.w3.org/1999/xlink}href") or "" for e in lic.iter()) if lic is not None else ""
     ltxt = txt(lic) if lic is not None else ""
-    if pmcid in NC_EXCEPTION:            # exactly the ruled text, with no licence link
-        if ltxt != NC_EXCEPTION[pmcid] or links.strip():
-            raise SystemExit(f"{pmcid}: licence text is not the one ruled on: {ltxt[:120]}")
-    elif re.search(r"NonCommercial|NoDeriv|by-nc|by-nd|by-sa|ShareAlike", href + links + ltxt):
+    if re.search(r"NonCommercial|NoDeriv|by-nc|by-nd|by-sa|ShareAlike", href + links + ltxt):
         raise SystemExit(f"{pmcid}: restricted licence {href} {ltxt[:120]}")
     elif not (re.search(r"creativecommons\.org/(licenses/by/|publicdomain/zero)", href + links + ltxt)
               or re.search(r"Creative Commons Attribution( \(CC BY\))?( \d\.\d)? (L|l)icen[cs]e", ltxt)):
@@ -714,7 +694,7 @@ def main(outdir):
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     cache, tables = {}, {}
-    for cfg in CONFIGS + (PENDING if os.environ.get("IRW_COV_PENDING") == "1" else []):
+    for cfg in CONFIGS:
         if cfg["pmcid"] not in cache:
             cache[cfg["pmcid"]] = ET.fromstring(get(cfg["pmcid"]))
             check_article(cfg["pmcid"], cache[cfg["pmcid"]])
