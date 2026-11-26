@@ -1337,4 +1337,13 @@ scs_2025_cfaclinic,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a 
 scs_2025_cfanonclinic,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 scs_2025_cfausatr,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 sd3ypl_klimczak_2019_sd3,data/sd3ypl_klimczak_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+thurston_2021_mrt,data/thurston_2021_mrt/thurston_2021_mrt.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_embedded_figures,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_mental_rotation,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_perspective_taking,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_raven12,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_sbsod,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_spatial_scaling,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_vswm,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wong_2025_vwm,data/wong_2025_spatial/wong_2025_spatial.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 wooly_hartman2022,data/AVI-S.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
