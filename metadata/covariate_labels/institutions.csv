@@ -17,3 +17,7 @@ platte_2026_*,cov_school,publish,"the source labels are already anonymised, 'sch
 rogers_2026_*,cov_school,publish,"School labels are country-level, 'Aus School' and 'UK School'; no school is identifiable; reviewed 2026-10-21"
 aznar_diaz_2026_*,cov_university,withhold,"Universidad labels are named public Spanish universities (Universidad de Almeria, de Cadiz, de Cordoba, de Granada, de Huelva, ...); withheld per the jie_2024_psqi ruling (#1775); reviewed 2026-10-21"
 deleon_villagran_2026_*,cov_campus,withhold,"CRegional labels are the named regional centres of one Salvadoran university (Chalatenango, Sonsonate, San Salvador, San Miguel) -- a place name here identifies the campus; withheld per the estevez_2021/jie_2024 rulings; reviewed 2026-10-21"
+polin_2026_crt*,cov_school,publish,"academic schools (Business, Engineering and Computer Science, Health Sciences), not named institutions; reviewed 2026-11-26"
+mastrothanasis_2026_sprs_s,cov_class,publish,"grade levels (fifth grade .. high school), not named classes; reviewed 2026-11-26"
+ercan_2026_*,cov_school,withhold,"named Turkish universities (Erciyes, Mersin, Cukurova, ...); reviewed 2026-11-26"
+hernandez_martinez_2025_math_attitudes,cov_institution,withhold,"named Ecuadorian schools; reviewed 2026-11-26"

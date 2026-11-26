@@ -149,7 +149,12 @@ class BuildTest(unittest.TestCase):
             write("t1", {"cov_gender": cov(["hombre", "mujer"], {"hombre": 1, "mujer": 1})}),
         ])
         self.assertEqual(rows, [])
-        self.assertEqual(rec, {})
+        # a table that is not live leaves no trace; a covariate shipped as label
+        # text is recorded as `text` so audit_gaps.py reads it as looked-at,
+        # nothing owed (#3754)
+        self.assertEqual(list(rec), [("t1", "cov_gender")])
+        self.assertEqual(rec[("t1", "cov_gender")]["status"], "text")
+        self.assertEqual(rec[("t1", "cov_gender")]["n_labelled"], 0)
 
     def test_second_file_unlabelled_is_left_out(self):
         # two studies feed cov_gender; only the first file labels its column

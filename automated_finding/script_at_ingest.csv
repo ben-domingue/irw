@@ -1592,4 +1592,16 @@ kuroda_2026_socialgoals7,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 luo_2024_lifesat7,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 shen_2026_genaiuse4,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
 cruz_2025_campusclimate6,cov,data/covariance/pmc_article_tables_az.py,2026-11-25
+cai_2026_careerbreadth6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+xu_2026_aifeedback6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+zhang_2024_hcwdistress6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+herr_2023_meaningfulwork7,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+alonazi_2025_limbstrength7,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+jiao_2024_foodmedia6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+velotti_2021_loneliness6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+larkin_2022_somatic7,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+iimura_2022_spsgi6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+boren_2023_nursestress6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+dealmeida_2021_moneyattitude6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
+hagerman_2017_faceattract6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 poole_2020_toj,core,data/timing_db/timing_db.R,2026-11-26
