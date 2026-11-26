@@ -17,7 +17,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-lead
 - [x] Ruled 2026-11-25: b108 shipped with the RA-name column dropped (gracia_2026_*); b14 and b45 HELD (blocked_licence);
   code-named construct tables ship as they are.
 - [ ] Unworked leads b37, b44, b60, b125, b127 (reasons in the lead notes).
-- [ ] Covariate labels: after these tables are published and the weekly pipeline runs, `build.py`, `audit_gaps.py --write`, PR.
+- [x] Covariate labels: done 2026-11-26 in #3754 (+69 tables); irw_meta published.
 
 ## Repos backlog drain 2026-11-25b — 143 unworked leads
 
@@ -67,7 +67,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   1000: the next batch needs another shard.
 - [ ] Ben: ship zenodo 15260103 (name-free twin of the named-respondent figshare 28667843)? Pant 2023/2025 organic
   pair (PV1-3 disagree): hold both, or ship one?
-- [ ] Covariate labels: the 9 .sav scripts (vilkaitevaitone_2026_ewom, kadlera_2025_ppis/_pops and lane 2's six) were
+- [x] (Done 2026-11-26, #3754: built; endeshaw/ghulman/perttula were a false never_examined, fixed in build.py/audit_gaps.py.) Covariate labels: the 9 .sav scripts (vilkaitevaitone_2026_ewom, kadlera_2025_ppis/_pops and lane 2's six) were
   HARVESTED 2026-11-24; logs in ~/.cache/irw/covariate_labels/logs. `build.py` only labels tables in metadata.csv, which
   the 2026-11-24 pipeline built before the shards were published. After the next weekly pipeline run: `build.py`,
   `audit_gaps.py --write`, PR. endeshaw_2026, ghulman_2025, perttula_2026 sit in gaps.csv as never_examined although
@@ -209,7 +209,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
   answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
 - [ ] 63 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/DJNHCM (8-case OSCE checklists,
   4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).
-- [ ] Re-run `metadata/covariate_labels/build.py` after release so mastrothanasis_2026_sprs_s
+- [x] (Done 2026-11-26, #3754.) Re-run `metadata/covariate_labels/build.py` after release so mastrothanasis_2026_sprs_s
   (harvest log already in ~/.cache/irw/covariate_labels/logs) gets its value labels.
 - [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
   Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
