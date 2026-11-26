@@ -332,7 +332,14 @@ def build(logs, live, rules, script_dir):
             for cov, info in sorted(w["covs"].items()):
                 vals = info.get("values")
                 if vals is not None and (not vals or not is_num(vals)):
-                    continue  # label strings or text ship already
+                    # Label strings or text ship already: nothing to label. Recorded
+                    # so audit_gaps.py can tell "looked, nothing owed" from "never
+                    # looked" (it called endeshaw_2026, ghulman_2025 and perttula_2026
+                    # never_examined until 2026-11-26).
+                    record.append(dict(table=table, covariate=cov, script=f"data/{b}.py", source_column="",
+                                       status="text", reason="shipped as label text; nothing to label",
+                                       n_codes=len(vals or []), n_labelled=0, unlabelled_codes=""))
+                    continue
                 col, why = pick_source(cov, vals or [], lab, src) if vals is not None else (None, "")
                 if col is None:
                     if why.startswith("ambiguous"):
