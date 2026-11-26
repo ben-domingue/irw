@@ -40,6 +40,16 @@ Usage (from src/):
 from the original deposit) unless --force; --force exists to re-plan a built
 record as a check on this tool, not to ingest it twice.
 
+Sample floor (datastandard.md, ruled on #3421): an ESM table needs 30 unique
+ids, and a median of 20 responses per person per item, pooled over the
+table's person x item grid (zero where a person skipped an item), in the
+table as shipped;
+a table with 100 or more people clears the ordinary floor and needs neither.
+`plan` flags a record under 30 people (counted in the data file, not openESM's
+n_participants) as a stop, and each proposed table that misses the floor as a
+per-table stop. Tables usually change after the plan, so the generated script
+checks the floor again on each table it writes.
+
 Network: the openESM metadata bundle (GitHub), the Zenodo API, and the OSF or
 Zenodo API for the original deposit's licence. Downloads are cached in
 ~/.cache/irw/openesm.
@@ -87,6 +97,19 @@ LICENCES = {
     "CC BY-SA 4.0": "CC BY-SA 4.0", "CC0 1.0": "CC0 1.0", "GPL-3.0": "GPL-3.0",
 }
 
+# Labels LICENCES does not know, read and ruled on for one record each:
+# record -> (licence carried, sentence for the dictionary notes).
+LICENCE_RULINGS = {
+    "0075": ("CC0 1.0",
+             "Licence: CC0 1.0 with an added no-reidentification clause (LICENSE "
+             "in github.com/digital-wellbeing/open-play, section 5): \"Users must "
+             "not attempt to reidentify, deanonymize, or otherwise link the data "
+             "to specific individuals. This includes combining the dataset with "
+             "other information sources for the purpose of reidentification.\" "
+             "The clause also bars sharing derived data in a way that could "
+             "enable reidentification. Cleared on #3421 (2026-11-15)."),
+}
+
 
 
 def norm_licence(name):
@@ -114,6 +137,28 @@ NA_LABEL = re.compile(r"not applicable|\bn/?a\b|don.?t know|no answer|"
 ANCHOR = re.compile(r"(-?\d+(?:\.\d+)?)\s*=\s*(.*?)\s*"
                     r"(?=(?:\s-?\d+(?:\.\d+)?\s*=)|\n|$)")
 TODO = "TODO"
+MIN_IDS = 100                               # datastandard.md sample floor
+ESM_MIN_IDS = 30                            # ESM floor (#3421): people, and
+ESM_MIN_MEDIAN = 20                         # pooled median responses per person per item
+
+
+def floor_check(counts):
+    """`counts`: responses per person (rows) per item (columns), zero where a
+    person in the table never answered an item. The median over that whole
+    person x item grid must reach ESM_MIN_MEDIAN (#3421: one pooled median, so
+    a thin item can stay in a table that clears 20 overall). Returns (people,
+    median, shortfall); shortfall is "" when the table clears."""
+    n = len(counts)
+    med = float(counts.stack().median()) if counts.size else 0.0
+    if n >= MIN_IDS:
+        return n, med, ""
+    why = []
+    if n < ESM_MIN_IDS:
+        why.append(f"{n} people, under {ESM_MIN_IDS}")
+    if med < ESM_MIN_MEDIAN:
+        why.append(f"median of {med:g} responses per person per item, under "
+                   f"{ESM_MIN_MEDIAN}")
+    return n, med, "; ".join(why)
 
 
 # --------------------------------------------------------------------------
@@ -310,7 +355,7 @@ def plan(args):
     if state and not state.startswith("planned") and not args.force:
         sys.exit(f"{did} is already in IRW ({state}). --force to re-plan anyway.")
     label = rec.get("license", "")
-    if label not in LICENCES:
+    if label not in LICENCES and num not in LICENCE_RULINGS:
         sys.exit(f"{did}: openESM licence {label!r} is not one this tool knows. "
                  "Read it and rule on it first (datastandard.md, 'Before you start').")
 
@@ -348,6 +393,12 @@ def plan(args):
              f"present but undescribed {extra}")
     if "id" not in df.columns:
         sys.exit(f"{did}: no `id` column")
+    n_ids = int(df["id"].nunique())
+    if n_ids < ESM_MIN_IDS:
+        # A flag rather than a refusal, so the record's plan is on file.
+        flag(f"STOP: {n_ids} people in the data file, under the ESM floor of "
+             f"{ESM_MIN_IDS} (datastandard.md, ruled on #3421). The record is "
+             "not built; resolve this flag by saying so, and emit nothing.")
 
     # ---- order, wave, date -------------------------------------------------
     times = [c for c in df.columns if feats.get(c, {}).get("variable_type") in TIME_TYPES]
@@ -413,15 +464,18 @@ def plan(args):
     beeps = (pd.to_numeric(df["beep"], errors="coerce")
              if "beep" in df.columns and df["beep"].nunique() <= 12 else None)
 
+    def as_number(c):
+        x = df[c]
+        if x.dtype == bool or x.dtype == object:
+            x = x.map({True: 1, False: 0, "TRUE": 1, "FALSE": 0}).where(x.notna())
+        return pd.to_numeric(x, errors="coerce")
+
     def item_entry(c):
         f = feats[c]
         stem, anchors, na = parse_coding(coding_of(f))
         if f["variable_type"] == "binary" and not anchors:
             anchors = {0: "not selected / false", 1: "selected / true"}
-        x = df[c]
-        if x.dtype == bool or x.dtype == object:
-            x = x.map({True: 1, False: 0, "TRUE": 1, "FALSE": 0}).where(x.notna())
-        x = pd.to_numeric(x, errors="coerce")
+        x = as_number(c)
         obs = x[~x.isin(na)].dropna()
         e = {"column": c, "item": slug(c, 60), "stem": stem or f["description"],
              "anchors": {str(k): v for k, v in anchors.items()},
@@ -557,6 +611,21 @@ def plan(args):
     for (v, lab), n in issues["na"].items():
         flag(f"{v} ({lab!r}) is read as missing in {n} item(s). Confirm it is "
              "not a scale point.")
+    for t in tables:
+        answered = pd.DataFrame({e["column"]: as_number(e["column"]).pipe(
+            lambda x: x.notna() & ~x.isin(e["na_codes"])) for e in t["items"]})
+        counts = answered.groupby(df["id"]).sum()
+        counts = counts[counts.sum(axis=1) > 0]
+        n, med, short = floor_check(counts)
+        t["floor"] = OrderedDict(people=n, median=med)
+        if short and n_ids >= ESM_MIN_IDS:       # else the record stop covers it
+            flag(f"STOP for table {t['name']}: {short} (ESM floor, datastandard.md, "
+                 f"ruled on #3421: {ESM_MIN_IDS} people and a median of "
+                 f"{ESM_MIN_MEDIAN} responses per person per item, pooled over the "
+                 f"table, unless {MIN_IDS}+ people). Move thin items to "
+                 "not_shipped, or merge the table into one that clears the floor "
+                 "only if it is the same instrument. The "
+                 "generated script checks the tables as shipped.")
     singles = [t["name"] for t in tables if len(t["items"]) == 1]
     if singles:
         flag(f"{len(singles)} proposed table(s) hold a single item ({', '.join(singles)}). "
@@ -592,7 +661,7 @@ def plan(args):
 
     olic, how = original_licence(rec.get("link_to_data"))
     olic = norm_licence(olic) if olic != TODO else olic
-    carried = LICENCES[label]
+    carried, ruled_note = LICENCE_RULINGS.get(num, (LICENCES.get(label), ""))
     flag(f"Licence: openESM {label!r}; original deposit {olic!r} ({how}). IRW "
          "carries openESM's label when it is stricter (ruled 2026-10-04); if the "
          "two differ, the difference goes in the notes and in the report to openESM.")
@@ -616,9 +685,11 @@ def plan(args):
             n_days=rec.get("n_days"), n_beeps_per_day=rec.get("n_beeps_per_day")),
         original_licence=OrderedDict(value=olic, how=how),
         licence=carried,
+        licence_note=ruled_note,
         reference=bibtex_to_reference(rec.get("reference_a")),
         script=script,
         input=OrderedDict(n_rows=len(df), n_ids=int(df["id"].nunique())),
+        exclude_ids=[],
         order=order, date=date,
         tables=tables, candidates=candidates, not_shipped=not_shipped,
         itemtext=OrderedDict(
@@ -672,7 +743,10 @@ def report(spec, rec, df):
         lines.append(f"**{tb['name']}** ({len(tb['items'])} items, scale "
                      f"{tb['items'][0]['scale'][0]}..{tb['items'][0]['scale'][1]}"
                      + (f", missing codes {tb['items'][0]['na_codes']}"
-                        if tb['items'][0]['na_codes'] else "") + ")")
+                        if tb['items'][0]['na_codes'] else "")
+                     + (f"; {tb['floor']['people']} people, median "
+                        f"{tb['floor']['median']:g} responses per person per item"
+                        if "floor" in tb else "") + ")")
         for e in tb["items"]:
             lines.append(f"- `{e['item']}`: {e['stem'][:90]} "
                          f"(observed {e['observed'][0]}..{e['observed'][1]}, "
@@ -710,6 +784,11 @@ def check_spec(spec):
     errs += [f"flag {i}: no resolution -- {f['what'][:70]}"
              for i, f in enumerate(spec["flags"], 1)
              if not (f.get("resolution") or "").strip()]
+    ex = spec.get("exclude_ids", [])
+    if not isinstance(ex, list) or len(set(map(str, ex))) != len(ex):
+        errs.append("exclude_ids: a list of distinct ids")
+    errs += [f"{t['name']}: dict_note must be a string" for t in spec["tables"]
+             if not isinstance(t.get("dict_note", ""), str)]
     if spec["candidates"]:
         errs.append("candidates is not empty: move each into a table or not_shipped")
     names = [t["name"] for t in spec["tables"]]
@@ -784,9 +863,15 @@ ITEMDIR = os.path.join(AF, "itemtext_output")
 CACHE = Path.home() / ".cache" / "irw" / "openesm"
 HEADERS = {{"User-Agent": "IRW-openESM-ingest/1.0"}}
 
+# Sample floor (datastandard.md, #3421): 100 people, or for ESM tables 30
+# people and a median of 20 responses per person per item, pooled over the
+# table's person x item grid (zero where a person skipped an item).
+MIN_IDS, ESM_MIN_IDS, ESM_MIN_MEDIAN = {min_ids}, {esm_min_ids}, {esm_min_median}
+
 REC = {zrec!r}
 FILENAME = {filename!r}
 N_ROWS, N_IDS = {n_rows!r}, {n_ids!r}
+EXCLUDE_IDS = {exclude_ids}        # dropped; why is in the coding notes
 ORDER = {order}
 DATE = {date}
 ITEMTEXT = {itemtext_spec}
@@ -887,6 +972,10 @@ def main():
     os.makedirs(ITEMDIR, exist_ok=True)
     df = load()
     assert len(df) == N_ROWS and df["id"].nunique() == N_IDS, df.shape
+    if EXCLUDE_IDS:
+        gone = df["id"].astype(str).isin(EXCLUDE_IDS)
+        assert df.loc[gone, "id"].nunique() == len(EXCLUDE_IDS), "an EXCLUDE_IDS id is absent"
+        df = df.loc[~gone].copy()
     df = add_wave_date(df)
     keep = ["id", "wave"] + (["date"] if DATE else [])
     for table in TABLES:
@@ -909,6 +998,11 @@ def main():
         assert not long.duplicated(["id", "item", "wave"]).any()
         if DATE:
             assert (long.groupby("id")["date"].diff().dropna() >= 0).all()
+        counts = long.groupby(["id", "item"]).size().unstack(fill_value=0)
+        n, med = len(counts), counts.stack().median()
+        assert n >= MIN_IDS or (n >= ESM_MIN_IDS and med >= ESM_MIN_MEDIAN), (
+            table["name"], f"{{n}} people, median {{med:g}} responses per person "
+            "per item: under the sample floor")
         bad = [c for c in run_qc(long) if c.status == "fail"]
         assert not bad, (table["name"], [(c.name, c.detail) for c in bad])
         path = os.path.join(OUTDIR, f"{{table['name']}}.csv")
@@ -948,6 +1042,8 @@ def emit(args):
     if out.exists() and not args.force:
         sys.exit(f"{out.relative_to(SRC)} exists; --force to overwrite")
     olic = spec["original_licence"]["value"]
+    # the reference's DOI: openESM's unless the reviewed spec cites another version
+    paper_doi = spec.get("paper_doi") or o["paper_doi"]
     licence_note = ("" if norm_licence(olic) == spec["licence"] else
                     f" (the openESM copy's label, carried; the original "
                     f"deposit is {olic})")
@@ -959,9 +1055,10 @@ def emit(args):
     header = "\n".join(textwrap.fill(line, 79, subsequent_indent="    ") for line in [
         f"Original deposit: {o['link_to_data']} ({olic})",
         f"Paper: {spec['reference']} "
-        f"doi:{re.sub(r'^https?://(dx[.])?doi[.]org/', '', o['paper_doi'] or '')}",
+        f"doi:{re.sub(r'^https?://(dx[.])?doi[.]org/', '', paper_doi or '')}",
         f"Data: {o['filename']}",
-        f"License: {spec['licence']}{licence_note}",
+        f"License: {spec['licence']}{licence_note}"
+        + (f". {spec['licence_note']}" if spec.get("licence_note") else ""),
         "Item text: " + (f"shipped, {it['language']}, translation_source="
                          f"{it['translation_source']}" if it["ship"] else
                          "not shipped (see coding notes)"),
@@ -980,6 +1077,8 @@ def emit(args):
         not_shipped="\n".join(f"{c:<22} {why}" for c, why in spec["not_shipped"].items())
         or "(none)",
         n_rows=spec["input"]["n_rows"], n_ids=spec["input"]["n_ids"],
+        exclude_ids=pprint.pformat(sorted(map(str, spec.get("exclude_ids", []))), width=70),
+        min_ids=MIN_IDS, esm_min_ids=ESM_MIN_IDS, esm_min_median=ESM_MIN_MEDIAN,
         order=pprint.pformat(spec["order"], width=70),
         date=pprint.pformat(spec["date"], width=70),
         itemtext_spec=pprint.pformat({"ship": it["ship"], "language": it["language"]}),
@@ -995,12 +1094,14 @@ def emit(args):
                     "copy used are carried."
                     if licence_note else
                     f"; original deposit {o['link_to_data']}, also {olic}.")
+                 + (f" {spec['licence_note']}" if spec.get("licence_note") else "")
+                 + (f" {t['dict_note']}" if t.get("dict_note") else "")
                  + f" See data/{spec['script']}.py.")
         dict_rows.append(OrderedDict(
             table=t["name"], description=t["description"],
             url=f"https://zenodo.org/records/{o['zenodo_record']}",
             reference=spec["reference"],
-            doi=re.sub(r"^https?://(dx\.)?doi\.org/", "", o["paper_doi"] or ""),
+            doi=re.sub(r"^https?://(dx\.)?doi\.org/", "", paper_doi or ""),
             doi_data=o["zenodo_version_doi"], original_license=spec["licence"],
             public_reshare="Public", derived_license=spec["licence"],
             notes=notes, codebook_url=o["codebook_url"]))

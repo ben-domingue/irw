@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2009-MPRB-District-06-Final-RCV.xls
+1,c01,4023.0000
+1,c02,277.0000
+1,c03,3040.0000
+1,c04,978.0000
+1,(exhausted),0.0000
+1,(write-in),36.0000
+2,c01,4300.0000
+2,c02,0.0000
+2,c03,3506.0000
+2,c04,0.0000
+2,(exhausted),548.0000
+2,(write-in),0.0000
+1,(threshold),4178
+1,(elected:c01),

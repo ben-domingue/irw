@@ -23,6 +23,15 @@ from .model import Finding
 MAX_NAME = 40
 #: datastandard.md line 13: "The floor is 100 unique `id` values, flat".
 MIN_IDS = 100
+#: The ESM / EMA floor (datastandard.md, ruled on #3421): 30 unique ids and a
+#: median of 20 responses per person per item, pooled over the table's
+#: person x item grid (zero where a person skipped an item).
+ESM_MIN_IDS = 30
+ESM_MIN_MEDIAN = 20
+#: Columns that mark repeated measurement over time. The ESM floor is only
+#: considered when one is present; the median condition then does the real
+#: work, since a panel with a handful of waves cannot reach 20.
+ESM_OCCASION = ("wave", "timepoint", "date")
 #: The plausible interval for a human age in years. `cov_age` outside it is not
 #: an age -- see #1779, which found 81 live tables shipping a sentinel (999,
 #: 1999), a birth year, or a days-since-epoch offset (-18090).
@@ -58,13 +67,25 @@ def check_shape(df: pd.DataFrame, table: str = "") -> list:
     out = []
     if "id" in df.columns:
         n = df["id"].nunique()
-        if n < MIN_IDS:
+        esm = _esm_floor(df, n) if n < MIN_IDS else None
+        if esm is not None:
+            out.append(Finding(
+                "sample_floor", "info",
+                f"{n} unique ids, under the flat floor of {MIN_IDS}, but the "
+                f"table clears the ESM floor ({ESM_MIN_IDS} people and a pooled "
+                f"median of {esm:g} responses per person per item, at least "
+                f"{ESM_MIN_MEDIAN}; datastandard.md, #3421). Confirm it is "
+                "intensive longitudinal (ESM / EMA) data.",
+                table=table, group="core"))
+        elif n < MIN_IDS:
             out.append(Finding(
                 "sample_floor", "warn",
                 f"{n} unique ids; IRW intake policy sets a flat floor of {MIN_IDS} "
                 "(not part of the data standard). Warn rather than block: the "
                 "floor governs what IRW accepts, not what is already published. "
-                "Non-human (animal) data are exempt (#2220).",
+                "Non-human (animal) data are exempt (#2220); ESM / EMA tables "
+                f"need {ESM_MIN_IDS} people and a pooled median of "
+                f"{ESM_MIN_MEDIAN} responses per person per item (#3421).",
                 table=table, group="core"))
     lead = [c for c in df.columns[:3]]
     if len(df.columns) >= 3 and lead != ["id", "item", "resp"]:
@@ -74,6 +95,22 @@ def check_shape(df: pd.DataFrame, table: str = "") -> list:
             "[id, item, resp] first, then optional columns.",
             table=table, group="core"))
     return out
+
+
+def _esm_floor(df: pd.DataFrame, n: int):
+    """The pooled median if `df` clears the ESM floor, else None.
+
+    Only tables with an occasion column are considered. The median is over
+    the whole person x item grid, counting zero where a person in the table
+    never answered an item, matching `automated_finding/openesm_ingest.py`.
+    """
+    if n < ESM_MIN_IDS or "item" not in df.columns:
+        return None
+    if not any(c in df.columns for c in ESM_OCCASION):
+        return None
+    grid = df.groupby(["id", "item"]).size().unstack(fill_value=0)
+    med = float(grid.stack().median())
+    return med if med >= ESM_MIN_MEDIAN else None
 
 
 def _cov_range_severity() -> str:

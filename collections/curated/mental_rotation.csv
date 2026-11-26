@@ -1,0 +1,23 @@
+table,basis,note
+twod_rotation_mather2023,curated:mental_rotation,"2D object rotation ability items (Mather & Condon 2023), large sparse online sample"
+fullscaleiq_mentalrotation,curated:mental_rotation,"openpsychometrics Full Scale IQ test, mental rotation block (6 items)"
+fullscaleiq_mentalrotation_options,curated:mental_rotation,option-level companion of fullscaleiq_mentalrotation
+geiser_tam,curated:mental_rotation,"mental rotation test items (Geiser, Lehmann & Eid 2006)"
+janssen2_tam,curated:mental_rotation,mental rotation test items (Janssen & Geiser 2010)
+dd_rotation,curated:mental_rotation,"chronometric mental rotation with rt (Borst, Kievit, Thompson & Kosslyn 2011)"
+mentalrotation_wolf_2024,curated:mental_rotation,"3-D printed Shepard-Metzler-style shapes, angle in itemcov_angle"
+thurston_2021_mrt,curated:mental_rotation,"Mental Rotation Test (Vandenberg & Kuse type), 20 items, Thai adults"
+wong_2025_mental_rotation,curated:mental_rotation,"mental rotation test, 10 items with penalty scoring, Hong Kong adults"
+bauer_2021_mr_pupil,curated:mental_rotation,"chronometric, 3D cubes, pre/post mindfulness or stereotype-threat manipulation"
+ebert_2024_animal_mr,curated:mental_rotation,"chronometric, animal pictures, preschoolers"
+jost_2023_mr_visualization,curated:mental_rotation,"chronometric, 3D cubes, choose the rotated copy, three conditions"
+jost_2022_mcmr_e1,curated:mental_rotation,"chronometric, 3D cubes, 2-alternative blocks of a multiple-choice test"
+jost_2022_mcmr_e2,curated:mental_rotation,"chronometric, 3D cubes, 2-alternative blocks of a multiple-choice test"
+ganis_kievit_2015_mr,curated:mental_rotation,"chronometric, new 3D shape set validation study"
+liu_lourenco_2026_mr,curated:mental_rotation,"chronometric, speed vs accuracy instructions"
+ebert_2024_letter_mr,curated:mental_rotation,"chronometric letter rotation (0/72/144 degrees), alone or under visual WM load"
+lakin_2024_mrt,curated:mental_rotation,"Shepard-Metzler style mental rotation test, 15 items (Rajeb & Lakin, OSF kxb9r)"
+munns_2026_flags,curated:mental_rotation,"Flags mental rotation test, 21 items (Munns & Hegarty 2026, study 1)"
+munns_2026_vk_mrt,curated:mental_rotation,"Vandenberg & Kuse Mental Rotations Test, 20 items (Munns & Hegarty 2026, study 2)"
+munns_2026_psvtr,curated:mental_rotation,"PSVT:R, 30 items (Munns & Hegarty 2026, study 3)"
+munns_2026_mrt_battery,curated:mental_rotation,"hybrid Flags + V&K + PSVT:R battery, 36 items (Munns & Hegarty 2026, study 4)"

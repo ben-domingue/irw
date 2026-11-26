@@ -19,14 +19,24 @@ cells (1, a dash, or blank) are written as 1. For tables printed as a full
 square, the script checks the upper triangle equals the lower exactly (as text)
 and writes the lower. Values are written in shortest round-trip form of the
 published decimal (e.g. "0.42"), i.e. unchanged. Mean and SD columns, where the
-table has them, become mean/sd rows.
+table has them, become mean/sd rows. A reliability the article prints for a
+variable (Cronbach's alpha, same sample) becomes a rel row, value as printed:
+from another table of the article (`rel`, matched on the row label given for
+each variable) or from the article text (`rel_text`, one regex per variable with
+one capture group, which must match exactly one distinct value). The
+coefficient is named in matrices.csv notes.
+
+Modification (2026-11-18): rel rows added (#3607 standard) for yu_2026,
+huang_2026 and liu_2026; other rows unchanged.
 
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md; stars stripped; values unchanged.
 
 Usage: python3 data/covariance/pmc_article_tables_o.py <out dir>
+(set IRW_PMC_XML_DIR=<dir of PMCxxxx.xml> to read saved copies instead of Europe PMC)
 """
 import csv
+import os
 import re
 import sys
 import urllib.request
@@ -37,13 +47,30 @@ from pathlib import Path
 #  first matrix col, mean col, sd col; optional k = number of variables when
 #  mean/SD are printed as rows below the matrix, at table rows mean_row/sd_row)
 #  layout: "lower" (lower triangle printed) or "full" (full square printed)
+#  optional rel = dict(label=<table label>, col=<cell index>, rows={variable: <first
+#  cell of its row in that table>}) and rel_text = {variable: regex}: see header.
 CONFIGS = [
     dict(pmcid="PMC13526775", label="Table 3", table="yu_2026_digitalreadiness11", n=768,
-         layout="lower", row0=1, labcol=0, col0=3, mean=1, sd=2),
+         layout="lower", row0=1, labcol=0, col0=3, mean=1, sd=2,
+         rel=dict(label="Table 1", col=2, rows={v: v for v in (  # Cronbach's alpha column
+             "Digital readiness (T1)", "Family support (T1)", "Learning engagement (T1)",
+             "Digital self-efficacy (T2)", "Learning engagement (T2)")})),
     dict(pmcid="PMC13572707", label="Table 1", table="huang_2026_familycommunication10", n=729,
-         layout="lower", row0=1, labcol=0, col0=3, mean=None, sd=None),
+         layout="lower", row0=1, labcol=0, col0=3, mean=None, sd=None,
+         rel_text={  # Cronbach's alpha, 2.2 Measures
+             "Conversation": r"Cronbach’s alpha coefficients were (\d?\.\d+) for conversation orientation",
+             "Conformity": r"Cronbach’s alpha coefficients were \d?\.\d+ for conversation orientation and (\d?\.\d+) for conformity orientation",
+             "CDI W1": r"Cronbach’s alpha was (\d?\.\d+) at both wave 1 \(W1\) and wave 2 \(W2\)",
+             "CDI W2": r"Cronbach’s alpha was (\d?\.\d+) at both wave 1 \(W1\) and wave 2 \(W2\)",
+             "ASA W1": r"more anhedonia\)\. Cronbach’s alpha coefficients were (\d?\.\d+) at W1",
+             "ASA W2": r"more anhedonia\)\. Cronbach’s alpha coefficients were \d?\.\d+ at W1 and (\d?\.\d+) at W2",
+             "ChIA W1": r"greater anger expression\. Cronbach’s alpha coefficients were (\d?\.\d+) at W1",
+             "ChIA W2": r"greater anger expression\. Cronbach’s alpha coefficients were \d?\.\d+ at W1 and (\d?\.\d+) at W2"}),
     dict(pmcid="PMC13701506", label="Table 1", table="liu_2026_peteachingstyle8", n=710,
-         layout="lower", row0=1, labcol=0, col0=5, mean=1, sd=2),
+         layout="lower", row0=1, labcol=0, col0=5, mean=1, sd=2,
+         rel_text={"PTSIC": (  # Cronbach's alpha, 2.3.2 (the 15-item PTSIC scale); no other alpha is per-variable
+             r"averaging responses across the 15 items\. The scale demonstrated excellent internal "
+             r"consistency in the present sample \(Cronbach’s α = (\d?\.\d+)\)")}),
 ]
 
 DIAG = {"1", "-", "–", "—", "", "1.00", "1.0"}
@@ -54,6 +81,9 @@ def txt(e):
 
 
 def get(pmcid):
+    local = os.environ.get("IRW_PMC_XML_DIR")
+    if local:
+        return (Path(local) / f"{pmcid}.xml").read_bytes()
     url = f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML"
     req = urllib.request.Request(url, headers={"User-Agent": "irw-cov-build"})
     with urllib.request.urlopen(req, timeout=120) as r:
@@ -123,6 +153,32 @@ def build(cfg, root):
             for i in range(k):
                 out.append({"stat": stat, "var1": names[i], "var2": "",
                             "value": num(r[cfg["col0"] + i], where)[0], "n": cfg["n"]})
+    if cfg.get("rel"):
+        rt = next(t for t in root.iter("table-wrap")
+                  if t.find("label") is not None and txt(t.find("label")) == cfg["rel"]["label"])
+        rrows = [[txt(c) for c in tr if c.tag in ("td", "th")] for tr in rt.iter("tr")]
+        for nm, lab in cfg["rel"]["rows"].items():
+            if nm not in names:
+                raise SystemExit(f"{where}: rel variable {nm!r} not in the matrix")
+            hit = [r for r in rrows if r and r[0] == lab]
+            if len(hit) != 1:
+                raise SystemExit(f"{where}: reliability row {lab!r} found {len(hit)} times")
+            v = num(hit[0][cfg["rel"]["col"]], f"{where} rel {nm}")[0]
+            if not 0 < float(v) <= 1:
+                raise SystemExit(f"{where}: reliability {v} out of range for {nm}")
+            out.append({"stat": "rel", "var1": nm, "var2": "", "value": v, "n": cfg["n"]})
+    if cfg.get("rel_text"):
+        text = txt(root.find(".//body"))
+        for nm, pat in cfg["rel_text"].items():
+            if nm not in names:
+                raise SystemExit(f"{where}: rel_text variable {nm!r} not in the matrix")
+            hits = set(re.findall(pat, text))
+            if len(hits) != 1:
+                raise SystemExit(f"{where}: reliability for {nm!r} matched {hits}")
+            v = num(hits.pop(), where)[0]
+            if not 0 < float(v) <= 1:
+                raise SystemExit(f"{where}: reliability {v} out of range for {nm}")
+            out.append({"stat": "rel", "var1": nm, "var2": "", "value": v, "n": cfg["n"]})
     return out, check, names
 
 

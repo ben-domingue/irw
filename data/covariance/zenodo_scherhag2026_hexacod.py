@@ -13,8 +13,9 @@ correlations among the HEXACO domain scores H, E, X, A, C, O and Disintegration
 o_r_compute = 1 means the authors computed the correlations from raw total
 scores rather than copying reported ones (Ben, 2026-11-17: matrices computed
 from microdata are included, with a note). o_r_facetlvl only says facet-level
-correlations also exist and does not affect these values. The alphas (o_rel_*)
-are not part of the layout.
+correlations also exist and does not affect these values. The alphas (o_rel_*,
+"Cronbach's alpha of the ... scale" in the codebook) are written as `rel` rows
+for the domains in that sample's matrix, as stored; a blank alpha is skipped.
 
 A variable with no correlation in a sample was not measured there and is
 dropped (Ben, 2026-11-17); a sample still holding a blank cell is not built and
@@ -25,6 +26,8 @@ built either. Values are written in shortest round-trip form, i.e. as stored.
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per sample, labelled
 "<report_ID> study <study_ID> sample <sample_ID>".
+Modification (2026-11-18): Cronbach's alpha per domain (o_rel_*) added as
+`rel` rows after each sample's matrix rows.
 
 Usage: python3 data/covariance/zenodo_scherhag2026_hexacod.py <out dir>
 """
@@ -96,6 +99,13 @@ def main(out):
             for j in keep[:a + 1]:
                 long.append({"stat": "cor", "var1": V[i], "var2": V[j],
                              "value": "1" if i == j else repr(M[i][j]), "n": ni, "group": group})
+        for i in keep:   # Cronbach's alpha as stored; blank skipped
+            a = num(r[ix[f"o_rel_{V[i]}"]])
+            if a is None:
+                continue
+            if not 0 < a <= 1:
+                raise SystemExit(f"{group}: alpha {a} for {V[i]} out of range")
+            long.append({"stat": "rel", "var1": V[i], "var2": "", "value": repr(a), "n": ni, "group": group})
         records.append({"group": group, "n_obs": ni, "dropped": dropped,
                         "computed": int(r[ix["o_r_compute"]] or 0),
                         "population": ", ".join(str(r[ix[c]]).strip() for c in ("s_targetpop", "t_country")
