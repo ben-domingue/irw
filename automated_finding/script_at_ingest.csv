@@ -1661,6 +1661,15 @@ uruguay_2023_aristas_g06_lec,core,data/national_exams_3498/uruguay_aristas.py,20
 uruguay_2023_aristas_g06_mat,core,data/national_exams_3498/uruguay_aristas.py,2026-11-27
 preininger_2025_sociolex_images,core,data/preininger_2025_sociolex.py,2026-11-27
 preininger_2025_sociolex_words,core,data/preininger_2025_sociolex.py,2026-11-27
+canada_eqao_g03_math,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g03_read,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g03_write,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g06_math,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g06_read,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g06_write,core,data/national_exams_3498/eqao_pj.py,2026-11-27
+canada_eqao_g09_math_academic,core,data/national_exams_3498/eqao_g9.py,2026-11-27
+canada_eqao_g09_math_applied,core,data/national_exams_3498/eqao_g9.py,2026-11-27
+canada_eqao_g10_osslt,core,data/national_exams_3498/eqao_osslt.py,2026-11-27
 alzahrani_2026_arabic_ld,core,data/alzahrani_2026_arabic_ld.py,2026-11-27
 brysbaert_2016_dlp2,core,data/brysbaert_2016_dlp2.py,2026-11-27
 brysbaert_2019_dcp,core,data/brysbaert_2019_dcp.py,2026-11-27
