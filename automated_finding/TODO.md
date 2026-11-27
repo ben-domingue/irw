@@ -105,10 +105,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-2
      thai_2021_government_support.csv, or rerun the thai_2021 data script.
   2. Ben publishes shard 2, then irw_text_4 (11 item text tables; saleem_2021_gad7 and elshanhaby_2026_manipulation_check
      describe shard 2 tables).
-- [ ] **Re-upload 4 tables (reverse-keyed items restored 2026-11-27):** javadizadeh_2022_{staffing,training,trust}
-  replace the live versions on item_response_warehouse_10 (now 10/9/18 items: StaffS9R/Staff10R, Trg5R, Trust18R back);
-  ji_2024_environmental_concern is new on item_response_warehouse_8. Rerun the two data scripts, `red_up` each set, Ben
-  publishes 10 and 8.
+- [x] **Re-uploaded 2026-11-27 evening (reverse-keyed items restored):** javadizadeh_2022_{staffing,training,trust}
+  replaced on the item_response_warehouse_10 draft (3/3 row-count verified; now 10/9/18 items);
+  ji_2024_environmental_concern new on the item_response_warehouse_8 draft (1/1 verified). Ben publishes 10 and 8.
 - [ ] Merge #3768 once shard 2 and irw_text_4 are published.
 - [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
   aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
