@@ -257,6 +257,7 @@ brudek_2026_hfs,core,data/brudek_2026_breast_cancer.py,2026-11-25
 brudek_2026_religious_meaning,core,data/brudek_2026_breast_cancer.py,2026-11-25
 brudek_2026_rses,core,data/brudek_2026_breast_cancer.py,2026-11-25
 brysbaert_2016_dlp2,core,data/brysbaert_2016_dlp2.py,2026-11-27
+brysbaert_2019_dcp,core,data/brysbaert_2019_dcp.py,2026-11-27
 burt_1915_emotions11,cov,data/covariance/pilot_rpackages.R,2026-11-17
 cabrerapommiez_2023_lecdis,core,data/national_exams_3498/cabrerapommiez_2023_lecdis.py,2026-11-25
 caceres_2022_solastalgia6,cov,data/covariance/pmc_article_tables_ay.py,2026-11-25
@@ -929,6 +930,7 @@ makowski_2025_illusion_perceptual,core,data/makowski_2025_illusion_retest/makows
 makowski_2025_illusion_retest,core,data/makowski_2025_illusion_retest/makowski_2025_illusion_retest.R,2026-11-25
 makowski_2026_illusion_pcs,core,data/makowski_2026_illusion_pcs/makowski_2026_illusion_pcs.R,2026-11-25
 malmi_1979_learning12,cov,data/covariance/batch_rpackages2.R,2026-11-17
+mandera_2020_ecp,core,data/mandera_2020_ecp.py,2026-11-27
 manzar_2019_ess8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 mao_2026_ai_governance,core,data/mao_2026_ai_governance.py,2026-11-25
 mao_2026_ai_implementation,core,data/mao_2026_ai_governance.py,2026-11-25
