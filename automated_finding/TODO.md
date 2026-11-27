@@ -88,6 +88,25 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   `metadata/10_collections.R` halts if a curated member is missing from published metadata. Branch
   `data/psychophysics-collection`, worktree `~/irw-wt/psychophysics-collection`.
 
+## Repos leads 2026-11-20 lane 2 (2026-11-27) — 307 tables staged, NOT uploaded
+
+Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-20-lane2`.
+
+- [ ] **Upload** (refused by the session's permission check, so not done): response tables first, by whole deposit,
+  from `automated_finding/runs/upload_2026-11-27/<shard>/` -- item_response_warehouse_10 (120; shard at 868),
+  _8 (74), _2 (70), _6 (43). `python3 -m red_up --dataset <shard> --dry-run <dir>`, then without `--dry-run`. Then the
+  11 item text tables in `automated_finding/itemtext_output/` to irw_text_4. Stamp `uploaded` in itemtext_provenance.csv
+  (byte edit) and the lead notes after row-count verification. Ben publishes.
+- [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
+  aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
+  ostos_2010, samaranayake_2026, syed_2026, tsai_2026, valera_2012 x2.
+- [ ] 61 item text tables held locally (`itemtext_hold_2026-11-27.csv`, files in Dropbox data/itemtext/): adapted
+  batteries and named instruments with no located grant; a clearance is an upload, not a redo.
+- [ ] Item text not built, wording in the deposit: javadizadeh_2022 (Codebook.xlsx; fire and police number items
+  differently -- map by wording), hartl_2015 (S1 Table PDF has the full German stems), amin_2026 (raw-instrument
+  headers), hoang_2020 (Survey questionnaire.docx), prasad_2026 (headers garbled 'na' -> '6'), mccall_2026 willingness
+  items (stem missing from the labels).
+
 ## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
 
 Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
@@ -95,9 +114,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
 - [x] **UPLOADED 2026-11-21 by Claude (Ben's go-ahead in-session, "please do the uploads")**: 169 response tables
   (396,057 responses) to the item_response_warehouse_9 draft, 169/169 row-count verified; Ben publishes.
   (35 deposits; list in BATCH_LOG). No item text.
-- [ ] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: 36 never opened because Mendeley's public API
-  returned 502 all session (re-profile them first), ~66 Zenodo/figshare/Dataverse/OSF rows not yet opened (green
-  purchase, destination image, service quality, tax-compliance experiments), and 2 holds below.
+- [x] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: worked 2026-11-27 (lane 2, BATCH_LOG 2026-11-27):
+  58 shipped (307 tables), 35 rejected, 5 blocked_licence, 4 skipped_pii; the 2 holds below stay unworked.
 - [ ] Holds: Novela (Zenodo 17302208, blocks observed 1-4 vs 2-5 -- a shifted 4-point scale?) and Rigglets (Mendeley
   wv525y5dn2, anchors printed Strongly agree..Strongly disagree; which end is 1?). Both need the paper or the authors.
 - [ ] Item text later, cheap from deposit files: fransisca_2026_*, prihatna_2025/2026_* (stems are the headers,

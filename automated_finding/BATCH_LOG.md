@@ -7,6 +7,67 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-27 — the 11-20 sweep's 104 unworked leads (lane 2): 58 leads, 57 deposits, 307 tables, 691,271 responses
+
+Ben (via the parent session): work every `unworked` lead in `leads/repos_leads_2026-11-20.csv`. Branch
+`data/repos-leads-2026-11-20-lane2`. Mendeley's public API answered this time (all ~36 deferred-on-502 rows were opened).
+Every lead now carries a `[repos sweep 2026-11-20 lane 2]` note: **58 shipped, 35 rejected_content, 5 blocked_licence,
+4 skipped_pii, 2 left unworked** (the two holds from the sweep, leads 18 Novela and 21 Rigglets, unchanged).
+
+All 307 tables pass `irw-validate --profile upload` (warnings only: nested observed ranges, response concentration,
+rights_register code-name leads on PT/FL/C/A/P codes that are not those instruments), `run_qc` no fails, and
+`irw_lint_covariates.py` with 3 accepted false positives (`syed_2026_eco_anxiety` items control_worry, loss_thinking,
+work_study_difficulty are eco-anxiety stems, not covariates). Every script balances its source columns (`not_shipped`
+gives a reason for each dropped column), asserts its source row count and its per-table output row counts. Build
+tooling (spec files, template, generator) lives outside the repo; the data/ scripts are self-contained.
+
+**Largest:** grant_2025_family_matters (11 policy-support items, 5,754 British adults, 55,335 responses), amin_2026 (771
+Pakistani shoppers, 9 tables), sorokowska_2024 (273 Polish children + caregivers: CFNS, odor identification test, FNS,
+CFPQ, 10 tables), prasad_2026 (630 Indian tourists, 25-attribute destination image), mccall_2026 (528 German students:
+CAS, CNS, BFI-10), tsai_2026 (768 Chiayi residents), traba_2026 (450 Spanish students and faculty), hartl_2015 (three
+Austrian tax experiments, 725 pooled), ostos_2010 and valera_2012 (Peruvian school-quality theses), cetinkaya_2025 (1,168).
+
+**Stacked samples:** atmadja_2026 (two brand sheets, cov_brand), takeuchi_2026 (leads 123 + 151, domestic and
+international samples, cov_sample), javadizadeh_2022 (fire + police, cov_sample; fire StaffS/TrgC prefixes unified to
+Staff/Trg), sun_2026 (three experiments, treat = X), hartl_2015 (cp/lp across S1-S3, first description only), xu_2026
+(study 2 + study 3, study 3 weekly x 4 with `wave`; study 2 rows wave = 1). `treat` carried for elshanhaby_2026,
+sun_2026, xu_2026.
+
+**Rejected (35):** duplicated response rows (81 45%, 89 49%, 101 43%, 146 26%, 165 44%, 78 15% plus an inconsistent
+second version 79); duplicates of shipped or IRW data (39 = 38, 92 = 91, 98 = 100, 116 = 113, 149 = 148, 93 = the
+live ali_2024_* from Dataverse Z6HW2X, 94 already in IRW via schaffner_2024_ssdp); N < 100 (44, 63, 65, 130, 172);
+composites/scores only (105, 129 -- its STAI items are pre-reversed, 154, 156); not person-by-item data (40, 61, 64
+Perplexity-compiled, 69 birds, 90 record checklist, 136 list experiment, 159/166 experiment records, 167 county data,
+190 bibliometrics); coin-flip exclusions 62 (16 items valued only 4-5, file named 'palingOK') and 124 (663 completion
+times all 161-229 s). **PII (4):** 68 and 180 (phone-number columns), 74 and 184 (names). **Licence (5, logged in
+license_blocked_candidates.csv):** 76 (Zenodo, none), 132/139 (public OSF nodes, no licence), 138 ('No license'), 135
+(CC0 plus 'contact me for permission').
+
+**Judgement calls worth a look:** ~20 deposits keep unexpanded codes as table names (e.g. `adami_2025_x1`,
+`charinolita_2025_x5`, `mauricio_2026_pe`); reverse-keyed (R) items dropped from javadizadeh_2022 (some R items
+correlate positively with their scale, some negatively); the EC block of ji_2024 dropped (file name says it was
+reverse-coded); rahmah_2026's masked 'Nama' column (initial + asterisks) dropped and the deposit shipped; samaranayake_2026's
+grade-specific G6/G9 task items shipped as separate items; isolated out-of-range cells set missing (saputra SS4 = 21,
+amin EM4 = 6, valera Item7 = 6 / Item43 = 33, samaranayake Q2k = 33, saleem ages 4/10/1994, ji age 128, syed age code 23).
+Table-name collisions with live tables were renamed: `kumar_2022_gp_*`, `anita_2026_chatbot_*`.
+
+**Item text (Step 3.5), builder `itemtext_verification/make_itemtext_repos_2026-11-20b.py`:** 11 tables built to ship
+in `itemtext_output/` -- saleem_2021_gad7 (GAD-7, register ship), elshanhaby_2026_manipulation_check (study-specific),
+valera_2012_* x8 (Spanish thesis questionnaires + IRW English), ostos_2010_principal_leadership (Spanish + IRW English).
+61 built, gated and **held locally** at `~/Dropbox/projects/irw/data/itemtext/` (list: `itemtext_hold_2026-11-27.csv`;
+11 new `hold` register rows): adapted TAM/UTAUT e-wallet batteries (ilieva, lie, thai), Sreen's TPB + CVSCALE battery,
+Kumar's TPB battery, Nguyen's eco-label battery, Ji's mindful-consumption battery (Chinese), Rahmah's brand batteries
+(Indonesian), Elshanhaby's four adapted scales, Ostos's SERVQUAL, samaranayake's sMARS adaptation, mccall's BFI-10/CNS/
+CAS/anxiety scale, cetinkaya's travel motives. Gates: `validate_items.R` PASS on all 72; `audit_batch.R` PASS on the 11
+(the held set: one expected WARN, samaranayake G6/G9 items answered by grade). Not built: javadizadeh (fire and police
+codebooks number the same items differently), hartl (German labels are stem endings only), amin, hoang, prasad (headers
+garbled 'na' -> '6'), the rest code-only; every provenance row says where the text is.
+
+**Upload: NOT done.** The parent session relayed Ben's go-ahead, but the `red_up` call was refused by the session's
+permission check, so nothing reached Redivis. Shard 10 holds 868 tables (cap 1000), so the 307 are staged in
+`runs/upload_2026-11-27/<shard>/` by whole deposit: item_response_warehouse_10 120, _8 74, _2 70, _6 43 (each fits under
+990). Item text (11) goes to irw_text_4 from `itemtext_output/` after the response tables.
+
 ## 2026-11-25c — the day's 157 repos leads worked: 85 deposits, 399 tables, 2,124,328 responses
 
 Ben (via the parent session): work the leads from the 2026-11-25 monthly routine (`leads/repos_leads_2026-11-25.csv`, 14) and the
