@@ -95,8 +95,15 @@ Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-2
 - [x] **UPLOADED 2026-11-27 by Claude (Ben's go-ahead in-session):** 307 response tables, all row-count verified --
   item_response_warehouse_10 78, _8 74, _7 29, _6 55, _2 70, _11 1 (grant_2025_policy_support, by Ben); 11 item text
   tables to irw_text_4 (11/11 verified). Ben published 10, 8, 7, 6.
-- [ ] Shard 2: confirm thai_2021_government_support (400 rows) replaced the empty v36.2 table in the reopened draft, then
-  Ben republishes shard 2, then irw_text_4.
+- [ ] **Shard 2 is blocked on Redivis.** Ben unreleased v36.2 at ~08:55 on 2026-11-27; since then every write to the
+  `next` draft fails with "The version 'vnext' is still in the process of being unreleased" (20 retries to 10:25; Ben
+  contacting Redivis support). The draft holds this batch's 70 tables: 69 verified, `thai_2021_government_support`
+  EMPTY (0 rows; created but never loaded when v36.2 went out). Live is v36.1, which does not have it. Once unstuck:
+  1. `python3 -m red_up --yes --dataset item_response_warehouse_2 automated_finding/runs/upload_2026-11-27/retry_2b`
+     (run from this branch's worktree; the dir holds that one CSV, 400 rows; replaces the empty table) and check it
+     reports 1/1 verified.
+  2. Ben publishes shard 2, then irw_text_4 (11 item text tables; saleem_2021_gad7 and elshanhaby_2026_manipulation_check
+     describe shard 2 tables).
 - [ ] Merge #3768 once shard 2 and irw_text_4 are published.
 - [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
   aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
