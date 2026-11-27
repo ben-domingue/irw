@@ -237,7 +237,9 @@ def newest_shard(targets: list[Target]) -> Target:
 #: 2026-11-27: item_response_warehouse_11 (dts6) registered and released (v1.0)
 #: so clients and the site can see it; pinned to shard 10 at Ben's request
 #: (897 tables in its draft) until he says to start filling 11.
-CORE_DEFAULT: str | None = "item_response_warehouse_10"
+#: 2026-11-27: shard 10 published at the 1000-table cap; unpinned at Ben's
+#: request, so new tables go to the newest shard, item_response_warehouse_11.
+CORE_DEFAULT: str | None = None
 
 
 def core_target(targets: list[Target]) -> Target:
