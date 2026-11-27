@@ -101,7 +101,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-2
   EMPTY (0 rows; created but never loaded when v36.2 went out). Live is v36.1, which does not have it. Once unstuck:
   1. `python3 -m red_up --yes --dataset item_response_warehouse_2 automated_finding/runs/upload_2026-11-27/retry_2b`
      (run from this branch's worktree; the dir holds that one CSV, 400 rows; replaces the empty table) and check it
-     reports 1/1 verified.
+     reports 1/1 verified. `runs/` is gitignored, so if this worktree is gone use the copy in ~/Downloads/
+     thai_2021_government_support.csv, or rerun the thai_2021 data script.
   2. Ben publishes shard 2, then irw_text_4 (11 item text tables; saleem_2021_gad7 and elshanhaby_2026_manipulation_check
      describe shard 2 tables).
 - [ ] Merge #3768 once shard 2 and irw_text_4 are published.
