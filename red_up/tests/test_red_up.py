@@ -13,6 +13,7 @@ import shutil
 import tempfile
 import builtins
 from unittest import mock
+import io
 import unittest
 from pathlib import Path
 
@@ -1413,6 +1414,42 @@ class PushOne(unittest.TestCase):
         self.assertTrue(r.ok)
         self.assertFalse(t.deleted)
         self.assertEqual(t.up.kwargs.get("delimiter"), ",")
+
+
+class PushAll(unittest.TestCase):
+    """cli.push_all: parallel uploads keep plan order and touch every table once."""
+
+    def _items(self, n):
+        from types import SimpleNamespace as NS
+        return [NS(dataset="w1", path=Path(f"t{i}.csv"), table=f"t{i}",
+                   report=NS(rows=i)) for i in range(n)]
+
+    def _run(self, jobs, n=12):
+        import random, time
+        from red_up import cli
+        from red_up.push import UploadResult
+        calls = []
+
+        def fake(dataset, path, table, rows):
+            time.sleep(random.random() / 200)
+            calls.append(table)
+            return UploadResult(table=table, dataset="w1", expected=rows, actual=rows)
+
+        items = self._items(n)
+        with mock.patch.object(cli, "push_one", fake), \
+                mock.patch("sys.stdout", new_callable=io.StringIO):
+            results = cli.push_all(items, {"w1": object()}, jobs)
+        return items, calls, results
+
+    def test_parallel_preserves_order_and_uploads_each_once(self):
+        items, calls, results = self._run(jobs=4)
+        self.assertEqual([r.table for r in results], [i.table for i in items])
+        self.assertEqual(sorted(calls), sorted(i.table for i in items))
+        self.assertTrue(all(r.ok for r in results))
+
+    def test_jobs_one_is_serial(self):
+        items, calls, results = self._run(jobs=1)
+        self.assertEqual(calls, [i.table for i in items])
 
 
 class TableCapTests(unittest.TestCase):
