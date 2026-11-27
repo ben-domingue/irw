@@ -1404,6 +1404,21 @@ chiba_2026_provider_competence,Adult (18+),NA,Internet-based,Opinion/attitude,Su
 chiba_2026_provider_warmth,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,jpn,Provider warmth
 chiba_2026_relative_service_decrease,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,jpn,Relative service decrease
 chiba_2026_tourist_satisfaction,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,jpn,Tourist satisfaction
+chile_2010_inicia_pcdgeneralista,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2010: disciplinary knowledge test for generalist primary teachers (PCD Generalista)
+chile_2010_inicia_pcdlenguaje,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2010: disciplinary knowledge test in language (PCD Lenguaje)
+chile_2010_inicia_pcdmatematica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2010: disciplinary knowledge test in mathematics (PCD Matemática)
+chile_2010_inicia_pcdp,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2010: disciplinary knowledge test for early childhood educators (PCDP)
+chile_2011_inicia_pcdbasica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2011: disciplinary knowledge test for primary teachers (PCD Básica)
+chile_2011_inicia_pcdp,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2011: disciplinary knowledge test for early childhood educators (PCDP)
+chile_2011_inicia_pcpbasica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2011: pedagogical knowledge test for primary teachers (PCP Básica)
+chile_2012_inicia_pcdbasica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: disciplinary knowledge test for primary teachers (PCD Básica)
+chile_2012_inicia_pcdhistoria,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: disciplinary knowledge test in history (PCD Historia)
+chile_2012_inicia_pcdlenguaje,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: disciplinary knowledge test in language (PCD Lenguaje)
+chile_2012_inicia_pcdmatematica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: disciplinary knowledge test in mathematics (PCD Matemática)
+chile_2012_inicia_pcdparvulos,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: disciplinary knowledge test for early childhood educators (PCD Párvulos)
+chile_2012_inicia_pcpbasica,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: pedagogical knowledge test for primary teachers (PCP Básica)
+chile_2012_inicia_pcpmedia,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: pedagogical knowledge test for secondary teachers (PCP Media)
+chile_2012_inicia_pcpparvulos,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,spa,Evaluación Inicia 2012: pedagogical knowledge test for early childhood educators (PCP Párvulos)
 chile_2023_children-adolescents-survey_aa,Child (<18y),"Child (6-12y), Adolescent (12-18y)","Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Mixed,spa,EANNA 2023 - NNA
 chile_2023_children-adolescents-survey_cp_a,Mixed,NA,"Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Cuidador Principal
 chile_2023_children-adolescents-survey_cp_c,Mixed,NA,"Representative, Targeted/specific",Opinion/attitude,Survey/questionnaire,Mixed,spa,Cuidador Principal
@@ -4722,6 +4737,27 @@ lindstrom2021_honesty_humility,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert 
 lindstrom2021_team_identification,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
 lindstrom2021_violent_intentions,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
 lischer_2021_phq4,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ger,The four-item PHQ-4 administered in German to Swiss students during the Covid-19 pandemic
+lithuania_2012_nssa_g04_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade mathematics"
+lithuania_2012_nssa_g04_ras,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade writing"
+lithuania_2012_nssa_g04_sk,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade reading"
+lithuania_2012_nssa_g08_mat,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade mathematics"
+lithuania_2012_nssa_g08_ras,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade writing"
+lithuania_2012_nssa_g08_sk,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade reading"
+lithuania_2014_nssa_g04_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade mathematics"
+lithuania_2014_nssa_g04_pp,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade world knowledge"
+lithuania_2014_nssa_g04_ras,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade writing"
+lithuania_2014_nssa_g04_sk,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade reading"
+lithuania_2014_nssa_g08_mat,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade mathematics"
+lithuania_2014_nssa_g08_ras,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade writing"
+lithuania_2014_nssa_g08_sk,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade reading"
+lithuania_2015_nssa_g04_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade mathematics"
+lithuania_2015_nssa_g04_pp,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade world knowledge"
+lithuania_2015_nssa_g04_ras,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade writing"
+lithuania_2015_nssa_g04_sk,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 4th grade reading"
+lithuania_2015_nssa_g08_gm,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade natural sciences"
+lithuania_2015_nssa_g08_sm,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 8th grade social sciences"
+lithuania_2016_nssa_g06_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 6th grade mathematics"
+lithuania_2016_nssa_g06_sk,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,lit,"Lithuanian national assessment (NSSA), 6th grade reading"
 liu_2017_benefit_finding,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 liu_2017_communication,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 liu_2017_mcmq_coping,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
@@ -6404,6 +6440,7 @@ polner_2018_cra,NA,NA,Educational,NA,Test,Likert Scale/selected response,hun,NA
 polner_2018_ghq12,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,hun,NA
 polner_2018_olife,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,hun,NA
 polner_2018_rei,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,hun,NA
+poole_2020_toj,Adult (18+),NA,Targeted/specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Temporal order judgement
 pop_2023_mp_concern,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,rum,NA
 pop_2023_mp_media,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,rum,NA
 portella_2022_racial_attitudes,Mixed,"Child (6-12y), Adolescent (12-18y)",Targeted/specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,por,Racial attitudes/norms
@@ -8388,6 +8425,24 @@ upoma_2026_tam_ease_of_use,Adult (18+),NA,Educational,Opinion/attitude,Survey/qu
 upoma_2026_tam_usefulness,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,TAM usefulness
 ups_vangsness_2019,Adult (18+),NA,Educational,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Unintentional Procrastination Scale
 uritani_2023_ases8,Adult (18+),NA,"Clinical, Targeted/specific",Personality,Survey/questionnaire,Likert Scale/selected response,jpn,"Arthritis Self-Efficacy Scale, 8-item short form, Japanese version (ASES-8J)"
+uruguay_2017_aristas_g03_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 reading"
+uruguay_2017_aristas_g03_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 mathematics"
+uruguay_2017_aristas_g06_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 reading"
+uruguay_2017_aristas_g06_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 mathematics"
+uruguay_2018_aristas_g09_lec,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 reading"
+uruguay_2018_aristas_g09_mat,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 mathematics"
+uruguay_2018_aristasrural_g09_lec,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 reading"
+uruguay_2018_aristasrural_g09_mat,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 mathematics"
+uruguay_2020_aristas_g03_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 reading"
+uruguay_2020_aristas_g03_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 mathematics"
+uruguay_2020_aristas_g06_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 reading"
+uruguay_2020_aristas_g06_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 mathematics"
+uruguay_2022_aristas_g09_lec,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 reading"
+uruguay_2022_aristas_g09_mat,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), lower secondary, grade 9 mathematics"
+uruguay_2023_aristas_g03_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 reading"
+uruguay_2023_aristas_g03_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 3 mathematics"
+uruguay_2023_aristas_g06_lec,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 reading"
+uruguay_2023_aristas_g06_mat,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,NA,spa,"Aristas national assessment (Uruguay), primary, grade 6 mathematics"
 usc_2026_gasa,Child (<18y),NA,Educational,Behavioral,Survey/questionnaire,Likert Scale/selected response,spa,Problematic gaming / gaming addiction
 usc_2026_phq9,Child (<18y),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,Depressive symptoms (PHQ-9)
 usc_2026_relsat,Child (<18y),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,Satisfaction with relationships
