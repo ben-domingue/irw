@@ -1,0 +1,14 @@
+table,basis,note
+kalimahnorms_alzahrani_2025,curated:#2983,Arabic words; 4 dimensions
+martineztomas_2026_pseudowords,curated:#2983,"pseudowords (letter strings); valence, arousal, wordlikeness; lexical stimuli, so included"
+rating_speed_2025,curated:#2983,Dutch words; 8 affect dimensions
+spelling2pronounce_edwards2023,curated:#2983,English words; single dimension (difficulty)
+concretewords,curated:#2983,"English multiword expressions; single dimension (concreteness); lexical units, so included"
+valence_kyrolainen_2021,curated:#2983,English words; single dimension (valence)
+sensorimotor_repetto_2022,curated:#2983,Italian words; 11 sensorimotor dimensions
+lynott_2020_sensorimotor,curated:#2983,English words; 11 sensorimotor dimensions (Lancaster)
+brand_2026_czelex,curated:#2983,"Czech words; concreteness, imageability, AoA, valence, gender (CzeLex)"
+preininger_2025_sociolex_words,curated:#2983,"Czech words; gender, location, political, valence (SocioLex-CZ)"
+green_2025_aoa,curated:#2983,English words; AoA for reading and spelling
+brysbaert_2024_expected_utility,curated:#2983,Dutch words; single dimension (expected utility)
+devarda_2025_iconicita,curated:#2983,Italian words; single dimension (iconicity); L1 and L2 raters
