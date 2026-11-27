@@ -39,9 +39,10 @@
 ## - agent = SubmissionId. A submission is a fixed bot, so one agent is one unchanging program;
 ##   a team's successive bots are separate agents. team_a/team_b give the submitting team
 ##   (Submissions.TeamId) so users can group them; blank where the submission is missing from
-##   Submissions.csv (counted in the summary line). Meta Kaggle omits every connectx and
-##   kaggriculture submission from Submissions.csv, so team_a/team_b are blank throughout
-##   those two tables.
+##   Submissions.csv (counted in the summary line). Meta Kaggle omits every connectx
+##   submission from Submissions.csv, so team_a/team_b are blank throughout that table.
+##   (kaggriculture's were missing too in the 2026-09-30 dump; the 2026-11-27 dump has a
+##   team for all 213,084 of its agents.)
 ## - agent_a is seat 0 (EpisodeAgents.Index 0), agent_b seat 1. homefield is "agent_a" only
 ##   where seat 0 moves first: connectx and connect_4 (seat 0 starts ACTIVE in the
 ##   kaggle-environments connectx interpreter) and fide_chess (seat 0 starts ACTIVE and all
@@ -74,8 +75,11 @@
 ## - Kaggle's ratings (InitialScore/UpdatedScore, the Confidence columns) are model output and
 ##   are not carried.
 ## Run time: ~1 h for the downloads at ~16 MB/s, then ~30 min to build; fits in 30 GB RAM.
-## kaggriculture was still running on 2026-09-30 (games until ~2026-10-15), so that table is a
-## snapshot of its episodes to 2026-09-30.
+## kaggriculture ran 2026-07-30 to 2026-10-15; its table was held back while the competition ran
+## and built on 2026-11-27 (`Rscript metakaggle.R kaggriculture`), so it covers every episode.
+## fwrite uses scipen = 999: without it a reward of exactly 100000 is written as 1e+05 (489
+## kaggriculture rows), which integer readers reject. The 18 tables built before that fix
+## were written without it.
 suppressMessages({library(arrow); library(dplyr); library(data.table)})
 cache <- path.expand("~/.cache/irw-comps/metakaggle")
 dir.create(cache, showWarnings = FALSE, recursive = TRUE)
@@ -183,7 +187,7 @@ for (k in seq_len(nrow(keep))) {
               all(is.na(x$score_b) == (x$error == "agent_b")))
     yr <- format(as.POSIXct(range(x$date), origin = "1970-01-01", tz = "UTC"), "%Y")
     nm <- paste("metakaggle", keep$name[k], yr[1], yr[2], sep = "_")
-    fwrite(x, file.path(out_dir, paste0(nm, ".csv")), na = "")
+    fwrite(x, file.path(out_dir, paste0(nm, ".csv")), na = "", scipen = 999)  # no 1e+05 scores
     cat(sprintf("%s (%s): %d rows, %d agents, %d teams, %s to %s, %d draws, homefield %s, %d forfeits, %d agents without a team; dropped %d both-failed, %d no-reward, %d self-play, %d non-2-agent, %d empty episodes (of %d public)\n",
                 nm, keep$Slug[k], nrow(x), uniqueN(c(x$agent_a, x$agent_b)), uniqueN(c(x$team_a, x$team_b)),
                 format(as.POSIXct(min(x$date), origin = "1970-01-01", tz = "UTC")),
