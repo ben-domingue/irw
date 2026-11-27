@@ -1605,3 +1605,5 @@ boren_2023_nursestress6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 dealmeida_2021_moneyattitude6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 hagerman_2017_faceattract6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 poole_2020_toj,core,data/timing_db/timing_db.R,2026-11-26
+preininger_2025_sociolex_images,core,data/preininger_2025_sociolex.py,2026-11-27
+preininger_2025_sociolex_words,core,data/preininger_2025_sociolex.py,2026-11-27
