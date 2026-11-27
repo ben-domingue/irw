@@ -5,11 +5,11 @@
 #     Financial Wellbeing of Young Relatives Shape the Political Preferences of Older Adults [Dataset]. Harvard
 #     Dataverse.
 # License: CC0 1.0 (Harvard Dataverse)
-# Data: 6,021 British adults (YouGov, 2022), support or opposition for 11 policies (state pension, elder care,
+# Data: 6,021 British adults (YouGov, 2022), support or opposition for 10 policies (state pension, elder care,
 #   childcare, vocational and university education, renewables, affordable and government housing, school meals,
 #   elder activities), 1 = Strongly oppose .. 5 = Strongly support; Don't know/skipped/not asked are missing in the
 #   cleaned file.
-# Tables: one table of the 11 policy-support items; item = the dataset variable name.
+# Tables: one table of the 10 policy-support items; item = the dataset variable name.
 # Covariates: cov_age (years), cov_gender (from the 0/1 female flag)
 # PII: none found (string columns screened)
 # Item text: not shipped -- the Stata labels are truncated summaries; full wording in the deposit's cleaning .do and

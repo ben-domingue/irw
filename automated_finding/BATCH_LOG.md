@@ -63,10 +63,16 @@ CAS/anxiety scale, cetinkaya's travel motives. Gates: `validate_items.R` PASS on
 codebooks number the same items differently), hartl (German labels are stem endings only), amin, hoang, prasad (headers
 garbled 'na' -> '6'), the rest code-only; every provenance row says where the text is.
 
-**Upload: NOT done.** The parent session relayed Ben's go-ahead, but the `red_up` call was refused by the session's
-permission check, so nothing reached Redivis. Shard 10 holds 868 tables (cap 1000), so the 307 are staged in
-`runs/upload_2026-11-27/<shard>/` by whole deposit: item_response_warehouse_10 120, _8 74, _2 70, _6 43 (each fits under
-990). Item text (11) goes to irw_text_4 from `itemtext_output/` after the response tables.
+**Uploaded 2026-11-27** by Claude from the parent session (Ben's go-ahead in-session; the subagent's own `red_up` call had
+been refused by the permission check). Other sessions filled shard 10 the same day, so the 307 were spread by whole deposit
+across six shards: item_response_warehouse_10 78 (the draft hit Redivis' 1000-table cap mid-run; the 13 that bounced --
+traba_2026 x4, tsai_2026 x8, mauricio_2026_ccp -- went to _6), _8 74, _7 29 (hartl_2015, amin_2026, ilieva_2023, moved off
+_10), _6 55, _2 70, _11 1 (grant_2025_policy_support, the first table on shard 11, uploaded by Ben). All row-count verified
+by `red_up`. Item text: 11/11 to irw_text_4, verified. Ben published shards 10, 8, 7 and 6 the same day. Shard 2 was
+released while its upload was still running: v36.2 went out with 65 of the 70, plus thai_2021_government_support as an
+EMPTY table (0 rows, created but not yet loaded). Ben unreleased it; the other four thai_2021 tables went into the reopened
+draft, and the empty table is replaced there before Ben republishes. Two transient client errors (`'NoneType' object has
+no attribute 'get'` on mauricio_2026_ccp and ilieva_2023_adoption) cleared on a plain retry.
 
 ## 2026-11-25c — the day's 157 repos leads worked: 85 deposits, 399 tables, 2,124,328 responses
 

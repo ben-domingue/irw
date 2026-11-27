@@ -88,15 +88,16 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   `metadata/10_collections.R` halts if a curated member is missing from published metadata. Branch
   `data/psychophysics-collection`, worktree `~/irw-wt/psychophysics-collection`.
 
-## Repos leads 2026-11-20 lane 2 (2026-11-27) — 307 tables staged, NOT uploaded
+## Repos leads 2026-11-20 lane 2 (2026-11-27) — 307 tables uploaded to shards 10/8/7/6/2/11 + 11 item text tables
 
 Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-20-lane2`.
 
-- [ ] **Upload** (refused by the session's permission check, so not done): response tables first, by whole deposit,
-  from `automated_finding/runs/upload_2026-11-27/<shard>/` -- item_response_warehouse_10 (120; shard at 868),
-  _8 (74), _2 (70), _6 (43). `python3 -m red_up --dataset <shard> --dry-run <dir>`, then without `--dry-run`. Then the
-  11 item text tables in `automated_finding/itemtext_output/` to irw_text_4. Stamp `uploaded` in itemtext_provenance.csv
-  (byte edit) and the lead notes after row-count verification. Ben publishes.
+- [x] **UPLOADED 2026-11-27 by Claude (Ben's go-ahead in-session):** 307 response tables, all row-count verified --
+  item_response_warehouse_10 78, _8 74, _7 29, _6 55, _2 70, _11 1 (grant_2025_policy_support, by Ben); 11 item text
+  tables to irw_text_4 (11/11 verified). Ben published 10, 8, 7, 6.
+- [ ] Shard 2: confirm thai_2021_government_support (400 rows) replaced the empty v36.2 table in the reopened draft, then
+  Ben republishes shard 2, then irw_text_4.
+- [ ] Merge #3768 once shard 2 and irw_text_4 are published.
 - [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
   aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
   ostos_2010, samaranayake_2026, syed_2026, tsai_2026, valera_2012 x2.
