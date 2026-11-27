@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-11-26
+# item-text tables in the Redivis shards as of 2026-11-27
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -580,6 +580,7 @@ eldor_2022_symbolic_threat,irw_text_3,published
 ellis_2016_calc_instrprac,irw_text,published
 ellis_2016_calc_instrqual,irw_text,published
 elshafie_2020_edsc,irw_text_3,published
+elshanhaby_2026_manipulation_check,irw_text_4,published
 emidy2024_fevs,irw_text,published
 emobank_buechel_2017,irw_text,published
 emsc_kuan-chin_2023,irw_text,published
@@ -1720,6 +1721,7 @@ os_tbmwtfs_schubert_2023_bmw3,irw_text,published
 os_tbmwtfs_schubert_2023_dmw,irw_text,published
 os_tbmwtfs_schubert_2023_ipip,irw_text,published
 os_tbmwtfs_schubert_2023_maas,irw_text,published
+ostos_2010_principal_leadership,irw_text_4,published
 otago_2018_library_support,irw_text_3,published
 otaki_2022_dental_adaptability,irw_text_2,published
 oxfordcovid_xue_2024_at,irw_text_2,published
@@ -1999,6 +2001,7 @@ sabers_vesper2023,irw_text_2,published
 sabrina_2026_gad7,irw_text_4,published
 safiye_2023_rfq,irw_text_2,published
 sakal_2026_ai_resistance,irw_text_3,published
+saleem_2021_gad7,irw_text_4,published
 salleh_2023_aim_iam_fim,irw_text_2,published
 sapa_personality,irw_text,published
 sariyska_2019_food_frequency,irw_text_3,published
@@ -2542,6 +2545,14 @@ uti_newlands_2023_gad,irw_text_2,published
 uti_newlands_2023_phq,irw_text_2,published
 uti_newlands_2023_wpai,irw_text_2,published
 valdivia_2023_oms,irw_text_2,published
+valera_2012_parents_administrative,irw_text_4,published
+valera_2012_parents_community,irw_text_4,published
+valera_2012_parents_institutional,irw_text_4,published
+valera_2012_parents_pedagogical,irw_text_4,published
+valera_2012_students_administrative,irw_text_4,published
+valera_2012_students_community,irw_text_4,published
+valera_2012_students_institutional,irw_text_4,published
+valera_2012_students_pedagogical,irw_text_4,published
 valverdeberrocoso_2021_learning_design,irw_text_2,published
 valverdeberrocoso_2021_sqd,irw_text_2,published
 valverdeberrocoso_2021_tictip,irw_text_2,published
