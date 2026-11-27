@@ -33,10 +33,11 @@ shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently none, so
 new item text goes to `irw_text_4`, registered 2026-10-30 with `irw_text_3` at
 954 tables; before that `irw_text_3`, from 2026-09-25); otherwise the core shard pinned by `CORE_DEFAULT`, or
 the newest core shard when that is `None` (currently none, so new response
-data goes to `item_response_warehouse_10`: unpinned 2026-10-15 with shards 5
+data goes to `item_response_warehouse_11`: unpinned 2026-10-15 with shards 5
 and 6 both near the cap, shard 8 registered 2026-10-21 with shard 7 at
 961, shard 9 registered 2026-11-09 with shard 8 at 864 released, and shard 10
-registered 2026-11-23 with shard 9 at 990 in its draft). A table that already exists is still updated where it lives. The menu shows every dataset in
+registered 2026-11-23 with shard 9 at 990 in its draft, and shard 11
+registered 2026-11-27, the default again from that day once shard 10 was published at the 1000-table cap). A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
 Response data, item text, conjoint and rankings are **shard lists**, because
@@ -97,6 +98,13 @@ the only true replace, and the table description is carried across.
 **Proves the row count.** After each table, an actual
 `select count(*)` against the draft, compared to the CSV. `numRows` is never
 consulted — it reported "no change" for tables that had just doubled.
+
+**Uploads four tables at a time.** Each table is two jobs on Redivis' side
+(the import, then the `count(*)`), so a serial run spent ~20 s per table
+waiting and ~70 tables took over 20 minutes. `--jobs N` (`-j`, default 4) sets
+the pool; `--jobs 1` is the old serial order. Drafts are still opened first and
+one at a time, and every table is replaced and verified on its own, so nothing
+above changes.
 
 **Never publishes.** Everything lands on the unreleased draft. Publishing stays
 a human click after reviewing the diff (`ARCHITECTURE.md` §4).
