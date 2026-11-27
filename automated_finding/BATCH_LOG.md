@@ -44,9 +44,9 @@ license_blocked_candidates.csv):** 76 (Zenodo, none), 132/139 (public OSF nodes,
 (CC0 plus 'contact me for permission').
 
 **Judgement calls worth a look:** ~20 deposits keep unexpanded codes as table names (e.g. `adami_2025_x1`,
-`charinolita_2025_x5`, `mauricio_2026_pe`); reverse-keyed (R) items dropped from javadizadeh_2022 (some R items
-correlate positively with their scale, some negatively); the EC block of ji_2024 dropped (file name says it was
-reverse-coded); rahmah_2026's masked 'Nama' column (initial + asterisks) dropped and the deposit shipped; samaranayake_2026's
+`charinolita_2025_x5`, `mauricio_2026_pe`); reverse-keyed (R) items in javadizadeh_2022 and the EC block of ji_2024 were
+first dropped as "reversal unverifiable" and restored the same day on Ben's ruling (never drop reverse-keyed items;
+datastandard.md: direction may vary across items) -- they ship as deposited with the uncertainty in the header; rahmah_2026's masked 'Nama' column (initial + asterisks) dropped and the deposit shipped; samaranayake_2026's
 grade-specific G6/G9 task items shipped as separate items; isolated out-of-range cells set missing (saputra SS4 = 21,
 amin EM4 = 6, valera Item7 = 6 / Item43 = 33, samaranayake Q2k = 33, saleem ages 4/10/1994, ji age 128, syed age code 23).
 Table-name collisions with live tables were renamed: `kumar_2022_gp_*`, `anita_2026_chatbot_*`.

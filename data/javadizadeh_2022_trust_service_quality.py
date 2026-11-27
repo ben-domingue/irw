@@ -9,8 +9,9 @@
 #   instruments, stacked with cov_sample (ids prefixed). The fire file's StaffS/TrgC prefixes are the police file's
 #   Staff/Trg and are unified to Staff/Trg. Items present in one sample only (e.g. Trust8-13 fire only) stay in the
 #   stacked table.
-# Tables: one per instrument in the deposit codebook; item = the codebook code. Reverse-keyed (R) items are not
-#   shipped.
+# Tables: one per instrument in the deposit codebook; item = the codebook code. Reverse-keyed (R) items ship as
+#   deposited: whether the depositors recoded them is not recorded (their correlations with their scales are mixed in
+#   sign), so check direction before scoring.
 # Covariates: cov_sample (fire/police)
 # PII: none found (string columns screened)
 # Item text: available -- Codebook.xlsx gives each item's wording, source (several adapted from SERVQUAL / Vahey;
@@ -55,9 +56,11 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                                            'StaffS5',
                                            'StaffS6',
                                            'StaffS7',
-                                           'StaffS8'],
+                                           'StaffS8',
+                                           'StaffS9R',
+                                           'StaffS10R'],
              'javadizadeh_2022_communication': ['Comm1', 'Comm2', 'Comm3', 'Comm4', 'Comm5', 'Comm6', 'Comm7'],
-             'javadizadeh_2022_training': ['TrgC1', 'TrgC2', 'TrgC3', 'TrgC4', 'TrgC6', 'TrgC7', 'TrgC8', 'TrgC9'],
+             'javadizadeh_2022_training': ['TrgC1', 'TrgC2', 'TrgC3', 'TrgC4', 'TrgC5R', 'TrgC6', 'TrgC7', 'TrgC8', 'TrgC9'],
              'javadizadeh_2022_motivation_public_svc': ['MotPS1', 'MotPS2', 'MotPS3', 'MotPS4', 'MotPS5', 'MotPS6'],
              'javadizadeh_2022_trust': ['Trust1',
                                         'Trust2',
@@ -75,23 +78,13 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                                         'Trust14',
                                         'Trust15',
                                         'Trust16',
-                                        'Trust17'],
+                                        'Trust17',
+                                        'Trust18R'],
              'javadizadeh_2022_psm': ['PSmot1', 'PSmot2', 'PSmot3', 'PSmot4', 'PSmot5'],
              'javadizadeh_2022_org_safety': ['OrgSaf1', 'OrgSaf2', 'OrgSaf3', 'OrgSaf4', 'OrgSaf5', 'OrgSaf6']},
   'covs': {},
   'cov_maps': {},
-  'not_shipped': {'StaffS9R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                              'items correlate positively with their scale in some cases and negatively in others -- '
-                              'so it is not shipped',
-                  'StaffS10R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                               'items correlate positively with their scale in some cases and negatively in others '
-                               '-- so it is not shipped',
-                  'TrgC5R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                            'items correlate positively with their scale in some cases and negatively in others -- '
-                            'so it is not shipped',
-                  'Trust18R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                              'items correlate positively with their scale in some cases and negatively in others -- '
-                              'so it is not shipped',
+  'not_shipped': {
                   'Turnov': 'single item',
                   'SERQ': 'composite',
                   'STAFF': 'composite',
@@ -121,6 +114,8 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'StaffS6': 'Staff6',
                  'StaffS7': 'Staff7',
                  'StaffS8': 'Staff8',
+                 'StaffS9R': 'Staff9R',
+                 'StaffS10R': 'Staff10R',
                  'Comm1': 'Comm1',
                  'Comm2': 'Comm2',
                  'Comm3': 'Comm3',
@@ -132,6 +127,7 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'TrgC2': 'Trg2',
                  'TrgC3': 'Trg3',
                  'TrgC4': 'Trg4',
+                 'TrgC5R': 'Trg5R',
                  'TrgC6': 'Trg6',
                  'TrgC7': 'Trg7',
                  'TrgC8': 'Trg8',
@@ -159,6 +155,7 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'Trust15': 'Trust15',
                  'Trust16': 'Trust16',
                  'Trust17': 'Trust17',
+                 'Trust18R': 'Trust18R',
                  'PSmot1': 'PSmot1',
                  'PSmot2': 'PSmot2',
                  'PSmot3': 'PSmot3',
@@ -186,7 +183,7 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                                                   'SerQ7',
                                                   'SerQ8',
                                                   'SerQ9'],
-             'javadizadeh_2022_training': ['Trg1', 'Trg2', 'Trg3', 'Trg4', 'Trg6', 'Trg7', 'Trg8', 'Trg9'],
+             'javadizadeh_2022_training': ['Trg1', 'Trg2', 'Trg3', 'Trg4', 'Trg5R', 'Trg6', 'Trg7', 'Trg8', 'Trg9'],
              'javadizadeh_2022_staffing': ['Staff1',
                                            'Staff2',
                                            'Staff3',
@@ -194,7 +191,9 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                                            'Staff5',
                                            'Staff6',
                                            'Staff7',
-                                           'Staff8'],
+                                           'Staff8',
+                                           'Staff9R',
+                                           'Staff10R'],
              'javadizadeh_2022_communication': ['Comm1', 'Comm2', 'Comm3', 'Comm4', 'Comm5', 'Comm6'],
              'javadizadeh_2022_psm': ['PSmot1', 'PSmot2', 'PSmot3', 'PSmot4', 'PSmot5'],
              'javadizadeh_2022_trust': ['Trust1',
@@ -207,23 +206,13 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                                         'Trust14',
                                         'Trust15',
                                         'Trust16',
-                                        'Trust17'],
+                                        'Trust17',
+                                        'Trust18R'],
              'javadizadeh_2022_motivation_public_svc': ['MotPS1', 'MotPS2', 'MotPS3', 'MotPS4', 'MotPS5', 'MotPS6'],
              'javadizadeh_2022_org_safety': ['OrgSaf1', 'OrgSaf2', 'OrgSaf3', 'OrgSaf4', 'OrgSaf5', 'OrgSaf6']},
   'covs': {},
   'cov_maps': {},
-  'not_shipped': {'Trg5R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R items '
-                           'correlate positively with their scale in some cases and negatively in others -- so it is '
-                           'not shipped',
-                  'Staff9R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                             'items correlate positively with their scale in some cases and negatively in others -- '
-                             'so it is not shipped',
-                  'Staff10R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                              'items correlate positively with their scale in some cases and negatively in others -- '
-                              'so it is not shipped',
-                  'Trust18R': 'reverse-keyed item (R): whether the deposit recoded it cannot be verified -- the R '
-                              'items correlate positively with their scale in some cases and negatively in others -- '
-                              'so it is not shipped',
+  'not_shipped': {
                   'SERQ': 'composite',
                   'STAFF': 'composite',
                   'COMM': 'composite',
@@ -249,6 +238,7 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'Trg2': 'Trg2',
                  'Trg3': 'Trg3',
                  'Trg4': 'Trg4',
+                 'Trg5R': 'Trg5R',
                  'Trg6': 'Trg6',
                  'Trg7': 'Trg7',
                  'Trg8': 'Trg8',
@@ -261,6 +251,8 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'Staff6': 'Staff6',
                  'Staff7': 'Staff7',
                  'Staff8': 'Staff8',
+                 'Staff9R': 'Staff9R',
+                 'Staff10R': 'Staff10R',
                  'Comm1': 'Comm1',
                  'Comm2': 'Comm2',
                  'Comm3': 'Comm3',
@@ -283,6 +275,7 @@ SOURCES = [{'url': 'https://dataverse.harvard.edu/api/access/datafile/6358307',
                  'Trust15': 'Trust15',
                  'Trust16': 'Trust16',
                  'Trust17': 'Trust17',
+                 'Trust18R': 'Trust18R',
                  'MotPS1': 'MotPS1',
                  'MotPS2': 'MotPS2',
                  'MotPS3': 'MotPS3',
@@ -304,9 +297,9 @@ EXPECT = {'javadizadeh_2022_communication': 1553,
  'javadizadeh_2022_org_safety': 1422,
  'javadizadeh_2022_psm': 1190,
  'javadizadeh_2022_service_quality': 2141,
- 'javadizadeh_2022_staffing': 1911,
- 'javadizadeh_2022_training': 1912,
- 'javadizadeh_2022_trust': 3349}
+ 'javadizadeh_2022_staffing': 2387,
+ 'javadizadeh_2022_training': 2150,
+ 'javadizadeh_2022_trust': 3588}
 
 
 def load(content, kind, read_kw):

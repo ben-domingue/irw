@@ -5,8 +5,8 @@
 #     [Dataset]. Mendeley Data.
 # License: CC BY 4.0 (Mendeley Data record: share/copy/modify with credit)
 # Data: 226 Chinese tourists (Wenjuanxing survey), mindful consumption and green purchase intention, 1-5 items. The
-#   deposit's file name says the EC (environmental concern) block was reverse-coded, and which EC items were flipped
-#   cannot be checked, so EC is not shipped. One age of 128 is set missing.
+#   deposit's file name says the EC (environmental concern) block was reverse-coded; EC ships as deposited, and which
+#   of its items (if any) the depositors flipped is not recorded, so check direction before scoring. One age of 128 is set missing.
 # Tables: one per block. A/C/T are IRW's reading of the Chinese labels as the mindful-consumption facets (caring for
 #   others' welfare, caring for the environment, temperance); EI is ethical/socially-responsible self-identity.
 # Covariates: cov_gender, cov_age, cov_education, cov_income (SPSS codes, Chinese value labels),
@@ -43,7 +43,8 @@ SOURCES = [{'url': 'https://data.mendeley.com/public-files/datasets/687vv29wsk/f
              'ji_2024_green_purchase_intention': ['GPI1', 'GPI2', 'GPI3', 'GPI4', 'GPI5'],
              'ji_2024_mc_caring_others': ['A1', 'A2', 'A3'],
              'ji_2024_mc_caring_environment': ['C1', 'C2', 'C3', 'C4', 'C5'],
-             'ji_2024_mc_temperance': ['T1', 'T2', 'T3']},
+             'ji_2024_mc_temperance': ['T1', 'T2', 'T3'],
+             'ji_2024_environmental_concern': ['EC1', 'EC2', 'EC3']},
   'covs': {'Q7': 'cov_gender',
            'Q8': 'cov_age',
            'Q9': 'cov_education',
@@ -58,15 +59,13 @@ SOURCES = [{'url': 'https://data.mendeley.com/public-files/datasets/687vv29wsk/f
                   'Q4': 'travel-status screener',
                   'Q5': 'travel-status screener',
                   'Q6': 'travel-status screener',
-                  'Q11': 'province-city-district of residence (geographic code rule)',
-                  'EC1': 'environmental-concern block, reverse-coded by the depositors (file name) -- dropped',
-                  'EC2': 'reverse-coded block, dropped',
-                  'EC3': 'reverse-coded block, dropped'},
+                  'Q11': 'province-city-district of residence (geographic code rule)'},
   'label': 'ji_2024_mindful_tourists',
   'invalid': {'Q8': ['128']}}]
 
 # rows written per table (asserted)
-EXPECT = {'ji_2024_ethical_identity': 678,
+EXPECT = {'ji_2024_environmental_concern': 678,
+ 'ji_2024_ethical_identity': 678,
  'ji_2024_green_purchase_intention': 1130,
  'ji_2024_health_consciousness': 678,
  'ji_2024_mc_caring_environment': 1130,
