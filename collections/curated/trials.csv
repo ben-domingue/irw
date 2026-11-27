@@ -95,3 +95,4 @@ keuleers_2012_blp,curated:lexical_decision #1428,"visual lexical decision, Briti
 brysbaert_2016_dlp2,curated:lexical_decision #1428,"visual lexical decision, Dutch (DLP2); item = string shown"
 brysbaert_2019_dcp,curated:lexical_decision #1428,"online visual lexical decision, Dutch (Dutch Crowdsourcing Project); item = string shown"
 mandera_2020_ecp,curated:lexical_decision #1428,"online visual lexical decision, English (English Crowdsourcing Project); item = string shown"
+tsang_2023_meldch,curated:lexical_decision #1428,"visual lexical decision, Chinese, simplified and traditional script groups (MELD-CH); item = word, form shown in itemcov_simplified / itemcov_traditional"

@@ -14,4 +14,5 @@ ota_2025_jalex,curated:lexical_decision #1428,"visual lexical decision, Japanese
 perezsanchez_2025_spaverb_ld,curated:lexical_decision #1428,"visual lexical decision, Spanish verbs (SpaVerb-LD); item = string shown"
 roar_lexical,curated:lexical_decision #1428,visual lexical decision (ROAR); item = string shown
 spalex_aguasvivas_2020,curated:lexical_decision #1428,"online visual lexical decision, Spanish (SPALEX); item = string shown"
+tsang_2023_meldch,curated:lexical_decision #1428,"visual lexical decision, Chinese, simplified and traditional script groups (MELD-CH); item = word, form shown in itemcov_simplified / itemcov_traditional"
 tucker_2019_mald,curated:lexical_decision #1428,"auditory lexical decision, English (MALD 1.1); item = string shown"
