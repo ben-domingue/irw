@@ -24,6 +24,8 @@ import os
 import sys
 
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from irw_validate._checks import run_qc  # noqa: E402
 
 src = sys.argv[1] if len(sys.argv) > 1 else "Persian Lexicon Project.xlsx"
 out_dir = sys.argv[2] if len(sys.argv) > 2 else "."
@@ -47,6 +49,14 @@ out = pd.DataFrame({
 out = out.sort_values(["id", "trial_number"]).reset_index(drop=True)
 
 name = "nemati_2022_persian_ld"
+# The shared checks (irw_validate.contract `no_validator`): fails block,
+# warnings are printed (concentrated 0/1 responses are expected here).
+_checks = run_qc(out)
+_fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+assert not _fails, _fails
+for _c in _checks:
+    if _c.status == "warn":
+        print(f"  [qc warn] {_c.name}: {_c.detail[:120]}")
 os.makedirs(out_dir, exist_ok=True)
 out.to_csv(os.path.join(out_dir, name + ".csv"), index=False)
 print(f"{name}: rows={len(out)} ids={out.id.nunique()} items={out.item.nunique()} "

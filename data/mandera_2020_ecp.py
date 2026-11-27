@@ -53,6 +53,8 @@ import sys
 
 import numpy as np
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from irw_validate._checks import run_qc  # noqa: E402
 
 src = sys.argv[1] if len(sys.argv) > 1 else "english-vocabtest-20180919-native.lang.en"
 out_dir = sys.argv[2] if len(sys.argv) > 2 else "."
@@ -119,6 +121,14 @@ with open(path, "w", encoding="utf-8", newline="") as fh:
         for k, v in pcov.items():
             o[v] = pid.map(age if k == "age" else p[k]).values
         o["itemcov_lexicality"] = c.lexicality.map({"W": "word", "N": "nonword"}).values
+        # The shared checks (irw_validate.contract `no_validator`): fails block,
+        # warnings are printed (concentrated 0/1 responses are expected here).
+        _checks = run_qc(o[cols])
+        _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+        assert not _fails, _fails
+        for _c in _checks:
+            if _c.status == "warn":
+                print(f"  [qc warn] {_c.name}: {_c.detail[:120]}")
         o[cols].to_csv(fh, index=False, header=False)
         n += len(o)
         rt_empty += int(o.rt.isna().sum())
