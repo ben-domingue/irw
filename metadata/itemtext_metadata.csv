@@ -543,6 +543,7 @@ eldor_2022_symbolic_threat,"Symbolic threat (adapted from Obaidi et al., 2018b; 
 ellis_2016_calc_instrprac,Characteristics of Successful Programs in College Calculus (CSPCC) Calculus I end-of-semester student survey - instructor classroom practices (Q19),12.625,86,4.66666666666667,8.41285714285715,English,standard_omission
 ellis_2016_calc_instrqual,"MAA Characteristics of Successful Programs in College Calculus (CSPCC) End-of-Semester Student Survey, Question 18 (instructor quality)",10.625,76.125,12.5,12.4635714285714,English,standard_omission
 elshafie_2020_edsc,"Egyptian Developmental Screening Chart (EDSC) checklist: Arabic adaptation of the Baroda Developmental Screening Test, 54 motor and mental milestones, birth to 30 months",15.3148148148148,79.6666666666667,2.5,5.14071428571429,Arabic,table
+elshanhaby_2026_manipulation_check,AI-identity manipulation check (study-specific),11.3333333333333,70.6666666666667,5.85714285714286,13.09,English,standard_omission
 emidy2024_fevs,2022 U.S. Office of Personnel Management Federal Employee Viewpoint Survey (OPM FEVS),10.4623655913978,65.6021505376344,13.7935483870968,NA,unknown,unestablished
 emobank_buechel_2017,"EmoBank crowdsourced VAD annotation task (5-point Self-Assessment Manikin: Pleasure, Arousal, Control)",115,773.833333333333,12.8666666666667,9.67008686312934,English,standard_omission
 emsc_kuan-chin_2023,Communication Skills,1.85714285714286,16.1428571428571,53.9047619047619,NA,unknown,unestablished
@@ -1699,6 +1700,7 @@ os_tbmwtfs_schubert_2023_bmw3,Brief Mind Wandering Three-Factor Scale,11.8333333
 os_tbmwtfs_schubert_2023_dmw,Deliberate Mind Wandering,7.75,43,3.46428571428571,NA,unknown,unestablished
 os_tbmwtfs_schubert_2023_ipip,International Personality Item Pool,5.44,27.78,19.8,NA,unknown,unestablished
 os_tbmwtfs_schubert_2023_maas,Mindful Attention Awareness Scale,14.3333333333333,78.2666666666667,16.1666666666667,NA,unknown,unestablished
+ostos_2010_principal_leadership,Principal leadership style as perceived by parents (Ostos-De-la-Cruz 2010),10.5,72.15,15.8,11.6323863636364,Spanish,table
 otago_2018_library_support,"Postgraduate Support at Otago student questionnaire, Q22 (Library support preferences) -- Research Support Unit Library, University of Otago (2018)",5,41.5,8.6,8.28166666666667,English,standard_omission
 otaki_2022_dental_adaptability,Tailor-made self-reported adaptability survey (quantitative segment),18.75,112.5,8.66666666666667,12.0416883116883,English,standard_omission
 oxfordcovid_xue_2024_at,Oxford ARC study: activities and technology use,5.16666666666667,27.1666666666667,6.2,2.35857142857143,English,standard_omission
@@ -1989,6 +1991,7 @@ SABFI2_Gallardo_Pujol_2018_Micro,"Micro-macro environment in life space (EV-macr
 sabrina_2026_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),6.57142857142857,38.5714285714286,15.25,6.705,English,standard_omission
 safiye_2023_rfq,Reflective Functioning Questionnaire (RFQ-8),1,2,16.1428571428571,-3.4,Serbian,table
 sakal_2026_ai_resistance,"AI Workplace Resistance Scale, 27 items (IRS / ORS / APB)",10.6666666666667,66.4444444444444,2,9.655,Turkish,table
+saleem_2021_gad7,"Generalized Anxiety Disorder 7-item scale (GAD-7), Spitzer et al. 2006, framed on the re-opening of college",5.85714285714286,38.5714285714286,15.25,14.1114285714286,English,standard_omission
 salleh_2023_aim_iam_fim,"AIM-IAM-FIM questionnaire (Malay Version): Acceptability of Intervention Measure (AIM), Intervention Appropriateness Measure (IAM), Feasibility of Intervention Measure (FIM)",5,32.3333333333333,11.4,8.97666666666667,Malay,table
 sapa_personality,SAPA-Project 696-item temperament item set (IPIP-based scales and the EPQ-R),5.31752873563218,30.132183908046,17.3333333333333,NA,unknown,unestablished
 sariyska_2019_food_frequency,"Food-frequency questions (study-authored), Sariyska, Markett, Lachmann & Montag 2019",1.5,8.1,8.85714285714286,2.89,English,standard_omission
@@ -2535,6 +2538,14 @@ uti_newlands_2023_gad,Generalized Anxiety Disorder 7 (GAD-7),6.42857142857143,37
 uti_newlands_2023_phq,Patient Health Questionnaire-9 (PHQ-9),12,69.2222222222222,15.25,7.81888888888889,English,standard_omission
 uti_newlands_2023_wpai,Work Productivity and Activity Impairment Questionnaire: Specific Health Problem V2.0 (WPAI:SHP),41.375,227.821428571429,3.5625,8.374,English,standard_omission
 valdivia_2023_oms,"Opening Minds Stigma Scale for Health Care Providers (OMS-HC-15), Mexican Spanish version",16.6666666666667,86.3333333333333,20.8,7.57,Spanish,table
+valera_2012_parents_administrative,"Perception of the educational service quality of a Ventanilla school, parents form, administrative dimension (Valera-Gálvez 2012)",15.3846153846154,102,2,10.3569230769231,Spanish,table
+valera_2012_parents_community,"Perception of the educational service quality of a Ventanilla school, parents form, community dimension (Valera-Gálvez 2012)",13.4,82,2,7.24974358974359,Spanish,table
+valera_2012_parents_institutional,"Perception of the educational service quality of a Ventanilla school, parents form, institutional dimension (Valera-Gálvez 2012)",16.25,99,2,10.1304248366013,Spanish,table
+valera_2012_parents_pedagogical,"Perception of the educational service quality of a Ventanilla school, parents form, pedagogical dimension (Valera-Gálvez 2012)",13.125,82.9375,2,8.6324025974026,Spanish,table
+valera_2012_students_administrative,"Perception of the educational service quality of a Ventanilla school, students form, administrative dimension (Valera-Gálvez 2012)",17.3076923076923,114.461538461538,2,11.7522222222222,Spanish,table
+valera_2012_students_community,"Perception of the educational service quality of a Ventanilla school, students form, community dimension (Valera-Gálvez 2012)",17.75,112.125,2,12.6181746031746,Spanish,table
+valera_2012_students_institutional,"Perception of the educational service quality of a Ventanilla school, students form, institutional dimension (Valera-Gálvez 2012)",17.5,108.916666666667,2,12.5733333333333,Spanish,table
+valera_2012_students_pedagogical,"Perception of the educational service quality of a Ventanilla school, students form, pedagogical dimension (Valera-Gálvez 2012)",16.7222222222222,103.888888888889,2,11.0605952380952,Spanish,table
 valverdeberrocoso_2021_learning_design,Learning Design Support Environment items — Descripción de la práctica docente habitual con TIC,4.45454545454545,39.3636363636364,9.83333333333333,14.68,Spanish,table
 valverdeberrocoso_2021_sqd,"SQD-Scale (Synthesis of Qualitative Evidence), Spanish version",14.75,87.75,19.1666666666667,10.0909615384615,Spanish,table
 valverdeberrocoso_2021_tictip,"Escala sobre integración educativa de las TIC (Scale for teachers' ICT integration proficiency, TICTIP)",13.8214285714286,88.5714285714286,9.83333333333333,10.84625,Spanish,table

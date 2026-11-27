@@ -1,0 +1,17 @@
+table,basis,note
+alzahrani_2026_arabic_ld,curated:lexical_decision #1428,"visual lexical decision, Modern Standard Arabic (Arabic Lexicon Project); item = string shown"
+brysbaert_2016_dlp2,curated:lexical_decision #1428,"visual lexical decision, Dutch (DLP2); item = string shown"
+brysbaert_2019_dcp,curated:lexical_decision #1428,"online visual lexical decision, Dutch (Dutch Crowdsourcing Project); item = string shown"
+chromy_2026_czeled,curated:lexical_decision #1428,"visual lexical decision, Czech word forms (CzeLeD); item = string shown"
+haro_2024_emotional_ld,curated:lexical_decision #1428,"visual lexical decision, Spanish emotional words; item = string shown"
+keuleers_2012_blp,curated:lexical_decision #1428,"visual lexical decision, British English (BLP); item = string shown"
+mandera_2020_ecp,curated:lexical_decision #1428,"online visual lexical decision, English (English Crowdsourcing Project); item = string shown"
+martineztomas_2026_pseudoword_ld,curated:lexical_decision #1428,"visual lexical decision, Spanish pseudoword megastudy; item = string shown"
+megart_tonkovic_2021,curated:lexical_decision #1428,"visual lexical decision, Croatian megastudy (MegaRT); item = string shown"
+mturkddm_lexical,curated:lexical_decision #1428,visual lexical decision (DDM study); item = string shown
+nemati_2022_persian_ld,curated:lexical_decision #1428,"visual lexical decision, Persian (Persian Lexicon Project); item = string shown"
+ota_2025_jalex,curated:lexical_decision #1428,"visual lexical decision, Japanese (JALEX); item = string shown"
+perezsanchez_2025_spaverb_ld,curated:lexical_decision #1428,"visual lexical decision, Spanish verbs (SpaVerb-LD); item = string shown"
+roar_lexical,curated:lexical_decision #1428,visual lexical decision (ROAR); item = string shown
+spalex_aguasvivas_2020,curated:lexical_decision #1428,"online visual lexical decision, Spanish (SPALEX); item = string shown"
+tucker_2019_mald,curated:lexical_decision #1428,"auditory lexical decision, English (MALD 1.1); item = string shown"
