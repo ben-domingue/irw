@@ -1683,3 +1683,7 @@ zhu_2026_ls_vsc,core,data/zhu_2026_live_streaming_loneliness.py,2026-11-25
 zieff_2023_snapiv18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
+tsukahara_2020_discrimination,core,data/tsukahara_2020_discrimination/tsukahara_2020_discrimination.R,2026-11-27
+tsukahara_2020_rapm,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
+tsukahara_2020_lettersets,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
+tsukahara_2020_numberseries,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
