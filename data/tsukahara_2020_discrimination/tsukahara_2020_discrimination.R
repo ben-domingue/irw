@@ -35,7 +35,8 @@
 ##   given in Data_Study1.csv. That file lists only the 331 people kept after
 ##   the paper's exclusions; the other 21 people have these covariates empty.
 ## No response times in the source. Demographics.csv (date of birth, etc.) is
-## not used. Subject numbers are remapped to integers.
+## not used. id is the lab subject number (12xxx), shared with
+## tsukahara_2020_rapm, _lettersets and _numberseries.
 ## Subject 12256 appears twice in LineDiscrimination_raw.csv with identical
 ## trials; the copy is dropped. The paper's accuracy-based exclusions
 ## (Scored Data/removed/*_removed.csv) are not applied: every person is kept.
@@ -77,10 +78,10 @@ covs <- c(rapm = "RAPM", lettersets = "LetterSets", numberseries = "NumberSeries
           stroopeffect = "StroopEffect")
 stopifnot(!any(duplicated(cv$Subject)), all(cv$Subject %in% x$Subject))
 
-subs <- sort(unique(x$Subject))
+
 m <- match(x$Subject, cv$Subject)
 d <- data.frame(
-  id = match(x$Subject, subs),
+  id = as.integer(x$Subject),
   item = sprintf("%s_d%0*d", x$task, x$w, as.integer(x$Difference)),
   resp = x$Accuracy,
   trial_number = x$Trial,

@@ -1606,3 +1606,6 @@ dealmeida_2021_moneyattitude6,cov,data/covariance/pmc_article_tables_ba.py,2026-
 hagerman_2017_faceattract6,cov,data/covariance/pmc_article_tables_ba.py,2026-11-25
 poole_2020_toj,core,data/timing_db/timing_db.R,2026-11-26
 tsukahara_2020_discrimination,core,data/tsukahara_2020_discrimination/tsukahara_2020_discrimination.R,2026-11-27
+tsukahara_2020_rapm,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
+tsukahara_2020_lettersets,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
+tsukahara_2020_numberseries,core,data/tsukahara_2020_reasoning/tsukahara_2020_reasoning.R,2026-11-27
