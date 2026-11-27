@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from . import plan as planning
@@ -195,6 +196,42 @@ def _validate(reports, target: Target, targets, index, owner: str, enabled: bool
         for line in checked:
             print(f"  {line}")
 
+
+def push_all(live, drafts, jobs: int) -> list:
+    """Upload every planned item; results come back in plan order.
+
+    push_one catches every exception into its result, so a worker never
+    raises; each table is still deleted, recreated, uploaded and row-count
+    verified on its own, exactly as in the serial path.
+    """
+    def _push(item):
+        return push_one(drafts[item.dataset], item.path, item.table, item.report.rows)
+
+    jobs = max(1, jobs)
+    if jobs == 1:
+        results = []
+        for n, item in enumerate(live, 1):
+            print(f"  [{n}/{len(live)}] {item.table} -> {item.dataset}", flush=True)
+            results.append(_push(item))
+        return results
+    print(f"  uploading {len(live)} table(s), {jobs} at a time", flush=True)
+    done = {}
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        futures = {pool.submit(_push, item): i for i, item in enumerate(live)}
+        for n, future in enumerate(as_completed(futures), 1):
+            i = futures[future]
+            done[i] = future.result()
+            mark = "ok" if done[i].ok else "FAILED"
+            print(f"  [{n}/{len(live)}] {live[i].table} -> {live[i].dataset}  {mark}",
+                  flush=True)
+    return [done[i] for i in range(len(live))]
+
+
+#: Concurrent table uploads. plan.py already fans out 8 threads of Redivis
+#: reads; 4 writes keeps well inside that.
+DEFAULT_JOBS = 4
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="red_up",
@@ -220,6 +257,11 @@ def main(argv: list[str] | None = None) -> int:
                              f"of a past batch rather than a staging area")
     parser.add_argument("--strict", action="store_true",
                         help="treat warnings as errors and upload nothing")
+    parser.add_argument("--jobs", "-j", type=int, default=DEFAULT_JOBS,
+                        help=f"tables to upload at once (default {DEFAULT_JOBS}). "
+                             f"Each table is network-bound -- an import job and a "
+                             f"count(*) query on Redivis' side -- so one at a time "
+                             f"spent ~20s per table waiting. 1 restores serial order.")
     args = parser.parse_args(argv)
 
     # Resolved before anything else, and never chdir'd away from: the scripts
@@ -384,14 +426,15 @@ def main(argv: list[str] | None = None) -> int:
         print("Cancelled.")
         return 0
 
+    # Drafts are opened up front and serially: create_next_version is the one
+    # call that must not race, and a failure here should stop the run before
+    # any table is touched.
     drafts: dict[str, object] = {}
-    results = []
-    for n, item in enumerate(live, 1):
+    for item in live:
         if item.dataset not in drafts:
             drafts[item.dataset] = open_draft(owner, item.dataset)
-        dataset = drafts[item.dataset]
-        print(f"  [{n}/{len(live)}] {item.table} -> {item.dataset}", flush=True)
-        results.append(push_one(dataset, item.path, item.table, item.report.rows))
+
+    results = push_all(live, drafts, args.jobs)
 
     for result in results:
         if result.stray_uploads:
