@@ -88,6 +88,42 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   `metadata/10_collections.R` halts if a curated member is missing from published metadata. Branch
   `data/psychophysics-collection`, worktree `~/irw-wt/psychophysics-collection`.
 
+## Repos leads 2026-11-20 lane 2 (2026-11-27) — 307 tables uploaded to shards 10/8/7/6/2/11 + 11 item text tables
+
+Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-20-lane2`.
+
+- [x] **UPLOADED 2026-11-27 by Claude (Ben's go-ahead in-session):** 307 response tables, all row-count verified --
+  item_response_warehouse_10 78, _8 74, _7 29, _6 55, _2 70, _11 1 (grant_2025_policy_support, by Ben); 11 item text
+  tables to irw_text_4 (11/11 verified). Ben published 10, 8, 7, 6.
+- [ ] **Shard 2 is blocked on Redivis.** Ben unreleased v36.2 at ~08:55 on 2026-11-27; since then every write to the
+  `next` draft fails with "The version 'vnext' is still in the process of being unreleased" (20 retries to 10:25; Ben
+  contacting Redivis support). The draft holds this batch's 70 tables: 69 verified, `thai_2021_government_support`
+  EMPTY (0 rows; created but never loaded when v36.2 went out). Live is v36.1, which does not have it. Once unstuck:
+  1. `python3 -m red_up --yes --dataset item_response_warehouse_2 automated_finding/runs/upload_2026-11-27/retry_2b`
+     (run from this branch's worktree; the dir holds that one CSV, 400 rows; replaces the empty table) and check it
+     reports 1/1 verified. `runs/` is gitignored, so if this worktree is gone use the copy in ~/Downloads/
+     thai_2021_government_support.csv, or rerun the thai_2021 data script.
+  2. Ben publishes shard 2, then irw_text_4 (11 item text tables; saleem_2021_gad7 and elshanhaby_2026_manipulation_check
+     describe shard 2 tables).
+- [x] **Re-uploaded 2026-11-27 evening (reverse-keyed items restored):** javadizadeh_2022_{staffing,training,trust}
+  replaced on the item_response_warehouse_10 draft (3/3 row-count verified; now 10/9/18 items);
+  ji_2024_environmental_concern new on the item_response_warehouse_8 draft (1/1 verified). Ben publishes 10 and 8.
+- [ ] Merge #3768 once shard 2 and irw_text_4 are published.
+- [x] **WITHDRAWN 2026-11-27 (#3788, Ben's go-ahead):** lie_2026 e-wallet x4 (shard 6) and amin_2026 x9 (shard 7),
+  deleted from new drafts, 13/13 verified. Ben publishes the shard 6 and 7 drafts.
+- [ ] Ben: possible re-cuts, not done. yeoh_2026_ai_live_host (20/400 rows share 8 identical 23-item patterns, scales
+  partial) stays live for now. Exact duplicate submissions were kept: saleem_2021_gad7_reopening 60/552 (N 492
+  without them), sreen_2017 4, rahmah_2026 / adami_2025 / astini_2026 1 each (astini would sit at exactly N=100).
+- [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
+  aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
+  ostos_2010, samaranayake_2026, syed_2026, tsai_2026, valera_2012 x2.
+- [ ] 61 item text tables held locally (`itemtext_hold_2026-11-27.csv`, files in Dropbox data/itemtext/): adapted
+  batteries and named instruments with no located grant; a clearance is an upload, not a redo.
+- [ ] Item text not built, wording in the deposit: javadizadeh_2022 (Codebook.xlsx; fire and police number items
+  differently -- map by wording), hartl_2015 (S1 Table PDF has the full German stems), amin_2026 (raw-instrument
+  headers), hoang_2020 (Survey questionnaire.docx), prasad_2026 (headers garbled 'na' -> '6'), mccall_2026 willingness
+  items (stem missing from the labels).
+
 ## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
 
 Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
@@ -95,9 +131,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
 - [x] **UPLOADED 2026-11-21 by Claude (Ben's go-ahead in-session, "please do the uploads")**: 169 response tables
   (396,057 responses) to the item_response_warehouse_9 draft, 169/169 row-count verified; Ben publishes.
   (35 deposits; list in BATCH_LOG). No item text.
-- [ ] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: 36 never opened because Mendeley's public API
-  returned 502 all session (re-profile them first), ~66 Zenodo/figshare/Dataverse/OSF rows not yet opened (green
-  purchase, destination image, service quality, tax-compliance experiments), and 2 holds below.
+- [x] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: worked 2026-11-27 (lane 2, BATCH_LOG 2026-11-27):
+  58 shipped (307 tables), 35 rejected, 5 blocked_licence, 4 skipped_pii; the 2 holds below stay unworked.
 - [ ] Holds: Novela (Zenodo 17302208, blocks observed 1-4 vs 2-5 -- a shifted 4-point scale?) and Rigglets (Mendeley
   wv525y5dn2, anchors printed Strongly agree..Strongly disagree; which end is 1?). Both need the paper or the authors.
 - [ ] Item text later, cheap from deposit files: fransisca_2026_*, prihatna_2025/2026_* (stems are the headers,
