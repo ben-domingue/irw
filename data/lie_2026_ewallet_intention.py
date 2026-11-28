@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# WITHDRAWN 2026-11-27 (#3788, tools/withdrawals/withdraw_fabricated_2026_11_27.py): the deposit's 190
+# Google Forms timestamps fall within 24.8 s, so the rows were generated, not collected. Kept as the record; do not rerun.
 # Source: https://zenodo.org/records/24362742
 # DOI: 10.5281/zenodo.24362742 (data)
 #   Lie, Yulius; Utomo, Kawang (2026). Study of Important Factors Affecting Intentions in using E-Wallet for Online

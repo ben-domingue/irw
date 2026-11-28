@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# WITHDRAWN 2026-11-27 (#3788, tools/withdrawals/withdraw_fabricated_2026_11_27.py): the processed CSV read here is
+# not a recode of the deposit's raw form export (per-item counts disagree on all 45 items). Kept as the record; do not rerun.
 # Source: https://zenodo.org/records/22105174
 # DOI: 10.5281/zenodo.22105174 (data)
 #   Amin, Farhan; Khan, Muhammad (2026). A Mixed-Method approach to understanding the Impact of Digital Marketing

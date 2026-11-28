@@ -109,6 +109,11 @@ Full write-up in `BATCH_LOG.md` (2026-11-27). Branch `data/repos-leads-2026-11-2
   replaced on the item_response_warehouse_10 draft (3/3 row-count verified; now 10/9/18 items);
   ji_2024_environmental_concern new on the item_response_warehouse_8 draft (1/1 verified). Ben publishes 10 and 8.
 - [ ] Merge #3768 once shard 2 and irw_text_4 are published.
+- [x] **WITHDRAWN 2026-11-27 (#3788, Ben's go-ahead):** lie_2026 e-wallet x4 (shard 6) and amin_2026 x9 (shard 7),
+  deleted from new drafts, 13/13 verified. Ben publishes the shard 6 and 7 drafts.
+- [ ] Ben: possible re-cuts, not done. yeoh_2026_ai_live_host (20/400 rows share 8 identical 23-item patterns, scales
+  partial) stays live for now. Exact duplicate submissions were kept: saleem_2021_gad7_reopening 60/552 (N 492
+  without them), sreen_2017 4, rahmah_2026 / adami_2025 / astini_2026 1 each (astini would sit at exactly N=100).
 - [ ] Covariate-label harvest after merge (`metadata/covariate_labels/harvest.py`) for the .sav/.dta scripts:
   aji_2020, castillo_2018 (xlsx, skip), cetinkaya_2025, grant_2025, hartl_2015, hoang_2020, ji_2024, le_2023, mccall_2026,
   ostos_2010, samaranayake_2026, syed_2026, tsai_2026, valera_2012 x2.
