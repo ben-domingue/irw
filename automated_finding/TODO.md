@@ -1,5 +1,15 @@
 # IRW Automated Finding — TODO
 
+## Reverse-keyed items restored 2026-11-27 (branch data/restore-reverse-keyed)
+
+Full write-up in `BATCH_LOG.md` (2026-11-27b). Outputs in `automated_finding/irw_output/`.
+- [ ] **Upload 15 new tables + 1 replacement** (rerun each script first; `kim_2023_nursing_learning.py` needs
+  KIM23_RAW = the Dataverse file 7103789). Siblings live on: shard 10 -- ucarer_2026_scs_sf; shard 9 -- liu_2024_{rcbs,
+  cses,ffmq}, muffato_2023_{bfi44,atot,pebs}, fazi_2026_stai_{s,t}, kim_2023_learning_selfdirected,
+  akulume_2024_donation_attitude, and may_2020_hsps (replace, now 30 items); shard 8 -- shen_2018_bfi,
+  perez_fuentes_2020_covid_threat, kawakami_2020_jcq, kabir_2021_elearning_stress. Shard 9 (and 10) are near the
+  1,000-table cap: check room before choosing where the 10 shard-9 siblings go. Ben publishes.
+
 ## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) uploaded to shard 10 + 81 item text tables
 
 Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-leads-2026-11-25`, rebased onto main).
@@ -204,8 +214,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 
 - [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 25/25 row-count verified; Ben publishes. Was: 25 response tables (587,820 responses) from
   `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
-- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
-  reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
+- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (resolved 2026-11-27:
+  shipped as kim_2023_learning_selfdirected under the never-drop ruling), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
   answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
 - [ ] 63 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/DJNHCM (8-case OSCE checklists,
   4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).

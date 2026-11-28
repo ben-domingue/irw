@@ -14,20 +14,21 @@
 # 218 nursing students at Gangneung Wonju National University, Feb-Mar 2022.
 # Checked: N = 218; 183 women (성별 2) = 83.9%; 97 fourth-years = 44.5%; both
 # as in the paper. Scale averages stored in the deposit equal the item means
-# exactly. THREE output tables (paper, Data sources/measurement):
+# exactly. FOUR output tables (paper, Data sources/measurement):
 #   kim_2023_learning_immersion     몰입1-29 -> immersion1..29, learning
 #     immersion (Kim et al.), 1-5.
 #   kim_2023_learning_selfefficacy  효능1-10 -> selfefficacy1..10, learning
 #     self-efficacy (Ayres; Korean by Park & Kweon), 1-7.
 #   kim_2023_learning_transfer      학습전이1-4 -> transfer1..4, learning
 #     transfer (Lee), 1-5.
+#   kim_2023_learning_selfdirected  주도1-22 -> selfdirected1..22, self-directed
+#     learning ability (Guglielmino, modified by Kim & Lee), 1-5, as deposited.
+#     The stored average equals the raw item mean and no item correlates
+#     negatively with the rest, so any negatively worded items were stored
+#     already reversed, and which ones is not recorded; check direction
+#     before scoring.
 #   1 = extremely disagree ... 5 (or 7) = extremely agree. No missing cells.
 # NOT shipped from the same file:
-#   - 주도1-22, self-directed learning ability (Guglielmino, modified by Kim &
-#     Lee): the stored average equals the raw item mean and no item correlates
-#     negatively with the rest, so any negatively worded items were stored
-#     already reversed, and which ones cannot be verified (pre-scored-reversal
-#     rule). Held in the hand-off.
 #   - 만족1-17: the paper's satisfaction scale has 15 items, the file 17.
 #   - 전이동기1-10 (transfer motivation, 1-7): not described in the paper.
 # Covariates: age, sex, school year. Other background columns are unlabeled
@@ -49,7 +50,8 @@ RAW = os.environ.get("KIM23_RAW", "jeehp-20-14-dataset1.xlsx")
 COVS = ["cov_age", "cov_sex", "cov_school_year"]
 SCALES = [("몰입", 29, "immersion", 5, "kim_2023_learning_immersion"),
           ("효능", 10, "selfefficacy", 7, "kim_2023_learning_selfefficacy"),
-          ("학습전이", 4, "transfer", 5, "kim_2023_learning_transfer")]
+          ("학습전이", 4, "transfer", 5, "kim_2023_learning_transfer"),
+          ("주도", 22, "selfdirected", 5, "kim_2023_learning_selfdirected")]
 
 
 def convert():

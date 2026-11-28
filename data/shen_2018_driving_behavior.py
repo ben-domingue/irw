@@ -12,20 +12,22 @@
 # Worked from the cleaned leads list of 2026-11-07 (refined_flag
 # recoverable_format; source leads/plos_leads_2026-10-30.csv), leads batch 7.
 #
-# THREE output tables, items as answered, numbered as in the headers:
+# FOUR output tables, items as answered, numbered as in the headers:
 #   shen_2018_pdbs  Positive Driver Behaviours Scale (Chinese, 13 items),
 #     1 never .. 6 very often.
 #   shen_2018_dbq   Driver Behaviour Questionnaire, 28 items, 1-5.
 #   shen_2018_dddi  Dula Dangerous Driving Index, 28 items, 1-5.
 #   None of the three has reverse-keyed items (all items in a block point the
 #   same way; every inter-item correlation is positive).
+#   shen_2018_bfi   BFI-44, bfi01..bfi44 in the BFI's item order, 1-5, as
+#     deposited. Its reverse-keyed items correlate mostly near zero (-0.24 to
+#     +0.37; most within +-0.17) with the mean of the direct items of their
+#     own scale, neither clearly negative nor clearly positive, so whether
+#     they were recoded before deposit is unknown (it may be mixed); check
+#     direction before scoring.
 # Note: the deposit holds all 448 respondents; the paper dropped 27 for
 #   careless responding (N = 421) without saying which. All 448 are kept.
-# Dropped: the BFI-44. Its reverse-keyed items correlate near zero (-0.10 to
-#   +0.07) with the direct items of their own scale rather than clearly
-#   negatively, so it cannot be told whether they were recoded before
-#   deposit; dropped under the 2026-11-08 rule. Mileage, fines and penalty
-#   points dropped.
+# Dropped: mileage, fines and penalty points.
 # Covariates: gender, age, education, driving years, accidents in the past
 #   three years.
 # `id` is the deposit's questionnaire number (1001..1449).
@@ -114,6 +116,17 @@ def convert():
         assert (out[src].corr().values > 0).all()
         out.columns = ["id"] + covs + names
         save(out, covs, names, name, vals)
+
+    # BFI-44: the headers read "I See Myself as Someone Who_<k>. ..." (item 2 lacks the prefix)
+    src = c[79:123]
+    assert len(src) == 44
+    for k, s in enumerate(src, 1):
+        assert str(s).split("_")[-1].startswith(f"{k}. "), s
+    names = [f"bfi{k:02d}" for k in range(1, 45)]
+    out = df[["id"] + covs + src].copy()
+    out[src] = out[src].apply(pd.to_numeric, errors="coerce")
+    out.columns = ["id"] + covs + names
+    save(out, covs, names, "shen_2018_bfi", range(1, 6))
 
 
 if __name__ == "__main__":

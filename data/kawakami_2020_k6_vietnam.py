@@ -13,18 +13,19 @@
 # Worked from the cleaned leads list of 2026-11-07 (refined_flag
 # recoverable_format; source leads/plos_leads_2026-10-30.csv), leads batch 7.
 #
-# TWO output tables:
+# THREE output tables:
 #   kawakami_2020_k6      Vietnamese K6, K1-K6, 0 none of the time .. 4 all
 #     of the time. N = 949 and mean total 4.57 as in the paper (asserted).
 #   kawakami_2020_dass21  DASS-21, 0-3, items named by the deposit's subscale
 #     codes (DASSD1-7 depression, DASSA1-7 anxiety, DASSS1-7 stress), in the
 #     deposit's (questionnaire) column order.
-# Dropped: the JCQ items (22 of the Job Content Questionnaire, 1-4). The
-#   deposit does not say whether the negatively worded items (4, 8, 22, 23
-#   in the JCQ numbering) were recoded, and the inter-item correlations do
-#   not settle it (4 and 8 are near zero, not negative, against the rest of
-#   decision latitude), so the table is dropped under the 2026-11-08 rule.
-#   EQ-5D-5L (H1-H5, five single-domain items, plus the VAS H6) not shipped.
+#   kawakami_2020_jcq     22 Job Content Questionnaire items, jcq3..jcq58 (the
+#     JCQ numbering the deposit uses), 1-4, as deposited. The deposit does not
+#     say whether the negatively worded items (4, 8, 22, 23) were recoded, and
+#     the inter-item correlations do not settle it (4 and 8 correlate +0.24
+#     and +0.14 with the rest of decision latitude, near zero rather than
+#     clearly negative), so check direction before scoring.
+# Not shipped: EQ-5D-5L (H1-H5, five single-domain items, plus the VAS H6).
 # Covariates: birth year, sex, marital status, education, from the header
 #   codes.
 # `id` is the row index (the deposit carries no identifier).
@@ -99,6 +100,11 @@ def convert():
     assert len(dass) == 21
     out = df.rename(columns={x: x.lower() for x in dass})
     save(out, covs, [x.lower() for x in dass], "kawakami_2020_dass21", [0, 1, 2, 3])
+
+    jcq = [x for x in c if str(x).startswith("JCQ")]
+    assert len(jcq) == 22
+    out = df.rename(columns={x: x.lower() for x in jcq})
+    save(out, covs, [x.lower() for x in jcq], "kawakami_2020_jcq", [1, 2, 3, 4])
 
 
 if __name__ == "__main__":

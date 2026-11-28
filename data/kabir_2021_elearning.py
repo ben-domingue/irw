@@ -12,17 +12,22 @@
 # Worked from the cleaned leads list of 2026-11-07 (refined_flag
 # recoverable_format; source leads/plos_leads_2026-10-30.csv), leads batch 6.
 #
-# ONE output table (the stress scale described below was dropped 2026-11-08):
+# TWO output tables:
 #   kabir_2021_elearning_readiness  39 items, 1 strongly disagree to 5
 #     strongly agree (availability of technology 6, use of technology 11,
 #     self-confidence 12, acceptance 7, training 3). The item sum equals the
 #     deposit's sum_readiness_scale on every row (asserted).
 #   kabir_2021_elearning_stress  the 14-item perceived e-learning stress
-#     scale (PLSS, adapted from Cohen's PSS-14), 0-4. STORED AS DEPOSITED,
-#     i.e. already scored: the plain item sum equals the deposit's
-#     sum_stress_scale on every row (asserted), so the seven positive items
-#     the paper reverse-scores (1, 2, 3, 8, 11, 12, 14) are deposited
-#     reversed. Those seven carry an "r" suffix in the item code.
+#     scale (PLSS, adapted from Cohen's PSS-14), stress1..stress14 (the
+#     deposit's stress_item_I..XIV), 0-4, STORED AS DEPOSITED. The plain item
+#     sum equals the deposit's sum_stress_scale on every row (asserted), so
+#     the items the paper reverse-scores (1, 2, 3, 8, 11, 12, 14) would be
+#     deposited already reversed -- but that list departs from the PSS-14's
+#     positive items (4, 5, 6, 7, 9, 10, 13), there is no wording to check it
+#     against, and stress4 and stress13 correlate negatively with the rest
+#     (-0.26, -0.31). The reversal state is unknown or mixed: check direction
+#     before scoring. (First dropped 2026-11-08 for this reason; restored
+#     2026-11-27 on Ben's ruling that such items ship.)
 # Covariates (text in the deposit): gender, degree, residence, age band,
 #   division (Dhaka / outside), institution type. 52.15% female (paper).
 # `id` is the row index.
@@ -46,7 +51,7 @@ URL = "https://zenodo.org/api/records/5068463/files/E-learning_dataset.xls/conte
 RAW = os.environ.get("KABIR_RAW")
 HDR = {"User-Agent": "IRW-Finder/1.0"}
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV"]
-REVERSED = {1, 2, 3, 8, 11, 12, 14}
+REVERSED = {1, 2, 3, 8, 11, 12, 14}  # the paper's reverse-scored items (header); not applied here
 
 
 def load():
@@ -88,8 +93,10 @@ def convert():
     df = df.rename(columns={c: c.replace("readiness_item_", "ready") for c in ready})
     save(df, covs, [f"ready{i}" for i in range(1, 40)], "kabir_2021_elearning_readiness", range(1, 6))
 
-    # Stress scale NOT shipped (Ben, 2026-11-08): deposited already scored,
-    # and the paper's reversed-item list cannot be checked against wording.
+    stress = [f"stress_item_{r}" for r in ROMAN]
+    assert (df[stress].sum(axis=1) == df["sum_stress_scale"]).all()
+    df = df.rename(columns={c: f"stress{i}" for i, c in enumerate(stress, 1)})
+    save(df, covs, [f"stress{i}" for i in range(1, 15)], "kabir_2021_elearning_stress", range(0, 5))
 
 
 if __name__ == "__main__":

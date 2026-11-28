@@ -14,10 +14,14 @@
 #   fazi_2026_pid5bf  Personality Inventory for DSM-5 Brief Form, PID-1..PID-25, 0-3
 #   fazi_2026_ysqs3   Young Schema Questionnaire Short Form 3, YSQ-1..YSQ-90, 1-6
 #   fazi_2026_bdi2    Beck Depression Inventory-II, BDI-1..BDI-21, 0-3
-# Not shipped: the STAI-Y columns (8 state + 8 trait). Several carry an "(r)" suffix and the
-#   deposit does not say whether those values were already reverse-scored; per the
-#   pre-scored-reversals rule a table whose reversal state cannot be verified is dropped.
-#   Also not shipped: all subscale/total columns.
+#   fazi_2026_stai_s  STAI-Y state items, STAI-Y-S1..S8, 1-4
+#   fazi_2026_stai_t  STAI-Y trait items, STAI-Y-T1..T8, 1-4
+#     Several STAI columns carry an "(r)" suffix (written "_r" in the item code, e.g.
+#     STAI-Y-S1_r) and the deposit does not say whether those values were already
+#     reverse-scored. They ship as deposited; check direction before scoring. The deposit's
+#     STAI totals equal the plain item sums and every (r) item correlates positively with the
+#     rest of its scale (.67-.81), which points to them being stored already reversed.
+# Not shipped: all subscale/total columns.
 # Covariates: cov_group (Misofonia/Controllo), cov_age, cov_sex, cov_gender_identity,
 #   cov_education, cov_occupation (Italian labels as deposited). Sexual orientation, marital
 #   status and the screening yes/no columns are not carried.
@@ -63,10 +67,16 @@ def main():
         "pid5bf": ([f"PID-{i}" for i in range(1, 26)], 0, 3),
         "ysqs3": ([f"YSQ-{i}" for i in range(1, 91)], 1, 6),
         "bdi2": ([f"BDI-{i}" for i in range(1, 22)], 0, 3),
+        "stai_s": ([c for c in d.columns if str(c).startswith("STAI-Y-S")], 1, 4),
+        "stai_t": ([c for c in d.columns if str(c).startswith("STAI-Y-T")], 1, 4),
     }
+    for tot, key in (("STAI-S tot.", "stai_s"), ("STAI-T tot.", "stai_t")):
+        assert len(scales[key][0]) == 8, key
+        assert (d[scales[key][0]].sum(axis=1) == d[tot]).all(), tot
     for name, (cols, lo, hi) in scales.items():
         t = d[["id"] + covs + cols].melt(id_vars=["id"] + covs, var_name="item", value_name="resp")
         t = t.dropna(subset=["resp"])
+        t["item"] = t["item"].str.replace(" (r)", "_r", regex=False)
         t["resp"] = t["resp"].astype(int)
         assert t["resp"].between(lo, hi).all(), name
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])

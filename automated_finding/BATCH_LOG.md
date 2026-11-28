@@ -7,6 +7,26 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-27b — reverse-keyed items restored in 11 merged scripts (Ben's never-drop ruling)
+
+Ben ruled 2026-11-27: never drop reverse-keyed items, or a block, because it cannot be verified whether the depositors
+already reversed them; datastandard.md lets direction vary across items, so they ship as deposited and the script header
+states the reversal uncertainty. This undoes the "pre-scored-reversals" / "2026-11-08 rule" drops in merged scripts
+(javadizadeh_2022 and ji_2024 were done separately in #3768). Each script re-run from its source; every new or changed
+table passes `irw-validate --profile upload`; sibling tables' row counts are unchanged.
+
+- New tables: `ucarer_2026_scs_sf` (11), `liu_2024_rcbs` (13), `liu_2024_cses` (10), `liu_2024_ffmq` (39; 70
+  mean-imputed cells and one out-of-range cell dropped -- the imputation was the FFMQ's other drop reason, and it is
+  handled cell by cell), `muffato_2023_bfi44` (44), `muffato_2023_atot` (10), `muffato_2023_pebs` (19), `shen_2018_bfi`
+  (44), `fazi_2026_stai_s` (8), `fazi_2026_stai_t` (8), `kim_2023_learning_selfdirected` (22; was hold 3JDN9S SDL),
+  `perez_fuentes_2020_covid_threat` (5; "thin" was not a reason on its own), `kawakami_2020_jcq` (22),
+  `akulume_2024_donation_attitude` (9), `kabir_2021_elearning_stress` (14; Ben's own 2026-11-08 drop, superseded).
+- Changed: `may_2020_hsps` 27 -> 30 items (R1-R3, the researcher-generated reverse-scored items). Their correlation with
+  the HSPS sum is positive in the Birth to Twenty file and negative in the student file -- split by cov_study.
+- Left alone: `gonzalez_jimarez_2026` (the `_recod` columns are exact 5 - x copies of EAR items that ship),
+  `siguenza_2025_ucla` (nothing was dropped), `gerber_2022_swiss_camp.py` (its unshipped EAS block is already live as
+  `gerber_2022_eas_temperament` from `gerber_2022_swisscamp.py`, which flips the R items itself).
+
 ## 2026-11-25c — the day's 157 repos leads worked: 85 deposits, 399 tables, 2,124,328 responses
 
 Ben (via the parent session): work the leads from the 2026-11-25 monthly routine (`leads/repos_leads_2026-11-25.csv`, 14) and the

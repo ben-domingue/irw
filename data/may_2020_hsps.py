@@ -12,9 +12,13 @@
 #   generated reverse-scored items".
 #
 # Table: may_2020_hsps -- Highly Sensitive Person Scale (Aron & Aron 1997), 27 items Q1..Q27,
-#   1-7. Same instrument and response scale in both samples -> one table with cov_study
-#   (btt / student). The 3 researcher-generated items are not shipped: the key calls them
-#   "reverse-scored" without saying whether the stored values are already reversed.
+#   1-7, plus R1-R3, the 3 researcher-generated items (the sheets' columns 1-3), 1-7. Same
+#   instrument and response scale in both samples -> one table with cov_study (btt / student).
+#   R1-R3 ship as deposited: the key calls them "reverse-scored" without saying whether the
+#   stored values are already reversed, so check direction before scoring. Their correlation
+#   with the HSPS item sum differs in sign between samples (btt +0.17 to +0.22, students
+#   -0.14 to -0.24): either one file stores them reversed and the other does not, or the BTT
+#   sample answers them differently (e.g. acquiescence). Split by cov_study before scoring.
 # id: the deposits' ids (BTTID, student number) are replaced by "btt_<row>" / "student_<row>"
 #   (a student number is an institutional identifier; the row index links to nothing).
 # Covariates (one student has a blank ethnicity, kept NA): cov_study, cov_sex, cov_ethnicity (both samples, harmonised to the student
@@ -41,6 +45,7 @@ BASE = "https://data.mendeley.com/public-files/datasets/32p7btkgr4/files/"
 URL_BTT = BASE + "2d9395fe-55ce-49cc-9e7c-074aec346de3/file_downloaded"
 URL_STU = BASE + "ea373cb5-74f5-4c90-995f-4036b5bc3084/file_downloaded"
 Q = [f"Q{i}" for i in range(1, 28)]
+R = ["R1", "R2", "R3"]  # the key's R1-3, columns headed 1, 2, 3 in both sheets
 
 
 def get(url, sheet):
@@ -53,6 +58,10 @@ def main():
     b = get(URL_BTT, "hspsbtt")
     s = get(URL_STU, "hspsstudent")
     assert len(b) == 1400 and len(s) == 750
+    for d in (b, s):
+        assert [c for c in d.columns if c in (1, 2, 3)] == [1, 2, 3]
+    b = b.rename(columns=dict(zip((1, 2, 3), R)))
+    s = s.rename(columns=dict(zip((1, 2, 3), R)))
     b = b.reset_index(drop=True)
     s = s.reset_index(drop=True)
     b["id"] = "btt_" + (b.index + 1).astype(str)
@@ -70,7 +79,7 @@ def main():
     frames = []
     for d in (b, s):
         print(d["cov_study"].iloc[0], "missing sex/ethnicity:", d[["cov_sex", "cov_ethnicity"]].isna().sum().to_dict())
-        t = d[["id"] + covs + Q].melt(id_vars=["id"] + covs, var_name="item", value_name="resp")
+        t = d[["id"] + covs + Q + R].melt(id_vars=["id"] + covs, var_name="item", value_name="resp")
         frames.append(t.dropna(subset=["resp"]))
     t = pd.concat(frames, ignore_index=True)
     t["resp"] = t["resp"].astype(int)

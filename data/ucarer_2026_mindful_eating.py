@@ -6,9 +6,10 @@
 # License: CC BY 4.0 (repository record)
 # Data: 559 Turkish university students. The 30 Mindful Eating Questionnaire items are stored as answered: the
 #   deposited MEQ total is the plain mean of the stored items while several items correlate negatively with item 1,
-#   so no reversal has been applied. The SCS-SF block (11 of 12 items) sums plainly to its total and cannot be
-#   checked for pre-applied reversals, so it is not shipped; the EMAQ is deposited as subscale scores only.
-# Tables: ucarer_2026_meq (30 items, 1-5, as answered).
+#   so no reversal has been applied. The SCS-SF block (11 of 12 items) sums plainly to its total, so the depositors
+#   may already have reversed its reverse-keyed items; which (if any) is not recorded. It ships as deposited: check
+#   direction before scoring. The EMAQ is deposited as subscale scores only.
+# Tables: ucarer_2026_meq (30 items, 1-5, as answered); ucarer_2026_scs_sf (SCS_item1-11, 1-5, as deposited).
 # Covariates: none carried
 # PII: none found (string columns screened)
 # Item text: not shipped -- codes only in the data file; no anchors/wording in the deposit
@@ -65,32 +66,11 @@ SOURCES = [{'url': 'https://data.mendeley.com/public-files/datasets/4m3ww2xsxx/f
                                  'MEQ_item27',
                                  'MEQ_item28',
                                  'MEQ_item29',
-                                 'MEQ_item30']},
+                                 'MEQ_item30'],
+             'ucarer_2026_scs_sf': [f'SCS_item{i}' for i in range(1, 12)]},
   'covs': {},
   'cov_maps': {},
-  'not_shipped': {'SCS_item1': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item2': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item3': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item4': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item5': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item6': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item7': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item8': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item9': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                               'pre-applied; unverifiable, not shipped',
-                  'SCS_item10': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                                'pre-applied; unverifiable, not shipped',
-                  'SCS_item11': 'SCS-SF: the 11 stored items sum to the deposited total, so reversals may be '
-                                'pre-applied; unverifiable, not shipped',
-                  'weight_kg': 'derived score, anthropometric or unkeyed code, not carried',
+  'not_shipped': {'weight_kg': 'derived score, anthropometric or unkeyed code, not carried',
                   'height_cm': 'derived score, anthropometric or unkeyed code, not carried',
                   'gender': 'derived score, anthropometric or unkeyed code, not carried',
                   'education': 'derived score, anthropometric or unkeyed code, not carried',
