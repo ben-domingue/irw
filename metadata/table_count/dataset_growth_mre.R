@@ -39,10 +39,17 @@ total_df$log_days_ago <- log(total_df$days_ago)
 total_df$group <- factor(total_df$group, levels = c("core", families))
 
 ends <- do.call(rbind, lapply(split(total_df, total_df$group, drop = TRUE), function(g) g[which.min(g$days_ago), ]))
+## Spread the end labels so none sit closer than `gap` in log10 units.
+gap <- 0.09
+ends <- ends[order(ends$n_tables), ]
+ends$label_y <- log10(ends$n_tables)
+for (k in seq_len(nrow(ends))[-1])
+  ends$label_y[k] <- max(ends$label_y[k], ends$label_y[k - 1] + gap)
+ends$label_y <- 10^ends$label_y
 
 p <- ggplot(total_df, aes(x = log_days_ago, y = n_tables, color = group)) +
   geom_step(linewidth = 0.9) +
-  geom_text(data = ends, aes(label = paste0(group, " (", format(n_tables, big.mark = ","), ")")),
+  geom_text(data = ends, aes(y = label_y, label = paste0(group, " (", trimws(format(n_tables, big.mark = ",")), ")")),
             hjust = -0.08, size = 3, show.legend = FALSE) +
   scale_y_log10(labels = scales::comma) +
   scale_x_reverse(breaks = log(c(1, 7, 30, 90, 365, 730)),
