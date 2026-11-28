@@ -4099,6 +4099,10 @@ balance_mokken,10.1007/978-3-642-83943-6_17,NA,"Van Maanen, L., Been, P. H., & S
 }",
 balik_2026_eq5d5l,10.7717/peerj.21727,NA,"Balik R, Ceran N (2026). Reliability and validity of the Turkish EQ-5D-5L in adults living with HIV. PeerJ 14:e21727. https://doi.org/10.7717/peerj.21727",https://europepmc.org/article/PMC/PMC13576739,CC BY 4.0,CC BY 4.0,NA,"EQ-5D-5L descriptive system (mobility, self-care, usual activities, pain/discomfort, anxiety/depression), 5 items, 1-5. 157 adults living with HIV at a tertiary hospital in Istanbul, Turkey; 60 completed it twice (wave 2 = retest). Covariates: age, sex, education."," @article{Bal_k_2026, title={Reliability and validity of the Turkish EQ-5D-5L in adults living with HIV}, volume={14}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.21727}, DOI={10.7717/peerj.21727}, journal={PeerJ}, publisher={PeerJ}, author={Balık, Recep and Ceran, Nurgül}, year={2026}, month=Sept, pages={e21727} }
 ",
+ballou_2025_bangs,10.31234/osf.io/nz96c_v2,10.5281/zenodo.21495794,"Ballou, N., Földes, T. A., Vuorre, M., Hakman, T., Magnusson, K., & Przybylski, A. K. (2026). Open Play: A longitudinal dataset of multi-platform video game digital trace data and psychological measures (Version 2). PsyArXiv. https://doi.org/10.31234/osf.io/nz96c_v2",https://zenodo.org/records/21495794,CC0 1.0,CC0 1.0,NA,"Daily diary (US participants, 30 days): six BANGS items about the participant's most recent gaming session, asked on days they had played in the previous 24 hours. 1 = strongly disagree .. 7 = strongly agree."," @article{Ballou_2026, title={Open Play: A longitudinal dataset of multi-platform video game digital trace data and psychological measures}, url={http://dx.doi.org/10.31234/osf.io/nz96c_v2}, DOI={10.31234/osf.io/nz96c_v2}, publisher={Center for Open Science}, author={Ballou, Nick and Földes, Tamás Andrei and Vuorre, Matti and Hakman, Thomas and Magnusson, Kristoffer and Przybylski, Andrew K}, year={2026}, month=Sept }
+",openESM
+ballou_2025_bpnsfs,10.31234/osf.io/nz96c_v2,10.5281/zenodo.21495794,"Ballou, N., Földes, T. A., Vuorre, M., Hakman, T., Magnusson, K., & Przybylski, A. K. (2026). Open Play: A longitudinal dataset of multi-platform video game digital trace data and psychological measures (Version 2). PsyArXiv. https://doi.org/10.31234/osf.io/nz96c_v2",https://zenodo.org/records/21495794,CC0 1.0,CC0 1.0,NA,"Daily diary (US participants, 30 days): one BPNSFS item for each of autonomy, competence and relatedness satisfaction and frustration, about the day. 1 = very strongly disagree .. 7 = very strongly agree."," @article{Ballou_2026, title={Open Play: A longitudinal dataset of multi-platform video game digital trace data and psychological measures}, url={http://dx.doi.org/10.31234/osf.io/nz96c_v2}, DOI={10.31234/osf.io/nz96c_v2}, publisher={Center for Open Science}, author={Ballou, Nick and Földes, Tamás Andrei and Vuorre, Matti and Hakman, Thomas and Magnusson, Kristoffer and Przybylski, Andrew K}, year={2026}, month=Sept }
+",openESM
 balmas2018_leader_attitudes,10.1111/ajps.12354,NA,"Balmas, M. (2019). Replication Data for: Tell Me Who Is Your Leader, and I Will Tell You Who You Are: Foreign Leaders' Perceived Personality and Public Attitudes toward Their Countries and Citizenry [Dataset]. Harvard Dataverse. https://doi.org/10.7910/DVN/SNLKUE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SNLKUE,CC0 1.0,CC0 1.0,NA,"Public attitude items toward foreign countries/citizenry (3 items: a3-a5); 5 studies pooled (N=2166); 1-5 Likert; cov_study, cov_condition, cov_age, cov_educ"," @article{Balmas_2018, title={Tell Me Who Is Your Leader, and I Will Tell You Who You Are: Foreign Leaders’ Perceived Personality and Public Attitudes toward Their Countries and Citizenry}, volume={62}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12354}, DOI={10.1111/ajps.12354}, number={2}, journal={American Journal of Political Science}, publisher={Wiley}, author={Balmas, Meital}, year={2018}, month=Mar, pages={499–514} }
 ",
 balmas2018_leader_personality,10.1111/ajps.12354,NA,"Balmas, M. (2019). Replication Data for: Tell Me Who Is Your Leader, and I Will Tell You Who You Are: Foreign Leaders' Perceived Personality and Public Attitudes toward Their Countries and Citizenry [Dataset]. Harvard Dataverse. https://doi.org/10.7910/DVN/SNLKUE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SNLKUE,CC0 1.0,CC0 1.0,NA,"Perceived personality ratings of foreign leaders/citizens (14 items); 5 studies pooled (N=2171); 1-5 Likert; cov_study, cov_condition, cov_age, cov_educ"," @article{Balmas_2018, title={Tell Me Who Is Your Leader, and I Will Tell You Who You Are: Foreign Leaders’ Perceived Personality and Public Attitudes toward Their Countries and Citizenry}, volume={62}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12354}, DOI={10.1111/ajps.12354}, number={2}, journal={American Journal of Political Science}, publisher={Wiley}, author={Balmas, Meital}, year={2018}, month=Mar, pages={499–514} }
@@ -6136,6 +6140,8 @@ brain_hemisphere,NA,NA,"Jorgenson, E. (2016). Open Hemispheric Brain Dominance S
   url = {http://openpsychometrics.org/_rawdata/OHBDS-data.zip},
   note = {Retrieved from http://openpsychometrics.org/_rawdata/}
 }",
+brand_2026_czelex,10.3758/s13428-026-03217-4,NA,"Brand, J., Smolík, F., Chromý, J., Ceháková, M., & Preininger, M. (2026). CzeLex: A megastudy dataset of concreteness, imageability, age of acquisition, valence, and gender ratings for 9601 Czech words. Behavior Research Methods, 58, 347.",https://osf.io/tqxfm/,CC BY-NC-SA 4.0,CC BY-NC-SA 4.0,NA,"CzeLex: Czech words rated on concreteness (1-5), imageability (1-7), age of acquisition (years, typed), valence (-3..3) and gender (-3..3, masculine to feminine), each participant rating lists on some of the dimensions. Stimulus-norms shape (irw#2983): id = word, item = dimension, rater = participant; a don't-know response is resp NA with dontknow = 1; cov_age, cov_gender, cov_gender_scale. 1,803,462 ratings of 9,576 words by 3,151 raters. The gender and valence ratings of the SocioLex-CZ participants, which the authors pool into CzeLex, are hosted once, in preininger_2025_sociolex_words."," @article{Brand_2026, title={CzeLex: A megastudy dataset of concreteness, imageability, age of acquisition, valence, and gender ratings for 9601 Czech words}, volume={58}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-026-03217-4}, DOI={10.3758/s13428-026-03217-4}, number={12}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Brand, James and Smolík, Filip and Chromý, Jan and Ceháková, Markéta and Preininger, Mikuláš}, year={2026}, month=Nov }
+",
 brand_raffaelli_2024_familiarity_24,10.3758/s13428-024-02525-x,NA,"Raffaelli, C., Bocchi, E., Estes, Z. et al. BRAND: Brand recognition and attitude norms database. Behav Res 57, 17 (2025). https://doi.org/10.3758/s13428-024-02525-x",https://researchbox.org/1892,CC BY 4.0,CC BY 4.0,NA,BRAND2024 Familiarity," @article{Raffaelli_2024, title={BRAND: Brand recognition and attitude norms database}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-024-02525-x}, DOI={10.3758/s13428-024-02525-x}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Raffaelli, Carolina and Bocchi, Elena and Estes, Zachary and Adelman, James S.}, year={2024}, month=dec }
 ",
 brand_raffaelli_2024_liking_20,10.3758/s13428-024-02525-x,NA,"Raffaelli, C., Bocchi, E., Estes, Z. et al. BRAND: Brand recognition and attitude norms database. Behav Res 57, 17 (2025). https://doi.org/10.3758/s13428-024-02525-x",https://researchbox.org/1892,CC BY 4.0,CC BY 4.0,NA,BRAND2020 Liking," @article{Raffaelli_2024, title={BRAND: Brand recognition and attitude norms database}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-024-02525-x}, DOI={10.3758/s13428-024-02525-x}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Raffaelli, Carolina and Bocchi, Elena and Estes, Zachary and Adelman, James S.}, year={2024}, month=dec }
@@ -6293,6 +6299,14 @@ brudek_2026_rses,NA,10.6084/m9.figshare.34961983.v1,Brudek P (2026). Self-Esteem
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",
+brysbaert_2024_expected_utility,NA,NA,"Brysbaert, M. (2024). Expected Utility ratings Dutch words [Data set]. OSF. https://osf.io/udjzq/ (data for the manuscript 'Adding volition to word recognition: Expected utility norms for 24 thousand Dutch words').",https://osf.io/udjzq/,CC BY 4.0,CC BY 4.0,NA,"Expected utility ratings for 24,037 Dutch words: how useful it is for someone to know the word, 1 (little use) to 5 (very useful), by 55 participants each rating one of five lists of ~4,800 words. Stimulus-norms shape (irw#2983): id = word, item = expected_utility, rater = participant; an unknown-word mark (0 in the files) is resp NA with dontknow = 1; rater ids are prefixed with the list (L<list>_PP<n>) because participant codes restart in each list; trial_list and trial_position. 264,145 ratings.","@dataset{brysbaert2024,
+  author = {Brysbaert, Marc},
+  title = {Expected Utility ratings Dutch words},
+  year = {2024},
+  publisher = {OSF},
+  url = {https://osf.io/udjzq/},
+  note = {Data for the manuscript 'Adding volition to word recognition: Expected utility norms for 24 thousand Dutch words'}
+}",
 BSCS_fadplus_goto2021,10.3389/fpsyg.2021.720601,NA,"Goto, T. (2021). Comparing the Psychometric Properties of Two Japanese-Translated Scales of the Free Will and Determinism-Plus Scale. Frontiers in Psychology, 12, 720601.",https://osf.io/2xbe5/?view_only=,CC BY 4.0,CC BY 4.0,NA,Brief self-control scale,"@article{Goto_2021, title={Comparing the Psychometric Properties of Two Japanese-Translated Scales of the Free Will and Determinism-Plus Scale}, volume={12}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2021.720601}, DOI={10.3389/fpsyg.2021.720601}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Goto, Takayuki}, year={2021}, month=oct }
 ",
 buczel_2022_inoculation_belief,10.1371/journal.pone.0267463,NA,"Buczel KA, Szyszka PD, Siwiak A, Szpitalak M, Polczyk R (2022) Vaccination against misinformation: The inoculation technique reduces the continued influence effect. PLoS ONE 17(4): e0267463.",https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0267463.s001&type=supplementary,CC BY 4.0,CC BY 4.0,NA,"6-item misinformation/retraction belief-rating scale (1-11), from an inoculation-technique experiment on the continued influence effect"," @article{Buczel_2022, title={Vaccination against misinformation: The inoculation technique reduces the continued influence effect}, volume={17}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0267463}, DOI={10.1371/journal.pone.0267463}, number={4}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Buczel, Klara Austeja and Szyszka, Paulina D. and Siwiak, Adam and Szpitalak, Malwina and Polczyk, Romuald}, editor={Garrido, Margarida Vaz}, year={2022}, month=Apr, pages={e0267463} }
@@ -9326,6 +9340,115 @@ childrensocialcognition_cvencek_2025_genderingroupbias,10.1037/edu0000953,NA,"Cv
 ",
 childrensocialcognition_cvencek_2025_mathgenderstereotype,10.1037/edu0000953,NA,"Cvencek, D., Sanders, E. A., Maddox, C. D., & Meltzoff, A. N. (2025). New online tools to assess children’s implicit social cognition: Replication and generalization of in-person research. Journal of Educational Psychology, 117(7), 1115–1136. https://doi.org/10.1037/edu0000953",https://osf.io/w35zk/,CC BY-NC-ND,CC BY-NC-ND,NA,Online and in-person IAT measuring implicit gender identity," @article{Cvencek_2025, title={New online tools to assess children’s implicit social cognition: Replication and generalization of in-person research.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000953}, DOI={10.1037/edu0000953}, number={7}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cvencek, Dario and Sanders, Elizabeth A. and Maddox, Craig D. and Meltzoff, Andrew N.}, year={2025}, month=Oct, pages={1115–1136} }
 ",
+chile_2010_inicia_pcdgeneralista,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2010). Evaluación Inicia 2010, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2010 (Chile), disciplinary knowledge test for generalist primary teachers (PCD Generalista): the national, voluntary exit examination of teacher-education graduates; 1,712 test takers, 90 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2010,
+  author = {{Ministerio de Educaci\'on de Chile, Centro de Perfeccionamiento, Experimentaci\'on e Investigaciones Pedag\'ogicas (CPEIP)}},
+  title = {Evaluaci\'on Inicia 2010, base de registros de respuesta individuales},
+  year = {2010},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/},
+  organization = {Datos Abiertos Mineduc}
+}",
+chile_2010_inicia_pcdlenguaje,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2010). Evaluación Inicia 2010, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2010 (Chile), disciplinary knowledge test in language (PCD Lenguaje): the national, voluntary exit examination of teacher-education graduates; 144 test takers, 42 items over two forms, with the option marked.","@dataset{mineduc2010,
+  author = {Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)},
+  title = {Evaluación Inicia 2010, base de registros de respuesta individuales},
+  year = {2010},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/},
+  publisher = {Datos Abiertos Mineduc}
+}",
+chile_2010_inicia_pcdmatematica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2010). Evaluación Inicia 2010, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2010 (Chile), disciplinary knowledge test in mathematics (PCD Matemática): the national, voluntary exit examination of teacher-education graduates; 122 test takers, 40 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2010,
+  author = {{Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2010, base de registros de respuesta individuales},
+  year = {2010},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/},
+  publisher = {Datos Abiertos Mineduc}
+}",
+chile_2010_inicia_pcdp,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2010). Evaluación Inicia 2010, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2010 (Chile), disciplinary knowledge test for early childhood educators (PCDP): the national, voluntary exit examination of teacher-education graduates; 1,140 test takers, 87 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2010,
+  author = {{Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2010, base de registros de respuesta individuales},
+  year = {2010},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2011_inicia_pcdbasica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2011). Evaluación Inicia 2011, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2011 (Chile), disciplinary knowledge test for primary teachers (PCD Básica): the national, voluntary exit examination of teacher-education graduates; 1,552 test takers, 118 items over two forms, with the option marked.","@dataset{mineduc2011evaluacion,
+  author = {{Ministerio de Educaci\'on de Chile and Centro de Perfeccionamiento, Experimentaci\'on e Investigaciones Pedag\'ogicas (CPEIP)}},
+  title = {Evaluaci\'on Inicia 2011, base de registros de respuesta individuales},
+  year = {2011},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2011_inicia_pcdp,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2011). Evaluación Inicia 2011, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2011 (Chile), disciplinary knowledge test for early childhood educators (PCDP): the national, voluntary exit examination of teacher-education graduates; 942 test takers, 90 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2011,
+  author = {Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)},
+  title = {Evaluación Inicia 2011, base de registros de respuesta individuales},
+  year = {2011},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/},
+  organization = {Datos Abiertos Mineduc}
+}",
+chile_2011_inicia_pcpbasica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2011). Evaluación Inicia 2011, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2011 (Chile), pedagogical knowledge test for primary teachers (PCP Básica): the national, voluntary exit examination of teacher-education graduates; 1,436 test takers, 68 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2011,
+  author = {{Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2011, base de registros de respuesta individuales},
+  year = {2011},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcdbasica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), disciplinary knowledge test for primary teachers (PCD Básica): the national, voluntary exit examination of teacher-education graduates; 666 test takers, 129 items over two forms, with the option marked.","@dataset{mineduc2012evaluacion,
+  author = {{Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcdhistoria,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), disciplinary knowledge test in history (PCD Historia): the national, voluntary exit examination of teacher-education graduates; 276 test takers, 100 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2012,
+  author = {{Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  type = {Data set},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcdlenguaje,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), disciplinary knowledge test in language (PCD Lenguaje): the national, voluntary exit examination of teacher-education graduates; 148 test takers, 95 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2012,
+  author = {{Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcdmatematica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), disciplinary knowledge test in mathematics (PCD Matemática): the national, voluntary exit examination of teacher-education graduates; 184 test takers, 60 items over two forms, with the option marked.","@dataset{mineduc2012evaluacioninicia,
+  author = {{Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  type = {Dataset},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcdparvulos,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), disciplinary knowledge test for early childhood educators (PCD Párvulos): the national, voluntary exit examination of teacher-education graduates; 391 test takers, 98 items over two forms, with the option marked.","@dataset{mineduc2012,
+  author = {{Ministerio de Educación de Chile and Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/},
+  publisher = {Datos Abiertos Mineduc}
+}",
+chile_2012_inicia_pcpbasica,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), pedagogical knowledge test for primary teachers (PCP Básica): the national, voluntary exit examination of teacher-education graduates; 672 test takers, 77 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2012,
+  author = {{Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  type = {Data set},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcpmedia,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), pedagogical knowledge test for secondary teachers (PCP Media): the national, voluntary exit examination of teacher-education graduates; 757 test takers, 81 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2012,
+  author = {{Ministerio de Educaci\'on de Chile} and {Centro de Perfeccionamiento, Experimentaci\'on e Investigaciones Pedag\'ogicas (CPEIP)}},
+  title = {Evaluaci\'on Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
+chile_2012_inicia_pcpparvulos,NA,NA,"Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) (2012). Evaluación Inicia 2012, base de registros de respuesta individuales [Data set]. Datos Abiertos Mineduc. https://datosabiertos.mineduc.cl/evaluacion-inicia/",https://datosabiertos.mineduc.cl/evaluacion-inicia/,Permission via Email,Custom,"Redistributed under Mineduc public-use terms: cite Ministerio de Educación de Chile (CPEIP), Evaluación Inicia, Datos Abiertos Mineduc, as the source.","Evaluación Inicia 2012 (Chile), pedagogical knowledge test for early childhood educators (PCP Párvulos): the national, voluntary exit examination of teacher-education graduates; 407 test takers, 79 items over two forms, with the option marked.","@dataset{mineduc_cpeip_2012,
+  author = {{Ministerio de Educación de Chile, Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)}},
+  title = {Evaluación Inicia 2012, base de registros de respuesta individuales},
+  year = {2012},
+  type = {Data set},
+  publisher = {Datos Abiertos Mineduc},
+  url = {https://datosabiertos.mineduc.cl/evaluacion-inicia/}
+}",
 chile_2023_children-adolescents-survey_aa,NA,NA,NA,https://bidat.gob.cl/details/ficha/dataset/e3ceb7aa-95a8-4838-909b-155719847d21,CC BY 4.0,CC BY 4.0,NA,"Chile principal characteristics of child work and other activities carried out by children in the country; the survey focuses on children aged 9-17, particularly their principal activities and relationships with others","@misc{bidat_dataset_2023,
   title = {Dataset from BiDAT},
   url = {https://bidat.gob.cl/details/ficha/dataset/e3ceb7aa-95a8-4838-909b-155719847d21},
@@ -11936,6 +12059,8 @@ desender_2018_colour,10.1177/0956797617744771,10.17605/OSF.IO/S46PR,"Desender, K
 desender_2022_dots_e2b,10.1038/s41467-022-31727-0,10.17605/OSF.IO/S46PR,"Desender, K., Vermeylen, L., & Verguts, T. (2022). Dynamic influences on static measures of metacognition. Nature Communications, 13, 4208.",https://osf.io/s46pr,CC0 1.0,CC0 1.0,NA,"Dot-number discrimination with confidence, staircased (Desender, Vermeylen & Verguts 2022, Expt 2B): 99 online adults, 500 trials each."," @article{Desender_2022, title={Dynamic influences on static measures of metacognition}, volume={13}, ISSN={2041-1723}, url={http://dx.doi.org/10.1038/s41467-022-31727-0}, DOI={10.1038/s41467-022-31727-0}, number={1}, journal={Nature Communications}, publisher={Springer Science and Business Media LLC}, author={Desender, Kobe and Vermeylen, Luc and Verguts, Tom}, year={2022}, month=July }
 ",Confidence Database
 det_naismith_2023,10.1016/j.asw.2024.100895,NA,"Naismith, B., Attali, Y., & LaFlair, G. T. (2024, March 8). DET Task Duration dataset (DET-duration). Retrieved from osf.io/zy8fb",https://osf.io/zy8fb/,CC BY 4.0,CC BY 4.0,NA,Certified DET for the independent writing,"@article{Naismith_2024, title={The impact of task duration on the scoring of independent writing responses of adult L2-English writers}, volume={62}, ISSN={1075-2935}, url={http://dx.doi.org/10.1016/j.asw.2024.100895}, DOI={10.1016/j.asw.2024.100895}, journal={Assessing Writing}, publisher={Elsevier BV}, author={Naismith, Ben and Attali, Yigal and LaFlair, Geoffrey T.}, year={2024}, month=oct, pages={100895} }
+",
+devarda_2025_iconicita,10.1371/journal.pone.0337947,NA,"de Varda, A. G., Lamarra, T., Ravelli, A. A., Saponaro, C., Giustolisi, B., & Bolognesi, M. (2025). IconicITA: Iconicity ratings of the Italian affective lexicon. PLOS ONE, 20(12), e0337947.",https://osf.io/r2tqs/,CC BY-NC 4.0,CC BY-NC 4.0,NA,"IconicITA: 1,151 Italian words (the Italian ANEW set) rated 1-7 on iconicity (how much the word sounds like what it means) by 128 raters, native speakers (L1) and highly proficient L2 speakers, each rating one or more lists of ~234 words. Stimulus-norms shape (irw#2983): id = word, item = iconicity, rater = participant; a don't-know response is resp NA with dontknow = 1 (a blank cell); trial_list and trial_session; cov_l2 (1 = L2 speaker) and cov_in_norms (1 = kept in the authors' published norms). 37,475 rows."," @article{de_Varda_2025, title={IconicITA: Iconicity ratings of the Italian affective lexicon}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0337947}, DOI={10.1371/journal.pone.0337947}, number={12}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={de Varda, Andrea Gregor and Lamarra, Tommaso and Ravelli, Andrea Amelio and Saponaro, Chiara and Giustolisi, Beatrice and Bolognesi, Marianna}, editor={Morett, Laura}, year={2025}, month=Dec, pages={e0337947} }
 ",
 development_delay_anunciacao_asqse,10.1007/s13158-026-00488-y,NA,"Anunciacao, L. (2026, February 21). Socio-Emotional Profiles of Young Children With and Without Developmental Delay. Retrieved from osf.io/n5ksw",https://osf.io/n5ksw/overview,CC BY 4.0,CC BY 4.0,NA,"Ages & Stages Questionnaires: Social-Emotional, 2nd ed. (ASQ:SE-2), nine age-interval forms (2-60 months); item scores 0/5/10, 10 = most concern"," @article{Anunciacao_2026, title={Socio-Emotional Profiles of Young Children With and Without Developmental Delay}, ISSN={1878-4658}, url={http://dx.doi.org/10.1007/s13158-026-00488-y}, DOI={10.1007/s13158-026-00488-y}, journal={International Journal of Early Childhood}, publisher={Springer Science and Business Media LLC}, author={Anunciacao, Luis and Murray, Christopher and Murphy, Kimberly and Squires, Jane}, year={2026}, month=mar }
 ",
@@ -20527,6 +20652,8 @@ graziotin_2021_f5,NA,10.5281/zenodo.4911906,"Graziotin, D., Lenberg, P., Feldt, 
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",
+green_2025_aoa,10.3758/s13428-025-02843-8,NA,"Green, C., Kong, A. P.-H., Brysbaert, M., & Keogh, K. (2025). Crowdsourced and AI-generated age-of-acquisition (AoA) norms for vocabulary in print: Extending the Kuperman et al. (2012) norms. Behavior Research Methods, 57, 304.",https://osf.io/ch48r/,CC BY 4.0,CC BY 4.0,NA,"Crowdsourced age-of-acquisition ratings for 11,074 English words in print (extending Kuperman et al. 2012): MTurk workers gave, per word, the age (0-20 years, half-year steps) at which they would first have understood it when reading (aoa_read) and been able to spell it (aoa_write). Stimulus-norms shape (irw#2983): id = word, item = aoa_read / aoa_write, rater = participant; a ticked Not Applicable box (could not read the word) is resp NA with dontknow = 1 on both rows; trial_hit separates a worker's repeat ratings of a word across HITs; cov_age, cov_age_english, cov_gender, cov_education as reported per HIT. 873,918 ratings by 1,405 workers."," @article{Green_2025, title={Crowdsourced and AI-generated age-of-acquisition (AoA) norms for vocabulary in print: Extending the Kuperman et al. (2012) norms}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-025-02843-8}, DOI={10.3758/s13428-025-02843-8}, number={11}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Green, Clarence and Kong, Anthony Pak-Hin and Brysbaert, Marc and Keogh, Kathleen}, year={2025}, month=Oct }
+",
 green_2025_job_impact,NA,10.7910/DVN/G1JVQ4,"Green, J., Grant, Z., Evans, G., & Inglese, G. (2025). Replication Data for: Linking Artificial Intelligence Job Exposure to Expectations. Harvard Dataverse.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G1JVQ4,CC0 1.0,CC0 1.0,NA,"Perceived job impact of six economic and technological forces, 6 items on a 1-5 ordinal scale, answered by 3,975 British Election Study panel respondents.","@misc{https://doi.org/10.7910/dvn/g1jvq4,
   doi = {10.7910/DVN/G1JVQ4},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/G1JVQ4},
@@ -21741,6 +21868,14 @@ hartmann_2026_pro_climate_intention,NA,10.5281/zenodo.22035722,"Hartmann, P. (20
 ",
 hatemi_2017_sex_freq,10.1016/j.paid.2016.10.008,NA,"Hatemi, P. K., Crabtree, C., & McDermott, R. (2017). The relationship between sexual preferences and political orientations: Do positions in the bedroom affect positions in the ballot box? Personality and Individual Differences, 105, 318-325. https://doi.org/10.1016/j.paid.2016.10.008",https://doi.org/10.7910/DVN/ZL47OH,CC0 1.0,CC0 1.0,NA,"Sexual behaviour frequency over the preceding 12 months, 18 items, 1-5; N = 1,003 US adults (online); cov_sex, cov_age, cov_education, cov_pid7, cov_ideology7."," @article{Hatemi_2017, title={The relationship between sexual preferences and political orientations: Do positions in the bedroom affect positions in the ballot box?}, volume={105}, ISSN={0191-8869}, url={http://dx.doi.org/10.1016/j.paid.2016.10.008}, DOI={10.1016/j.paid.2016.10.008}, journal={Personality and Individual Differences}, publisher={Elsevier BV}, author={Hatemi, Peter K. and Crabtree, Charles and McDermott, Rose}, year={2017}, month=Jan, pages={318–325} }
 ",
+hawks_2023_anxdep,10.1016/j.bpsc.2022.12.002,10.5281/zenodo.17347390,"Hawks, Z. W., Strong, R., Jung, L., Beck, E. D., Passell, E. J., Grinspoon, E., Singh, S., Frumkin, M. R., Sliwinski, M., & Germine, L. T. (2023). Accurate prediction of momentary cognition from intensive longitudinal data. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 8(8), 841-851.",https://zenodo.org/records/17347390,CC BY-NC 4.0,CC BY-NC 4.0,NA,"EMA, 3 sittings a day for 10 days, before the cognitive tasks: seven items, 'since the last survey, how often have you felt...'. 1 = none of the time .. 5 = all the time."," @article{Hawks_2023, title={Accurate Prediction of Momentary Cognition From Intensive Longitudinal Data}, volume={8}, ISSN={2451-9022}, url={http://dx.doi.org/10.1016/j.bpsc.2022.12.002}, DOI={10.1016/j.bpsc.2022.12.002}, number={8}, journal={Biological Psychiatry: Cognitive Neuroscience and Neuroimaging}, publisher={Elsevier BV}, author={Hawks, Zoë W. and Strong, Roger and Jung, Laneé and Beck, Emorie D. and Passell, Eliza J. and Grinspoon, Elizabeth and Singh, Shifali and Frumkin, Madelyn R. and Sliwinski, Martin and Germine, Laura T.}, year={2023}, month=Aug, pages={841–851} }
+",openESM
+hawks_2023_attention,10.1016/j.bpsc.2022.12.002,10.5281/zenodo.17347390,"Hawks, Z. W., Strong, R., Jung, L., Beck, E. D., Passell, E. J., Grinspoon, E., Singh, S., Frumkin, M. R., Sliwinski, M., & Germine, L. T. (2023). Accurate prediction of momentary cognition from intensive longitudinal data. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 8(8), 841-851.",https://zenodo.org/records/17347390,CC BY-NC 4.0,CC BY-NC 4.0,NA,"EMA, 3 sittings a day for 10 days, before the cognitive tasks: six items, 'to what extent are you currently having difficulty...'. 1 = not having difficulty at all .. 5 = extreme difficulty."," @article{Hawks_2023, title={Accurate Prediction of Momentary Cognition From Intensive Longitudinal Data}, volume={8}, ISSN={2451-9022}, url={http://dx.doi.org/10.1016/j.bpsc.2022.12.002}, DOI={10.1016/j.bpsc.2022.12.002}, number={8}, journal={Biological Psychiatry: Cognitive Neuroscience and Neuroimaging}, publisher={Elsevier BV}, author={Hawks, Zoë W. and Strong, Roger and Jung, Laneé and Beck, Emorie D. and Passell, Eliza J. and Grinspoon, Elizabeth and Singh, Shifali and Frumkin, Madelyn R. and Sliwinski, Martin and Germine, Laura T.}, year={2023}, month=Aug, pages={841–851} }
+",openESM
+hawks_2023_panas_na,10.1016/j.bpsc.2022.12.002,10.5281/zenodo.17347390,"Hawks, Z. W., Strong, R., Jung, L., Beck, E. D., Passell, E. J., Grinspoon, E., Singh, S., Frumkin, M. R., Sliwinski, M., & Germine, L. T. (2023). Accurate prediction of momentary cognition from intensive longitudinal data. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 8(8), 841-851.",https://zenodo.org/records/17347390,CC BY-NC 4.0,CC BY-NC 4.0,NA,"EMA, 3 sittings a day for 10 days, before the cognitive tasks: five negative-affect words, 'to what extent you felt this way right before you started this survey'. 1 = very slightly or not at all .. 5 = extremely."," @article{Hawks_2023, title={Accurate Prediction of Momentary Cognition From Intensive Longitudinal Data}, volume={8}, ISSN={2451-9022}, url={http://dx.doi.org/10.1016/j.bpsc.2022.12.002}, DOI={10.1016/j.bpsc.2022.12.002}, number={8}, journal={Biological Psychiatry: Cognitive Neuroscience and Neuroimaging}, publisher={Elsevier BV}, author={Hawks, Zoë W. and Strong, Roger and Jung, Laneé and Beck, Emorie D. and Passell, Eliza J. and Grinspoon, Elizabeth and Singh, Shifali and Frumkin, Madelyn R. and Sliwinski, Martin and Germine, Laura T.}, year={2023}, month=Aug, pages={841–851} }
+",openESM
+hawks_2023_panas_pa,10.1016/j.bpsc.2022.12.002,10.5281/zenodo.17347390,"Hawks, Z. W., Strong, R., Jung, L., Beck, E. D., Passell, E. J., Grinspoon, E., Singh, S., Frumkin, M. R., Sliwinski, M., & Germine, L. T. (2023). Accurate prediction of momentary cognition from intensive longitudinal data. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 8(8), 841-851.",https://zenodo.org/records/17347390,CC BY-NC 4.0,CC BY-NC 4.0,NA,"EMA, 3 sittings a day for 10 days, before the cognitive tasks: five positive-affect words, 'to what extent you felt this way right before you started this survey'. 1 = very slightly or not at all .. 5 = extremely."," @article{Hawks_2023, title={Accurate Prediction of Momentary Cognition From Intensive Longitudinal Data}, volume={8}, ISSN={2451-9022}, url={http://dx.doi.org/10.1016/j.bpsc.2022.12.002}, DOI={10.1016/j.bpsc.2022.12.002}, number={8}, journal={Biological Psychiatry: Cognitive Neuroscience and Neuroimaging}, publisher={Elsevier BV}, author={Hawks, Zoë W. and Strong, Roger and Jung, Laneé and Beck, Emorie D. and Passell, Eliza J. and Grinspoon, Elizabeth and Singh, Shifali and Frumkin, Madelyn R. and Sliwinski, Martin and Germine, Laura T.}, year={2023}, month=Aug, pages={841–851} }
+",openESM
 hawlader_2021_postcovid_symptoms,10.1371/journal.pone.0257421,NA,"Hawlader MDH, Rashid MU, Khan MAS, Ara T, Nabi MH, Haque MMA, et al. (2021) Quality of life of COVID-19 recovered patients in Bangladesh. PLoS ONE 16(10): e0257421. https://doi.org/10.1371/journal.pone.0257421",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257421,CC BY 4.0,CC BY 4.0,NA,"Checklist of 22 post-COVID symptoms, present/absent. 3,203 adults recovered from COVID-19, Bangladesh. Covariates: age, gender, residence, education, occupation, health-care worker, marital status, income, hospitalised, smoking."," @article{Hawlader_2021, title={Quality of life of COVID-19 recovered patients in Bangladesh}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0257421}, DOI={10.1371/journal.pone.0257421}, number={10}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Hawlader, Mohammad Delwer Hossain and Rashid, Md. Utba and Khan, Md. Abdullah Saeed and Ara, Tasnim and Nabi, Mohammad Hayatun and Haque, Miah Md. Akiful and Matin, Kazi Farhana and Hossain, Mohammad Ali and Rahman, Mahfil Ara and Hossian, Mosharop and Saha, Shuvajit and Manna, Ridwana Maher and Arafat, Md. Yeasin and Barsha, Sabrina Yesmin and Maliha, Ramisha and Khan, Jeba Zaman and Kha, Soumik and Hasan, S. M. Rezwanul and Hasan, Mehedi and Siddiquea, Saleka Raihana and Khan, Joyeeta and Islam, A. M. Khairul and Rashid, Rubaya and Nur, Naima and Khalid, Omar and Bari, Fatiha and Rahman, Mohammad Lutfor}, editor={Kabir, Enamul}, year={2021}, month=Oct, pages={e0257421} }
 ",
 hawlader_2021_whoqol_bref,10.1371/journal.pone.0257421,NA,"Hawlader MDH, Rashid MU, Khan MAS, Ara T, Nabi MH, Haque MMA, et al. (2021) Quality of life of COVID-19 recovered patients in Bangladesh. PLoS ONE 16(10): e0257421. https://doi.org/10.1371/journal.pone.0257421",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257421,CC BY 4.0,CC BY 4.0,NA,"WHOQOL-BREF (Bangla), 26 items, 1-5. 3,203 adults recovered from COVID-19, Bangladesh. Covariates: age, gender, residence, education, occupation, health-care worker, marital status, income, hospitalised, smoking."," @article{Hawlader_2021, title={Quality of life of COVID-19 recovered patients in Bangladesh}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0257421}, DOI={10.1371/journal.pone.0257421}, number={10}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Hawlader, Mohammad Delwer Hossain and Rashid, Md. Utba and Khan, Md. Abdullah Saeed and Ara, Tasnim and Nabi, Mohammad Hayatun and Haque, Miah Md. Akiful and Matin, Kazi Farhana and Hossain, Mohammad Ali and Rahman, Mahfil Ara and Hossian, Mosharop and Saha, Shuvajit and Manna, Ridwana Maher and Arafat, Md. Yeasin and Barsha, Sabrina Yesmin and Maliha, Ramisha and Khan, Jeba Zaman and Kha, Soumik and Hasan, S. M. Rezwanul and Hasan, Mehedi and Siddiquea, Saleka Raihana and Khan, Joyeeta and Islam, A. M. Khairul and Rashid, Rubaya and Nur, Naima and Khalid, Omar and Bari, Fatiha and Rahman, Mohammad Lutfor}, editor={Kabir, Enamul}, year={2021}, month=Oct, pages={e0257421} }
@@ -22947,6 +23082,8 @@ hochsteiner_2026_sustainability_relevance,NA,10.7910/DVN/FCNTSN,"Hochsteiner, P.
 ",
 hocine_2016_psychosocial_stressors,10.1371/journal.pone.0157078,10.6084/m9.figshare.3156154,"Hocine MN, Ait Bouziad K, Legeron P, Dab W, Saporta G (2016). How to Identify and Prioritize Psychosocial Factors Impacting Stress Level. PLOS ONE 11(6): e0157078.",https://doi.org/10.6084/m9.figshare.3156154,CC BY 4.0,CC BY 4.0,NA,"Stimulus 58-item psychosocial stressors (psychosocial risk at work) questionnaire, administered in French to 10,000 French employees during a routine occupational-physician interview, 2011-2012. Items nsp01-nsp58 on a 6-point agreement scale, 0 (strongly disagree) to 5 (strongly agree); resp=0 is the documented bottom anchor, not a missing code, and the file has no missing cells. The 58 items belong to five blocks (work context, job control, relationships at work, type of performed tasks, recognition) which the column names do not encode, so no block covariate is written. The 10,000 respondents are a simple random sample drawn from several hundred thousand records; the exact round number is the sampling design, not simulation."," @article{Hocine_2016, title={How to Identify and Prioritize Psychosocial Factors Impacting Stress Level}, volume={11}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0157078}, DOI={10.1371/journal.pone.0157078}, number={6}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Hocine, Mounia N. and Aït Bouziad, Karim and Légeron, Patrick and Dab, William and Saporta, Gilbert}, editor={van den Bos, Ruud}, year={2016}, month=June, pages={e0157078} }
 ",
+hoebeke_2022_rumination,10.36131/cnfioritieditore20220504,10.5281/zenodo.22952951,"Hoebeke, Y., Blanchard, M. A., Contreras, A., & Heeren, A. (2022). An experience sampling measure of the key features of rumination. Clinical Neuropsychiatry, 19(5), 288-297.",https://zenodo.org/records/22952951,CC BY 4.0,CC BY 4.0,NA,"Experience sampling, 4 prompts a day (9am, 1pm, 5pm, 9pm) for 14 days, community sample of 40 French-speaking adults: five items on key features of rumination since the previous prompt (perseverance, negativity, self-criticism, brooding, replaying). 0-100 sliders."," @article{hoebeke_blanchard_contreras_heeren_2022, address={IT}, title={The association between upper disorders and psychological well-being and its implication in text neck syndrome: a systematic review}, volume={19}, ISSN={1724-4935, 2385-0787}, url={https://doi.org/10.36131/cnfioritieditore20220504}, DOI={10.36131/cnfioritieditore20220504}, abstractNote={Objective: Research indicates that rumination can be viewed as a dynamic process that fluctuates over time, within hours and days. An increasing number of intensive longitudinal studies on rumination are accordingly being conducted and published using experiencing sampling methodology (ESM), a technique with measurements in everyday life. Yet, this literature suffers from a profound caveat: rumination has so far been conceptualized and measured as a unitary construct in these ESM studies. This is unfortunate, since such a unitary view contrasts with prominent contemporary models that regard rumination as a multifaceted construct, wherein the key features are not interchangeable and should therefore be measured separately. Moreover, no validated ESM measure of the key features of rumination has yet been developed. Therefore, we developed and validated an ESM protocol and the first ESM questionnaire to assess rumination as a multifaceted construct, measuring five features of rumination. Method: We conducted an ESM study in a community sample of 40 French-speaking participants. They answered the five rumination ESM items in French four times a day for fourteen days. At the end of the ESM assessment period, participants completed trait-like questionnaires of rumination, depression, and general anxiety. Results: The ESM rumination items exhibited good psychometric properties, including excellent within-person variability and convergent validity with corresponding trait-like constructs. Conclusions: Although further validation is warranted, this novel ESM assessment protocol of rumination as a multifaceted construct (validated in French and translated into English) will allow future researchers to study how rumination’s features fluctuate and interact with other constructs over time. Key words: rumination, state rumination, experience sampling methodology, intensive longitudinal studies, psychometrics, daily life assessment}, number={5}, journal={Clinical Neuropsychiatry}, publisher={Giovanni Fioriti Editore}, author={Hoebeke, Yorgo and Blanchard, M. Annelise and Contreras, Alba and Heeren, Alexandre}, year={2022}, month=Oct, pages={288} }
+",openESM
 hofmann_2017_hope_symptoms,10.1371/journal.pone.0179415,NA,"Hofmann S, Hess S, Klein C, Lindena G, Radbruch L, Ostgathe C (2017). Patients in palliative care - Development of a predictive model for anxiety using routine data. PLOS ONE 12(8): e0179415.",https://doi.org/10.1371/journal.pone.0179415.s001,CC BY 4.0,CC BY 4.0,NA,"HOPE (Hospice and Palliative Care Evaluation) symptom and problem checklist: 15 items (pain, nausea, vomiting, dyspnea, constipation, weakness, loss of appetite, tiredness, wound care, assistance with ADL, organization of care, feeling depressed, anxiety, tension, disorientation/confusion) rated 0 none, 1 mild, 2 moderate, 3 severe at admission BY THE CARE TEAM (rater = care_team). 9,924 adult patients admitted to German palliative care services 2007-2011. THE DEPOSIT'S VALUE LABELS CALL 0 'NO DATA', which cannot be right for a 0-3 column: the paper dichotomises these scores as none/mild vs moderate/severe, every item has a separate NaN state, and 0 is the modal value on rare symptoms; 0 ships as 'none'. Covariates: gender, age, ECOG performance status, living situation, service type, cancer vs non-cancer, brain tumour, nursing-care level.","@article{Hofmann2017,
   author = {Hofmann, S. and Hess, S. and Klein, C. and Lindena, G. and Radbruch, L. and Ostgathe, C.},
   year = {2017},
@@ -26097,6 +26234,8 @@ jo_2023_via_adoption,NA,10.5061/dryad.jdfn2z3g5,"Jo, H. (2023). Data for: Evalua
   copyright = {Creative Commons Zero v1.0 Universal}
 }
 ",
+johannes_2021_mood,10.1080/15213269.2020.1768122,10.5281/zenodo.22953104,"Johannes, N., Meier, A., Reinecke, L., Ehlert, S., Setiawan, D. N., Walasek, N., Dienlin, T., Buijzen, M., & Veling, H. (2021). The relationship between online vigilance and affective well-being in everyday life: Combining smartphone logging with experience sampling. Media Psychology, 24(5), 581-605.",https://zenodo.org/records/22953104,CC BY 4.0,CC BY 4.0,NA,"Experience sampling, 8 prompts a day between 09:00 and 21:00 for 5 working days, 77 Dutch undergraduate students: seven bipolar mood items after 'At this moment, I feel:' (tired-awake, content-discontent, agitated-calm, full of energy-without energy, unwell-well, relaxed-tense, depressed-happy). 1..7; discontent, without_energy and tense run towards the negative pole."," @article{Johannes_2020, title={The relationship between online vigilance and affective well-being in everyday life: Combining smartphone logging with experience sampling}, volume={24}, ISSN={1532-785X}, url={http://dx.doi.org/10.1080/15213269.2020.1768122}, DOI={10.1080/15213269.2020.1768122}, number={5}, journal={Media Psychology}, publisher={Informa UK Limited}, author={Johannes, Niklas and Meier, Adrian and Reinecke, Leonard and Ehlert, Saara and Setiawan, Dinda Nuranissa and Walasek, Nicole and Dienlin, Tobias and Buijzen, Moniek and Veling, Harm}, year={2020}, month=May, pages={581–605} }
+",openESM
 johannisson_2016_ipip_neo,10.7717/peerj.2245,NA,Johannisson (2016). Correlations between personality traits and specific groups of alpha waves in the human EEG. PeerJ.,https://europepmc.org/article/PMC/PMC4957988,CC BY 4.0,CC BY 4.0,NA,"120-item IPIP-NEO personality inventory (1-5 Likert), n=200"," @article{Johannisson_2016, title={Correlations between personality traits and specific groups of alpha waves in the human EEG}, volume={4}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.2245}, DOI={10.7717/peerj.2245}, journal={PeerJ}, publisher={PeerJ}, author={Johannisson, Tomas}, year={2016}, month=July, pages={e2245} }
 ",
 johansson-swedish-pss-rasch-analysis-2024,NA,10.17605/OSF.IO/TXVW2,"Rozental, A., Forsström, D. & Johansson, M. A psychometric evaluation of the Swedish translation of the Perceived Stress Scale: a Rasch analysis. BMC Psychiatry 23, 690 (2023). https://doi.org/10.1186/s12888-023-05162-4",https://osf.io/txvw2/files/osfstorage,CC BY 4.0,CC BY 4.0,NA,A Psychometric Evaluation of the Swedish Translation of the Perceived Stress Scale: A Rasch Analysis,"@article{https://doi.org/10.17605/osf.io/txvw2,
@@ -31209,6 +31348,186 @@ lischer_2021_phq4,NA,10.5281/zenodo.5708255,"Lischer, S., Safi, N., & Dickson, C
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",
+lithuania_2012_nssa_g04_mat,NA,NA,"National Agency for Education (2023). NSSA 2012: 4th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/Y8T6GV",https://hdl.handle.net/21.12137/Y8T6GV,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 4th grade, mathematics: 3,093 students, 216 items across 6 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2012,
+  author = {{National Agency for Education}},
+  title = {NSSA 2012: 4th Grade Students Study, 2012},
+  year = {2012},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/Y8T6GV},
+  note = {Accessed as dataset}
+}",
+lithuania_2012_nssa_g04_ras,NA,NA,"National Agency for Education (2023). NSSA 2012: 4th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/Y8T6GV",https://hdl.handle.net/21.12137/Y8T6GV,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 4th grade, writing: 2,053 students, 31 items across 4 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2012,
+  author = {{National Agency for Education}},
+  title = {{NSSA} 2012: 4th Grade Students Study, 2012},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/Y8T6GV}
+}",
+lithuania_2012_nssa_g04_sk,NA,NA,"National Agency for Education (2023). NSSA 2012: 4th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/Y8T6GV",https://hdl.handle.net/21.12137/Y8T6GV,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 4th grade, reading: 3,058 students, 132 items across 6 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2012_4thgrade,
+  author = {{National Agency for Education}},
+  title = {NSSA 2012: 4th Grade Students Study, 2012},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/Y8T6GV}
+}",
+lithuania_2012_nssa_g08_mat,NA,NA,"National Agency for Education (2023). NSSA 2012: 8th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V4.1. https://hdl.handle.net/21.12137/WRL1OA",https://hdl.handle.net/21.12137/WRL1OA,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 8th grade, mathematics: 497 students, 42 items across 1 rotated booklet.","@dataset{nssa2012,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {NSSA 2012: 8th Grade Students Study, 2012},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V4.1},
+  url = {https://hdl.handle.net/21.12137/WRL1OA}
+}",
+lithuania_2012_nssa_g08_ras,NA,NA,"National Agency for Education (2023). NSSA 2012: 8th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V4.1. https://hdl.handle.net/21.12137/WRL1OA",https://hdl.handle.net/21.12137/WRL1OA,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 8th grade, writing: 498 students, 4 items across 1 rotated booklet.","@dataset{nssa_2012,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {{NSSA} 2012: 8th Grade Students Study, 2012},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V4.1},
+  url = {https://hdl.handle.net/21.12137/WRL1OA}
+}",
+lithuania_2012_nssa_g08_sk,NA,NA,"National Agency for Education (2023). NSSA 2012: 8th Grade Students Study, 2012 [Data set]. Lithuanian Data Archive for SSH (LiDA), V4.1. https://hdl.handle.net/21.12137/WRL1OA",https://hdl.handle.net/21.12137/WRL1OA,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2012, 8th grade, reading: 498 students, 16 items across 1 rotated booklet.","@dataset{nssa2012,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {NSSA 2012: 8th Grade Students Study, 2012},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V4.1},
+  url = {https://hdl.handle.net/21.12137/WRL1OA}
+}",
+lithuania_2014_nssa_g04_mat,NA,NA,"National Agency for Education (2023). NSSA 2014: 4th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/THUGMK",https://hdl.handle.net/21.12137/THUGMK,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 4th grade, mathematics: 1,696 students, 149 items across 4 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2014_2023,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {NSSA 2014: 4th Grade Students Study, 2014},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/THUGMK}
+}",
+lithuania_2014_nssa_g04_pp,NA,NA,"National Agency for Education (2023). NSSA 2014: 4th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/THUGMK",https://hdl.handle.net/21.12137/THUGMK,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 4th grade, world knowledge: 1,278 students, 116 items across 3 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2014_4thgrade,
+  author = {{National Agency for Education}},
+  title = {NSSA 2014: 4th Grade Students Study, 2014},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/THUGMK}
+}",
+lithuania_2014_nssa_g04_ras,NA,NA,"National Agency for Education (2023). NSSA 2014: 4th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/THUGMK",https://hdl.handle.net/21.12137/THUGMK,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 4th grade, writing: 1,683 students, 30 items across 4 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2014_4thgrade,
+  author = {{National Agency for Education}},
+  title = {{NSSA 2014: 4th Grade Students Study, 2014}},
+  year = {2014},
+  publisher = {{Lithuanian Data Archive for SSH (LiDA)}},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/THUGMK},
+  note = {Dataset}
+}",
+lithuania_2014_nssa_g04_sk,NA,NA,"National Agency for Education (2023). NSSA 2014: 4th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/THUGMK",https://hdl.handle.net/21.12137/THUGMK,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 4th grade, reading: 1,247 students, 67 items across 3 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa2014_4thgrade,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {{NSSA} 2014: 4th Grade Students Study, 2014},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/THUGMK},
+  note = {Data set}
+}",
+lithuania_2014_nssa_g08_mat,NA,NA,"National Agency for Education (2023). NSSA 2014: 8th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/6WNHS0",https://hdl.handle.net/21.12137/6WNHS0,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 8th grade, mathematics: 432 students, 40 items across 1 rotated booklet.","@dataset{nssa2014,
+  author = {{National Agency for Education}},
+  title = {NSSA 2014: 8th Grade Students Study, 2014},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  url = {https://hdl.handle.net/21.12137/6WNHS0},
+  note = {Data set}
+}",
+lithuania_2014_nssa_g08_ras,NA,NA,"National Agency for Education (2023). NSSA 2014: 8th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/6WNHS0",https://hdl.handle.net/21.12137/6WNHS0,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 8th grade, writing: 423 students, 4 items across 1 rotated booklet, with the option marked on multiple-choice questions.","@dataset{nssa_2014,
+  author = {{National Agency for Education}},
+  year = {2023},
+  title = {NSSA 2014: 8th Grade Students Study, 2014},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  url = {https://hdl.handle.net/21.12137/6WNHS0}
+}",
+lithuania_2014_nssa_g08_sk,NA,NA,"National Agency for Education (2023). NSSA 2014: 8th Grade Students Study, 2014 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/6WNHS0",https://hdl.handle.net/21.12137/6WNHS0,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2014, 8th grade, reading: 432 students, 22 items across 1 rotated booklet.","@dataset{nssa2014,
+  author = {{National Agency for Education}},
+  title = {NSSA 2014: 8th Grade Students Study, 2014},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  url = {https://hdl.handle.net/21.12137/6WNHS0}
+}",
+lithuania_2015_nssa_g04_mat,NA,NA,"National Agency for Education (2023). NSSA 2015: 4th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/C2G2VF",https://hdl.handle.net/21.12137/C2G2VF,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 4th grade, mathematics: 1,344 students, 91 items across 3 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  year = {2015},
+  title = {NSSA 2015: 4th Grade Students Study},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {1.2},
+  url = {https://hdl.handle.net/21.12137/C2G2VF},
+  note = {Data set}}
+",
+lithuania_2015_nssa_g04_pp,NA,NA,"National Agency for Education (2023). NSSA 2015: 4th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/C2G2VF",https://hdl.handle.net/21.12137/C2G2VF,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 4th grade, world knowledge: 2,697 students, 242 items across 6 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  title = {NSSA 2015: 4th Grade Students Study, 2015},
+  year = {2015},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/C2G2VF},
+  note = {Data set}
+}",
+lithuania_2015_nssa_g04_ras,NA,NA,"National Agency for Education (2023). NSSA 2015: 4th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/C2G2VF",https://hdl.handle.net/21.12137/C2G2VF,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 4th grade, writing: 451 students, 7 items across 1 rotated booklet, with the option marked on multiple-choice questions.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  title = {NSSA 2015: 4th Grade Students Study, 2015},
+  year = {2015},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/C2G2VF},
+  note = {Data set}
+}",
+lithuania_2015_nssa_g04_sk,NA,NA,"National Agency for Education (2023). NSSA 2015: 4th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V1.2. https://hdl.handle.net/21.12137/C2G2VF",https://hdl.handle.net/21.12137/C2G2VF,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 4th grade, reading: 902 students, 50 items across 2 rotated booklets, with the option marked on multiple-choice questions.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  year = {2015},
+  title = {NSSA 2015: 4th Grade Students Study},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V1.2},
+  url = {https://hdl.handle.net/21.12137/C2G2VF},
+  urldate = {2023}
+}",
+lithuania_2015_nssa_g08_gm,NA,NA,"National Agency for Education (2023). NSSA 2015: 8th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/UW5I0U",https://hdl.handle.net/21.12137/UW5I0U,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 8th grade, natural sciences: 437 students, 45 items across 1 rotated booklet.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  year = {2015},
+  title = {NSSA 2015: 8th Grade Students Study},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  url = {https://hdl.handle.net/21.12137/UW5I0U},
+  urldate = {2023}
+}",
+lithuania_2015_nssa_g08_sm,NA,NA,"National Agency for Education (2023). NSSA 2015: 8th Grade Students Study, 2015 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/UW5I0U",https://hdl.handle.net/21.12137/UW5I0U,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2015, 8th grade, social sciences: 433 students, 47 items across 1 rotated booklet.","@dataset{nssa_2015,
+  author = {{National Agency for Education}},
+  year = {2015},
+  title = {{NSSA} 2015: 8th Grade Students Study},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  note = {Accessed 2023},
+  url = {https://hdl.handle.net/21.12137/UW5I0U},
+  howpublished = {https://hdl.handle.net/21.12137/UW5I0U}
+}",
+lithuania_2016_nssa_g06_mat,NA,NA,"National Agency for Education (2023). NSSA 2016: 6th Grade Students Study, 2016 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/IE7M6H",https://hdl.handle.net/21.12137/IE7M6H,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2016, 6th grade, mathematics: 453 students, 32 items across 1 rotated booklet.","@dataset{nssa2016,
+  author = {{National Agency for Education}},
+  title = {NSSA 2016: 6th Grade Students Study, 2016},
+  year = {2023},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  version = {V2.2},
+  url = {https://hdl.handle.net/21.12137/IE7M6H}
+}",
+lithuania_2016_nssa_g06_sk,NA,NA,"National Agency for Education (2023). NSSA 2016: 6th Grade Students Study, 2016 [Data set]. Lithuanian Data Archive for SSH (LiDA), V2.2. https://hdl.handle.net/21.12137/IE7M6H",https://hdl.handle.net/21.12137/IE7M6H,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Lithuanian national student achievement study (NSSA) 2016, 6th grade, reading: 468 students, 24 items across 1 rotated booklet.","@dataset{NationalAgencyforEducation2023,
+  author = {{National Agency for Education}},
+  title = {NSSA 2016: 6th Grade Students Study, 2016},
+  year = {2023},
+  version = {V2.2},
+  publisher = {Lithuanian Data Archive for SSH (LiDA)},
+  url = {https://hdl.handle.net/21.12137/IE7M6H},
+  doi = {21.12137/IE7M6H}
+}",
 liu_2017_benefit_finding,10.1371/journal.pone.0169375,NA,"Liu, Z., Zhang, L., Shi, S. et al. (2017). Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer. PLOS ONE. https://doi.org/10.1371/journal.pone.0169375",https://doi.org/10.1371/journal.pone.0169375,CC BY 4.0,CC BY 4.0,NA,"Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer: communication, medical coping (MCMQ), social support (SSRS), benefit-finding, and quality-of-life batteries"," @article{Liu_2017, title={Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer: A Predictor of Perceived Benefits, Communication with Doctors, Medical Coping Modes, Depression and Quality of Life}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0169375}, DOI={10.1371/journal.pone.0169375}, number={1}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Liu, Zhunzhun and Zhang, Lanfeng and Shi, Songsong and Xia, Wenkai}, editor={Li, Dongmei}, year={2017}, month=Jan, pages={e0169375} }
 ",
 liu_2017_communication,10.1371/journal.pone.0169375,NA,"Liu, Z., Zhang, L., Shi, S. et al. (2017). Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer. PLOS ONE. https://doi.org/10.1371/journal.pone.0169375",https://doi.org/10.1371/journal.pone.0169375,CC BY 4.0,CC BY 4.0,NA,"Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer: communication, medical coping (MCMQ), social support (SSRS), benefit-finding, and quality-of-life batteries"," @article{Liu_2017, title={Objectively Assessed Exercise Behavior in Chinese Patients with Early-Stage Cancer: A Predictor of Perceived Benefits, Communication with Doctors, Medical Coping Modes, Depression and Quality of Life}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0169375}, DOI={10.1371/journal.pone.0169375}, number={1}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Liu, Zhunzhun and Zhang, Lanfeng and Shi, Songsong and Xia, Wenkai}, editor={Li, Dongmei}, year={2017}, month=Jan, pages={e0169375} }
@@ -32273,6 +32592,8 @@ lv_2026_social_trust,NA,10.6084/m9.figshare.35019874.v2,"Lv M (2026). When the L
 }
 ",
 ly_2021_animal_empathy,10.1371/journal.pone.0247808,NA,"Ly LH, Weary DM (2021). Facial expression in humans as a measure of empathy towards farm animals in pain. PLOS ONE, 16(3), e0247808. https://doi.org/10.1371/journal.pone.0247808",https://doi.org/10.1371/journal.pone.0247808.s003,CC BY 4.0,CC BY 4.0,NA,"Self-reported emotional response (7 emotions, 0-10) to videos of farm animals undergoing painful vs. non-painful procedures"," @article{Ly_2021, title={Facial expression in humans as a measure of empathy towards farm animals in pain}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0247808}, DOI={10.1371/journal.pone.0247808}, number={3}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Ly, Lexis H. and Weary, Daniel M.}, editor={Brown, Kirk Warren}, year={2021}, month=Mar, pages={e0247808} }
+",
+lynott_2020_sensorimotor,10.3758/s13428-019-01316-z,NA,"Lynott, D., Connell, L., Brysbaert, M., Brand, J., & Carney, J. (2020). The Lancaster Sensorimotor Norms: Multidimensional measures of perceptual and action strength for 40,000 English words. Behavior Research Methods, 52(3), 1271-1291.",https://osf.io/rwhs6/,CC BY 4.0,CC BY 4.0,NA,"Lancaster Sensorimotor Norms, trial level: 39,954 English words rated 0-5 on six perceptual modalities (auditory, gustatory, haptic, interoceptive, olfactory, visual) and five action effectors (foot_leg, hand_arm, head, mouth, torso) by MTurk participants, each rating one list of words on one norming component (perception or action). Stimulus-norms shape (irw#2983): id = word, item = dimension, rater = participant; a don't-know response is resp NA with dontknow = 1; trial_list and trial_response identify the list and the completed response; cov_age and cov_sex. 10,495,805 rows (614,026 of them don't-know) for 39,954 words from 5,874 rater ids; ids are per norming component, so a person who did both the perception and the action norms has two. trial_repeat numbers a word shown twice in one list."," @article{Lynott_2019, title={The Lancaster Sensorimotor Norms: multidimensional measures of perceptual and action strength for 40,000 English words}, volume={52}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-019-01316-z}, DOI={10.3758/s13428-019-01316-z}, number={3}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Lynott, Dermot and Connell, Louise and Brysbaert, Marc and Brand, James and Carney, James}, year={2019}, month=Dec, pages={1271–1291} }
 ",
 lys_2020_rape_1_rma,10.1007/s12144-020-01249-3,NA,"Łyś, A.E., Bargiel-Matusiewicz, K., Krasuski, T. et al. Psychometric properties of the polish updated Illinois rape myth acceptance scale. Curr Psychol 42, 445–459 (2023). https://doi.org/10.1007/s12144-020-01249-3",https://osf.io/eu4qd/files/osfstorage,CC BY 4.0,CC BY 4.0,NA,Rape myth acceptance ratings for the study 1 of the rape myth acceptance scale paper," @article{_y__2021, title={Psychometric properties of the polish updated Illinois rape myth acceptance scale}, volume={42}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-020-01249-3}, DOI={10.1007/s12144-020-01249-3}, number={1}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Łyś, Agnieszka Ewa and Bargiel-Matusiewicz, Kamilla and Krasuski, Tomasz and Studzińska, Anna}, year={2021}, month=feb, pages={445–459} }
 ",
@@ -40301,6 +40622,8 @@ polner_2018_olife,10.7717/peerj.5615,NA,"Polner, B., Simor, P., & Kéri, S. (201
 ",
 polner_2018_rei,10.7717/peerj.5615,NA,"Polner, B., Simor, P., & Kéri, S. (2018). Insomnia and intellect mask the positive link between schizotypal traits and creativity. PeerJ, 6, e5615. https://doi.org/10.7717/peerj.5615",https://europepmc.org/article/PMC/PMC6147126,CC BY 4.0,CC BY 4.0,NA,"Rational-Experiential Inventory (all 40 items, 1-5), Hungarian university students"," @article{Polner_2018, title={Insomnia and intellect mask the positive link between schizotypal traits and creativity}, volume={6}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.5615}, DOI={10.7717/peerj.5615}, journal={PeerJ}, publisher={PeerJ}, author={Polner, Bertalan and Simor, Péter and Kéri, Szabolcs}, year={2018}, month=Sept, pages={e5615} }
 ",
+poole_2020_toj,10.1163/22134468-bja10011,NA,"Poole, D., Lees, K. J., & Jones, L. A. (2020). Click trains do not alter auditory temporal order judgements. Timing & Time Perception, 8(3-4), 239-253. Data via the Timing Database: Aydogan, T., Karsilar, H., Duyan, Y. A., Akdogan, B., Baccarani, A., Brochard, R., De Corte, B., Crystal, J. D., Cavdaroglu, B., Gallistel, C. R., Grondin, S., Gur, E., Hallez, Q., de Jong, J., van Maanen, L., Matell, M., Narayanan, N. S., Ozoglu, E., Oztel, T., Vatakis, A., Freestone, D., & Balci, F. (2023). The timing database: An open-access, live repository for interval timing studies. Behavior Research Methods, 56(1), 290-300. https://doi.org/10.3758/s13428-022-02050-9",https://osf.io/vrwjz,Permission via Email,CC BY 4.0,NA,"Auditory temporal order judgements (which of a high and a low tone came first), with the gap filled by silence, white noise or a click train, at three SOAs set from each person's threshold (Poole, Lees & Jones 2020): 60 adults, 252 trials each."," @article{Poole_2020, title={Click Trains do not Alter Auditory Temporal Order Judgements}, volume={8}, ISSN={2213-4468}, url={http://dx.doi.org/10.1163/22134468-bja10011}, DOI={10.1163/22134468-bja10011}, number={3-4}, journal={Timing &amp; Time Perception}, publisher={Walter de Gruyter GmbH}, author={Poole, Daniel and Lees, Kyle J. and Jones, Luke A.}, year={2020}, month=Nov, pages={239–253} }
+",
 pop_2023_mp_concern,10.7717/peerj.16338,NA,"Pop V, Ozunu A, Petrescu DC, Stan AD, Petrescu-Mag RM (2023). The influence of media narratives on microplastics risk perception. PeerJ, 11, e16338. https://doi.org/10.7717/peerj.16338",https://europepmc.org/article/PMC/PMC10625762,CC BY 4.0,CC BY 4.0,NA,"Microplastics awareness and concern, 3 binary items (heard of microplastics; concern for health; concern for the environment), Romanian respondents. 1,251 responses from 417 respondents on 3 items."," @article{Pop_2023, title={The influence of media narratives on microplastics risk perception}, volume={11}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.16338}, DOI={10.7717/peerj.16338}, journal={PeerJ}, publisher={PeerJ}, author={Pop, Valeria and Ozunu, Alexandru and Petrescu, Dacinia Crina and Stan, Adrian-Daniel and Petrescu-Mag, Ruxandra Malina}, year={2023}, month=Nov, pages={e16338} }
 ",
 pop_2023_mp_media,10.7717/peerj.16338,NA,"Pop V, Ozunu A, Petrescu DC, Stan AD, Petrescu-Mag RM (2023). The influence of media narratives on microplastics risk perception. PeerJ, 11, e16338. https://doi.org/10.7717/peerj.16338",https://europepmc.org/article/PMC/PMC10625762,CC BY 4.0,CC BY 4.0,NA,"Microplastics information known from the media, 8 items on a 1-7 scale, Romanian respondents. 3,336 responses from 417 respondents on 8 items."," @article{Pop_2023, title={The influence of media narratives on microplastics risk perception}, volume={11}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.16338}, DOI={10.7717/peerj.16338}, journal={PeerJ}, publisher={PeerJ}, author={Pop, Valeria and Ozunu, Alexandru and Petrescu, Dacinia Crina and Stan, Adrian-Daniel and Petrescu-Mag, Ruxandra Malina}, year={2023}, month=Nov, pages={e16338} }
@@ -40558,6 +40881,10 @@ pratista_2026_music_tourism_transport,NA,10.6084/m9.figshare.32662941,Pratista A
 }
 ",
 PRCPSFFMQ_Lecuona_2017,10.1177/1073191119873718,NA,"Lecuona, O., García-Garzón, E., García-Rubio, C., & Rodríguez-Carvajal, R. (2020). A psychometric review and conceptual replication study of the Five Facets Mindfulness Questionnaire latent structure. Assessment, 27(5), 859-872.",https://osf.io/m64wp/,CC0 1.0,CC0 1.0,NA,Five Facets Mindfulness Questionnaire,"@article{Lecuona_2019, title={A Psychometric Review and Conceptual Replication Study of the Five Facets Mindfulness Questionnaire Latent Structure}, volume={27}, ISSN={1552-3489}, url={http://dx.doi.org/10.1177/1073191119873718}, DOI={10.1177/1073191119873718}, number={5}, journal={Assessment}, publisher={SAGE Publications}, author={Lecuona, Oscar and García-Garzón, Eduardo and García-Rubio, Carlos and Rodríguez-Carvajal, Raquel}, year={2019}, month=oct, pages={859–872} }
+",
+preininger_2025_sociolex_images,10.3758/s13428-025-02907-9,10.17605/OSF.IO/PV9MD,"Preininger, M., Brand, J., Kříž, A., & Ceháková, M. (2025). SocioLex-CZ: Normative estimates for socio-semantic dimensions of meaning for 2,999 words and 1,000 images. Behavior Research Methods, 58, 18.",https://osf.io/pv9md/,CC BY-NC-SA 4.0,CC BY-NC-SA 4.0,NA,"SocioLex-CZ images: 500 MultiPic pictures, each in a colour and a grey-scale version (id = picture code plus version), rated -3..3 on gender, location, political and valence by 455 Czech native speakers who each saw one version. Stimulus-norms shape (irw#2983): id = picture, item = dimension, rater = participant; a don't-know response is resp NA with dontknow = 1; rater covariates as in the words table. 181,901 ratings."," @article{Preininger_2025, title={SocioLex-CZ: Normative estimates for socio-semantic dimensions of meaning for 2,999 words and 1,000 images}, volume={58}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-025-02907-9}, DOI={10.3758/s13428-025-02907-9}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Preininger, Mikuláš and Brand, James and Kříž, Adam and Ceháková, Markéta}, year={2025}, month=Dec }
+",
+preininger_2025_sociolex_words,10.3758/s13428-025-02907-9,10.17605/OSF.IO/PV9MD,"Preininger, M., Brand, J., Kříž, A., & Ceháková, M. (2025). SocioLex-CZ: Normative estimates for socio-semantic dimensions of meaning for 2,999 words and 1,000 images. Behavior Research Methods, 58, 18.",https://osf.io/pv9md/,CC BY-NC-SA 4.0,CC BY-NC-SA 4.0,NA,"SocioLex-CZ words: 3,111 Czech words rated -3..3 on four socio-semantic dimensions (gender: masculine to feminine; location: rural to urban; political: liberal to conservative; valence: negative to positive) by 1,254 Czech native speakers. Stimulus-norms shape (irw#2983): id = word, item = dimension, rater = participant; a don't-know response is resp NA with dontknow = 1; cov_age, cov_gender, cov_education, cov_sample and the participant's own placement on the four scales. 523,218 ratings."," @article{Preininger_2025, title={SocioLex-CZ: Normative estimates for socio-semantic dimensions of meaning for 2,999 words and 1,000 images}, volume={58}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-025-02907-9}, DOI={10.3758/s13428-025-02907-9}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Preininger, Mikuláš and Brand, James and Kříž, Adam and Ceháková, Markéta}, year={2025}, month=Dec }
 ",
 premkumar_2020_bpaq,NA,10.5281/zenodo.3956134,"Premkumar, P., Kuipers, E., & Kumari, V. (2020). The path from schizotypy to depression and aggression and the role of family stress. European Psychiatry.",https://zenodo.org/records/3956134,CC BY 4.0,CC BY 4.0,NA,"Buss-Perry Aggression Questionnaire, 29 items scored 1-7, from 104 participants in a study of the path from schizotypy to depression and aggression.","@misc{https://doi.org/10.5281/zenodo.3956134,
   doi = {10.5281/ZENODO.3956134},
@@ -52276,6 +52603,109 @@ ups_vangsness_2019,NA,10.17605/OSF.IO/R7WCX,"Vangsness, L., Voss, N. M., Maddox,
 ",
 uritani_2023_ases8,10.1371/journal.pone.0292426,NA,"Uritani, D., Kubo, T., Yasuura, Y., & Fujii, T. (2023). Reliability and validity of the Japanese short-form arthritis self-efficacy scale in patients with knee osteoarthritis: A cross-sectional study. PLOS ONE, 18(10), e0292426.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0292426,CC BY 4.0,CC BY 4.0,NA,"Japanese 8-item short-form Arthritis Self-Efficacy Scale (ASES-8J), 8 items, 1-10, 179 adults with knee osteoarthritis; cov_site (participant-code prefix, undocumented; possibly recruiting site), cov_age, cov_sex (codes not documented)."," @article{Uritani_2023, title={Reliability and validity of the Japanese short-form arthritis self-efficacy scale in patients with knee osteoarthritis: A cross-sectional study}, volume={18}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0292426}, DOI={10.1371/journal.pone.0292426}, number={10}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Uritani, Daisuke and Kubo, Takanari and Yasuura, Yuuka and Fujii, Tadashi}, editor={Özden, Fatih}, year={2023}, month=Oct, pages={e0292426} }
 ",
+uruguay_2017_aristas_g03_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2017). Aristas 2017: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2017 (Uruguay, INEEd), primary, grade 3, reading: national computer-based assessment; 7,038 students, 104 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{ineed2017,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2017},
+  title = {Aristas 2017: base de datos de estudiantes por ítem},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/},
+  organization = {Instituto Nacional de Evaluación Educativa (INEEd)}
+}",
+uruguay_2017_aristas_g03_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2017). Aristas 2017: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2017 (Uruguay, INEEd), primary, grade 3, mathematics: national computer-based assessment; 7,067 students, 191 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2017,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2017},
+  title = {Aristas 2017: base de datos de estudiantes por ít{em}},
+  publisher = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2017_aristas_g06_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2017). Aristas 2017: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2017 (Uruguay, INEEd), primary, grade 6, reading: national computer-based assessment; 7,111 students, 133 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{ineed2017,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2017},
+  title = {Aristas 2017: base de datos de estudiantes por ítem},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2017_aristas_g06_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2017). Aristas 2017: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2017 (Uruguay, INEEd), primary, grade 6, mathematics: national computer-based assessment; 7,096 students, 218 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{ineed2017,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2017},
+  title = {Aristas 2017: base de datos de estudiantes por ítem},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2018_aristas_g09_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2018). Aristas 2018: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2018 (Uruguay, INEEd), lower secondary, grade 9, reading: national computer-based assessment; 7,828 students, 277 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2018,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2018},
+  title = {Aristas 2018: base de datos de estudiantes por ítem},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2018_aristas_g09_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2018). Aristas 2018: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2018 (Uruguay, INEEd), lower secondary, grade 9, mathematics: national computer-based assessment; 7,892 students, 218 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2018,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2018},
+  title = {Aristas 2018: base de datos de estudiantes por ítem},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/},
+  type = {Data set}
+}",
+uruguay_2018_aristasrural_g09_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2018). Aristas 2018: base de datos de estudiantes por ítem (relevamiento rural de educación media) [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2018 rural lower secondary census (Uruguay, INEEd), lower secondary, grade 9, reading: national computer-based assessment; 1,333 students, 277 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2018,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2018},
+  title = {Aristas 2018: base de datos de estudiantes por ítem (relevamiento rural de educación media)},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2018_aristasrural_g09_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2018). Aristas 2018: base de datos de estudiantes por ítem (relevamiento rural de educación media) [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2018 rural lower secondary census (Uruguay, INEEd), lower secondary, grade 9, mathematics: national computer-based assessment; 1,315 students, 218 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2018,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2018},
+  title = {Aristas 2018: base de datos de estudiantes por ítem (relevamiento rural de educación media)},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2020_aristas_g03_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2020). Aristas 2020: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2020 (Uruguay, INEEd), primary, grade 3, reading: national computer-based assessment; 5,079 students, 139 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2020,
+  author = {Instituto Nacional de Evaluación Educativa},
+  title = {Aristas 2020: base de datos de estudiantes por ítem},
+  year = {2020},
+  publisher = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2020_aristas_g03_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2020). Aristas 2020: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2020 (Uruguay, INEEd), primary, grade 3, mathematics: national computer-based assessment; 5,081 students, 205 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2020,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2020},
+  title = {Aristas 2020: base de datos de estudiantes por ítem},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2020_aristas_g06_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2020). Aristas 2020: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2020 (Uruguay, INEEd), primary, grade 6, reading: national computer-based assessment; 5,299 students, 164 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2020,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2020},
+  title = {Aristas 2020: base de datos de estudiantes por ítem},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/},
+  publisher = {INEEd}
+}",
+uruguay_2020_aristas_g06_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2020). Aristas 2020: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2020 (Uruguay, INEEd), primary, grade 6, mathematics: national computer-based assessment; 5,252 students, 221 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2020,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2020},
+  title = {Aristas 2020: base de datos de estudiantes por ítem},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/},
+  organization = {INEEd}
+}",
+uruguay_2022_aristas_g09_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2022). Aristas 2022: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2022 (Uruguay, INEEd), lower secondary, grade 9, reading: national computer-based assessment; 9,614 students, 279 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2022,
+  author = {{Instituto Nacional de Evaluaci\'on Educativa (INEEd)}},
+  title = {Aristas 2022: base de datos de estudiantes por \'item},
+  year = {2022},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/},
+  type = {Data set}
+}",
+uruguay_2022_aristas_g09_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2022). Aristas 2022: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2022 (Uruguay, INEEd), lower secondary, grade 9, mathematics: national computer-based assessment; 9,539 students, 224 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{ineed2022aristas,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2022},
+  title = {Aristas 2022: base de datos de estudiantes por ítem},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
 uruguay_2022_technology_access,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.","Household access and ownership of computers, tablets, and internet connectivity","@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
@@ -52355,6 +52785,34 @@ uruguay_2022_technology_work,NA,NA,Encuesta de Usos de las Tecnologías de la In
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
+}",
+uruguay_2023_aristas_g03_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2023). Aristas 2023: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2023 (Uruguay, INEEd), primary, grade 3, reading: national computer-based assessment; 5,855 students, 137 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2023,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  title = {Aristas 2023: base de datos de estudiantes por ítem},
+  year = {2023},
+  publisher = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2023_aristas_g03_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2023). Aristas 2023: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2023 (Uruguay, INEEd), primary, grade 3, mathematics: national computer-based assessment; 5,892 students, 200 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{ineed2023,
+  author = {{Instituto Nacional de Evaluaci\'on Educativa (INEEd)}},
+  title = {Aristas 2023: base de datos de estudiantes por \'item},
+  year = {2023},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2023_aristas_g06_lec,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2023). Aristas 2023: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2023 (Uruguay, INEEd), primary, grade 6, reading: national computer-based assessment; 6,099 students, 158 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2023,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  year = {2023},
+  title = {Aristas 2023: base de datos de estudiantes por ítem},
+  type = {Data set},
+  organization = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
+}",
+uruguay_2023_aristas_g06_mat,NA,NA,Instituto Nacional de Evaluación Educativa (INEEd) (2023). Aristas 2023: base de datos de estudiantes por ítem [Data set]. INEEd. https://www.ineed.edu.uy/bases-de-datos-de-aristas/,https://www.ineed.edu.uy/bases-de-datos-de-aristas/,Permission via Email,Custom,"Redistributed with INEEd permission: cite Instituto Nacional de Evaluación Educativa (INEEd), Aristas, as the primary source.","Aristas 2023 (Uruguay, INEEd), primary, grade 6, mathematics: national computer-based assessment; 6,046 students, 210 items in rotated booklets of two blocks, scored right/wrong (a few partial-credit items).","@dataset{INEEd2023,
+  author = {{Instituto Nacional de Evaluación Educativa (INEEd)}},
+  title = {Aristas 2023: base de datos de estudiantes por ítem},
+  year = {2023},
+  publisher = {INEEd},
+  url = {https://www.ineed.edu.uy/bases-de-datos-de-aristas/}
 }",
 usc_2026_gasa,NA,10.5281/zenodo.19811259,Anonymous authors (2026). A psychometric comparison of four approaches to the Gaming Addiction Scale (GAS) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.19811259,https://zenodo.org/records/19811259,CC BY 4.0,CC BY 4.0,NA,"Game Addiction Scale for Adolescents (GASA-7, 0-4) from a nationwide school survey of 34,076 Spanish secondary-school adolescents.","@misc{https://doi.org/10.5281/zenodo.19811259,
   doi = {10.5281/ZENODO.19811259},

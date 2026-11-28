@@ -33,7 +33,8 @@ IRW_CORE_DATASETS <- c(
   "item_response_warehouse_7",
   "item_response_warehouse_8",
   "item_response_warehouse_9",
-  "item_response_warehouse_10"
+  "item_response_warehouse_10",
+  "item_response_warehouse_11"
 )
 
 ## Item-text shards, oldest to newest.
