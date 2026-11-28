@@ -8,14 +8,16 @@ Full write-up in `BATCH_LOG.md` (2026-11-27b). Outputs in `automated_finding/irw
   kabir_2021_elearning_stress. Shard 11 draft (11; shards 9 and 10 are full): liu_2024_{rcbs,cses,ffmq},
   muffato_2023_{bfi44,atot,pebs}, fazi_2026_stai_{s,t}, kim_2023_learning_selfdirected, akulume_2024_donation_attitude,
   ucarer_2026_scs_sf. Ben publishes 8 and 11.
-- [ ] **Ben: may_2020_hsps NOT uploaded (held).** The script now ships R1-R3 (27 -> 30 items), but R1-R3 correlate
-  +0.17..+0.22 with the HSPS sum in the Birth to Twenty file and -0.14..-0.24 in the student file. If one file stores
-  them reversed, stacking makes direction inconsistent *within* an item, which datastandard.md forbids. Options: ship
-  as is; give R1-R3 per-study item names; or keep them out of the stacked table. Live table is still the 27-item one,
-  so the merged script is ahead of live until this is decided.
-- [ ] **Ben: live gerber_2022_eas_temperament may double-flip R items.** `data/gerber_2022_swisscamp.py` applies
-  6 - x to the R items, but in the deposit their correlations with their dimension are mixed in sign (soc4r -0.33,
-  act2r -0.27, tim3r +0.15), so some may already have been reversed. Not touched.
+- [x] **may_2020_hsps replaced on the item_response_warehouse_9 draft (2026-11-27, Ben: ship as one table):** 30 items
+  (R1-R3 added), 64,405 rows, 1/1 verified. R1-R3 flip sign between samples, read as BTT acquiescence; header says
+  split by cov_study before scoring.
+- [x] **gerber_2022_eas_temperament replaced on the item_response_warehouse_3 draft (2026-11-27, Ben: yes):** the R
+  items now ship as deposited (no 6 - x) and keep the R in the item name (ACT2R, ACT5R, SOC4R, TIM2R, TIM3R, TIM5R);
+  9,938 rows, 1/1 verified.
+- [ ] **Ben: sheet edit.** The core dictionary row for gerber_2022_eas_temperament says "reverse-worded items
+  recoded"; drop that phrase (they are no longer recoded).
+- [ ] table_changes rows owed on release (#3561): may_2020_hsps (R1-R3 added), gerber_2022_eas_temperament (R items
+  no longer recoded; item names gain R).
 - [ ] Leads skipped whole for pre-scored reversals, workable under the new ruling: Mendeley 88kb9t8my6 (NEO IPIP
   120), Zenodo 20153132 (STAI, N = 101).
 
