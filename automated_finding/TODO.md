@@ -1,8 +1,25 @@
 # IRW Automated Finding — TODO
 
-## Repos leads 2026-11-25c — 403 tables (86 deposits, 2,170,946 responses) uploaded to shard 10 + 81 item text tables
+## Reverse-keyed items restored 2026-11-27 (branch data/restore-reverse-keyed)
 
-Full write-up in `BATCH_LOG.md` (2026-11-25c). PR #3729 (branch `data/repos-leads-2026-11-25`, rebased onto main).
+Full write-up in `BATCH_LOG.md` (2026-11-27b). Outputs in `automated_finding/irw_output/`.
+- [x] **Uploaded 2026-11-27 evening by Claude (Ben: "please upload push and edit"):** 15 new tables, all row-count
+  verified. Shard 8 draft (4): shen_2018_bfi, perez_fuentes_2020_covid_threat, kawakami_2020_jcq,
+  kabir_2021_elearning_stress. Shard 11 draft (11; shards 9 and 10 are full): liu_2024_{rcbs,cses,ffmq},
+  muffato_2023_{bfi44,atot,pebs}, fazi_2026_stai_{s,t}, kim_2023_learning_selfdirected, akulume_2024_donation_attitude,
+  ucarer_2026_scs_sf. Ben publishes 8 and 11.
+- [x] **may_2020_hsps replaced on the item_response_warehouse_9 draft (2026-11-27, Ben: ship as one table):** 30 items
+  (R1-R3 added), 64,405 rows, 1/1 verified. R1-R3 flip sign between samples, read as BTT acquiescence; header says
+  split by cov_study before scoring.
+- [x] **gerber_2022_eas_temperament replaced on the item_response_warehouse_3 draft (2026-11-27, Ben: yes):** the R
+  items now ship as deposited (no 6 - x) and keep the R in the item name (ACT2R, ACT5R, SOC4R, TIM2R, TIM3R, TIM5R);
+  9,938 rows, 1/1 verified.
+- [ ] **Ben: sheet edit.** The core dictionary row for gerber_2022_eas_temperament says "reverse-worded items
+  recoded"; drop that phrase (they are no longer recoded).
+- [ ] table_changes rows owed on release (#3561): may_2020_hsps (R1-R3 added), gerber_2022_eas_temperament (R items
+  no longer recoded; item names gain R).
+- [ ] Leads skipped whole for pre-scored reversals, workable under the new ruling: Mendeley 88kb9t8my6 (NEO IPIP
+  120), Zenodo 20153132 (STAI, N = 101).
 
 - [x] **UPLOADED 2026-11-25 by Claude (Ben's go-ahead in-session):** 403 response tables to the item_response_warehouse_10
   draft (all row-count verified; ding_2026_who5 re-uploaded by Ben after an interrupted run left it empty) and 81 item text
@@ -239,8 +256,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 
 - [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 25/25 row-count verified; Ben publishes. Was: 25 response tables (587,820 responses) from
   `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
-- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
-  reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
+- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (resolved 2026-11-27:
+  shipped as kim_2023_learning_selfdirected under the never-drop ruling), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
   answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
 - [ ] 63 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/DJNHCM (8-case OSCE checklists,
   4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).

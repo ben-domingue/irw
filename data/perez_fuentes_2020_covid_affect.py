@@ -13,19 +13,23 @@
 # Worked from the cleaned leads list of 2026-11-07 (refined_flag
 # recoverable_format; source leads/plos_leads_2026-10-30.csv), leads batch 7.
 #
-# ONE output table:
+# TWO output tables:
 #   perez_fuentes_2020_affect_balance  Affect Balance Scale (Spanish
 #     adaptation), EBA1-EBA18, 1 little or never, 2 sometimes, 3 a lot or
 #     usually. Positive items 3,5,7,9,12,13,15,16,18 and negative items
 #     1,2,4,6,8,10,11,14,17 are scored separately (no reversal); their sums
 #     equal the deposit's EBApos and EBAneg on every row (asserted).
+#   perez_fuentes_2020_covid_threat  Brief Illness Perception Questionnaire
+#     (BIP-Q, the 5-item Spanish COVID-19 version), bipq01-bipq05, 1-10 (the
+#     paper: "five items answered on a 10-point Likert-type scale"). The item
+#     sum is the deposited TotalBIPQ (asserted), and the deposit does not show
+#     whether the control items were reversed before entry; shipped as
+#     deposited, so check direction before scoring. All five correlate
+#     positively with the rest (bipq03 weakest, +0.18).
 # Checks: N = 1,014, 681 women, mean age 40.87 as in the paper (asserted).
 # Dropped: EVEA mood scale (EVEA2 and EVEA8, two anger-hostility items,
 #   are identical on every row, so one item's answers are lost, and the
-#   deposit's 1-10 range departs from the paper's 0-10); the 5-item
-#   COVID-19 threat questionnaire (BIP-Q: the item sum is the deposited
-#   total and the deposit does not show whether the control items were
-#   reversed before entry; dropped under the 2026-11-08 rule, and thin).
+#   deposit's 1-10 range departs from the paper's 0-10).
 # Covariates: age, sex, marital status, education, dependent children,
 #   COVID-19 case in close environment (value labels, translated).
 # `id` is the row index (the deposit carries no identifier).
@@ -101,6 +105,11 @@ def convert():
     items = [f"EBA{i}" for i in range(1, 19)]
     out = df.rename(columns={c: f"aba{int(c[3:]):02d}" for c in items})
     save(out, covs, [f"aba{i:02d}" for i in range(1, 19)], "perez_fuentes_2020_affect_balance", [1, 2, 3])
+
+    bipq = [f"BIPQ{i}" for i in range(1, 6)]
+    assert (df[bipq].sum(axis=1) == df["TotalBIPQ"]).all()
+    out = df.rename(columns={c: f"bipq{int(c[4:]):02d}" for c in bipq})
+    save(out, covs, [f"bipq{i:02d}" for i in range(1, 6)], "perez_fuentes_2020_covid_threat", range(1, 11))
 
 
 if __name__ == "__main__":

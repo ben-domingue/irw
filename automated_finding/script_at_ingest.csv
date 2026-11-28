@@ -1463,6 +1463,7 @@ tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 tucker_2019_mald,core,data/tucker_2019_mald.py,2026-11-27
 tzang_2021_adhdparent9,cov,data/covariance/pmc_article_tables_aq.py,2026-11-19
 ucarer_2026_meq,core,data/ucarer_2026_mindful_eating.py,2026-11-23
+ucarer_2026_scs_sf,core,data/ucarer_2026_mindful_eating.py,2026-11-27
 ulusoy_2023_eds8,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 umoru_2026_health_stressors,core,data/umoru_2026_older_farmers.py,2026-11-25
 umoru_2026_life_satisfaction,core,data/umoru_2026_older_farmers.py,2026-11-25

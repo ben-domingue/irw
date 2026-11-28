@@ -24,11 +24,14 @@ sequence:
      "<n>_PRE<SUBSCALE><k>[R]" / "<n>_POST<SUBSCALE><k>[R]", 1 (strongly
      disagree) - 5 (strongly agree). Subscales: TIM = timidite/shyness,
      EMO = emotionality, SOC = sociability, ACT = activity. Items with an
-     "R" suffix are reverse-worded in the source instrument; per the paper's
-     own scoring convention these are recoded before being summed into a
-     subscale score, so we flip them here (recoded = 6 - raw on the 1-5
-     scale) so that higher resp always means more of the construct across
-     all items in a subscale.
+     "R" suffix are reverse-worded in the source instrument. They ship as
+     deposited, NOT recoded, and keep the R in the item name (e.g. ACT2R).
+     Until 2026-11-27 this script flipped them (6 - x), but in the deposit
+     their correlations with their subscale are mixed in sign (SOC4R -0.33,
+     ACT2R -0.27, TIM3R +0.15), so some may already have been reversed by
+     the depositors and a blanket flip could double-reverse them. Check
+     direction before scoring (Ben's 2026-11-27 ruling; datastandard.md:
+     do not recode reverse-scored items).
 
 Remaining columns (S8*/S9*/S10*/Q10*/Q12*) are one-off camp-specific or
 control-group-specific control questions (e.g. "is this your first camp",
@@ -65,14 +68,13 @@ SUBSCALE_NAMES = {"TIM": "shyness", "EMO": "emotionality", "SOC": "sociability",
 
 
 def _parse_eas_colname(raw: str) -> tuple[str, str, bool]:
-    """'7_PREACT2R' -> ('ACT', 'ACT2', True); '1_PRETIM1' -> ('TIM','TIM1',False)"""
+    """'7_PREACT2R' -> ('ACT', 'ACT2R', True); '1_PRETIM1' -> ('TIM','TIM1',False)"""
     suffix = raw.split("_", 1)[1]  # e.g. PREACT2R / POSTACT2R
     body = suffix.replace("PRE", "", 1) if suffix.startswith("PRE") else suffix.replace("POST", "", 1)
     reversed_item = body.endswith("R")
-    core = body[:-1] if reversed_item else body
-    # core like ACT2, TIM1, SOC5, EMO3
-    subscale = core[:3]
-    return subscale, core, reversed_item
+    # item name keeps the R suffix (ACT2R); subscale from the first three letters
+    subscale = body[:3]
+    return subscale, body, reversed_item
 
 
 def fetch_raw() -> pd.DataFrame:
@@ -150,21 +152,16 @@ def convert():
     est_long = build_two_wave_scale(df, cov, est_pre, est_post, est_items, -2, 2)
     write_scale(est_long, "gerber_2022_selfesteem.csv")
 
-    # --- 3. EAS temperament (20 items, 4 subscales, 1-5, R-items flipped) ---
+    # --- 3. EAS temperament (20 items, 4 subscales, 1-5, R items as deposited) ---
     eas_item_names = []
     eas_family = []
-    reversed_flags = []
     for raw_col in EAS_PRE_COLS:
         subscale, core, is_rev = _parse_eas_colname(raw_col)
         eas_item_names.append(core)
         eas_family.append(SUBSCALE_NAMES[subscale])
-        reversed_flags.append(is_rev)
 
     eas_long = build_two_wave_scale(df, cov, EAS_PRE_COLS, EAS_POST_COLS, eas_item_names,
                                      1, 5, item_family=eas_family)
-    rev_items = {name for name, rev in zip(eas_item_names, reversed_flags) if rev}
-    rev_mask = eas_long["item"].isin(rev_items)
-    eas_long.loc[rev_mask, "resp"] = 6 - eas_long.loc[rev_mask, "resp"]
     write_scale(eas_long, "gerber_2022_eas_temperament.csv")
 
 

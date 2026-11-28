@@ -108,6 +108,7 @@ akter_2026_proenv_private_behaviour,core,none,2026-10-29
 akter_2026_proenv_public_behaviour,core,none,2026-10-29
 akulume_2024_donation_intention,core,none,2026-11-13
 akulume_2024_donation_norms,core,none,2026-11-13
+akulume_2024_donation_attitude,core,none,2026-11-27
 akulume_2024_donation_pbc,core,none,2026-11-13
 akuteye_2026_cognitive_presence,core,none,2026-11-23
 akuteye_2026_perceived_ease_use,core,none,2026-11-23
@@ -1630,6 +1631,8 @@ fazi_2026_dmq_imp,core,none,2026-11-10
 fazi_2026_dmss,core,none,2026-11-10
 fazi_2026_pid5bf,core,none,2026-11-10
 fazi_2026_ysqs3,core,none,2026-11-10
+fazi_2026_stai_s,core,none,2026-11-27
+fazi_2026_stai_t,core,none,2026-11-27
 febriyanti_2026_actual_use,core,none,2026-11-21
 febriyanti_2026_attitude,core,none,2026-11-21
 febriyanti_2026_behavioral_intention,core,none,2026-11-21
@@ -2670,6 +2673,7 @@ jurado_2022_brexit_deal_germany,conj,https://static.cambridge.org/content/id/urn
 jurado_2022_brexit_deal_spain,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
 justesen_2025_brazil_clientelism,conj,none,2026-10-22
 kabir_2021_elearning_readiness,core,none,2026-11-07
+kabir_2021_elearning_stress,core,none,2026-11-27
 kabir_2023_tam_atu,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
 kabir_2023_tam_bi,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
 kabir_2023_tam_peu,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
@@ -2770,6 +2774,7 @@ kataria_2026_human_ai_collab,core,none,2026-11-25
 kato_2025_candidates_jan22,conj,none,2026-10-09
 kato_2025_candidates_mar22,conj,none,2026-10-09
 kawakami_2020_dass21,core,none,2026-11-08
+kawakami_2020_jcq,core,none,2026-11-27
 kawakami_2020_k6,core,none,2026-11-08
 kawakami_2026_visa_england,conj,none,2026-10-08
 kawakami_2026_visa_japan,conj,none,2026-10-08
@@ -2852,6 +2857,7 @@ kim_2022_immigration_covid,conj,none,2026-10-08
 kim_2023_learning_immersion,core,none,2026-11-10
 kim_2023_learning_selfefficacy,core,none,2026-11-10
 kim_2023_learning_transfer,core,none,2026-11-10
+kim_2023_learning_selfdirected,core,none,2026-11-27
 kim_2024_ams_im,core,https://dataverse.harvard.edu/api/access/datafile/10451946,2026-11-10
 kim_2024_carbon_tax_korea,conj,none,2026-10-09
 kim_2024_class_gender_uk,conj,none,2026-10-09
@@ -3329,6 +3335,9 @@ liu_2021_dw_job_self_efficacy,core,none,2026-11-23
 liu_2021_dw_work_engagement,core,none,2026-11-23
 liu_2023_program_evaluation,conj,none,2026-10-07
 liu_2024_bdi2,core,none,2026-11-10
+liu_2024_rcbs,core,none,2026-11-27
+liu_2024_cses,core,none,2026-11-27
+liu_2024_ffmq,core,none,2026-11-27
 liu_2024_igd27,core,none,2026-10-19
 liu_2024_partisan_collaboration,conj,none,2026-10-08
 liu_2024_teacher_grit,core,none,2026-10-15
@@ -3870,6 +3879,9 @@ mueller_2024_covid_governance_ch,conj,none,2026-10-09
 mueller_2024_covid_governance_fr,conj,none,2026-10-09
 mueller_2024_covid_governance_us,conj,none,2026-10-09
 muffato_2023_spatial_anxiety,core,none,2026-11-13
+muffato_2023_bfi44,core,none,2026-11-27
+muffato_2023_atot,core,none,2026-11-27
+muffato_2023_pebs,core,none,2026-11-27
 mugisha_2026_ehr_competence,core,none,2026-10-15
 mugisha_2026_ehr_status,core,none,2026-10-15
 mugisha_2026_ehr_use,core,none,2026-10-15
@@ -4237,6 +4249,7 @@ peng_2026_mhl_knowledge,core,none,2026-10-18
 peng_2026_pyd,core,none,2026-10-18
 pepinsky_2023_refugee_gender,conj,https://dataverse.harvard.edu/api/access/datafile/8137846,2026-10-11
 perez_fuentes_2020_affect_balance,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0235305.s002,2026-11-08
+perez_fuentes_2020_covid_threat,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0235305.s002,2026-11-27
 perez_hernandez_2021_cesd7,core,https://zenodo.org/api/records/4602365/files/Cuestionario%20Junio%202020.pdf/content,2026-10-10
 perez_hernandez_2021_elcsa,core,https://zenodo.org/api/records/4602365/files/Cuestionario%20Junio%202020.pdf/content,2026-10-10
 perez_hernandez_2021_gad7,core,https://zenodo.org/api/records/4602365/files/Cuestionario%20Junio%202020.pdf/content,2026-10-10
@@ -5843,6 +5856,7 @@ shelat_2022_covid_train_long,conj,https://data.4tu.nl/file/73ad36d3-2364-4700-a5
 shelat_2022_covid_train_short,conj,https://data.4tu.nl/file/73ad36d3-2364-4700-a54a-92dd156ec039/e8030c45-0bca-47de-8239-e99111b4c96d,2026-10-14
 shen_2018_dbq,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,2026-11-08
 shen_2018_dddi,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,2026-11-08
+shen_2018_bfi,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,2026-11-27
 shen_2018_pdbs,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,2026-11-08
 shen_2025_bsmas,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_dass21,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
@@ -6410,6 +6424,7 @@ tuxhorn_2026_tax_equity,conj,none,2026-11-10
 tyllianakis_2025_agri_schemes_uk,conj,https://zenodo.org/api/records/17551096/files/Survey_EN.pdf/content,2026-10-09
 tzouras_2025_mode_safety,conj,https://zenodo.org/api/records/17779261/files/README_perceivedSafetyChoices_v2.0.rtf/content,2026-10-14
 ucarer_2026_meq,core,none,2026-11-23
+ucarer_2026_scs_sf,core,none,2026-11-27
 uhm_2024_pemt_difficulty,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10
 uhm_2024_pemt_frequency,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10
 uhm_2024_pemt_importance,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10

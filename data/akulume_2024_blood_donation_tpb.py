@@ -14,11 +14,13 @@
 #   akulume_2024_donation_intention -- N30-N33 (Intention)
 #   akulume_2024_donation_pbc       -- N34-N39 (PBC, perceived behavioural control)
 #   akulume_2024_donation_norms     -- N40-N49 (Subjectivenorms)
-# Not shipped: the attitude items N50-N57 (9; composite Attitudes). N54 "Donating blood affects my
-#   health negatively", N56 "...is a waste of time" and both N57 items are negatively worded yet
-#   correlate positively with the rest, so they were reversed before deposit while their value
-#   labels still read 1 = Strongly Agree; which coding the stored values carry cannot be confirmed.
-#   Eligibility/knowledge yes-no items are recoded and summarised as percentages; composites.
+#   akulume_2024_donation_attitude  -- N50-N57 (9 items; Attitudes), as deposited. N54 "Donating blood
+#     affects my health negatively", N56 "...is a waste of time" and both N57 items are negatively
+#     worded yet correlate positively with the rest (+0.30 to +0.38), so they look reversed before
+#     deposit while their value labels still read 1 = Strongly Agree (every item's variable label
+#     reads "RECODE of ...", so the labels do not say which were flipped); which coding the stored values carry is not confirmed, so check direction
+#     before scoring.
+# Not shipped: eligibility/knowledge yes-no items are recoded and summarised as percentages; composites.
 # id: row number (Questionnairecode repeats for 12 rows, on rows that differ elsewhere).
 # Covariates: cov_age, cov_sex, cov_education (Senior 3-6, labels), cov_school_location (rural/urban).
 # Item text: not shipped -- the Stata variable labels carry the statements but truncated at ~45
@@ -54,7 +56,7 @@ def main():
     for c in items:
         assert vl[c][1].startswith("Strongly Agree") and vl[c][5].startswith("Strongly Disagree"), c
     blocks = {"intention": (items[0:4], "Intention"), "pbc": (items[4:10], "PBC"),
-              "norms": (items[10:20], "Subjectivenorms")}
+              "norms": (items[10:20], "Subjectivenorms"), "attitude": (items[20:29], "Attitudes")}
     d["id"] = range(1, len(d) + 1)
     d["cov_age"] = d["Age"]
     d["cov_sex"] = d["NewSex"].map(vl["NewSex"])
